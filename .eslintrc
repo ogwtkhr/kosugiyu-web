@@ -1,0 +1,38 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "airbnb-base",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended",
+    "prettier/@typescript-eslint"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "settings": {
+    "import/extensions": [".js", ".jsx", ".ts", ".d.ts", ".tsx"],
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".d.ts", ".tsx"]
+      },
+      "alias": {
+        "map": [["@", "./src/"]],
+        "extensions": [".js", ".jsx", ".ts", ".d.ts", ".tsx"]
+      }
+    }
+  },
+  "rules": {
+    "no-new": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "react/prop-types": "off"
+  },
+  "globals": {
+    "window": true,
+    "document": true,
+    "IntersectionObserver": true,
+    "google": true
+  }
+}

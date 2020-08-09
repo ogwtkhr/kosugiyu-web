@@ -1,0 +1,15 @@
+{
+  "processors": [
+    "stylelint-processor-styled-components"
+  ],
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-property-sort-order-smacss",
+    "./node_modules/prettier-stylelint/config.js"
+  ],
+  "syntax": "scss",
+  "rules": {
+    "no-empty-source": null,
+    "no-descending-specificity": null
+  }
+}

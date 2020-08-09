@@ -1,0 +1,8 @@
+{
+  "eslintIntegration": true,
+  "stylelintIntegration": true,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "disableLanguages": ["markdown"],
+  "printWidth": 100
+}
