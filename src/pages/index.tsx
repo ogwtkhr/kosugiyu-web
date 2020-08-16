@@ -8,36 +8,10 @@ import { Twitter } from 'styled-icons/boxicons-logos';
 
 import { BaseLayout, SEO } from '@/layouts';
 import { Logo, GoogleMap } from '@/components';
-// import { SCREEN_TYPE } from '@/constants';
 
-import { TeaserInfoQuery } from '@/types';
-
-const URL_TWITTER = 'https://twitter.com/kosugiyu_tonari';
+const URL_TWITTER = 'https://twitter.com/kosugiyu';
 
 const IndexPage: React.FC = () => {
-  const teaserInfo: TeaserInfoQuery = useStaticQuery(graphql`
-    query TeaserInfo {
-      architectureImage: file(relativePath: { eq: "architectures.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 2000) {
-            ...GatsbyImageSharpFluid_noBase64
-          }
-        }
-      }
-      takeoutImage: file(relativePath: { eq: "takeout_food.jpg" }) {
-        childImageSharp {
-          fluid(maxWidth: 2000) {
-            ...GatsbyImageSharpFluid_noBase64
-          }
-        }
-      }
-    }
-  `);
-
-  // const mainTextsBase = teaserInfo.settingYaml?.teaserInfo?.mainTexts;
-
-  // const mainTexts = mainTextsBase ? (mainTextsBase as MainText[]) : [];
-
   return (
     <BaseLayout>
       <SEO />
@@ -50,11 +24,7 @@ const IndexPage: React.FC = () => {
         </SnsLink>
       </SnsIcons>
       <HeroImage>
-        <HeroImageInner>
-          <GatsbyImage
-            fluid={teaserInfo?.architectureImage?.childImageSharp?.fluid as FluidObject}
-          />
-        </HeroImageInner>
+        <HeroImageInner>test</HeroImageInner>
       </HeroImage>
       <Notice>
         <NoticeHeader>今後の営業について</NoticeHeader>
@@ -147,24 +117,6 @@ const NormalModule: React.FC<{
   </StyledModule>
 );
 
-const ListModule: React.FC<{
-  title: string;
-  list: string[];
-}> = ({ title, list }) => (
-  <StyledModule>
-    <dl>
-      <ListModuleTitle>{title}</ListModuleTitle>
-      <dd>
-        <NormalList>
-          {list.map(item => (
-            <NormalListItem key={item}>{item}</NormalListItem>
-          ))}
-        </NormalList>
-      </dd>
-    </dl>
-  </StyledModule>
-);
-
 const ListModuleTitle = styled.dt`
   font-weight: bold;
 `;
@@ -204,18 +156,6 @@ const InlineImageContainer = styled.div`
   overflow: hidden;
   border-radius: 10px;
 `;
-
-// const MainHeading = styled.div`
-//   margin-bottom: ${getSpacingUnit(4)};
-//   color: ${COLOR.UI_TEXT_NORMAL};
-//   font-size: 3rem;
-//   text-align: center;
-//   ${media.greaterThan(SCREEN_BREAK_POINT)`
-//     & br {
-//       display: none;
-//     }
-//   `}
-// `;
 
 const NormalHeading = styled.h2`
   margin-bottom: ${getSpacingUnit(4)};

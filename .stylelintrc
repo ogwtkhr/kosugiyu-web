@@ -5,9 +5,9 @@
   "extends": [
     "stylelint-config-standard",
     "stylelint-config-property-sort-order-smacss",
-    "./node_modules/prettier-stylelint/config.js"
+    "./node_modules/prettier-stylelint/config.js",
+    "stylelint-config-styled-components"
   ],
-  "syntax": "scss",
   "rules": {
     "no-empty-source": null,
     "no-descending-specificity": null
