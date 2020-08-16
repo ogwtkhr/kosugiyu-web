@@ -1,1 +1,2 @@
-export type ElementName = keyof JSX.IntrinsicElements | React.ComponentType<any>;
+type ElementName = keyof JSX.IntrinsicElements | React.ComponentType<any>;
+declare module '*.jpg';
