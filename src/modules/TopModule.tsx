@@ -2,12 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 import { SPACING, TYPOGRAPHY, SCREEN_TYPE } from '@/constants';
-import { Button, ButtonContainer, HeroImage } from '@/components';
+import { Button, ButtonContainer, HeroImage, Logo } from '@/components';
 import { IntersectionFadeIn } from '@/animations';
 
 export const TopModule: React.FC = () => {
   return (
     <Container>
+      <Logo />
       <HeroArea>
         <HeroImage />
       </HeroArea>
