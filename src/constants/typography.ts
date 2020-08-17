@@ -12,8 +12,8 @@ const TEXT_SIZE = {
 
 const TYPEFACE = {
   // TODO: 英字等
-  // BASE: `'Noto Sans JP', sans-serif;`,
-  BASE: `sans-serif;`,
+  BASE: `'Noto Sans JP', sans-serif;`,
+  // BASE: `sans-serif;`,
 } as const;
 
 const LINE_HEIGHT = {

@@ -13,7 +13,6 @@ const IndexPage: React.FC = () => {
     <BaseLayout>
       <SEO />
       <TopModule />
-      <div style={{ height: '300px' }} />
       <IntroModule />
     </BaseLayout>
   );

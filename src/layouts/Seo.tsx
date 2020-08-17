@@ -84,7 +84,7 @@ export const SEO: React.FC<Props> = ({ title, description, lang = 'en', meta = [
       ]}
       link={[
         {
-          href: 'https://fonts.googleapis.com/css?family=Noto+Sans+JP:300,500&display=swap',
+          href: 'https://fonts.googleapis.com/css?family=Noto+Sans+JP:200,500&display=swap',
           rel: 'stylesheet',
           type: 'text/css',
         },

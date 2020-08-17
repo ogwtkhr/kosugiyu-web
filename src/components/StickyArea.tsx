@@ -4,18 +4,21 @@ import styled from 'styled-components';
 
 type StickyAreaProps = {
   height: number;
-  onScroll?: (yMoment: number) => void;
+  onScroll?: (arg: { yMoment: number; isIntersecting: boolean }) => void;
 };
 export const StickyArea: React.FC<StickyAreaProps> = ({ height, onScroll, children }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const [isInterSecting, setIsInterSecting] = useState(false);
+  const [isIntersecting, setIsIntersecting] = useState(false);
 
   const handleScroll = useCallback((): void => {
-    if (!isInterSecting || !onScroll || !ref.current) return;
+    if (!isIntersecting || !onScroll || !ref.current) return;
 
     const { top } = ref.current.getBoundingClientRect();
-    onScroll(top * -1 + window.innerHeight);
-  }, [isInterSecting, onScroll]);
+    onScroll({
+      yMoment: top * -1 + window.innerHeight,
+      isIntersecting,
+    });
+  }, [isIntersecting, onScroll]);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
@@ -29,7 +32,7 @@ export const StickyArea: React.FC<StickyAreaProps> = ({ height, onScroll, childr
     const observer = new IntersectionObserver(
       e => {
         const { isIntersecting: currentIsIntersecting } = e[0];
-        setIsInterSecting(currentIsIntersecting);
+        setIsIntersecting(currentIsIntersecting);
       },
       {
         threshold: [0],
@@ -45,8 +48,8 @@ export const StickyArea: React.FC<StickyAreaProps> = ({ height, onScroll, childr
 };
 
 const Container = styled.div<Pick<StickyAreaProps, 'height'>>`
+  position: relative;
   height: ${({ height }): string => `${height}px`};
-  background-color: blue;
 `;
 
 export default StickyArea;
