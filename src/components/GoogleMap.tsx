@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import media from 'styled-media-query';
 import { Loader } from 'google-maps';
 import { useGoogleApiKey } from '@/hooks';
-import { SCREEN_TYPE } from '@/constants';
+import { ScreenType } from '@/constants';
 
 export const GoogleMap: React.FC = () => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
@@ -56,7 +56,7 @@ const MapContainer = styled.div`
     display: block;
     padding-bottom: 50%;
     max-height: 100px;
-    ${media.lessThan(SCREEN_TYPE.MEDIUM)`
+    ${media.lessThan(ScreenType.MEDIUM)`
       padding-bottom: 80%;
     `}
   } */

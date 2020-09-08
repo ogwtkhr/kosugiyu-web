@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 // import media from 'styled-media-query';
-// import { SPACING, TYPOGRAPHY, SCREEN_TYPE } from '@/constants';
+// import { SPACING, TYPOGRAPHY, ScreenType } from '@/constants';
 import { StickyArea } from '@/components';
 
 import image from '@/images/photos/top/intro_1.jpg';

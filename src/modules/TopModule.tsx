@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import media from 'styled-media-query';
-import { SPACING, TYPOGRAPHY, SCREEN_TYPE } from '@/constants';
+import { SPACING, TYPOGRAPHY, ScreenType } from '@/constants';
 import { Button, ButtonContainer, HeroImage, Logo } from '@/components';
 import { IntersectionFadeIn } from '@/animations';
 
@@ -44,6 +44,7 @@ const MenuList = styled.ul`
 
 const MenuItem = styled.li`
   margin-top: 16px;
+
   & a {
     color: black;
   }
