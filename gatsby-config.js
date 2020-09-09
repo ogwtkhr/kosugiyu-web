@@ -79,6 +79,30 @@ module.exports = {
         trackingId: 'UA-100837084-2',
       },
     },
+    {
+      resolve: 'gatsby-source-microcms',
+      options: {
+        apiKey: process.env.MICRO_CMS_KEY,
+        serviceId: 'kosugiyu',
+        apis: [
+          {
+            endpoint: 'article',
+          },
+        ],
+      },
+    },
+    // {
+    //   resolve: 'gatsby-plugin-eslint',
+    //   options: {
+    //     test: /\.js$|\.jsx$|\.ts$|\.tsx$/,
+    //     exclude: /(node_modules|.cache|public)/,
+    //     stages: ['develop'],
+    //     options: {
+    //       // emitWarning: true,
+    //       // failOnError: true,
+    //     },
+    //   },
+    // },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // 'gatsby-plugin-offline',

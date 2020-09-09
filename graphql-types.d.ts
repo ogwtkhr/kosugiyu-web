@@ -1332,6 +1332,202 @@ export type IntQueryOperatorInput = {
 };
 
 
+export type MicrocmsArticle = Node & {
+  id: Scalars['ID'];
+  parent?: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+  createdAt?: Maybe<Scalars['Date']>;
+  updatedAt?: Maybe<Scalars['Date']>;
+  publishedAt?: Maybe<Scalars['Date']>;
+  title?: Maybe<Scalars['String']>;
+  mainVisual?: Maybe<MicrocmsArticleMainVisual>;
+  body?: Maybe<Scalars['String']>;
+  articleId?: Maybe<Scalars['String']>;
+};
+
+
+export type MicrocmsArticleCreatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+export type MicrocmsArticleUpdatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+export type MicrocmsArticlePublishedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+export type MicrocmsArticleConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<MicrocmsArticleEdge>;
+  nodes: Array<MicrocmsArticle>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  group: Array<MicrocmsArticleGroupConnection>;
+};
+
+
+export type MicrocmsArticleConnectionDistinctArgs = {
+  field: MicrocmsArticleFieldsEnum;
+};
+
+
+export type MicrocmsArticleConnectionGroupArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  field: MicrocmsArticleFieldsEnum;
+};
+
+export type MicrocmsArticleEdge = {
+  next?: Maybe<MicrocmsArticle>;
+  node: MicrocmsArticle;
+  previous?: Maybe<MicrocmsArticle>;
+};
+
+export type MicrocmsArticleFieldsEnum = 
+  | 'id'
+  | 'parent___id'
+  | 'parent___parent___id'
+  | 'parent___parent___parent___id'
+  | 'parent___parent___parent___children'
+  | 'parent___parent___children'
+  | 'parent___parent___children___id'
+  | 'parent___parent___children___children'
+  | 'parent___parent___internal___content'
+  | 'parent___parent___internal___contentDigest'
+  | 'parent___parent___internal___description'
+  | 'parent___parent___internal___fieldOwners'
+  | 'parent___parent___internal___ignoreType'
+  | 'parent___parent___internal___mediaType'
+  | 'parent___parent___internal___owner'
+  | 'parent___parent___internal___type'
+  | 'parent___children'
+  | 'parent___children___id'
+  | 'parent___children___parent___id'
+  | 'parent___children___parent___children'
+  | 'parent___children___children'
+  | 'parent___children___children___id'
+  | 'parent___children___children___children'
+  | 'parent___children___internal___content'
+  | 'parent___children___internal___contentDigest'
+  | 'parent___children___internal___description'
+  | 'parent___children___internal___fieldOwners'
+  | 'parent___children___internal___ignoreType'
+  | 'parent___children___internal___mediaType'
+  | 'parent___children___internal___owner'
+  | 'parent___children___internal___type'
+  | 'parent___internal___content'
+  | 'parent___internal___contentDigest'
+  | 'parent___internal___description'
+  | 'parent___internal___fieldOwners'
+  | 'parent___internal___ignoreType'
+  | 'parent___internal___mediaType'
+  | 'parent___internal___owner'
+  | 'parent___internal___type'
+  | 'children'
+  | 'children___id'
+  | 'children___parent___id'
+  | 'children___parent___parent___id'
+  | 'children___parent___parent___children'
+  | 'children___parent___children'
+  | 'children___parent___children___id'
+  | 'children___parent___children___children'
+  | 'children___parent___internal___content'
+  | 'children___parent___internal___contentDigest'
+  | 'children___parent___internal___description'
+  | 'children___parent___internal___fieldOwners'
+  | 'children___parent___internal___ignoreType'
+  | 'children___parent___internal___mediaType'
+  | 'children___parent___internal___owner'
+  | 'children___parent___internal___type'
+  | 'children___children'
+  | 'children___children___id'
+  | 'children___children___parent___id'
+  | 'children___children___parent___children'
+  | 'children___children___children'
+  | 'children___children___children___id'
+  | 'children___children___children___children'
+  | 'children___children___internal___content'
+  | 'children___children___internal___contentDigest'
+  | 'children___children___internal___description'
+  | 'children___children___internal___fieldOwners'
+  | 'children___children___internal___ignoreType'
+  | 'children___children___internal___mediaType'
+  | 'children___children___internal___owner'
+  | 'children___children___internal___type'
+  | 'children___internal___content'
+  | 'children___internal___contentDigest'
+  | 'children___internal___description'
+  | 'children___internal___fieldOwners'
+  | 'children___internal___ignoreType'
+  | 'children___internal___mediaType'
+  | 'children___internal___owner'
+  | 'children___internal___type'
+  | 'internal___content'
+  | 'internal___contentDigest'
+  | 'internal___description'
+  | 'internal___fieldOwners'
+  | 'internal___ignoreType'
+  | 'internal___mediaType'
+  | 'internal___owner'
+  | 'internal___type'
+  | 'createdAt'
+  | 'updatedAt'
+  | 'publishedAt'
+  | 'title'
+  | 'mainVisual___url'
+  | 'body'
+  | 'articleId';
+
+export type MicrocmsArticleFilterInput = {
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+  createdAt?: Maybe<DateQueryOperatorInput>;
+  updatedAt?: Maybe<DateQueryOperatorInput>;
+  publishedAt?: Maybe<DateQueryOperatorInput>;
+  title?: Maybe<StringQueryOperatorInput>;
+  mainVisual?: Maybe<MicrocmsArticleMainVisualFilterInput>;
+  body?: Maybe<StringQueryOperatorInput>;
+  articleId?: Maybe<StringQueryOperatorInput>;
+};
+
+export type MicrocmsArticleGroupConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<MicrocmsArticleEdge>;
+  nodes: Array<MicrocmsArticle>;
+  pageInfo: PageInfo;
+  field: Scalars['String'];
+  fieldValue?: Maybe<Scalars['String']>;
+};
+
+export type MicrocmsArticleMainVisual = {
+  url?: Maybe<Scalars['String']>;
+};
+
+export type MicrocmsArticleMainVisualFilterInput = {
+  url?: Maybe<StringQueryOperatorInput>;
+};
+
+export type MicrocmsArticleSortInput = {
+  fields?: Maybe<Array<Maybe<MicrocmsArticleFieldsEnum>>>;
+  order?: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
 /** Node Interface */
 export type Node = {
   id: Scalars['ID'];
@@ -1392,6 +1588,8 @@ export type Query = {
   allSite: SiteConnection;
   imageSharp?: Maybe<ImageSharp>;
   allImageSharp: ImageSharpConnection;
+  microcmsArticle?: Maybe<MicrocmsArticle>;
+  allMicrocmsArticle: MicrocmsArticleConnection;
   settingYaml?: Maybe<SettingYaml>;
   allSettingYaml: SettingYamlConnection;
   siteBuildMetadata?: Maybe<SiteBuildMetadata>;
@@ -1566,6 +1764,29 @@ export type QueryImageSharpArgs = {
 export type QueryAllImageSharpArgs = {
   filter?: Maybe<ImageSharpFilterInput>;
   sort?: Maybe<ImageSharpSortInput>;
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryMicrocmsArticleArgs = {
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+  createdAt?: Maybe<DateQueryOperatorInput>;
+  updatedAt?: Maybe<DateQueryOperatorInput>;
+  publishedAt?: Maybe<DateQueryOperatorInput>;
+  title?: Maybe<StringQueryOperatorInput>;
+  mainVisual?: Maybe<MicrocmsArticleMainVisualFilterInput>;
+  body?: Maybe<StringQueryOperatorInput>;
+  articleId?: Maybe<StringQueryOperatorInput>;
+};
+
+
+export type QueryAllMicrocmsArticleArgs = {
+  filter?: Maybe<MicrocmsArticleFilterInput>;
+  sort?: Maybe<MicrocmsArticleSortInput>;
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
 };
@@ -2354,6 +2575,10 @@ export type SitePageFieldsEnum =
   | 'pluginCreator___pluginOptions___alias____'
   | 'pluginCreator___pluginOptions___extensions'
   | 'pluginCreator___pluginOptions___trackingId'
+  | 'pluginCreator___pluginOptions___apiKey'
+  | 'pluginCreator___pluginOptions___serviceId'
+  | 'pluginCreator___pluginOptions___apis'
+  | 'pluginCreator___pluginOptions___apis___endpoint'
   | 'pluginCreator___pluginOptions___pathCheck'
   | 'pluginCreator___nodeAPIs'
   | 'pluginCreator___browserAPIs'
@@ -2559,6 +2784,10 @@ export type SitePluginFieldsEnum =
   | 'pluginOptions___alias____'
   | 'pluginOptions___extensions'
   | 'pluginOptions___trackingId'
+  | 'pluginOptions___apiKey'
+  | 'pluginOptions___serviceId'
+  | 'pluginOptions___apis'
+  | 'pluginOptions___apis___endpoint'
   | 'pluginOptions___pathCheck'
   | 'nodeAPIs'
   | 'browserAPIs'
@@ -2693,6 +2922,9 @@ export type SitePluginPluginOptions = {
   alias?: Maybe<SitePluginPluginOptionsAlias>;
   extensions?: Maybe<Array<Maybe<Scalars['String']>>>;
   trackingId?: Maybe<Scalars['String']>;
+  apiKey?: Maybe<Scalars['String']>;
+  serviceId?: Maybe<Scalars['String']>;
+  apis?: Maybe<Array<Maybe<SitePluginPluginOptionsApis>>>;
   pathCheck?: Maybe<Scalars['Boolean']>;
 };
 
@@ -2702,6 +2934,18 @@ export type SitePluginPluginOptionsAlias = {
 
 export type SitePluginPluginOptionsAliasFilterInput = {
   _?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsApis = {
+  endpoint?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsApisFilterInput = {
+  endpoint?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsApisFilterListInput = {
+  elemMatch?: Maybe<SitePluginPluginOptionsApisFilterInput>;
 };
 
 export type SitePluginPluginOptionsFilterInput = {
@@ -2723,6 +2967,9 @@ export type SitePluginPluginOptionsFilterInput = {
   alias?: Maybe<SitePluginPluginOptionsAliasFilterInput>;
   extensions?: Maybe<StringQueryOperatorInput>;
   trackingId?: Maybe<StringQueryOperatorInput>;
+  apiKey?: Maybe<StringQueryOperatorInput>;
+  serviceId?: Maybe<StringQueryOperatorInput>;
+  apis?: Maybe<SitePluginPluginOptionsApisFilterListInput>;
   pathCheck?: Maybe<BooleanQueryOperatorInput>;
 };
 
