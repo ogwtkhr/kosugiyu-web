@@ -1332,7 +1332,7 @@ export type IntQueryOperatorInput = {
 };
 
 
-export type MicrocmsArticle = Node & {
+export type MicrocmsPersons = Node & {
   id: Scalars['ID'];
   parent?: Maybe<Node>;
   children: Array<Node>;
@@ -1341,13 +1341,14 @@ export type MicrocmsArticle = Node & {
   updatedAt?: Maybe<Scalars['Date']>;
   publishedAt?: Maybe<Scalars['Date']>;
   title?: Maybe<Scalars['String']>;
-  mainVisual?: Maybe<MicrocmsArticleMainVisual>;
+  mainVisual?: Maybe<MicrocmsPersonsMainVisual>;
   body?: Maybe<Scalars['String']>;
-  articleId?: Maybe<Scalars['String']>;
+  slug?: Maybe<Scalars['String']>;
+  personsId?: Maybe<Scalars['String']>;
 };
 
 
-export type MicrocmsArticleCreatedAtArgs = {
+export type MicrocmsPersonsCreatedAtArgs = {
   formatString?: Maybe<Scalars['String']>;
   fromNow?: Maybe<Scalars['Boolean']>;
   difference?: Maybe<Scalars['String']>;
@@ -1355,7 +1356,7 @@ export type MicrocmsArticleCreatedAtArgs = {
 };
 
 
-export type MicrocmsArticleUpdatedAtArgs = {
+export type MicrocmsPersonsUpdatedAtArgs = {
   formatString?: Maybe<Scalars['String']>;
   fromNow?: Maybe<Scalars['Boolean']>;
   difference?: Maybe<Scalars['String']>;
@@ -1363,41 +1364,41 @@ export type MicrocmsArticleUpdatedAtArgs = {
 };
 
 
-export type MicrocmsArticlePublishedAtArgs = {
+export type MicrocmsPersonsPublishedAtArgs = {
   formatString?: Maybe<Scalars['String']>;
   fromNow?: Maybe<Scalars['Boolean']>;
   difference?: Maybe<Scalars['String']>;
   locale?: Maybe<Scalars['String']>;
 };
 
-export type MicrocmsArticleConnection = {
+export type MicrocmsPersonsConnection = {
   totalCount: Scalars['Int'];
-  edges: Array<MicrocmsArticleEdge>;
-  nodes: Array<MicrocmsArticle>;
+  edges: Array<MicrocmsPersonsEdge>;
+  nodes: Array<MicrocmsPersons>;
   pageInfo: PageInfo;
   distinct: Array<Scalars['String']>;
-  group: Array<MicrocmsArticleGroupConnection>;
+  group: Array<MicrocmsPersonsGroupConnection>;
 };
 
 
-export type MicrocmsArticleConnectionDistinctArgs = {
-  field: MicrocmsArticleFieldsEnum;
+export type MicrocmsPersonsConnectionDistinctArgs = {
+  field: MicrocmsPersonsFieldsEnum;
 };
 
 
-export type MicrocmsArticleConnectionGroupArgs = {
+export type MicrocmsPersonsConnectionGroupArgs = {
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
-  field: MicrocmsArticleFieldsEnum;
+  field: MicrocmsPersonsFieldsEnum;
 };
 
-export type MicrocmsArticleEdge = {
-  next?: Maybe<MicrocmsArticle>;
-  node: MicrocmsArticle;
-  previous?: Maybe<MicrocmsArticle>;
+export type MicrocmsPersonsEdge = {
+  next?: Maybe<MicrocmsPersons>;
+  node: MicrocmsPersons;
+  previous?: Maybe<MicrocmsPersons>;
 };
 
-export type MicrocmsArticleFieldsEnum = 
+export type MicrocmsPersonsFieldsEnum = 
   | 'id'
   | 'parent___id'
   | 'parent___parent___id'
@@ -1490,9 +1491,10 @@ export type MicrocmsArticleFieldsEnum =
   | 'title'
   | 'mainVisual___url'
   | 'body'
-  | 'articleId';
+  | 'slug'
+  | 'personsId';
 
-export type MicrocmsArticleFilterInput = {
+export type MicrocmsPersonsFilterInput = {
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
   children?: Maybe<NodeFilterListInput>;
@@ -1501,30 +1503,31 @@ export type MicrocmsArticleFilterInput = {
   updatedAt?: Maybe<DateQueryOperatorInput>;
   publishedAt?: Maybe<DateQueryOperatorInput>;
   title?: Maybe<StringQueryOperatorInput>;
-  mainVisual?: Maybe<MicrocmsArticleMainVisualFilterInput>;
+  mainVisual?: Maybe<MicrocmsPersonsMainVisualFilterInput>;
   body?: Maybe<StringQueryOperatorInput>;
-  articleId?: Maybe<StringQueryOperatorInput>;
+  slug?: Maybe<StringQueryOperatorInput>;
+  personsId?: Maybe<StringQueryOperatorInput>;
 };
 
-export type MicrocmsArticleGroupConnection = {
+export type MicrocmsPersonsGroupConnection = {
   totalCount: Scalars['Int'];
-  edges: Array<MicrocmsArticleEdge>;
-  nodes: Array<MicrocmsArticle>;
+  edges: Array<MicrocmsPersonsEdge>;
+  nodes: Array<MicrocmsPersons>;
   pageInfo: PageInfo;
   field: Scalars['String'];
   fieldValue?: Maybe<Scalars['String']>;
 };
 
-export type MicrocmsArticleMainVisual = {
+export type MicrocmsPersonsMainVisual = {
   url?: Maybe<Scalars['String']>;
 };
 
-export type MicrocmsArticleMainVisualFilterInput = {
+export type MicrocmsPersonsMainVisualFilterInput = {
   url?: Maybe<StringQueryOperatorInput>;
 };
 
-export type MicrocmsArticleSortInput = {
-  fields?: Maybe<Array<Maybe<MicrocmsArticleFieldsEnum>>>;
+export type MicrocmsPersonsSortInput = {
+  fields?: Maybe<Array<Maybe<MicrocmsPersonsFieldsEnum>>>;
   order?: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
@@ -1588,8 +1591,8 @@ export type Query = {
   allSite: SiteConnection;
   imageSharp?: Maybe<ImageSharp>;
   allImageSharp: ImageSharpConnection;
-  microcmsArticle?: Maybe<MicrocmsArticle>;
-  allMicrocmsArticle: MicrocmsArticleConnection;
+  microcmsPersons?: Maybe<MicrocmsPersons>;
+  allMicrocmsPersons: MicrocmsPersonsConnection;
   settingYaml?: Maybe<SettingYaml>;
   allSettingYaml: SettingYamlConnection;
   siteBuildMetadata?: Maybe<SiteBuildMetadata>;
@@ -1769,7 +1772,7 @@ export type QueryAllImageSharpArgs = {
 };
 
 
-export type QueryMicrocmsArticleArgs = {
+export type QueryMicrocmsPersonsArgs = {
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
   children?: Maybe<NodeFilterListInput>;
@@ -1778,15 +1781,16 @@ export type QueryMicrocmsArticleArgs = {
   updatedAt?: Maybe<DateQueryOperatorInput>;
   publishedAt?: Maybe<DateQueryOperatorInput>;
   title?: Maybe<StringQueryOperatorInput>;
-  mainVisual?: Maybe<MicrocmsArticleMainVisualFilterInput>;
+  mainVisual?: Maybe<MicrocmsPersonsMainVisualFilterInput>;
   body?: Maybe<StringQueryOperatorInput>;
-  articleId?: Maybe<StringQueryOperatorInput>;
+  slug?: Maybe<StringQueryOperatorInput>;
+  personsId?: Maybe<StringQueryOperatorInput>;
 };
 
 
-export type QueryAllMicrocmsArticleArgs = {
-  filter?: Maybe<MicrocmsArticleFilterInput>;
-  sort?: Maybe<MicrocmsArticleSortInput>;
+export type QueryAllMicrocmsPersonsArgs = {
+  filter?: Maybe<MicrocmsPersonsFilterInput>;
+  sort?: Maybe<MicrocmsPersonsSortInput>;
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
 };
@@ -3030,7 +3034,7 @@ export type ComponentsSeoQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<Site
 export type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_1_Query = { allMicrocmsArticle: { nodes: Array<Pick<MicrocmsArticle, 'articleId' | 'title' | 'body'>> } };
+export type Unnamed_1_Query = { allMicrocmsPersons: { nodes: Array<Pick<MicrocmsPersons, 'id' | 'title' | 'body' | 'slug'>> } };
 
 export type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 

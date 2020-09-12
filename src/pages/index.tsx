@@ -12,19 +12,20 @@ import { TopModule, IntroModule } from '@/modules';
 const IndexPage: React.FC = () => {
   const data: Query = useStaticQuery(graphql`
     {
-      allMicrocmsArticle(sort: { fields: [createdAt], order: DESC }) {
+      allMicrocmsPersons(sort: { fields: [createdAt], order: DESC }) {
         nodes {
-          articleId
+          id
           title
           body
+          slug
         }
       }
     }
   `);
   return (
     <>
-      {data.allMicrocmsArticle.nodes.map((entry) => (
-        <div>{entry?.title}</div>
+      {data.allMicrocmsPersons.nodes.map((entry) => (
+        <div>{entry?.slug}</div>
       ))}
 
       <BaseLayout>

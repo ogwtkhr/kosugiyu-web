@@ -6,12 +6,11 @@ require('dotenv').config({ path: `./.env.${env}` });
 
 module.exports = {
   siteMetadata: {
-    title: '小杉湯となり',
-    description:
-      '杉並区・高円寺にある銭湯「小杉湯」のとなり。銭湯が街のお風呂であるように、街に開かれたもう一つの家のような場所です。',
+    title: '小杉湯',
+    description: '杉並区・高円寺にある銭湯「小杉湯」。',
     author: 'ogwtkhr',
     googleApiKey: process.env.GOOGLE_API_KEY,
-    siteUrl: 'https://kosugiyu-tonari.com',
+    siteUrl: 'https://kosugiyu.co.jp',
   },
   plugins: [
     'gatsby-plugin-typescript',
@@ -86,7 +85,7 @@ module.exports = {
         serviceId: 'kosugiyu',
         apis: [
           {
-            endpoint: 'article',
+            endpoint: 'persons',
           },
         ],
       },
