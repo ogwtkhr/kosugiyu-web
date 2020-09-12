@@ -3027,6 +3027,11 @@ export type ComponentsSeoQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type ComponentsSeoQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
 
+export type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Unnamed_1_Query = { allMicrocmsArticle: { nodes: Array<Pick<MicrocmsArticle, 'articleId' | 'title' | 'body'>> } };
+
 export type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
 export type GatsbyImageSharpFixed_TracedSvgFragment = Pick<ImageSharpFixed, 'tracedSVG' | 'width' | 'height' | 'src' | 'srcSet'>;
