@@ -1,38 +1,37 @@
-// import React from 'react';
-// import { Link, graphql } from 'gatsby';
+import React from 'react';
+import { Link, graphql } from 'gatsby';
 
-// import { Query } from '../../types/graphql-types';
+import { Query } from '@/types';
 
-// // import Layout from '../layout/layout';
-// // import SEO from '../layout/seo';
+// import Layout from '../layout/layout';
+// import SEO from '../layout/seo';
 
-// type WorkPageProps = {
-//   data: WorksYamlQuery;
-// };
+type PersonsPageProps = {
+  data: Pick<Query, 'microcmsPersons'>;
+};
 
-// const WorkPage: React.FC<WorkPageProps> = ({ data }) => {
-//   return (
-//     // <Layout>
-//     //   <SEO title="Work" />
-//     //   <h1>{data.worksYaml?.title}</h1>
-//     //   <p>{data.worksYaml?.description}</p>
-//     //   <p>
-//     //     {data.worksYaml?.year} - {data.worksYaml?.category}
-//     //   </p>
-//     //   <Link to="/">Go to home</Link>
-//     // </Layout>
-//   );
-// };
+const PersonsPage: React.FC<PersonsPageProps> = ({ data }) => {
+  console.log(data.microcmsPersons?.title);
+  return (
+    // <Layout>
+    //   <SEO title="Work" />
+    //   <h1>{data.worksYaml?.title}</h1>
+    //   <p>{data.worksYaml?.description}</p>
+    //   <p>
+    //     {data.worksYaml?.year} - {data.worksYaml?.category}
+    //   </p>
+    //   <Link to="/">Go to home</Link>
+    // </Layout>
+    <div>hoge</div>
+  );
+};
 
-// export const query = graphql`
-//   query WorksYaml($slug: String!) {
-//     worksYaml(slug: { eq: $slug }) {
-//       title
-//       description
-//       year
-//       category
-//     }
-//   }
-// `;
+export const query = graphql`
+  query($slug: String!) {
+    microcmsPersons(slug: { eq: $slug }) {
+      title
+    }
+  }
+`;
 
-// export default WorkPage;
+export default PersonsPage;

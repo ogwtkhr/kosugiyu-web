@@ -5,34 +5,33 @@
  */
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-/*
-// const path = require('path');
+const path = require('path');
 
-// exports.createPages = async ({ graphql, actions }) => {
-//   const { createPage } = actions;
-//   const result = await graphql(`
-//     query {
-//       allWorksYaml {
-//         edges {
-//           node {
-//             slug
-//           }
-//         }
-//       }
-//     }
-//   `);
+exports.createPages = async ({ graphql, actions }) => {
+  const { createPage } = actions;
+  const result = await graphql(`
+    {
+      allMicrocmsPersons(sort: { fields: [createdAt], order: DESC }) {
+        nodes {
+          id
+          title
+          body
+          slug
+        }
+      }
+    }
+  `);
 
-//   result.data.allWorksYaml.edges.map(edge => {
-//     const work = edge.node;
-//     const { slug } = work;
-//     console.log('Create page.', `/works/${slug}`);
-//     createPage({
-//       path: `/works/${slug}`,
-//       component: path.resolve('./src/templates/work.tsx'),
-//       context: {
-//         slug,
-//       },
-//     });
-//   });
-// };
-// */
+  result.data.allMicrocmsPersons.nodes.map((edge) => {
+    const personPageInfo = edge;
+    const { slug } = personPageInfo;
+    console.log('Create page.', `/persons/${slug}`);
+    createPage({
+      path: `/persons/${slug}`,
+      component: path.resolve('./src/templates/persons.tsx'),
+      context: {
+        slug,
+      },
+    });
+  });
+};
