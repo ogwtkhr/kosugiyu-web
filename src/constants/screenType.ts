@@ -1,8 +1,12 @@
-export const SCREEN_TYPE = {
+import { ValueOf } from '@/types';
+
+export const ScreenType = {
   HUGE: 'huge',
   LARGE: 'large',
   MEDIUM: 'medium',
   SMALL: 'small',
 } as const;
 
-export default SCREEN_TYPE;
+export type ScreenType = ValueOf<typeof ScreenType>;
+
+export default ScreenType;

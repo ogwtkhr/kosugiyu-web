@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import media from 'styled-media-query';
 
 import { Heading, HeadingContainer } from '@/components';
-import { SCREEN_TYPE, RELATIVE_SPACING } from '@/constants';
+import { ScreenType, RELATIVE_SPACING } from '@/constants';
 
 type SizeType = 'large' | 'normal' | 'small';
 
@@ -42,7 +42,7 @@ const basePaddingValue = `${RELATIVE_SPACING.NORMAL}vh ${RELATIVE_SPACING.NORMAL
 
 const basePaddingWithSpNoPadding = css`
   padding: ${basePaddingValue};
-  ${media.lessThan(SCREEN_TYPE.MEDIUM)`
+  ${media.lessThan(ScreenType.MEDIUM)`
     padding: ${RELATIVE_SPACING.NORMAL}vh 0;
   `}
 `;

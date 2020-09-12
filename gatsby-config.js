@@ -6,12 +6,11 @@ require('dotenv').config({ path: `./.env.${env}` });
 
 module.exports = {
   siteMetadata: {
-    title: '小杉湯となり',
-    description:
-      '杉並区・高円寺にある銭湯「小杉湯」のとなり。銭湯が街のお風呂であるように、街に開かれたもう一つの家のような場所です。',
+    title: '小杉湯',
+    description: '杉並区・高円寺にある銭湯「小杉湯」。',
     author: 'ogwtkhr',
     googleApiKey: process.env.GOOGLE_API_KEY,
-    siteUrl: 'https://kosugiyu-tonari.com',
+    siteUrl: 'https://kosugiyu.co.jp',
   },
   plugins: [
     'gatsby-plugin-typescript',
@@ -79,6 +78,30 @@ module.exports = {
         trackingId: 'UA-100837084-2',
       },
     },
+    {
+      resolve: 'gatsby-source-microcms',
+      options: {
+        apiKey: process.env.MICRO_CMS_KEY,
+        serviceId: 'kosugiyu',
+        apis: [
+          {
+            endpoint: 'persons',
+          },
+        ],
+      },
+    },
+    // {
+    //   resolve: 'gatsby-plugin-eslint',
+    //   options: {
+    //     test: /\.js$|\.jsx$|\.ts$|\.tsx$/,
+    //     exclude: /(node_modules|.cache|public)/,
+    //     stages: ['develop'],
+    //     options: {
+    //       // emitWarning: true,
+    //       // failOnError: true,
+    //     },
+    //   },
+    // },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // 'gatsby-plugin-offline',
