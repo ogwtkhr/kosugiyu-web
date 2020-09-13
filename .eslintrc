@@ -27,17 +27,7 @@
   "rules": {
     "no-new": "off",
     "@typescript-eslint/no-explicit-any": "off",
-    "react/prop-types": "off",
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      {
-        "js:": "never",
-        "jsx": "never",
-        "ts": "never",
-        "tsx": "never"
-      }
-    ]
+    "react/prop-types": "off"
   },
   "globals": {
     "window": true,

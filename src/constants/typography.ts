@@ -27,6 +27,7 @@ const MIXIN = {
   BASE: css`
     color: ${COLORS.UI_TEXT_MAIN};
     font-family: ${TYPEFACE.BASE};
+    font-feature-settings: 'palt';
     ${media.greaterThan(ScreenType.MEDIUM)`
       font-size: ${TEXT_SIZE.NORMAL}rem;
     `}

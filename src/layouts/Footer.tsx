@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { TYPOGRAPHY, SPACING } from '@/constants';
 
 export const Footer: React.FC = () => (
-  <StyledFooter>copyright {new Date().getFullYear()} 小杉湯となり</StyledFooter>
+  <StyledFooter>copyright {new Date().getFullYear()} 小杉湯</StyledFooter>
 );
 
 const StyledFooter = styled.footer`

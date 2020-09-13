@@ -24,9 +24,9 @@ const IndexPage: React.FC = () => {
   `);
   return (
     <>
-      {data.allMicrocmsPersons.nodes.map((entry) => (
+      {/* {data.allMicrocmsPersons.nodes.map((entry) => (
         <div>{entry?.slug}</div>
-      ))}
+      ))} */}
 
       <BaseLayout>
         <SEO />

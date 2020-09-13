@@ -63,16 +63,16 @@ const stickyMixin = css<StickyMixinProps>`
 `;
 
 const StickyContent = styled.div`
-  ${stickyMixin}
+  ${stickyMixin};
 `;
 
 const Overlay = styled.div`
-  ${stickyMixin}
+  ${stickyMixin};
   background-color: ${BASE_COLOR};
 `;
 
 const Poster = styled.div`
-  ${stickyMixin}
+  ${stickyMixin};
   background-image: url(${image});
   background-repeat: no-repeat;
   background-position: center;
