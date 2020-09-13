@@ -11,7 +11,7 @@ type HeadingProps = {
 // };
 
 export const Heading = styled.h2<HeadingProps>`
-  ${Typography.MIXIN.DISPLAY}
+  ${Typography.Mixin.DISPLAY}
   font-size: 3rem;
 `;
 

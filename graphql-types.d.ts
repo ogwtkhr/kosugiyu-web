@@ -1,4 +1,4 @@
-export type Maybe<T> = T | null;
+export type Maybe<T> = T | undefined;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -730,8 +730,9 @@ export type FileFieldsEnum =
   | 'childSettingYaml___internal___mediaType'
   | 'childSettingYaml___internal___owner'
   | 'childSettingYaml___internal___type'
-  | 'childSettingYaml___moduleInfo___faq___faqList'
-  | 'childSettingYaml___moduleInfo___contact___selectOptions';
+  | 'childSettingYaml___menu'
+  | 'childSettingYaml___menu___id'
+  | 'childSettingYaml___menu___label';
 
 export type FileFilterInput = {
   sourceInstanceName?: Maybe<StringQueryOperatorInput>;
@@ -1802,7 +1803,7 @@ export type QuerySettingYamlArgs = {
   parent?: Maybe<NodeFilterInput>;
   children?: Maybe<NodeFilterListInput>;
   internal?: Maybe<InternalFilterInput>;
-  moduleInfo?: Maybe<SettingYamlModuleInfoFilterInput>;
+  menu?: Maybe<SettingYamlMenuFilterListInput>;
 };
 
 
@@ -1860,7 +1861,7 @@ export type SettingYaml = Node & {
   parent?: Maybe<Node>;
   children: Array<Node>;
   internal: Internal;
-  moduleInfo?: Maybe<SettingYamlModuleInfo>;
+  menu?: Maybe<Array<Maybe<SettingYamlMenu>>>;
 };
 
 export type SettingYamlConnection = {
@@ -1977,20 +1978,16 @@ export type SettingYamlFieldsEnum =
   | 'internal___mediaType'
   | 'internal___owner'
   | 'internal___type'
-  | 'moduleInfo___faq___faqList'
-  | 'moduleInfo___faq___faqList___id'
-  | 'moduleInfo___faq___faqList___question'
-  | 'moduleInfo___faq___faqList___answer'
-  | 'moduleInfo___contact___selectOptions'
-  | 'moduleInfo___contact___selectOptions___id'
-  | 'moduleInfo___contact___selectOptions___label';
+  | 'menu'
+  | 'menu___id'
+  | 'menu___label';
 
 export type SettingYamlFilterInput = {
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
   children?: Maybe<NodeFilterListInput>;
   internal?: Maybe<InternalFilterInput>;
-  moduleInfo?: Maybe<SettingYamlModuleInfoFilterInput>;
+  menu?: Maybe<SettingYamlMenuFilterListInput>;
 };
 
 export type SettingYamlGroupConnection = {
@@ -2002,60 +1999,18 @@ export type SettingYamlGroupConnection = {
   fieldValue?: Maybe<Scalars['String']>;
 };
 
-export type SettingYamlModuleInfo = {
-  faq?: Maybe<SettingYamlModuleInfoFaq>;
-  contact?: Maybe<SettingYamlModuleInfoContact>;
-};
-
-export type SettingYamlModuleInfoContact = {
-  selectOptions?: Maybe<Array<Maybe<SettingYamlModuleInfoContactSelectOptions>>>;
-};
-
-export type SettingYamlModuleInfoContactFilterInput = {
-  selectOptions?: Maybe<SettingYamlModuleInfoContactSelectOptionsFilterListInput>;
-};
-
-export type SettingYamlModuleInfoContactSelectOptions = {
+export type SettingYamlMenu = {
   id?: Maybe<Scalars['String']>;
   label?: Maybe<Scalars['String']>;
 };
 
-export type SettingYamlModuleInfoContactSelectOptionsFilterInput = {
+export type SettingYamlMenuFilterInput = {
   id?: Maybe<StringQueryOperatorInput>;
   label?: Maybe<StringQueryOperatorInput>;
 };
 
-export type SettingYamlModuleInfoContactSelectOptionsFilterListInput = {
-  elemMatch?: Maybe<SettingYamlModuleInfoContactSelectOptionsFilterInput>;
-};
-
-export type SettingYamlModuleInfoFaq = {
-  faqList?: Maybe<Array<Maybe<SettingYamlModuleInfoFaqFaqList>>>;
-};
-
-export type SettingYamlModuleInfoFaqFaqList = {
-  id?: Maybe<Scalars['Int']>;
-  question?: Maybe<Scalars['String']>;
-  answer?: Maybe<Scalars['String']>;
-};
-
-export type SettingYamlModuleInfoFaqFaqListFilterInput = {
-  id?: Maybe<IntQueryOperatorInput>;
-  question?: Maybe<StringQueryOperatorInput>;
-  answer?: Maybe<StringQueryOperatorInput>;
-};
-
-export type SettingYamlModuleInfoFaqFaqListFilterListInput = {
-  elemMatch?: Maybe<SettingYamlModuleInfoFaqFaqListFilterInput>;
-};
-
-export type SettingYamlModuleInfoFaqFilterInput = {
-  faqList?: Maybe<SettingYamlModuleInfoFaqFaqListFilterListInput>;
-};
-
-export type SettingYamlModuleInfoFilterInput = {
-  faq?: Maybe<SettingYamlModuleInfoFaqFilterInput>;
-  contact?: Maybe<SettingYamlModuleInfoContactFilterInput>;
+export type SettingYamlMenuFilterListInput = {
+  elemMatch?: Maybe<SettingYamlMenuFilterInput>;
 };
 
 export type SettingYamlSortInput = {
@@ -2587,6 +2542,7 @@ export type SitePageFieldsEnum =
   | 'pluginCreator___pluginOptions___theme_color_in_head'
   | 'pluginCreator___pluginOptions___cacheDigest'
   | 'pluginCreator___pluginOptions___fileName'
+  | 'pluginCreator___pluginOptions___codegenConfig___maybeValue'
   | 'pluginCreator___pluginOptions___alias____'
   | 'pluginCreator___pluginOptions___extensions'
   | 'pluginCreator___pluginOptions___trackingId'
@@ -2797,6 +2753,7 @@ export type SitePluginFieldsEnum =
   | 'pluginOptions___theme_color_in_head'
   | 'pluginOptions___cacheDigest'
   | 'pluginOptions___fileName'
+  | 'pluginOptions___codegenConfig___maybeValue'
   | 'pluginOptions___alias____'
   | 'pluginOptions___extensions'
   | 'pluginOptions___trackingId'
@@ -2935,6 +2892,7 @@ export type SitePluginPluginOptions = {
   theme_color_in_head?: Maybe<Scalars['Boolean']>;
   cacheDigest?: Maybe<Scalars['String']>;
   fileName?: Maybe<Scalars['String']>;
+  codegenConfig?: Maybe<SitePluginPluginOptionsCodegenConfig>;
   alias?: Maybe<SitePluginPluginOptionsAlias>;
   extensions?: Maybe<Array<Maybe<Scalars['String']>>>;
   trackingId?: Maybe<Scalars['String']>;
@@ -2964,6 +2922,14 @@ export type SitePluginPluginOptionsApisFilterListInput = {
   elemMatch?: Maybe<SitePluginPluginOptionsApisFilterInput>;
 };
 
+export type SitePluginPluginOptionsCodegenConfig = {
+  maybeValue?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsCodegenConfigFilterInput = {
+  maybeValue?: Maybe<StringQueryOperatorInput>;
+};
+
 export type SitePluginPluginOptionsFilterInput = {
   exclude?: Maybe<StringQueryOperatorInput>;
   name?: Maybe<StringQueryOperatorInput>;
@@ -2980,6 +2946,7 @@ export type SitePluginPluginOptionsFilterInput = {
   theme_color_in_head?: Maybe<BooleanQueryOperatorInput>;
   cacheDigest?: Maybe<StringQueryOperatorInput>;
   fileName?: Maybe<StringQueryOperatorInput>;
+  codegenConfig?: Maybe<SitePluginPluginOptionsCodegenConfigFilterInput>;
   alias?: Maybe<SitePluginPluginOptionsAliasFilterInput>;
   extensions?: Maybe<StringQueryOperatorInput>;
   trackingId?: Maybe<StringQueryOperatorInput>;
@@ -3032,6 +2999,11 @@ export type GoogleApiKeyQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GoogleApiKeyQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'googleApiKey'>> }> };
+
+export type MenuQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MenuQueryQuery = { settingYaml?: Maybe<{ menu?: Maybe<Array<Maybe<Pick<SettingYamlMenu, 'id' | 'label'>>>> }> };
 
 export type SiteTitleQueryVariables = Exact<{ [key: string]: never; }>;
 

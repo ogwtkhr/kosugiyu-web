@@ -50,7 +50,7 @@ export const IntersectionFadeIn: React.FC<IntersectionFadeInProps> = ({ children
 };
 
 // export const IntersectionFadeIn = styled.h2<IntersectionFadeInProps>`
-//   ${Typography.MIXIN.DISPLAY}
+//   ${Typography.Mixin.DISPLAY}
 //   font-size: 3rem;
 // `;
 

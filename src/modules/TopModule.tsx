@@ -1,21 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
-import media from 'styled-media-query';
+// import media from 'styled-media-query';
+import { Link } from 'gatsby';
 import { Spacing, Typography, ScreenType } from '@/constants';
 import { Button, ButtonContainer, HeroImage, Logo } from '@/components';
-import { IntersectionFadeIn } from '@/animations';
+// import { IntersectionFadeIn } from '@/animations';
+import { useMenu } from '@/hooks';
 
 export const TopModule: React.FC = () => {
+  const menuList = useMenu({ ignoreTopData: true });
+
   return (
     <Container>
       <LogoContainer>
         <Logo />
-        <p>高円寺・昭和八年創業</p>
+        <ExtendedTypeface>高円寺・昭和八年創業</ExtendedTypeface>
       </LogoContainer>
       <MenuList>
-        <MenuItem>小杉湯と人</MenuItem>
-        <MenuItem>お知らせ</MenuItem>
-        <MenuItem>営業・施設案内</MenuItem>
+        {menuList.map(({ id, label }) => (
+          <MenuItem>
+            <Link to={`/${id}`} key={id}>
+              {label}
+            </Link>
+          </MenuItem>
+        ))}
       </MenuList>
       <HeroArea>
         <HeroImage />
@@ -44,10 +52,16 @@ const MenuList = styled.ul`
 
 const MenuItem = styled.li`
   margin-top: 16px;
+  ${Typography.Mixin.EXTENDED};
 
   & a {
     color: black;
+    text-decoration: none;
   }
+`;
+
+const ExtendedTypeface = styled.p`
+  ${Typography.Mixin.EXTENDED};
 `;
 
 const HeroArea = styled.div`

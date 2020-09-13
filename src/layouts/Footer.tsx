@@ -8,7 +8,7 @@ export const Footer: React.FC = () => (
 
 const StyledFooter = styled.footer`
   padding: ${Spacing.XXX_LARGE}px;
-  ${Typography.MIXIN.SUB}
+  ${Typography.Mixin.SUB}
   text-align: center;
 `;
 

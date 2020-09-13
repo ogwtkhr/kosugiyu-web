@@ -12,11 +12,11 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    ${Typography.MIXIN.BASE}
+    ${Typography.Mixin.BASE}
   }
 
   button {
-    ${Typography.MIXIN.BASE}
+    ${Typography.Mixin.BASE}
   }
 `;
 

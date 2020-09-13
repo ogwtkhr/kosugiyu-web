@@ -23,7 +23,7 @@ const LineHeight = {
   THICK: 2,
 } as const;
 
-const MIXIN = {
+const Mixin = {
   BASE: css`
     color: ${Colors.UI_TEXT_MAIN};
     font-family: ${TypeFace.BASE};
@@ -50,13 +50,16 @@ const MIXIN = {
     font-family: ${TypeFace.BASE};
     font-size: ${TextSize.SMALL}rem;
   `,
+  EXTENDED: css`
+    transform: scale(1, 0.9);
+  `,
 } as const;
 
 export const Typography = {
   TextSize,
   TypeFace,
   LineHeight,
-  MIXIN,
+  Mixin,
 } as const;
 
 export default Typography;

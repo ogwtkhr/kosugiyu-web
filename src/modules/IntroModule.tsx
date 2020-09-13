@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 // import media from 'styled-media-query';
 // import { Spacing, Typography, ScreenType } from '@/constants';
-import { StickyArea } from '@/components';
+import { StickyArea, GridContainer, GridItem } from '@/components';
 
 import image from '@/images/photos/top/intro_1.jpg';
 
-const MODULE_HEIGHT = 3000;
 const BASE_COLOR = '#021a2b';
 
 export const IntroModule: React.FC = () => {
@@ -14,9 +13,9 @@ export const IntroModule: React.FC = () => {
   return (
     <>
       <StickyArea
-        height={MODULE_HEIGHT}
-        onScroll={({ yMoment }): void => {
-          const opacity = 1 - yMoment / MODULE_HEIGHT + 0.2;
+        height={3000}
+        onScroll={({ progress }): void => {
+          const opacity = 1 - progress + 0.2;
           setPosterOpacity(opacity);
         }}
       >
@@ -35,10 +34,6 @@ export const IntroModule: React.FC = () => {
   );
 };
 
-// const Container = styled.div`
-//   position: relative;
-// `;
-
 const Message = styled.p`
   display: inline-block;
   position: relative;
@@ -49,13 +44,6 @@ const Message = styled.p`
   font-size: 20px;
   z-index: 1;
 `;
-
-// const stickyMixin = css<StickyMixinProps>`
-//   position: ${({ isIntersecting }): string => (isIntersecting ? 'fixed' : 'absolute')};
-//   top: 0;
-//   width: 100vw;
-//   height: 100vh;
-// `;
 
 const Overlay = styled.div`
   position: absolute;
@@ -77,13 +65,5 @@ const Poster = styled.div`
   background-position: center;
   background-size: cover;
 `;
-
-// const HeroArea = styled.div`
-//   position: absolute;
-//   top: calc(50% - (90vh / 2));
-//   right: 0;
-//   width: 75%;
-//   height: 90%;
-// `;
 
 export default IntroModule;

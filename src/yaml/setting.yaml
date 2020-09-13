@@ -1,25 +1,11 @@
-- moduleInfo:
-    faq:
-      faqList:
-        - id: 1
-          question: 銭湯に入らなくても利用できますか？
-          answer: こたえその1ほげほげほげほげ
-        - id: 2
-          question: イベント情報はどこで見られますか？
-          answer: こたえその2ほげほげほげほげ
-        - id: 3
-          question: 荷物を置いて銭湯へ行くことは可能ですか？
-          answer: こたえその3ほげほげほげほげ
-
-    contact:
-      selectOptions:
-        - id: f1
-          label: 1階について
-        - id: f2
-          label: 2階について
-        - id: f3
-          label: 3階について
-        - id: others
-          label: その他お問い合わせ
-        - id: media
-          label: 取材等のお申し込み
+- menu:
+  - id: top
+    label: トップ
+  - id: persons
+    label: 小杉湯と人
+  - id: archive
+    label: できごと
+  - id: facility
+    label: 施設
+  - id: information
+    label: 営業案内

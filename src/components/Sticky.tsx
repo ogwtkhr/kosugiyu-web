@@ -2,9 +2,15 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import styled from 'styled-components';
 
+type OnScrollArg = {
+  yMoment: number;
+  progress: number;
+  isIntersecting: boolean;
+};
+
 type StickyAreaProps = {
   height: number;
-  onScroll?: (arg: { yMoment: number; isIntersecting: boolean }) => void;
+  onScroll?: (arg: OnScrollArg) => void;
 };
 
 export const StickyArea: React.FC<StickyAreaProps> = ({ height, onScroll, children }) => {
@@ -23,6 +29,7 @@ export const StickyArea: React.FC<StickyAreaProps> = ({ height, onScroll, childr
     if (!onScroll) return;
     onScroll({
       yMoment,
+      progress: yMoment / height,
       isIntersecting,
     });
   }, [isIntersecting, yMoment, onScroll]);
