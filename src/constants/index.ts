@@ -1,6 +1,6 @@
 export * from './colors';
 export * from './spacing';
-export * from './typography';
+export * from './Typography';
 export * from './line';
 export * from './screenType';
 export * from './animation';

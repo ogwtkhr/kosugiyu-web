@@ -1,20 +1,20 @@
-import { COLORS } from './colors';
+import { Colors } from './colors';
 
 // import { css } from 'styled-components';
 
-const WIDTH = {
+const Width = {
   THIN: 1,
   NORMAL: 2,
 } as const;
 
-const SHORT_HAND = {
-  THIN: `solid ${WIDTH.THIN}px ${COLORS.UI_LINE_NORMAL}`,
-  NORMAL: `solid ${WIDTH.NORMAL}px ${COLORS.UI_LINE_NORMAL}`,
+const ShorHand = {
+  THIN: `solid ${Width.THIN}px ${Colors.UI_LINE_NORMAL}`,
+  NORMAL: `solid ${Width.NORMAL}px ${Colors.UI_LINE_NORMAL}`,
 } as const;
 
 export const LINE = {
-  WIDTH,
-  SHORT_HAND,
+  Width,
+  ShorHand,
 } as const;
 
 export default LINE;

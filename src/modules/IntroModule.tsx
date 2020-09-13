@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 // import media from 'styled-media-query';
-// import { SPACING, TYPOGRAPHY, ScreenType } from '@/constants';
+// import { Spacing, Typography, ScreenType } from '@/constants';
 import { StickyArea } from '@/components';
 
 import image from '@/images/photos/top/intro_1.jpg';
@@ -11,17 +11,13 @@ const BASE_COLOR = '#021a2b';
 
 export const IntroModule: React.FC = () => {
   const [posterOpacity, setPosterOpacity] = useState(1);
-  const [isIntersecting, setIsIntersecting] = useState(false);
   return (
     <>
       <StickyArea
         height={MODULE_HEIGHT}
-        onScroll={({ yMoment, isIntersecting: coreIsIntersecting }): void => {
+        onScroll={({ yMoment }): void => {
           const opacity = 1 - yMoment / MODULE_HEIGHT + 0.2;
-          // const inFixView = coreIsIntersecting && yMoment > window.innerHeight;
-          // console.log(yMoment);
           setPosterOpacity(opacity);
-          setIsIntersecting(coreIsIntersecting);
         }}
       >
         <Message>

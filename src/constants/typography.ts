@@ -1,22 +1,22 @@
 import { css } from 'styled-components';
 import media from 'styled-media-query';
-import { COLORS } from './colors';
+import { Colors } from './colors';
 import { ScreenType } from './screenType';
 
-const TEXT_SIZE = {
+const TextSize = {
   SMALL: 1.4,
   NORMAL: 1.6,
   LARGE: 2,
   X_LARGE: 3,
 } as const;
 
-const TYPEFACE = {
+const TypeFace = {
   // TODO: 英字等
   BASE: `'Noto Sans JP', sans-serif;`,
   // BASE: `sans-serif;`,
 } as const;
 
-const LINE_HEIGHT = {
+const LineHeight = {
   MONOLITHIC: 1,
   THIN: 1.3,
   NORMAL: 1.6,
@@ -25,38 +25,38 @@ const LINE_HEIGHT = {
 
 const MIXIN = {
   BASE: css`
-    color: ${COLORS.UI_TEXT_MAIN};
-    font-family: ${TYPEFACE.BASE};
+    color: ${Colors.UI_TEXT_MAIN};
+    font-family: ${TypeFace.BASE};
     font-feature-settings: 'palt';
     ${media.greaterThan(ScreenType.MEDIUM)`
-      font-size: ${TEXT_SIZE.NORMAL}rem;
+      font-size: ${TextSize.NORMAL}rem;
     `}
     ${media.lessThan(ScreenType.MEDIUM)`
-        font-size: ${TEXT_SIZE.SMALL}rem;
+        font-size: ${TextSize.SMALL}rem;
     `}
     font-weight: 500;
-    line-height: ${LINE_HEIGHT.THICK};
+    line-height: ${LineHeight.THICK};
     letter-spacing: 0.1em;
   `,
   DISPLAY: css`
-    color: ${COLORS.UI_TEXT_MAIN};
-    font-family: ${TYPEFACE.BASE};
-    font-size: ${TEXT_SIZE.X_LARGE}rem;
+    color: ${Colors.UI_TEXT_MAIN};
+    font-family: ${TypeFace.BASE};
+    font-size: ${TextSize.X_LARGE}rem;
     font-weight: 500;
-    line-height: ${LINE_HEIGHT.NORMAL};
+    line-height: ${LineHeight.NORMAL};
   `,
   SUB: css`
-    color: ${COLORS.UI_TEXT_SUB};
-    font-family: ${TYPEFACE.BASE};
-    font-size: ${TEXT_SIZE.SMALL}rem;
+    color: ${Colors.UI_TEXT_SUB};
+    font-family: ${TypeFace.BASE};
+    font-size: ${TextSize.SMALL}rem;
   `,
 } as const;
 
-export const TYPOGRAPHY = {
-  TEXT_SIZE,
-  TYPEFACE,
-  LINE_HEIGHT,
+export const Typography = {
+  TextSize,
+  TypeFace,
+  LineHeight,
   MIXIN,
 } as const;
 
-export default TYPOGRAPHY;
+export default Typography;

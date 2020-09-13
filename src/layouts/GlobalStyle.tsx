@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import { TYPOGRAPHY } from '@/constants';
+import { Typography } from '@/constants';
 
 export const GlobalStyle = createGlobalStyle`
   
@@ -12,11 +12,11 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    ${TYPOGRAPHY.MIXIN.BASE}
+    ${Typography.MIXIN.BASE}
   }
 
   button {
-    ${TYPOGRAPHY.MIXIN.BASE}
+    ${Typography.MIXIN.BASE}
   }
 `;
 

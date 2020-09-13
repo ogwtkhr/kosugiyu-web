@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 // import styled from 'styled-components';
-// import { SPACING, TYPOGRAPHY } from '@/constants';
+// import { Spacing, Typography } from '@/constants';
 
 type IntersectionFadeInProps = {
   // children: string;
@@ -13,7 +13,7 @@ export const IntersectionFadeIn: React.FC<IntersectionFadeInProps> = ({ children
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const observer = new IntersectionObserver(
-      entries => {
+      (entries) => {
         const { isIntersecting } = entries[0];
         if (isIntersecting && !isExec) {
           setIsExec(true);
@@ -50,14 +50,14 @@ export const IntersectionFadeIn: React.FC<IntersectionFadeInProps> = ({ children
 };
 
 // export const IntersectionFadeIn = styled.h2<IntersectionFadeInProps>`
-//   ${TYPOGRAPHY.MIXIN.DISPLAY}
+//   ${Typography.MIXIN.DISPLAY}
 //   font-size: 3rem;
 // `;
 
 // export const IntersectionFadeInContainer = styled.div`
 //   display: flex;
 //   justify-content: center;
-//   padding: ${SPACING.XXX_LARGE}px 0;
+//   padding: ${Spacing.XXX_LARGE}px 0;
 // `;
 
 export default IntersectionFadeIn;

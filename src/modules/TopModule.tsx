@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import media from 'styled-media-query';
-import { SPACING, TYPOGRAPHY, ScreenType } from '@/constants';
+import { Spacing, Typography, ScreenType } from '@/constants';
 import { Button, ButtonContainer, HeroImage, Logo } from '@/components';
 import { IntersectionFadeIn } from '@/animations';
 

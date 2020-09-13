@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import media from 'styled-media-query';
 
 import { Heading, HeadingContainer } from '@/components';
-import { ScreenType, RELATIVE_SPACING } from '@/constants';
+import { ScreenType, RELATIVE_Spacing } from '@/constants';
 
 type SizeType = 'large' | 'normal' | 'small';
 
@@ -38,12 +38,12 @@ type StyledModuleProps = {
   withSpHorizontalSpacing?: boolean;
 };
 
-const basePaddingValue = `${RELATIVE_SPACING.NORMAL}vh ${RELATIVE_SPACING.NORMAL}vw`;
+const basePaddingValue = `${RELATIVE_Spacing.NORMAL}vh ${RELATIVE_Spacing.NORMAL}vw`;
 
 const basePaddingWithSpNoPadding = css`
   padding: ${basePaddingValue};
   ${media.lessThan(ScreenType.MEDIUM)`
-    padding: ${RELATIVE_SPACING.NORMAL}vh 0;
+    padding: ${RELATIVE_Spacing.NORMAL}vh 0;
   `}
 `;
 

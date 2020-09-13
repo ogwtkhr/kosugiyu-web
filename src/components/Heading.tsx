@@ -1,6 +1,6 @@
 // import React from 'react';
 import styled from 'styled-components';
-import { SPACING, TYPOGRAPHY } from '@/constants';
+import { Spacing, Typography } from '@/constants';
 
 type HeadingProps = {
   children: string;
@@ -11,14 +11,14 @@ type HeadingProps = {
 // };
 
 export const Heading = styled.h2<HeadingProps>`
-  ${TYPOGRAPHY.MIXIN.DISPLAY}
+  ${Typography.MIXIN.DISPLAY}
   font-size: 3rem;
 `;
 
 export const HeadingContainer = styled.div`
   display: flex;
   justify-content: center;
-  padding: ${SPACING.XXX_LARGE}px 0;
+  padding: ${Spacing.XXX_LARGE}px 0;
 `;
 
 export default Heading;

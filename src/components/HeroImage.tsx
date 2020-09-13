@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 // import media from 'styled-media-query';
-// import { SPACING, TYPOGRAPHY, ScreenType } from '@/constants';
+// import { Spacing, Typography, ScreenType } from '@/constants';
 // import { IntersectionFadeIn } from '@/animations';
 
 import mainVisual from '@/images/photos/top/hero_1.jpg';

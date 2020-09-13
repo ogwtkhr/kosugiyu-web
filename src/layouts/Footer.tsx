@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import { TYPOGRAPHY, SPACING } from '@/constants';
+import { Typography, Spacing } from '@/constants';
 
 export const Footer: React.FC = () => (
   <StyledFooter>copyright {new Date().getFullYear()} 小杉湯</StyledFooter>
 );
 
 const StyledFooter = styled.footer`
-  padding: ${SPACING.XXX_LARGE}px;
-  ${TYPOGRAPHY.MIXIN.SUB}
+  padding: ${Spacing.XXX_LARGE}px;
+  ${Typography.MIXIN.SUB}
   text-align: center;
 `;
 

@@ -2,7 +2,7 @@ const ABSTRACT_BLACK = '#000000';
 const ABSTRACT_GLAY = '#999999';
 const ABSTRACT_WHITE = '#ffffff';
 
-export const COLORS = {
+export const Colors = {
   UI_BASE: ABSTRACT_BLACK,
   UI_TEXT_MAIN: ABSTRACT_BLACK,
   UI_TEXT_SUB: ABSTRACT_GLAY,
@@ -14,4 +14,4 @@ export const COLORS = {
   ABSTRACT_WHITE,
 } as const;
 
-export default COLORS;
+export default Colors;
