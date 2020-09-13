@@ -36,6 +36,7 @@ const MIXIN = {
     `}
     font-weight: 500;
     line-height: ${LINE_HEIGHT.THICK};
+    letter-spacing: 0.1em;
   `,
   DISPLAY: css`
     color: ${COLORS.UI_TEXT_MAIN};

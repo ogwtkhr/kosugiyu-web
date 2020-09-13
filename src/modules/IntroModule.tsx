@@ -13,18 +13,17 @@ export const IntroModule: React.FC = () => {
   const [posterOpacity, setPosterOpacity] = useState(1);
   const [isIntersecting, setIsIntersecting] = useState(false);
   return (
-    <StickyArea
-      height={MODULE_HEIGHT}
-      onScroll={({ yMoment, isIntersecting: coreIsIntersecting }): void => {
-        const opacity = 1 - yMoment / MODULE_HEIGHT + 0.2;
-        const inFixView = coreIsIntersecting && yMoment > window.innerHeight;
-        setPosterOpacity(opacity);
-        setIsIntersecting(inFixView);
-      }}
-    >
-      <Poster isIntersecting={isIntersecting} />
-      <Overlay isIntersecting={isIntersecting} style={{ opacity: posterOpacity }} />
-      <StickyContent isIntersecting={isIntersecting}>
+    <>
+      <StickyArea
+        height={MODULE_HEIGHT}
+        onScroll={({ yMoment, isIntersecting: coreIsIntersecting }): void => {
+          const opacity = 1 - yMoment / MODULE_HEIGHT + 0.2;
+          // const inFixView = coreIsIntersecting && yMoment > window.innerHeight;
+          // console.log(yMoment);
+          setPosterOpacity(opacity);
+          setIsIntersecting(coreIsIntersecting);
+        }}
+      >
         <Message>
           東京の一大ターミナル、新宿駅から10分。
           <br />
@@ -32,8 +31,11 @@ export const IntroModule: React.FC = () => {
           <br />
           あらゆる文化が混ざり合い、老若男女が集う街、高円寺。
         </Message>
-      </StickyContent>
-    </StickyArea>
+        <Poster />
+        <Overlay style={{ opacity: posterOpacity }} />
+      </StickyArea>
+      <div style={{ height: '100vh', backgroundColor: 'green' }}>test</div>
+    </>
   );
 };
 
@@ -49,30 +51,31 @@ const Message = styled.p`
   transform: translate(-50%, -50%);
   color: #fff;
   font-size: 20px;
+  z-index: 1;
 `;
 
-type StickyMixinProps = {
-  isIntersecting: boolean;
-};
-
-const stickyMixin = css<StickyMixinProps>`
-  position: ${({ isIntersecting }): string => (isIntersecting ? 'fixed' : 'absolute')};
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-`;
-
-const StickyContent = styled.div`
-  ${stickyMixin};
-`;
+// const stickyMixin = css<StickyMixinProps>`
+//   position: ${({ isIntersecting }): string => (isIntersecting ? 'fixed' : 'absolute')};
+//   top: 0;
+//   width: 100vw;
+//   height: 100vh;
+// `;
 
 const Overlay = styled.div`
-  ${stickyMixin};
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   background-color: ${BASE_COLOR};
 `;
 
 const Poster = styled.div`
-  ${stickyMixin};
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   background-image: url(${image});
   background-repeat: no-repeat;
   background-position: center;
