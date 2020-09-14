@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { StickyArea, GridContainer, GridItem } from '@/components';
 
 import image from '@/images/photos/top/intro_1.jpg';
+import { Typography } from '@/constants';
 
 const BASE_COLOR = '#021a2b';
 
@@ -29,17 +30,29 @@ export const IntroModule: React.FC = () => {
         <Poster />
         <Overlay style={{ opacity: posterOpacity }} />
       </StickyArea>
-      <div style={{ height: '100vh', backgroundColor: 'green' }}>test</div>
+      <GridContainer>
+        <GridItem columnStart={3} columnEnd={6} rowEnd={4}>
+          test1
+        </GridItem>
+        <GridItem columnStart={1} columnEnd={3} rowStart={3} rowEnd={5} marginRight={-4}>
+          test2
+        </GridItem>
+      </GridContainer>
+      <Message>
+        関東大震災後、東京の中心部からやってきたファミリー層や高齢者世帯によって、新興住宅街がつくられたこのエリア。戦後になると、作家やアーティストをはじめ若者も多く移り住むようになり、多種多様な人びとが、ときに“中央線文化”とも呼ばれる独自のカルチャーを形作ってきました。
+      </Message>
     </>
   );
 };
 
 const Message = styled.p`
+  line-height: 1.6;
+  letter-spacing: 0.3em;
   display: inline-block;
   position: relative;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(1, 0.9);
   color: #fff;
   font-size: 20px;
   z-index: 1;

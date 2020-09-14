@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-expressions */
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import { useIntersectionObserver } from '@/hooks';
 import styled from 'styled-components';
 
 type OnScrollArg = {
@@ -14,16 +15,25 @@ type StickyAreaProps = {
 };
 
 export const StickyArea: React.FC<StickyAreaProps> = ({ height, onScroll, children }) => {
-  const ref = useRef<HTMLDivElement>(null);
   const [isIntersecting, setIsIntersecting] = useState(false);
   const [topOffset, setTopOffset] = useState(0);
+
+  const observerTargetRef = useIntersectionObserver<HTMLDivElement>(
+    (e) => {
+      const { isIntersecting: currentIsIntersecting } = e[0];
+      setIsIntersecting(currentIsIntersecting);
+    },
+    {
+      threshold: [0],
+    },
+  );
 
   const yMoment = useMemo(() => topOffset * -1 + window.innerHeight, [topOffset]);
 
   const handleScroll = useCallback((): void => {
-    if (!ref.current) return;
-    setTopOffset(ref.current.getBoundingClientRect().top);
-  }, []);
+    if (!observerTargetRef.current) return;
+    setTopOffset(observerTargetRef.current.getBoundingClientRect().top);
+  }, [observerTargetRef]);
 
   useEffect((): void => {
     if (!onScroll) return;
@@ -32,7 +42,7 @@ export const StickyArea: React.FC<StickyAreaProps> = ({ height, onScroll, childr
       progress: yMoment / height,
       isIntersecting,
     });
-  }, [isIntersecting, yMoment, onScroll]);
+  }, [isIntersecting, yMoment, height, onScroll]);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
@@ -41,21 +51,8 @@ export const StickyArea: React.FC<StickyAreaProps> = ({ height, onScroll, childr
     };
   }, [handleScroll]);
 
-  useEffect(() => {
-    if (!ref.current) return;
-    const observer = new IntersectionObserver(
-      (e) => {
-        const { isIntersecting: currentIsIntersecting } = e[0];
-        setIsIntersecting(currentIsIntersecting);
-      },
-      {
-        threshold: [0],
-      },
-    );
-    observer.observe(ref.current);
-  }, [ref]);
   return (
-    <Container height={height} ref={ref}>
+    <Container height={height} ref={observerTargetRef}>
       <StickyContent yMoment={yMoment} parentHeight={height}>
         {children}
       </StickyContent>
