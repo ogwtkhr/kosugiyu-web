@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { StyleUnit } from '@/constants/styleUnit';
+import { isUndefined } from '@/util/type';
+import { joinStyleWithSemicolon } from '@/util/style';
 
 export type GridContainerProps = {
   columns?: number;
@@ -23,10 +26,12 @@ export type GridItemProps = {
   rowEnd?: number;
   columnStart?: number;
   columnEnd?: number;
+  unit?: StyleUnit;
+  margin?: number;
   marginLeft?: number;
   marginRight?: number;
   marginTop?: number;
-  marginBottom?: nubmer;
+  marginBottom?: number;
   fullWidth?: boolean;
 };
 
@@ -41,10 +46,13 @@ export const GridItem = styled.div<GridItemProps>`
     `;
   }}
 
-  ${({ marginTop = 0, marginRight = 0, marginBottom = 0, marginLeft = 0 }) => {
-    if (marginTop && marginRight && marginBottom && marginLeft) return '';
-    return `
-      margin: ${marginTop}vw ${marginRight}vw ${marginBottom}vw ${marginLeft}vw;
-    `;
+  ${({ margin, marginTop, marginRight, marginBottom, marginLeft, unit = StyleUnit.VW }) => {
+    return joinStyleWithSemicolon(
+      isUndefined(margin) ? '' : `margin: ${margin + unit}`,
+      isUndefined(marginTop) ? '' : `margin-top: ${marginTop + unit}`,
+      isUndefined(marginRight) ? '' : `margin-right: ${marginRight + unit}`,
+      isUndefined(marginBottom) ? '' : `margin-bottom: ${marginBottom + unit}`,
+      isUndefined(marginLeft) ? '' : `margin-left: ${marginLeft + unit}`,
+    );
   }}
 `;

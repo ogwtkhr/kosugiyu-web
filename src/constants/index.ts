@@ -5,3 +5,4 @@ export * from './line';
 export * from './screenType';
 export * from './animation';
 export * from './opacity';
+export * from './styleUnit';
