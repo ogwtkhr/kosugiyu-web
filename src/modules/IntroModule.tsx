@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 // import media from 'styled-media-query';
 // import { Spacing, Typography, ScreenType } from '@/constants';
-import { StickyArea, GridContainer, GridItem } from '@/components';
+import { StickyArea, GridContainer, GridItem, GridImage } from '@/components';
 import { joinStyleWithSemicolon } from '@/util/style';
 
 import image from '@/images/photos/top/intro_1.jpg';
@@ -35,7 +35,7 @@ export const IntroModule: React.FC = () => {
       </StickyArea>
       <GridContainer>
         <GridItem columnStart={3} columnEnd={6} rowEnd={4}>
-          test1
+          <GridImage src="https://dummyimage.com/600x400/000/fff" />
         </GridItem>
         <GridItem columnStart={1} columnEnd={3} rowStart={3} rowEnd={5} marginRight={-4}>
           test2

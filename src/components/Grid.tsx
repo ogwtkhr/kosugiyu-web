@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { StyleUnit } from '@/constants/styleUnit';
 import { isUndefined } from '@/util/type';
 import { joinStyleWithSemicolon } from '@/util/style';
+import { useIntersectionObserver } from '@/hooks';
 
 export type GridContainerProps = {
   columns?: number;
@@ -15,10 +16,6 @@ export const GridContainer = styled.div<GridContainerProps>`
   grid-template-columns: 2vw repeat(5, 1fr) 2vw;
   grid-template-rows: 14vw;
   grid-auto-rows: 14vw;
-  /*
-  grid-template-rows: 18vw;
-  grid-auto-rows: 18vw;
-  */
 `;
 
 export type GridItemProps = {
@@ -55,4 +52,23 @@ export const GridItem = styled.div<GridItemProps>`
       isUndefined(marginLeft) ? '' : `margin-left: ${marginLeft + unit}`,
     );
   }}
+`;
+
+type GridImageProps = {
+  src: string;
+};
+
+export const GridImage: React.FC<GridImageProps> = ({ src }) => {
+  const [ref, isIntersecting, hasIntersected] = useIntersectionObserver<HTMLDivElement>();
+
+  return <GridImageContainer src={src} ref={ref} />;
+};
+
+const GridImageContainer = styled.div<GridImageProps>`
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url(${({ src }) => src});
 `;

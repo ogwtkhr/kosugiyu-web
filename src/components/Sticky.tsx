@@ -15,18 +15,10 @@ type StickyAreaProps = {
 };
 
 export const StickyArea: React.FC<StickyAreaProps> = ({ height, onScroll, children }) => {
-  const [isIntersecting, setIsIntersecting] = useState(false);
+  // const [isIntersecting, setIsIntersecting] = useState(false);
   const [topOffset, setTopOffset] = useState(0);
 
-  const observerTargetRef = useIntersectionObserver<HTMLDivElement>(
-    (e) => {
-      const { isIntersecting: currentIsIntersecting } = e[0];
-      setIsIntersecting(currentIsIntersecting);
-    },
-    {
-      threshold: [0],
-    },
-  );
+  const [observerTargetRef, isIntersecting] = useIntersectionObserver<HTMLDivElement>();
 
   const yMoment = useMemo(() => topOffset * -1 + window.innerHeight, [topOffset]);
 
