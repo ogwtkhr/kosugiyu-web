@@ -9,7 +9,6 @@ export const useCoreIntersectionObserver = <T extends Element = HTMLElement>(
   const ref = useRef<T>(null);
 
   useEffect(() => {
-    console.log('effect', ref.current);
     if (!ref.current) return;
     const observer = new IntersectionObserver(callback, options);
     observer.observe(ref.current);
