@@ -9,11 +9,11 @@ import {
   GridImage,
   StaticPoster,
   DynamicPoster,
+  Box,
 } from '@/components';
-import { joinStyleWithSemicolon } from '@/util/style';
 
 import image1 from '@/images/photos/top/intro_1.jpg';
-import { Typography, Colors } from '@/constants';
+import { Typography, Colors, Spacing } from '@/constants';
 
 const BASE_COLOR = '#021a2b';
 
@@ -30,13 +30,13 @@ export const IntroModule: React.FC = () => {
         }}
       >
         <MessageContainer centering>
-          <MessageText color={Colors.UI_TEXT_DARK_BACKGROUND}>
+          <MessageTypography color={Colors.UI_TEXT_DARK_BACKGROUND}>
             東京の一大ターミナル、新宿駅から10分。
             <br />
             昔懐かしい商店街、古着屋、カフェ。演劇にアート、阿波踊り……。
             <br />
             あらゆる文化が混ざり合い、老若男女が集う街、高円寺。
-          </MessageText>
+          </MessageTypography>
         </MessageContainer>
         <StaticPoster src={image1} />
         <Overlay style={{ opacity: posterOpacity }} />
@@ -49,9 +49,9 @@ export const IntroModule: React.FC = () => {
           test2
         </GridItem>
         <GridItem columnStart={3} columnEnd={6} rowStart={4} rowEnd={6} margin={2}>
-          <MessageText>
+          <MessageTypography>
             関東大震災後、東京の中心部からやってきたファミリー層や高齢者世帯によって、新興住宅街がつくられたこのエリア。戦後になると、作家やアーティストをはじめ若者も多く移り住むようになり、多種多様な人びとが、ときに“中央線文化”とも呼ばれる独自のカルチャーを形作ってきました。
-          </MessageText>
+          </MessageTypography>
         </GridItem>
       </GridContainer>
       <StickyArea
@@ -69,44 +69,57 @@ export const IntroModule: React.FC = () => {
             'https://dummyimage.com/600x400/c46039/fff',
           ]}
         />
+        <MessageContainer
+          unit="px"
+          width={600}
+          backgroundColor={Colors.ABSTRACT_WHITE}
+          paddingTop={Spacing.XX_LARGE}
+          paddingBottom={Spacing.XX_LARGE}
+          centering
+        >
+          <MessageTypography align="center">
+            その長い歴史の中で、
+            <br />
+            さまざま人たちが小杉湯に集まり、
+            <br />
+            さまざまな物語が生まれてきました。
+          </MessageTypography>
+        </MessageContainer>
       </StickyArea>
     </>
   );
 };
 
 type MessageContainerProps = {
-  top?: string;
-  bottom?: string;
-  left?: string;
-  right?: string;
-  width?: string;
   centering?: boolean;
 };
 
-const MessageContainer = styled.div<MessageContainerProps>`
-  display: inline-block;
+const MessageContainer = styled(Box)<MessageContainerProps>`
+  display: block;
   position: relative;
   z-index: 1;
-  font-size: 20px;
-  ${({ width }) => (width ? `width: ${width}` : '')};
-  ${({ top = '50%', bottom, left = '50%', right }) => {
-    const positionX = right ? `right: ${right}` : `left: ${left}`;
-    const positionY = bottom ? `bottom: ${bottom}` : `top: ${top}`;
-    return joinStyleWithSemicolon(positionX, positionY);
-  }};
-  ${({ centering }) => (centering ? 'transform: translate(-50%, -50%)' : '')};
+  ${({ centering }) =>
+    centering
+      ? `
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  `
+      : ''};
 `;
 
-type MessageTextProps = {
+type MessageTypographyProps = {
   color?: string;
+  align?: 'center';
 };
 
-const MessageText = styled.p<MessageTextProps>`
+const MessageTypography = styled.p<MessageTypographyProps>`
   ${Typography.Mixin.EXTENDED};
   color: ${({ color = Colors.UI_BASE }) => color};
   font-size: 20px;
   letter-spacing: 0.3em;
   line-height: 2;
+  text-align: ${({ align }) => (align === 'center' ? 'center' : 'left')};
 `;
 
 const Overlay = styled.div`
@@ -117,17 +130,5 @@ const Overlay = styled.div`
   height: 100vh;
   background-color: ${BASE_COLOR};
 `;
-
-// const Poster = styled.div`
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   width: 100vw;
-//   height: 100vh;
-//   background-image: url(${image});
-//   background-repeat: no-repeat;
-//   background-position: center;
-//   background-size: cover;
-// `;
 
 export default IntroModule;

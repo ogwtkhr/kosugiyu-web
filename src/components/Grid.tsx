@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { StyleUnit } from '@/constants/styleUnit';
-import { isUndefined } from '@/util/type';
-import { joinStyleWithSemicolon } from '@/util/style';
 import { useIntersectionObserver } from '@/hooks';
+import { BoxProps, boxMixin } from './Box';
 
 export type GridContainerProps = {
   columns?: number;
@@ -23,14 +21,8 @@ export type GridItemProps = {
   rowEnd?: number;
   columnStart?: number;
   columnEnd?: number;
-  unit?: StyleUnit;
-  margin?: number;
-  marginLeft?: number;
-  marginRight?: number;
-  marginTop?: number;
-  marginBottom?: number;
   fullWidth?: boolean;
-};
+} & BoxProps;
 
 export const GridItem = styled.div<GridItemProps>`
   display: block;
@@ -43,15 +35,7 @@ export const GridItem = styled.div<GridItemProps>`
     `;
   }}
 
-  ${({ margin, marginTop, marginRight, marginBottom, marginLeft, unit = StyleUnit.VW }) => {
-    return joinStyleWithSemicolon(
-      isUndefined(margin) ? '' : `margin: ${margin + unit}`,
-      isUndefined(marginTop) ? '' : `margin-top: ${marginTop + unit}`,
-      isUndefined(marginRight) ? '' : `margin-right: ${marginRight + unit}`,
-      isUndefined(marginBottom) ? '' : `margin-bottom: ${marginBottom + unit}`,
-      isUndefined(marginLeft) ? '' : `margin-left: ${marginLeft + unit}`,
-    );
-  }}
+  ${boxMixin};
 `;
 
 type GridImageProps = {
@@ -67,8 +51,8 @@ export const GridImage: React.FC<GridImageProps> = ({ src }) => {
 const GridImageContainer = styled.div<GridImageProps>`
   width: 100%;
   height: 100%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   background-image: url(${({ src }) => src});
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 `;
