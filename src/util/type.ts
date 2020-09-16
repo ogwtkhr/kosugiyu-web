@@ -1,1 +1,1 @@
-export const isUndefined = (arg: any): arg is number => arg === undefined;
+export const isUndefined = (arg: any): arg is undefined => arg === undefined;

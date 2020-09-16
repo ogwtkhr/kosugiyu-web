@@ -4,6 +4,7 @@ export * from './Logo';
 export * from './HeroImage';
 export * from './Sticky';
 export * from './Grid';
+export * from './Poster';
 export * from './GoogleMap';
 // export * from './Image';
 // export * from './Select';

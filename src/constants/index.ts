@@ -3,6 +3,7 @@ export * from './spacing';
 export * from './Typography';
 export * from './line';
 export * from './screenType';
+export * from './eventType';
 export * from './animation';
 export * from './opacity';
 export * from './styleUnit';

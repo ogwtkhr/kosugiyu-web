@@ -2,16 +2,24 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 // import media from 'styled-media-query';
 // import { Spacing, Typography, ScreenType } from '@/constants';
-import { StickyArea, GridContainer, GridItem, GridImage } from '@/components';
+import {
+  StickyArea,
+  GridContainer,
+  GridItem,
+  GridImage,
+  StaticPoster,
+  DynamicPoster,
+} from '@/components';
 import { joinStyleWithSemicolon } from '@/util/style';
 
-import image from '@/images/photos/top/intro_1.jpg';
+import image1 from '@/images/photos/top/intro_1.jpg';
 import { Typography, Colors } from '@/constants';
 
 const BASE_COLOR = '#021a2b';
 
 export const IntroModule: React.FC = () => {
   const [posterOpacity, setPosterOpacity] = useState(1);
+  const [dynamicPosterAreaScrollProgress, setDynamicPosterAreaScrollProgress] = useState(0);
   return (
     <>
       <StickyArea
@@ -30,7 +38,7 @@ export const IntroModule: React.FC = () => {
             あらゆる文化が混ざり合い、老若男女が集う街、高円寺。
           </MessageText>
         </MessageContainer>
-        <Poster />
+        <StaticPoster src={image1} />
         <Overlay style={{ opacity: posterOpacity }} />
       </StickyArea>
       <GridContainer>
@@ -46,6 +54,22 @@ export const IntroModule: React.FC = () => {
           </MessageText>
         </GridItem>
       </GridContainer>
+      <StickyArea
+        height={3000}
+        onScroll={({ progress }): void => {
+          setDynamicPosterAreaScrollProgress(progress);
+        }}
+      >
+        <DynamicPoster
+          progress={dynamicPosterAreaScrollProgress}
+          src={[
+            'https://dummyimage.com/600x400/ff0/fff',
+            'https://dummyimage.com/600x400/3ea9b3/fff',
+            'https://dummyimage.com/600x400/c244c2/fff',
+            'https://dummyimage.com/600x400/c46039/fff',
+          ]}
+        />
+      </StickyArea>
     </>
   );
 };
@@ -78,7 +102,7 @@ type MessageTextProps = {
 };
 
 const MessageText = styled.p<MessageTextProps>`
-  transform: scale(1, 0.9);
+  ${Typography.Mixin.EXTENDED};
   color: ${({ color = Colors.UI_BASE }) => color};
   font-size: 20px;
   letter-spacing: 0.3em;
@@ -94,16 +118,16 @@ const Overlay = styled.div`
   background-color: ${BASE_COLOR};
 `;
 
-const Poster = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-image: url(${image});
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-`;
+// const Poster = styled.div`
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   width: 100vw;
+//   height: 100vh;
+//   background-image: url(${image});
+//   background-repeat: no-repeat;
+//   background-position: center;
+//   background-size: cover;
+// `;
 
 export default IntroModule;

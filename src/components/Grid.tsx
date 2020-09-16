@@ -12,10 +12,10 @@ export type GridContainerProps = {
 
 export const GridContainer = styled.div<GridContainerProps>`
   display: grid;
+  grid-auto-rows: 14vw;
   grid-gap: ${({ gap = '1vw' }) => (typeof gap === 'number' ? `${gap}px` : gap)};
   grid-template-columns: 2vw repeat(5, 1fr) 2vw;
   grid-template-rows: 14vw;
-  grid-auto-rows: 14vw;
 `;
 
 export type GridItemProps = {

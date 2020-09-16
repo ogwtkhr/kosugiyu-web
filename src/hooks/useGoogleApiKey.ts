@@ -1,7 +1,7 @@
 import { useStaticQuery, graphql } from 'gatsby';
 import { GoogleApiKeyQuery } from '@/types';
 
-export const useGoogleApiKey = () => {
+export const useGoogleApiKey = (): string | null | undefined => {
   const data: GoogleApiKeyQuery = useStaticQuery(graphql`
     query GoogleApiKey {
       site {
