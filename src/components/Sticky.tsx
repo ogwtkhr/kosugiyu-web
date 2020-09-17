@@ -4,6 +4,8 @@ import { useIntersectionObserver } from '@/hooks';
 import styled from 'styled-components';
 import { DomEventType } from '@/constants';
 
+const windowGlobal = typeof window !== 'undefined' && window;
+
 type OnScrollArg = {
   yMoment: number;
   progress: number;
@@ -21,7 +23,7 @@ export const StickyArea: React.FC<StickyAreaProps> = ({ height, onScroll, childr
 
   const [observerTargetRef, isIntersecting] = useIntersectionObserver<HTMLDivElement>();
 
-  const yMoment = useMemo(() => topOffset * -1 + window.innerHeight, [topOffset]);
+  const yMoment = useMemo(() => topOffset * -1 + windowGlobal.innerHeight, [topOffset]);
 
   const handleScroll = useCallback((): void => {
     if (!observerTargetRef.current) return;
@@ -38,9 +40,9 @@ export const StickyArea: React.FC<StickyAreaProps> = ({ height, onScroll, childr
   }, [isIntersecting, yMoment, height, onScroll]);
 
   useEffect(() => {
-    window.addEventListener(DomEventType.SCROLL, handleScroll);
+    windowGlobal.addEventListener(DomEventType.SCROLL, handleScroll);
     return (): void => {
-      window.removeEventListener(DomEventType.SCROLL, handleScroll);
+      windowGlobal.removeEventListener(DomEventType.SCROLL, handleScroll);
     };
   }, [handleScroll]);
 
