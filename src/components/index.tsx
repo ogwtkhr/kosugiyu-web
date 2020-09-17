@@ -6,6 +6,7 @@ export * from './Sticky';
 export * from './Grid';
 export * from './Poster';
 export * from './Box';
+export * from './Tape';
 export * from './GoogleMap';
 // export * from './Image';
 // export * from './Select';

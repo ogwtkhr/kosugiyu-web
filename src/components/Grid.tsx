@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useIntersectionObserver } from '@/hooks';
-import { BoxProps, boxMixin } from './Box';
+import { BoxProps, boxMixin, getBoxExpression } from './Box';
 
 export type GridContainerProps = {
   columns?: number;
@@ -16,18 +16,25 @@ export const GridContainer = styled.div<GridContainerProps>`
   grid-template-rows: 14vw;
 `;
 
-export type GridItemProps = {
+export type GridOption = {
   rowStart?: number;
   rowEnd?: number;
   columnStart?: number;
   columnEnd?: number;
-  fullWidth?: boolean;
-} & BoxProps;
+};
+
+export type GridItemProps = {
+  grid?: GridOption;
+  gridSmall?: GridOption;
+  box?: BoxProps;
+  boxSmall?: BoxProps;
+};
 
 export const GridItem = styled.div<GridItemProps>`
   display: block;
-  background-color: green;
-  ${({ rowStart = 1, rowEnd = 6, columnStart = 1, columnEnd = 6 }) => {
+  ${({ grid }) => {
+    if (!grid) return '';
+    const { rowStart = 1, rowEnd = 6, columnStart = 1, columnEnd = 6 } = grid;
     const OFFSET = 1;
     return `
       grid-row: ${rowStart} / ${rowEnd};
@@ -35,7 +42,7 @@ export const GridItem = styled.div<GridItemProps>`
     `;
   }}
 
-  ${boxMixin};
+  ${({ box }) => (box ? getBoxExpression(box) : '')}
 `;
 
 type GridImageProps = {

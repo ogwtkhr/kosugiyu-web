@@ -10,9 +10,12 @@ import {
   StaticPoster,
   DynamicPoster,
   Box,
+  Tape,
 } from '@/components';
 
 import introImage from '@/images/photos/top/intro_1.jpg';
+import townImage1 from '@/images/photos/top/town_1.jpg';
+import townImage2 from '@/images/photos/top/town_2.jpg';
 import facilityImage1 from '@/images/photos/top/facility_1.jpg';
 import facilityImage2 from '@/images/photos/top/facility_2.jpg';
 import facilityImage3 from '@/images/photos/top/facility_3.jpg';
@@ -51,8 +54,8 @@ export const IntroModule: React.FC = () => {
           setOpeningOverlayOpacity(opacity);
         }}
       >
-        <MessageContainer centering width={800} unit="px">
-          <MessageTypography color={Colors.UI_TEXT_DARK_BACKGROUND}>
+        <MessageContainer centering unit="px">
+          <MessageTypography align="center" color={Colors.UI_TEXT_DARK_BACKGROUND}>
             東京の一大ターミナル、新宿駅から10分。
             <br />
             昔懐かしい商店街、古着屋、カフェ。 演劇にアート、阿波踊り……。
@@ -64,16 +67,52 @@ export const IntroModule: React.FC = () => {
         <Overlay color={Colors.ABSTRACT_NAVY} style={{ opacity: openingOverlayOpacity }} />
       </StickyArea>
       <GridContainer>
-        <GridItem columnStart={3} columnEnd={6} rowEnd={4}>
-          <GridImage src="https://dummyimage.com/600x400/000/fff" />
+        <GridItem
+          grid={{
+            columnStart: 3,
+            columnEnd: 6,
+            rowEnd: 4,
+          }}
+        >
+          <GridImage src={townImage1} />
         </GridItem>
-        <GridItem columnStart={1} columnEnd={3} rowStart={3} rowEnd={5} marginRight={-4}>
-          test2
+        <GridItem
+          grid={{
+            columnStart: 1,
+            columnEnd: 3,
+            rowStart: 2,
+            rowEnd: 5,
+          }}
+          box={{
+            marginRight: -4,
+          }}
+        >
+          <GridImage src={townImage2} />
         </GridItem>
-        <GridItem columnStart={3} columnEnd={6} rowStart={4} rowEnd={6} margin={2}>
+        <GridItem
+          grid={{
+            columnStart: 3,
+            columnEnd: 6,
+            rowStart: 4,
+            rowEnd: 6,
+          }}
+          box={{
+            margin: 2,
+          }}
+        >
           <MessageTypography>
             関東大震災後、東京の中心部からやってきたファミリー層や高齢者世帯によって、新興住宅街がつくられたこのエリア。戦後になると、作家やアーティストをはじめ若者も多く移り住むようになり、多種多様な人びとが、ときに“中央線文化”とも呼ばれる独自のカルチャーを形作ってきました。
           </MessageTypography>
+        </GridItem>
+        <GridItem
+          grid={{
+            columnStart: 2,
+            columnEnd: 5,
+            rowStart: 6,
+            rowEnd: 8,
+          }}
+        >
+          <GridImage src={townImage1} />
         </GridItem>
       </GridContainer>
       <StickyArea
@@ -104,6 +143,23 @@ export const IntroModule: React.FC = () => {
           }}
         />
         <Overlay color={Colors.ABSTRACT_WHITE} style={{ opacity: endingOverlayOpacity }} />
+        {currentDynamicPosterIndex < 3 && (
+          <MessageContainer unit="px" centering>
+            <MessageTypography align="center" color={Colors.UI_BASE}>
+              <Tape>小杉湯は昭和8年（1933年）にこの街で生まれました。</Tape>
+              <Tape>高円寺らしい“ごちゃ混ぜ感”をぎゅっと凝縮したような、街の銭湯。</Tape>
+            </MessageTypography>
+          </MessageContainer>
+        )}
+        {currentDynamicPosterIndex >= 3 && currentDynamicPosterIndex < 5 && (
+          <MessageContainer unit="px" centering>
+            <MessageTypography align="center" color={Colors.UI_BASE}>
+              <Tape>創業当時の建物を守りつつ、時代に合わせて中身を変え続け </Tape>
+              <Tape>高円寺の人々とともにあり続けてきました。</Tape>
+            </MessageTypography>
+          </MessageContainer>
+        )}
+
         {currentDynamicPosterIndex >= 5 && (
           <MessageContainer
             unit="px"
@@ -177,6 +233,7 @@ const MessageTypography = styled.p<MessageTypographyProps>`
 type OverlayProps = {
   color: string;
 };
+
 const Overlay = styled.div<OverlayProps>`
   position: absolute;
   top: 0;
@@ -185,5 +242,7 @@ const Overlay = styled.div<OverlayProps>`
   height: 100vh;
   background-color: ${({ color }) => color};
 `;
+
+const GridModule = styled.div``;
 
 export default IntroModule;
