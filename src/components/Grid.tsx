@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+// import media from 'styled-media-query';
 import { useIntersectionObserver } from '@/hooks';
 import { BoxProps, boxMixin, getBoxExpression } from './Box';
 
@@ -14,6 +15,7 @@ export const GridContainer = styled.div<GridContainerProps>`
   grid-gap: ${({ gap = '1vw' }) => (typeof gap === 'number' ? `${gap}px` : gap)};
   grid-template-columns: 2vw repeat(5, 1fr) 2vw;
   grid-template-rows: 14vw;
+  /&
 `;
 
 export type GridOption = {

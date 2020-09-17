@@ -16,6 +16,13 @@ import {
 import introImage from '@/images/photos/top/intro_1.jpg';
 import townImage1 from '@/images/photos/top/town_1.jpg';
 import townImage2 from '@/images/photos/top/town_2.jpg';
+import townImage3 from '@/images/photos/top/town_3.jpg';
+import townImage4 from '@/images/photos/top/town_4.jpg';
+import townImage5 from '@/images/photos/top/town_5.jpg';
+import townImage6 from '@/images/photos/top/town_6.jpg';
+import townImage7 from '@/images/photos/top/town_7.jpg';
+import townImage8 from '@/images/photos/top/town_8.jpg';
+import townImage9 from '@/images/photos/top/town_9.jpg';
 import facilityImage1 from '@/images/photos/top/facility_1.jpg';
 import facilityImage2 from '@/images/photos/top/facility_2.jpg';
 import facilityImage3 from '@/images/photos/top/facility_3.jpg';
@@ -66,55 +73,132 @@ export const IntroModule: React.FC = () => {
         <StaticPoster src={introImage} />
         <Overlay color={Colors.ABSTRACT_NAVY} style={{ opacity: openingOverlayOpacity }} />
       </StickyArea>
-      <GridContainer>
-        <GridItem
-          grid={{
-            columnStart: 3,
-            columnEnd: 6,
-            rowEnd: 4,
-          }}
-        >
-          <GridImage src={townImage1} />
-        </GridItem>
-        <GridItem
-          grid={{
-            columnStart: 1,
-            columnEnd: 3,
-            rowStart: 2,
-            rowEnd: 5,
-          }}
-          box={{
-            marginRight: -4,
-          }}
-        >
-          <GridImage src={townImage2} />
-        </GridItem>
-        <GridItem
-          grid={{
-            columnStart: 3,
-            columnEnd: 6,
-            rowStart: 4,
-            rowEnd: 6,
-          }}
-          box={{
-            margin: 2,
-          }}
-        >
-          <MessageTypography>
-            関東大震災後、東京の中心部からやってきたファミリー層や高齢者世帯によって、新興住宅街がつくられたこのエリア。戦後になると、作家やアーティストをはじめ若者も多く移り住むようになり、多種多様な人びとが、ときに“中央線文化”とも呼ばれる独自のカルチャーを形作ってきました。
-          </MessageTypography>
-        </GridItem>
-        <GridItem
-          grid={{
-            columnStart: 2,
-            columnEnd: 5,
-            rowStart: 6,
-            rowEnd: 8,
-          }}
-        >
-          <GridImage src={townImage1} />
-        </GridItem>
-      </GridContainer>
+      <GridOuter>
+        <GridContainer>
+          <GridItem
+            grid={{
+              columnStart: 3,
+              columnEnd: 6,
+              rowEnd: 4,
+            }}
+          >
+            <GridImage src={townImage1} />
+          </GridItem>
+          <GridItem
+            grid={{
+              columnStart: 1,
+              columnEnd: 3,
+              rowStart: 2,
+              rowEnd: 5,
+            }}
+            box={{
+              marginRight: -4,
+            }}
+          >
+            <GridImage src={townImage2} />
+          </GridItem>
+          <GridItem
+            grid={{
+              columnStart: 3,
+              columnEnd: 6,
+              rowStart: 4,
+              rowEnd: 6,
+            }}
+            box={{
+              margin: 2,
+            }}
+          >
+            <MessageTypography>
+              関東大震災後、東京の中心部からやってきたファミリー層や高齢者世帯によって、新興住宅街がつくられたこのエリア。戦後になると、作家やアーティストをはじめ若者も多く移り住むようになり、多種多様な人びとが、ときに“中央線文化”とも呼ばれる独自のカルチャーを形作ってきました。
+            </MessageTypography>
+          </GridItem>
+          <GridItem
+            grid={{
+              columnStart: 2,
+              columnEnd: 5,
+              rowStart: 5,
+              rowEnd: 8,
+            }}
+          >
+            <GridImage src={townImage6} />
+          </GridItem>
+        </GridContainer>
+      </GridOuter>
+      <GridOuter>
+        <GridContainer>
+          <GridItem
+            grid={{
+              columnStart: 3,
+              columnEnd: 6,
+              rowEnd: 4,
+            }}
+          >
+            <GridImage src={townImage3} />
+          </GridItem>
+          <GridItem
+            grid={{
+              columnStart: 1,
+              columnEnd: 3,
+              rowStart: 2,
+              rowEnd: 4,
+            }}
+          >
+            <GridImage src={townImage5} />
+          </GridItem>
+          <GridItem
+            grid={{
+              columnStart: 2,
+              columnEnd: 5,
+              rowStart: 4,
+              rowEnd: 6,
+            }}
+            box={{
+              margin: 2,
+            }}
+          >
+            <MessageTypography>
+              車通りが少なく子どもや年配の方が安心して過ごせる、
+              子育てにも良い、働く人・サラリーマンもいっぱい住んでる。
+              まさに“混沌”ということばで形容するにふさわしい場所です。
+            </MessageTypography>
+          </GridItem>
+          <GridItem
+            grid={{
+              columnStart: 1,
+              columnEnd: 2,
+              rowStart: 5,
+              rowEnd: 6,
+            }}
+          >
+            <GridImage src={townImage4} />
+          </GridItem>
+          <GridItem
+            grid={{
+              columnStart: 2,
+              columnEnd: 4,
+              rowStart: 5,
+              rowEnd: 7,
+            }}
+          >
+            <GridImage src={townImage7} />
+          </GridItem>
+          <GridItem
+            grid={{
+              columnStart: 4,
+              columnEnd: 6,
+              rowStart: 5,
+              rowEnd: 7,
+            }}
+            box={{
+              marginTop: 4,
+              marginLeft: 3,
+              marginBottom: 2,
+            }}
+          >
+            <GridImage src={townImage8} />
+          </GridItem>
+        </GridContainer>
+      </GridOuter>
       <StickyArea
         height={7000}
         onScroll={({ progress }): void => {
@@ -147,6 +231,7 @@ export const IntroModule: React.FC = () => {
           <MessageContainer unit="px" centering>
             <MessageTypography align="center" color={Colors.UI_BASE}>
               <Tape>小杉湯は昭和8年（1933年）にこの街で生まれました。</Tape>
+              <br />
               <Tape>高円寺らしい“ごちゃ混ぜ感”をぎゅっと凝縮したような、街の銭湯。</Tape>
             </MessageTypography>
           </MessageContainer>
@@ -155,6 +240,7 @@ export const IntroModule: React.FC = () => {
           <MessageContainer unit="px" centering>
             <MessageTypography align="center" color={Colors.UI_BASE}>
               <Tape>創業当時の建物を守りつつ、時代に合わせて中身を変え続け </Tape>
+              <br />
               <Tape>高円寺の人々とともにあり続けてきました。</Tape>
             </MessageTypography>
           </MessageContainer>
@@ -243,6 +329,9 @@ const Overlay = styled.div<OverlayProps>`
   background-color: ${({ color }) => color};
 `;
 
-const GridModule = styled.div``;
+const GridOuter = styled.div`
+  /* max-width: 1200px; */
+  margin: 3vw auto;
+`;
 
 export default IntroModule;
