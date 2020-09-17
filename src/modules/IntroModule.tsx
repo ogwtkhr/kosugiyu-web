@@ -11,6 +11,7 @@ import {
   DynamicPoster,
   Box,
   Tape,
+  Indicator,
 } from '@/components';
 
 import introImage from '@/images/photos/top/intro_1.jpg';
@@ -22,7 +23,6 @@ import townImage5 from '@/images/photos/top/town_5.jpg';
 import townImage6 from '@/images/photos/top/town_6.jpg';
 import townImage7 from '@/images/photos/top/town_7.jpg';
 import townImage8 from '@/images/photos/top/town_8.jpg';
-import townImage9 from '@/images/photos/top/town_9.jpg';
 import facilityImage1 from '@/images/photos/top/facility_1.jpg';
 import facilityImage2 from '@/images/photos/top/facility_2.jpg';
 import facilityImage3 from '@/images/photos/top/facility_3.jpg';
@@ -52,6 +52,7 @@ export const IntroModule: React.FC = () => {
         return Colors.ABSTRACT_NAVY;
     }
   }, [currentDynamicPosterIndex]);
+
   return (
     <>
       <StickyArea
@@ -265,6 +266,7 @@ export const IntroModule: React.FC = () => {
           </MessageContainer>
         )}
       </StickyArea>
+      <Indicator current={1} total={8} />
     </>
   );
 };
