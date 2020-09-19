@@ -4,7 +4,7 @@ import { useIntersectionObserver } from '@/hooks';
 import styled from 'styled-components';
 import { DomEventType } from '@/constants';
 
-const windowGlobal = typeof window !== 'undefined' && window;
+const windowGlobal = (typeof window !== 'undefined' && window) as Window;
 
 type OnScrollArg = {
   yMoment: number;

@@ -17,14 +17,15 @@ export const Indicator: React.FC<IndicatorProps> = ({ current, total }) => {
 };
 
 const Container = styled.div`
-  font-family: Arial, Helvetica, sans-serif;
   display: flex;
   position: fixed;
-  align-items: center;
   top: 50%;
   right: 20px;
+  align-items: center;
   transform: translateY(-50%);
   color: ${Colors.UI_TEXT_DARK_BACKGROUND};
+  font-family: Arial, Helvetica, sans-serif;
+  mix-blend-mode: difference;
 `;
 
 const Current = styled.div``;

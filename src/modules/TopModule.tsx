@@ -18,9 +18,9 @@ export const TopModule: React.FC = () => {
       </LogoContainer>
       <MenuList>
         {menuList.map(({ id, label }) => (
-          <MenuItem>
-            <Link to={`/${id}`} key={id}>
-              {label}
+          <MenuItem key={id}>
+            <Link to={`/${id}`}>
+              <MenuType>{label}</MenuType>
             </Link>
           </MenuItem>
         ))}
@@ -51,13 +51,17 @@ const MenuList = styled.ul`
 `;
 
 const MenuItem = styled.li`
-  margin-top: 16px;
-  ${Typography.Mixin.EXTENDED};
+  margin-top: 12px;
 
   & a {
     color: black;
     text-decoration: none;
   }
+`;
+
+const MenuType = styled.span`
+  display: inline-block;
+  ${Typography.Mixin.EXTENDED};
 `;
 
 const ExtendedTypeface = styled.p`
