@@ -9,5 +9,4 @@ export * from './Box';
 export * from './Tape';
 export * from './GoogleMap';
 export * from './Indicator';
-// export * from './Select';
-// export * from './TextInput';
+export * from './Picture';

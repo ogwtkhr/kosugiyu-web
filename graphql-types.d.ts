@@ -2995,6 +2995,17 @@ export type StringQueryOperatorInput = {
   glob?: Maybe<Scalars['String']>;
 };
 
+export type AllImageFileQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllImageFileQueryQuery = { desktopImages: { edges: Array<{ node: (
+        Pick<File, 'relativePath'>
+        & { childImageSharp?: Maybe<{ fluid?: Maybe<GatsbyImageSharpFluid_WithWebpFragment> }> }
+      ) }> }, mobileImages: { edges: Array<{ node: (
+        Pick<File, 'relativePath'>
+        & { childImageSharp?: Maybe<{ fluid?: Maybe<GatsbyImageSharpFluid_WithWebpFragment> }> }
+      ) }> } };
+
 export type GoogleApiKeyQueryVariables = Exact<{ [key: string]: never; }>;
 
 
