@@ -233,7 +233,7 @@ export const IntroModule: React.FC = () => {
 
           setIsEndingPhase1(progress > 0.9);
           setIsEndingPhase2(progress > 0.92);
-          setIsEndingPhase3(progress > 0.95);
+          setIsEndingPhase3(progress > 0.99);
 
           setEndingOverlayOpacity(opacity);
         }}
