@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import styled from 'styled-components';
 // import media from 'styled-media-query';
 // import { Spacing, Typography, ScreenType } from '@/constants';
+import Transition, { TransitionStatus } from 'react-transition-group/Transition';
 import {
   StickyArea,
   GridContainer,
@@ -12,6 +13,7 @@ import {
   Box,
   Tape,
   Indicator,
+  PersonsLogo,
 } from '@/components';
 
 import introImage from '@/images/photos/top/intro_1.jpg';
@@ -39,8 +41,12 @@ import { floorInRange0to1 } from '@/util/number';
 export const IntroModule: React.FC = () => {
   const [openingOverlayOpacity, setOpeningOverlayOpacity] = useState(1);
   const [endingOverlayOpacity, setEndingOverlayOpacity] = useState(0);
+  const [isEndingPhase1, setIsEndingPhase1] = useState(false);
+  const [isEndingPhase2, setIsEndingPhase2] = useState(false);
+  const [isEndingPhase3, setIsEndingPhase3] = useState(false);
   const [dynamicPosterScrollProgress, setDynamicPosterScrollProgress] = useState(0);
   const [currentDynamicPosterIndex, setCurrentDynamicPosterIndex] = useState(0);
+
   const dynamicPosterTextColor = useMemo(() => {
     switch (currentDynamicPosterIndex) {
       case 5:
@@ -208,6 +214,10 @@ export const IntroModule: React.FC = () => {
           const MAX = 1;
           const opacity = floorInRange0to1((progress - MIN) / (MAX - MIN));
 
+          setIsEndingPhase1(progress > 0.95);
+          setIsEndingPhase2(progress > 0.97);
+          setIsEndingPhase3(progress > 0.99);
+
           setEndingOverlayOpacity(opacity);
         }}
       >
@@ -248,22 +258,71 @@ export const IntroModule: React.FC = () => {
         )}
 
         {currentDynamicPosterIndex >= 5 && (
-          <MessageContainer
+          <EndingMessageContainer
             unit="px"
-            width={600}
+            width={isEndingPhase2 ? 200 : 600}
+            height={270}
             paddingTop={Spacing.XX_LARGE}
             paddingBottom={Spacing.XX_LARGE}
             centering
             borderColor={dynamicPosterTextColor}
+            style={{
+              position: 'relative',
+              top: isEndingPhase3 ? '80%' : '50%',
+              transition: '0.5s ease',
+            }}
           >
-            <MessageTypography align="center" color={dynamicPosterTextColor}>
-              その長い歴史の中で、
-              <br />
-              さまざま人たちが小杉湯に集まり、
-              <br />
-              さまざまな物語が生まれてきました。
-            </MessageTypography>
-          </MessageContainer>
+            <Transition
+              in={!isEndingPhase1}
+              timeout={{
+                enter: 10,
+                exit: 500,
+              }}
+              unmountOnExit
+            >
+              {(state) => (
+                <MessageTypography
+                  align="center"
+                  color={dynamicPosterTextColor}
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    width: '600px',
+                    transform: 'translate(-50%, -50%)',
+                    opacity: state === 'entered' ? 1 : 0,
+                    transition: '0.5s ease',
+                  }}
+                >
+                  その長い歴史の中で、
+                  <br />
+                  さまざま人たちが小杉湯に集まり、
+                  <br />
+                  さまざまな物語が生まれてきました。
+                </MessageTypography>
+              )}
+            </Transition>
+
+            <Transition
+              in={isEndingPhase2}
+              timeout={{
+                enter: 10,
+                exit: 500,
+              }}
+              unmountOnExit
+            >
+              {(state) => (
+                <div
+                  style={{
+                    opacity: state === 'entered' ? 1 : 0,
+                    transition: '0.5s ease',
+                  }}
+                >
+                  <PersonsLogo />
+                </div>
+              )}
+            </Transition>
+          </EndingMessageContainer>
         )}
       </StickyArea>
       <div style={{ height: '1000px', backgroundColor: 'blue' }} />
@@ -281,7 +340,7 @@ const MessageContainer = styled(Box)<MessageContainerProps>`
   display: block;
   position: relative;
   z-index: 1;
-  transition: 1s ease;
+
   ${({ centering }) =>
     centering
       ? `
@@ -302,6 +361,13 @@ const MessageContainer = styled(Box)<MessageContainerProps>`
     transition: 1s ease;
     border: solid 1px ${({ borderColor }) => borderColor};
   }
+`;
+
+const EndingMessageContainer = styled(MessageContainer)`
+  display: flex;
+  transition: 0.5s ease;
+  justify-content: center;
+  align-items: center;
 `;
 
 type MessageTypographyProps = {

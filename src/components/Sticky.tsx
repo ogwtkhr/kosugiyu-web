@@ -10,8 +10,8 @@ type OnScrollArg = {
   yMoment: number;
   progress: number;
   isIntersecting: boolean;
-  isUnderScroll: boolean;
-  isOverScroll: boolean;
+  // isUnderScroll: boolean;
+  // isOverScroll: boolean;
 };
 
 type StickyAreaProps = {
@@ -24,8 +24,8 @@ export const StickyArea: React.FC<StickyAreaProps> = ({ height, onScroll, childr
   const [topOffset, setTopOffset] = useState(0);
 
   const [observerTargetRef, isIntersecting] = useIntersectionObserver<HTMLDivElement>();
-  const [isUnderScroll, setIsUnderScroll] = useState<boolean>(false);
-  const [isOverScroll, setIsOverScroll] = useState<boolean>(false);
+  // const [isUnderScroll, setIsUnderScroll] = useState<boolean>(false);
+  // const [isOverScroll, setIsOverScroll] = useState<boolean>(false);
 
   const yMoment = useMemo(() => topOffset * -1 + windowGlobal.innerHeight, [topOffset]);
 
@@ -34,15 +34,15 @@ export const StickyArea: React.FC<StickyAreaProps> = ({ height, onScroll, childr
     setTopOffset(observerTargetRef.current.getBoundingClientRect().top);
   }, [observerTargetRef]);
 
-  const childScrollListener = useCallback(
-    ({ isOverScroll, isUnderScroll }: { isOverScroll: boolean; isUnderScroll: boolean }): void => {
-      setTimeout(() => {
-        setIsOverScroll(isOverScroll);
-        setIsUnderScroll(isUnderScroll);
-      }, 10);
-    },
-    [],
-  );
+  // const childScrollListener = useCallback(
+  //   ({ isOverScroll, isUnderScroll }: { isOverScroll: boolean; isUnderScroll: boolean }): void => {
+  //     setTimeout(() => {
+  //       setIsOverScroll(isOverScroll);
+  //       setIsUnderScroll(isUnderScroll);
+  //     }, 10);
+  //   },
+  //   [],
+  // );
 
   useEffect((): void => {
     if (!onScroll || !isIntersecting) return;
@@ -50,8 +50,8 @@ export const StickyArea: React.FC<StickyAreaProps> = ({ height, onScroll, childr
       yMoment,
       progress: yMoment / height,
       isIntersecting,
-      isUnderScroll,
-      isOverScroll,
+      // isUnderScroll,
+      // isOverScroll,
     });
   }, [isIntersecting, yMoment, height, onScroll]);
 
@@ -64,7 +64,7 @@ export const StickyArea: React.FC<StickyAreaProps> = ({ height, onScroll, childr
 
   return (
     <Container height={height} ref={observerTargetRef}>
-      <StickyContent yMoment={yMoment} parentHeight={height} onScroll={childScrollListener}>
+      <StickyContent yMoment={yMoment} parentHeight={height}>
         {children}
       </StickyContent>
     </Container>
@@ -79,13 +79,13 @@ const Container = styled.div<Pick<StickyAreaProps, 'height'>>`
 type StickyContentProps = {
   yMoment: number;
   parentHeight: number;
-  onScroll: (arg: { isUnderScroll: boolean; isOverScroll: boolean }) => void;
+  // onScroll: (arg: { isUnderScroll: boolean; isOverScroll: boolean }) => void;
 };
 
 const StickyContent: React.FC<StickyContentProps> = ({
   yMoment,
   parentHeight,
-  onScroll,
+  // onScroll,
   children,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -94,10 +94,10 @@ const StickyContent: React.FC<StickyContentProps> = ({
   const isUnderScroll = yMoment <= height;
   const isOverScroll = yMoment > parentHeight;
 
-  onScroll({
-    isUnderScroll,
-    isOverScroll,
-  });
+  // onScroll({
+  //   isUnderScroll,
+  //   isOverScroll,
+  // });
 
   return (
     <StickyContentContainer isUnderScroll={isUnderScroll} isOverScroll={isOverScroll} ref={ref}>

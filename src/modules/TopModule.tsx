@@ -3,7 +3,7 @@ import styled from 'styled-components';
 // import media from 'styled-media-query';
 import { Link } from 'gatsby';
 import { Spacing, Typography, ScreenType, Colors } from '@/constants';
-import { Button, ButtonContainer, HeroImage, Logo } from '@/components';
+import { Button, ButtonContainer, HeroImage, MainLogo } from '@/components';
 // import { IntersectionFadeIn } from '@/animations';
 import { useMenu } from '@/hooks';
 
@@ -13,7 +13,7 @@ export const TopModule: React.FC = () => {
   return (
     <Container>
       <LogoContainer>
-        <Logo />
+        <MainLogo />
         <ExtendedTypeface>高円寺・昭和八年創業</ExtendedTypeface>
       </LogoContainer>
       <MenuList>
