@@ -16,7 +16,6 @@ export const GridContainer = styled.div<GridContainerProps>`
   grid-gap: ${({ gap = '1vw' }) => (typeof gap === 'number' ? `${gap}px` : gap)};
   grid-template-columns: 2vw repeat(5, 1fr) 2vw;
   grid-template-rows: 14vw;
-  /&
 `;
 
 export type GridOption = {

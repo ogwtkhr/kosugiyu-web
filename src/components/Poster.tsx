@@ -55,7 +55,7 @@ export const DynamicPoster: React.FC<DynamicPosterProps> = ({ data, progress, on
           const parallaxStyle = [
             parallax && parallax === 'scroll' ? `scale(1.3) translateY(${seed * 200}px)` : '',
             parallax && parallax === 'zoomout' ? `scale(${1 + seed})` : '',
-            parallax && parallax === 'zoomin' ? `scale(${1 - seed})` : '',
+            parallax && parallax === 'zoomin' ? `scale(${1.2 - seed})` : '',
           ].join(' ');
 
           return (
