@@ -14,6 +14,7 @@ import 'intersection-observer';
 import 'reset.css';
 
 import { SiteTitleQuery } from '@/types';
+import { Menu } from '@/components';
 
 export const BaseLayout: React.FC = ({ children }) => {
   const data: SiteTitleQuery = useStaticQuery(graphql`
@@ -28,10 +29,10 @@ export const BaseLayout: React.FC = ({ children }) => {
 
   return (
     <>
-      {/* <Header siteTitle={data.site?.siteMetadata?.title || ''} /> */}
       <GlobalStyle />
       <Main>{children}</Main>
       <Footer />
+      <Menu />
     </>
   );
 };

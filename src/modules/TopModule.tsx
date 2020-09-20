@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 // import media from 'styled-media-query';
 import { Link } from 'gatsby';
-import { Spacing, Typography, ScreenType } from '@/constants';
+import { Spacing, Typography, ScreenType, Colors } from '@/constants';
 import { Button, ButtonContainer, HeroImage, Logo } from '@/components';
 // import { IntersectionFadeIn } from '@/animations';
 import { useMenu } from '@/hooks';
@@ -36,6 +36,7 @@ const Container = styled.div`
   position: relative;
   width: 100vw;
   height: 100vh;
+  background-color: ${Colors.UI_PAPER};
 `;
 
 const LogoContainer = styled.div`

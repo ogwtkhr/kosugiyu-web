@@ -36,8 +36,10 @@ export const StickyArea: React.FC<StickyAreaProps> = ({ height, onScroll, childr
 
   const childScrollListener = useCallback(
     ({ isOverScroll, isUnderScroll }: { isOverScroll: boolean; isUnderScroll: boolean }): void => {
-      setIsOverScroll(isOverScroll);
-      setIsUnderScroll(isUnderScroll);
+      setTimeout(() => {
+        setIsOverScroll(isOverScroll);
+        setIsUnderScroll(isUnderScroll);
+      }, 10);
     },
     [],
   );

@@ -6,4 +6,6 @@ export * from './screenType';
 export * from './eventType';
 export * from './animation';
 export * from './opacity';
+export * from './layer';
 export * from './styleUnit';
+export * from './styleMixin';

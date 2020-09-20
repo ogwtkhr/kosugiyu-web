@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Colors } from '@/constants';
 
 export const Tape: React.FC = ({ children }) => {
   return (
@@ -15,13 +16,13 @@ const Container = styled.span`
 
   &::after {
     content: '';
-    width: 100%;
-    height: 100%;
     position: absolute;
+    z-index: 1;
     top: 0;
     left: 0;
-    z-index: 1;
-    background-color: white;
+    width: 100%;
+    height: 100%;
+    background-color: ${Colors.ABSTRACT_WHITE};
   }
 `;
 

@@ -335,6 +335,7 @@ const Overlay = styled.div<OverlayProps>`
 const GridOuter = styled.div`
   /* max-width: 1200px; */
   margin: 3vw auto;
+  background-color: ${Colors.UI_PAPER};
 `;
 
 export default IntroModule;

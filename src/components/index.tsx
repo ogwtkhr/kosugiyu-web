@@ -10,3 +10,4 @@ export * from './Tape';
 export * from './GoogleMap';
 export * from './Indicator';
 export * from './Picture';
+export * from './Menu';
