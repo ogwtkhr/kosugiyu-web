@@ -24,31 +24,37 @@ const endingPosterData = [
   {
     src: 'photos/top/facility_1.jpg',
     duration: 2,
+    parallax: 'zoomin',
   },
   {
     src: 'photos/top/facility_2.jpg',
     duration: 1,
+    parallax: 'zoomin',
   },
   {
     src: 'photos/top/facility_3.jpg',
     duration: 1,
+    parallax: 'zoomin',
   },
   {
     src: 'photos/top/facility_4.jpg',
     duration: 1,
+    parallax: 'zoomin',
   },
   {
     src: 'photos/top/facility_5.jpg',
     duration: 1,
+    parallax: 'zoomin',
   },
   {
     src: 'photos/top/facility_6.jpg',
     duration: 1,
+    parallax: 'zoomin',
   },
   {
     src: 'photos/top/facility_7.jpg',
     duration: 3,
-    parallax: true,
+    parallax: 'scroll',
   },
 ];
 
@@ -72,7 +78,7 @@ export const IntroModule: React.FC = () => {
   return (
     <>
       <StickyArea
-        height={3000}
+        height={2000}
         onScroll={({ progress }): void => {
           setOpeningPosterScrollProgress(progress);
           const opacity = 1 - progress + 0.2;
@@ -91,7 +97,7 @@ export const IntroModule: React.FC = () => {
         <StaticPoster
           data={{
             src: 'photos/top/intro_1.jpg',
-            parallax: true,
+            parallax: 'scroll',
           }}
           progress={OpeningPosterScrollProgress}
         />

@@ -4,9 +4,11 @@ import { usePrevious } from '@/hooks';
 import Picture from './Picture';
 import { isUndefined } from '@/util/type';
 
+type ParallaxType = 'zoomout' | 'zoomin' | 'scroll';
+
 type PosterData = {
   src: string;
-  parallax?: boolean;
+  parallax?: ParallaxType;
   duration?: number;
 };
 
@@ -49,12 +51,19 @@ export const DynamicPoster: React.FC<DynamicPosterProps> = ({ data, progress, on
       {data.map(({ src, parallax }, index) => {
         if (parallax) {
           const seed = map[index] - progress;
+
+          const parallaxStyle = [
+            parallax && parallax === 'scroll' ? `scale(1.3) translateY(${seed * 200}px)` : '',
+            parallax && parallax === 'zoomout' ? `scale(${1 + seed})` : '',
+            parallax && parallax === 'zoomin' ? `scale(${1 - seed})` : '',
+          ].join(' ');
+
           return (
             <Transition key={index} visible={index <= currentIndex}>
               <PosterImage>
                 <PosterInner
                   style={{
-                    transform: `scale(1.3) translateY(${seed * 200}px)`,
+                    transform: parallaxStyle,
                   }}
                 >
                   <Picture relativePath={src} />
@@ -83,13 +92,21 @@ type StaticPosterProps = {
 export const StaticPoster: React.FC<StaticPosterProps> = ({ data, progress }) => {
   const { src, parallax } = data;
 
+  const parallaxStyle = [
+    parallax ? 'scale(1.3)' : '',
+    parallax && parallax.includes('scroll') ? `translateY(-${(progress - 0.5) * 100}px)` : '',
+    parallax && parallax.includes('zoomout')
+      ? `perspective(100px) translateZ(-${(progress - 0.5) * 10}px)`
+      : '',
+  ].join(' ');
+
   return (
     <PosterImage>
       <PosterInner
         style={
           parallax
             ? {
-                transform: `scale(1.3) translateY(-${(progress - 0.5) * 100}px)`,
+                transform: parallaxStyle,
               }
             : {}
         }
