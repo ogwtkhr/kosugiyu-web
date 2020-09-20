@@ -45,13 +45,26 @@ export const DynamicPoster: React.FC<DynamicPosterProps> = ({
 };
 
 type StaticPosterProps = {
-  src: string;
+  data: PosterData;
+  progress: number;
 };
 
-export const StaticPoster: React.FC<StaticPosterProps> = ({ src }) => {
+export const StaticPoster: React.FC<StaticPosterProps> = ({ data, progress }) => {
+  const { src, parallax } = data;
+
   return (
     <PosterImage>
-      <Picture relativePath={src} />
+      <PosterInner
+        style={
+          parallax
+            ? {
+                transform: `scale(1.3) translateY(-${(progress - 0.5) * 100}px)`,
+              }
+            : {}
+        }
+      >
+        <Picture relativePath={src} />
+      </PosterInner>
     </PosterImage>
   );
 };
@@ -71,4 +84,10 @@ const PosterImage = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
+`;
+
+const PosterInner = styled.div`
+  width: 100%;
+  height: 100%;
 `;

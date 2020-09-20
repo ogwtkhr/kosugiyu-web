@@ -23,9 +23,12 @@ import { floorInRange0to1 } from '@/util/number';
 export const IntroModule: React.FC = () => {
   const [openingOverlayOpacity, setOpeningOverlayOpacity] = useState(1);
   const [endingOverlayOpacity, setEndingOverlayOpacity] = useState(0);
+
   const [isEndingPhase1, setIsEndingPhase1] = useState(false);
   const [isEndingPhase2, setIsEndingPhase2] = useState(false);
   const [isEndingPhase3, setIsEndingPhase3] = useState(false);
+
+  const [OpeningPosterScrollProgress, setOpeningPosterScrollProgress] = useState(0);
   const [dynamicPosterScrollProgress, setDynamicPosterScrollProgress] = useState(0);
   const [currentDynamicPosterIndex, setCurrentDynamicPosterIndex] = useState(0);
 
@@ -46,6 +49,7 @@ export const IntroModule: React.FC = () => {
       <StickyArea
         height={3000}
         onScroll={({ progress }): void => {
+          setOpeningPosterScrollProgress(progress);
           const opacity = 1 - progress + 0.2;
           setOpeningOverlayOpacity(opacity);
         }}
@@ -59,7 +63,13 @@ export const IntroModule: React.FC = () => {
             あらゆる文化が混ざり合い、老若男女が集う街、高円寺。
           </MessageTypography>
         </MessageContainer>
-        <StaticPoster src="photos/top/intro_1.jpg" />
+        <StaticPoster
+          data={{
+            src: 'photos/top/intro_1.jpg',
+            parallax: true,
+          }}
+          progress={OpeningPosterScrollProgress}
+        />
         <Overlay color={Colors.ABSTRACT_NAVY} style={{ opacity: openingOverlayOpacity }} />
       </StickyArea>
       <GridOuter>
