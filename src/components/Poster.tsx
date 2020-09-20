@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 import { usePrevious } from '@/hooks';
 import Picture from './Picture';
+import { isUndefined } from '@/util/type';
 
 type PosterData = {
   src: string;
@@ -10,21 +11,35 @@ type PosterData = {
 };
 
 type DynamicPosterProps = {
-  src: string[];
+  data: PosterData[];
   progress: number;
-  offset?: number;
   onChange?: (currentIndex: number) => void;
 };
-export const DynamicPoster: React.FC<DynamicPosterProps> = ({
-  src,
-  progress,
-  offset = 0,
-  onChange,
-}) => {
-  const step = src.length + offset;
-  const currentIndex = Math.floor(progress * step);
-  // console.log(currentIndex, progress * step, progress);
-  // const currentIndex = Math.max(Math.floor(step * Math.min(progress, 1)), 0);
+
+export const DynamicPoster: React.FC<DynamicPosterProps> = ({ data, progress, onChange }) => {
+  const src = data.map(({ src }) => src);
+  const totalStep = useMemo(() => {
+    return data.reduce(
+      (prev, current) => prev + (!isUndefined(current.duration) ? current.duration : 1),
+      0,
+    );
+  }, [data]);
+  const coefficient = useMemo(() => {
+    return 1 / totalStep;
+  }, [totalStep]);
+
+  const map = useMemo(
+    () =>
+      data.reduce<number[]>((prev, current) => {
+        const last = prev[prev.length - 1];
+        const addition = (current.duration || 1) * coefficient;
+        return isUndefined(last) ? [addition] : [...prev, addition + last];
+      }, []),
+    [data, coefficient],
+  );
+
+  let currentIndex = map.findIndex((target) => progress <= target);
+  if (currentIndex === -1) currentIndex = data.length - 1;
   const previousIndex = usePrevious(currentIndex);
   useEffect(() => {
     if (onChange && currentIndex !== previousIndex) onChange(currentIndex);

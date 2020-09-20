@@ -20,6 +20,38 @@ import { Typography, Colors, Spacing } from '@/constants';
 import { isString } from '@/util/type';
 import { floorInRange0to1 } from '@/util/number';
 
+const endingPosterData = [
+  {
+    src: 'photos/top/facility_1.jpg',
+    duration: 2,
+  },
+  {
+    src: 'photos/top/facility_2.jpg',
+    duration: 1,
+  },
+  {
+    src: 'photos/top/facility_3.jpg',
+    duration: 1,
+  },
+  {
+    src: 'photos/top/facility_4.jpg',
+    duration: 1,
+  },
+  {
+    src: 'photos/top/facility_5.jpg',
+    duration: 1,
+  },
+  {
+    src: 'photos/top/facility_6.jpg',
+    duration: 1,
+  },
+  {
+    src: 'photos/top/facility_7.jpg',
+    duration: 3,
+    parallax: true,
+  },
+];
+
 export const IntroModule: React.FC = () => {
   const [openingOverlayOpacity, setOpeningOverlayOpacity] = useState(1);
   const [endingOverlayOpacity, setEndingOverlayOpacity] = useState(0);
@@ -29,20 +61,13 @@ export const IntroModule: React.FC = () => {
   const [isEndingPhase3, setIsEndingPhase3] = useState(false);
 
   const [OpeningPosterScrollProgress, setOpeningPosterScrollProgress] = useState(0);
-  const [dynamicPosterScrollProgress, setDynamicPosterScrollProgress] = useState(0);
+  const [endingPosterScrollProgress, setEndingPosterScrollProgress] = useState(0);
   const [currentDynamicPosterIndex, setCurrentDynamicPosterIndex] = useState(0);
 
-  const dynamicPosterTextColor = useMemo(() => {
-    switch (currentDynamicPosterIndex) {
-      case 5:
-      case 6:
-        return Colors.UI_TEXT_DARK_BACKGROUND;
-      case 7:
-        return Colors.ABSTRACT_NAVY;
-      default:
-        return Colors.ABSTRACT_NAVY;
-    }
-  }, [currentDynamicPosterIndex]);
+  const endingPosterTextColor = useMemo(() => {
+    if (endingPosterScrollProgress < 0.8) return Colors.UI_TEXT_DARK_BACKGROUND;
+    return Colors.ABSTRACT_NAVY;
+  }, [endingPosterScrollProgress]);
 
   return (
     <>
@@ -201,22 +226,21 @@ export const IntroModule: React.FC = () => {
       <StickyArea
         height={7000}
         onScroll={({ progress }): void => {
-          setDynamicPosterScrollProgress(progress);
+          setEndingPosterScrollProgress(progress);
           const MIN = 0.8;
           const MAX = 1;
           const opacity = floorInRange0to1((progress - MIN) / (MAX - MIN));
 
-          setIsEndingPhase1(progress > 0.95);
-          setIsEndingPhase2(progress > 0.97);
-          setIsEndingPhase3(progress > 0.99);
+          setIsEndingPhase1(progress > 0.9);
+          setIsEndingPhase2(progress > 0.92);
+          setIsEndingPhase3(progress > 0.95);
 
           setEndingOverlayOpacity(opacity);
         }}
       >
         <DynamicPoster
-          progress={dynamicPosterScrollProgress}
-          src={[...Array(7)].map((e, i) => `photos/top/facility_${i + 1}.jpg`)}
-          offset={2}
+          progress={endingPosterScrollProgress}
+          data={endingPosterData}
           onChange={(i) => {
             setCurrentDynamicPosterIndex(i);
           }}
@@ -249,7 +273,7 @@ export const IntroModule: React.FC = () => {
             paddingTop={Spacing.XX_LARGE}
             paddingBottom={Spacing.XX_LARGE}
             centering
-            borderColor={dynamicPosterTextColor}
+            borderColor={endingPosterTextColor}
             style={{
               position: 'relative',
               top: isEndingPhase3 ? '80%' : '50%',
@@ -267,7 +291,7 @@ export const IntroModule: React.FC = () => {
               {(state) => (
                 <MessageTypography
                   align="center"
-                  color={dynamicPosterTextColor}
+                  color={endingPosterTextColor}
                   style={{
                     position: 'absolute',
                     top: '50%',

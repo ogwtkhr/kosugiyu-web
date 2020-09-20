@@ -6,6 +6,4 @@
   - id: archive
     label: できごと
   - id: facility
-    label: 施設
-  - id: information
-    label: 営業案内
+    label: 施設・営業案内

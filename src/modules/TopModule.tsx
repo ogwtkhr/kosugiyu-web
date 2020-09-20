@@ -41,7 +41,7 @@ const Container = styled.div`
 
 const LogoContainer = styled.div`
   position: absolute;
-  top: 35%;
+  top: 40%;
   left: 40px;
 `;
 

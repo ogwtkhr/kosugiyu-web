@@ -8,12 +8,23 @@ import { rgba } from 'polished';
 
 const TRANSITION_TIME = 300;
 
+const transitionTimeout = {
+  enter: 10,
+  exit: TRANSITION_TIME,
+};
+
 // enteringをフックにすると、マウントと同時に的にopacityが1になりアニメーションが適用されない
 // entering -> enteredを10msecにして、即enterednに移行させる
 
-export const Menu: React.FC = () => {
+type MenuProps = {
+  firstViewVisible?: boolean;
+};
+
+export const Menu: React.FC<MenuProps> = ({ firstViewVisible = true }) => {
   const [isOpen, setIsOpen] = useState(false);
   const menuList = useMenu();
+
+  // TODO: ファーストビュー消すモード
 
   return (
     <>
@@ -24,14 +35,7 @@ export const Menu: React.FC = () => {
           setIsOpen(!isOpen);
         }}
       />
-      <Transition
-        in={isOpen}
-        timeout={{
-          enter: 10,
-          exit: TRANSITION_TIME,
-        }}
-        unmountOnExit
-      >
+      <Transition in={isOpen} timeout={transitionTimeout} unmountOnExit>
         {(state) => {
           return (
             <Content state={state}>
