@@ -19,7 +19,7 @@ export const Picture: React.FC<PictureProps> = ({ relativePath, alt, style, clas
             relativePath
             childImageSharp {
               fluid(maxWidth: 2000, quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
+                ...GatsbyImageSharpFluid_withWebp_noBase64
               }
             }
           }
@@ -33,7 +33,7 @@ export const Picture: React.FC<PictureProps> = ({ relativePath, alt, style, clas
             relativePath
             childImageSharp {
               fluid(maxWidth: 1000, quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
+                ...GatsbyImageSharpFluid_withWebp_noBase64
               }
             }
           }
@@ -74,6 +74,8 @@ export const Picture: React.FC<PictureProps> = ({ relativePath, alt, style, clas
       {imageSources ? (
         <Img
           fluid={imageSources}
+          fadeIn={false}
+          loading="eager"
           style={{
             width: '100%',
             height: '100%',
@@ -85,6 +87,9 @@ export const Picture: React.FC<PictureProps> = ({ relativePath, alt, style, clas
           }}
           className={className}
           alt={alt}
+          onLoad={() => {
+            console.log('load');
+          }}
         />
       ) : (
         <>image not found.</>

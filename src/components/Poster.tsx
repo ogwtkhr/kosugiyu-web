@@ -1,6 +1,13 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { usePrevious } from '@/hooks';
+import Picture from './Picture';
+
+type PosterData = {
+  src: string;
+  parallax?: boolean;
+  duration?: number;
+};
 
 type DynamicPosterProps = {
   src: string[];
@@ -27,7 +34,9 @@ export const DynamicPoster: React.FC<DynamicPosterProps> = ({
       {src.map((s, i) => {
         return (
           <Transition key={i} visible={i <= currentIndex}>
-            <PosterImage src={s} />
+            <PosterImage>
+              <Picture relativePath={s} />
+            </PosterImage>
           </Transition>
         );
       })}
@@ -40,7 +49,11 @@ type StaticPosterProps = {
 };
 
 export const StaticPoster: React.FC<StaticPosterProps> = ({ src }) => {
-  return <PosterImage src={src} />;
+  return (
+    <PosterImage>
+      <Picture relativePath={src} />
+    </PosterImage>
+  );
 };
 
 type TransitionProps = {
@@ -52,18 +65,10 @@ const Transition = styled.div<TransitionProps>`
   opacity: ${({ visible }) => (visible ? 1 : 0)};
 `;
 
-type PosterImageProps = {
-  src: string;
-};
-
-const PosterImage = styled.div<PosterImageProps>`
+const PosterImage = styled.div`
   position: absolute;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-image: url(${({ src }) => src});
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
 `;

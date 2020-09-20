@@ -3000,10 +3000,10 @@ export type AllImageFileQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type AllImageFileQueryQuery = { desktopImages: { edges: Array<{ node: (
         Pick<File, 'relativePath'>
-        & { childImageSharp?: Maybe<{ fluid?: Maybe<GatsbyImageSharpFluid_WithWebpFragment> }> }
+        & { childImageSharp?: Maybe<{ fluid?: Maybe<GatsbyImageSharpFluid_WithWebp_NoBase64Fragment> }> }
       ) }> }, mobileImages: { edges: Array<{ node: (
         Pick<File, 'relativePath'>
-        & { childImageSharp?: Maybe<{ fluid?: Maybe<GatsbyImageSharpFluid_WithWebpFragment> }> }
+        & { childImageSharp?: Maybe<{ fluid?: Maybe<GatsbyImageSharpFluid_WithWebp_NoBase64Fragment> }> }
       ) }> } };
 
 export type GoogleApiKeyQueryVariables = Exact<{ [key: string]: never; }>;

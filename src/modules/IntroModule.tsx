@@ -16,27 +16,9 @@ import {
   PersonsLogo,
 } from '@/components';
 
-import introImage from '@/images/photos/top/intro_1.jpg';
-import townImage1 from '@/images/photos/top/town_1.jpg';
-import townImage2 from '@/images/photos/top/town_2.jpg';
-import townImage3 from '@/images/photos/top/town_3.jpg';
-import townImage4 from '@/images/photos/top/town_4.jpg';
-import townImage5 from '@/images/photos/top/town_5.jpg';
-import townImage6 from '@/images/photos/top/town_6.jpg';
-import townImage7 from '@/images/photos/top/town_7.jpg';
-import townImage8 from '@/images/photos/top/town_8.jpg';
-import facilityImage1 from '@/images/photos/top/facility_1.jpg';
-import facilityImage2 from '@/images/photos/top/facility_2.jpg';
-import facilityImage3 from '@/images/photos/top/facility_3.jpg';
-import facilityImage4 from '@/images/photos/top/facility_4.jpg';
-import facilityImage5 from '@/images/photos/top/facility_5.jpg';
-import facilityImage6 from '@/images/photos/top/facility_6.jpg';
-import facilityImage7 from '@/images/photos/top/facility_7.jpg';
 import { Typography, Colors, Spacing } from '@/constants';
 import { isString } from '@/util/type';
 import { floorInRange0to1 } from '@/util/number';
-
-// const BASE_COLOR = '#021a2b';
 
 export const IntroModule: React.FC = () => {
   const [openingOverlayOpacity, setOpeningOverlayOpacity] = useState(1);
@@ -77,7 +59,7 @@ export const IntroModule: React.FC = () => {
             あらゆる文化が混ざり合い、老若男女が集う街、高円寺。
           </MessageTypography>
         </MessageContainer>
-        <StaticPoster src={introImage} />
+        <StaticPoster src="photos/top/intro_1.jpg" />
         <Overlay color={Colors.ABSTRACT_NAVY} style={{ opacity: openingOverlayOpacity }} />
       </StickyArea>
       <GridOuter>
@@ -89,7 +71,7 @@ export const IntroModule: React.FC = () => {
               rowEnd: 4,
             }}
           >
-            <GridImage src={townImage1} />
+            <GridImage src="photos/top/town_1.jpg" />
           </GridItem>
           <GridItem
             grid={{
@@ -102,7 +84,7 @@ export const IntroModule: React.FC = () => {
               marginRight: -4,
             }}
           >
-            <GridImage src={townImage2} />
+            <GridImage src="photos/top/town_2.jpg" />
           </GridItem>
           <GridItem
             grid={{
@@ -127,7 +109,7 @@ export const IntroModule: React.FC = () => {
               rowEnd: 8,
             }}
           >
-            <GridImage src={townImage6} />
+            <GridImage src="photos/top/town_6.jpg" />
           </GridItem>
         </GridContainer>
       </GridOuter>
@@ -140,7 +122,7 @@ export const IntroModule: React.FC = () => {
               rowEnd: 4,
             }}
           >
-            <GridImage src={townImage3} />
+            <GridImage src="photos/top/town_3.jpg" />
           </GridItem>
           <GridItem
             grid={{
@@ -150,7 +132,7 @@ export const IntroModule: React.FC = () => {
               rowEnd: 4,
             }}
           >
-            <GridImage src={townImage5} />
+            <GridImage src="photos/top/town_5.jpg" />
           </GridItem>
           <GridItem
             grid={{
@@ -177,7 +159,7 @@ export const IntroModule: React.FC = () => {
               rowEnd: 6,
             }}
           >
-            <GridImage src={townImage4} />
+            <GridImage src="photos/top/town_4.jpg" />
           </GridItem>
           <GridItem
             grid={{
@@ -187,7 +169,7 @@ export const IntroModule: React.FC = () => {
               rowEnd: 7,
             }}
           >
-            <GridImage src={townImage7} />
+            <GridImage src="photos/top/town_7.jpg" />
           </GridItem>
           <GridItem
             grid={{
@@ -202,7 +184,7 @@ export const IntroModule: React.FC = () => {
               marginBottom: 2,
             }}
           >
-            <GridImage src={townImage8} />
+            <GridImage src="photos/top/town_8.jpg" />
           </GridItem>
         </GridContainer>
       </GridOuter>
@@ -223,15 +205,7 @@ export const IntroModule: React.FC = () => {
       >
         <DynamicPoster
           progress={dynamicPosterScrollProgress}
-          src={[
-            facilityImage1,
-            facilityImage2,
-            facilityImage3,
-            facilityImage4,
-            facilityImage5,
-            facilityImage6,
-            facilityImage7,
-          ]}
+          src={[...Array(7)].map((e, i) => `photos/top/facility_${i + 1}.jpg`)}
           offset={2}
           onChange={(i) => {
             setCurrentDynamicPosterIndex(i);

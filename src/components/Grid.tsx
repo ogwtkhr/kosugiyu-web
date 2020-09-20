@@ -3,6 +3,7 @@ import styled from 'styled-components';
 // import media from 'styled-media-query';
 import { useIntersectionObserver } from '@/hooks';
 import { BoxProps, boxMixin, getBoxExpression } from './Box';
+import Picture from './Picture';
 
 export type GridContainerProps = {
   columns?: number;
@@ -52,16 +53,17 @@ type GridImageProps = {
 };
 
 export const GridImage: React.FC<GridImageProps> = ({ src }) => {
-  const [ref, isIntersecting, hasIntersected] = useIntersectionObserver<HTMLDivElement>();
+  // const [ref, isIntersecting, hasIntersected] = useIntersectionObserver<HTMLDivElement>();
 
-  return <GridImageContainer src={src} ref={ref} />;
+  // return <GridImageContainer src={src} ref={ref} />;
+  return <Picture relativePath={src} />;
 };
 
-const GridImageContainer = styled.div<GridImageProps>`
-  width: 100%;
-  height: 100%;
-  background-image: url(${({ src }) => src});
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-`;
+// const GridImageContainer = styled.div<GridImageProps>`
+//   width: 100%;
+//   height: 100%;
+//   background-image: url(${({ src }) => src});
+//   background-repeat: no-repeat;
+//   background-position: center;
+//   background-size: cover;
+// `;
