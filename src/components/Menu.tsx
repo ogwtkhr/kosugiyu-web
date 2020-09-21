@@ -1,10 +1,20 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Colors, Typography, Opacity, Layer, Spacing, StyleMixin } from '@/constants';
+import {
+  Colors,
+  Typography,
+  Opacity,
+  Layer,
+  Spacing,
+  StyleMixin,
+  ScreenType,
+  TextSize,
+} from '@/constants';
 import Transition, { TransitionStatus } from 'react-transition-group/Transition';
 import { useMenu } from '@/hooks';
 import { Link } from 'gatsby';
 import { rgba } from 'polished';
+import media from 'styled-media-query';
 
 const TRANSITION_TIME = 300;
 
@@ -91,9 +101,13 @@ const Item = styled.li`
 
 const Type = styled.span`
   display: inline-block;
-  font-size: 4rem;
+  font-size: ${TextSize.XX_LARGE}rem;
   letter-spacing: 0.2em;
   ${Typography.Mixin.EXTENDED};
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    font-size: ${TextSize.X_LARGE}rem;
+  `}
 `;
 
 type TriggerProps = {
@@ -109,6 +123,13 @@ const Trigger = styled.button<TriggerProps>`
   width: ${Spacing.XXX_LARGE}px;
   height: ${Spacing.XXX_LARGE}px;
   mix-blend-mode: difference;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    left: auto;
+    right: ${Spacing.XX_LARGE}px;
+    width: ${Spacing.XX_LARGE}px;
+    height: ${Spacing.XX_LARGE}px;
+  `}
 
   &::before,
   &::after {
@@ -129,6 +150,10 @@ const Trigger = styled.button<TriggerProps>`
 
   &::after {
     top: ${({ isOpen }) => (isOpen ? '0' : '40%')};
+    ${media.lessThan(ScreenType.MEDIUM)`
+      left: auto;
+      right: 0;
+    `}
     width: ${({ isOpen }) => (isOpen ? '100%' : '80%')};
     transform: ${({ isOpen }) => (isOpen ? 'translateY(5px) rotate(135deg)' : '')};
   }

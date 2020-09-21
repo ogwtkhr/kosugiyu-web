@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-// import media from 'styled-media-query';
+import media from 'styled-media-query';
 import { useIntersectionObserver } from '@/hooks';
 import { BoxProps, boxMixin, getBoxExpression } from './Box';
 import Picture from './Picture';
+import { ScreenType, ScreenValue } from '@/constants';
 
 export type GridContainerProps = {
   columns?: number;
@@ -13,9 +14,15 @@ export type GridContainerProps = {
 export const GridContainer = styled.div<GridContainerProps>`
   display: grid;
   grid-auto-rows: 14vw;
-  grid-gap: ${({ gap = '1vw' }) => (typeof gap === 'number' ? `${gap}px` : gap)};
-  grid-template-columns: 2vw repeat(5, 1fr) 2vw;
+  grid-template-columns: repeat(5, 1fr);
   grid-template-rows: 14vw;
+
+  ${media.greaterThan(ScreenType.LARGE)`
+    width: ${ScreenValue.LARGE}px;
+    margin: 0 auto;
+    grid-auto-rows: 150px;
+    grid-template-rows: 150px;
+  `}
 `;
 
 export type GridOption = {
@@ -30,6 +37,7 @@ export type GridItemProps = {
   gridSmall?: GridOption;
   box?: BoxProps;
   boxSmall?: BoxProps;
+  centering?: boolean;
 };
 
 export const GridItem = styled.div<GridItemProps>`
@@ -44,7 +52,33 @@ export const GridItem = styled.div<GridItemProps>`
     `;
   }}
 
-  ${({ box }) => (box ? getBoxExpression(box) : '')}
+  ${({ gridSmall }) => {
+    if (!gridSmall) return '';
+    const { rowStart = 1, rowEnd = 6, columnStart = 1, columnEnd = 6 } = gridSmall;
+    const OFFSET = 1;
+    return `
+      @media(max-width: ${ScreenValue.SMALL}px) {
+        grid-row: ${rowStart} / ${rowEnd};
+        grid-column: ${columnStart + OFFSET} / ${columnEnd + OFFSET};
+      }
+    `;
+  }}
+
+  ${({ box }) =>
+    box ? getBoxExpression(box) : ''}
+
+  @media(max-width: ${ScreenValue.SMALL}px) {
+    ${({ boxSmall }) => (boxSmall ? getBoxExpression(boxSmall) : '')}
+  }
+
+  ${({ centering }) =>
+    centering
+      ? `
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  `
+      : ''}
 `;
 
 type GridImageProps = {
@@ -57,12 +91,3 @@ export const GridImage: React.FC<GridImageProps> = ({ src }) => {
   // return <GridImageContainer src={src} ref={ref} />;
   return <Picture relativePath={src} />;
 };
-
-// const GridImageContainer = styled.div<GridImageProps>`
-//   width: 100%;
-//   height: 100%;
-//   background-image: url(${({ src }) => src});
-//   background-repeat: no-repeat;
-//   background-position: center;
-//   background-size: cover;
-// `;

@@ -1,7 +1,0 @@
-const BASE_TRANSITION = '.5s ease';
-export const Animation = {
-  BASE_TRANSITION,
-  HOVER_TRANSITION_NORMAL: BASE_TRANSITION,
-} as const;
-
-export default Animation;

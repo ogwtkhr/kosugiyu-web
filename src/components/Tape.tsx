@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Colors } from '@/constants';
+import { Colors, Spacing } from '@/constants';
 
 export const Tape: React.FC = ({ children }) => {
   return (
@@ -13,6 +13,7 @@ export const Tape: React.FC = ({ children }) => {
 const Container = styled.span`
   display: inline-block;
   position: relative;
+  margin-bottom: ${Spacing.LARGE}px;
 
   &::after {
     content: '';

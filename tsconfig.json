@@ -9,18 +9,6 @@
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"]
-      // "@components": ["src/components"],
-      // "@components/*": ["src/components/*"],
-      // "@constants": ["src/constants"],
-      // "@constants/*": ["src/constants/*"],
-      // "@layouts": ["src/layouts"],
-      // "@layouts/*": ["src/layouts/*"],
-      // "@modules": ["src/modules"],
-      // "@modules/*": ["src/modules/*"],
-      // "@pages": ["src/pages"],
-      // "@pages/*": ["src/pages/*"],
-      // "@types": ["src/types"],
-      // "@types/*": ["src/types/*"]
-    }
+    },
   }
 }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Colors } from '@/constants';
+import { Colors, Spacing, ScreenType } from '@/constants';
+import media from 'styled-media-query';
 
 type IndicatorProps = {
   current: number;
@@ -20,12 +21,17 @@ const Container = styled.div`
   display: flex;
   position: fixed;
   top: 50%;
-  right: 20px;
+  right: ${Spacing.X_LARGE}px;
   align-items: center;
   transform: translateY(-50%);
   color: ${Colors.UI_TEXT_DARK_BACKGROUND};
   font-family: Arial, Helvetica, sans-serif;
   mix-blend-mode: difference;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    top: auto;
+    bottom: ${Spacing.MIDDLE}px;
+  `}
 `;
 
 const Current = styled.div``;
