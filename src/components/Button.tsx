@@ -19,7 +19,6 @@ export const Button: React.FC<ButtonProps> = (props) => {
 
 const StyledButton = styled.a`
   display: inline-block;
-  min-width: ${STRUCTURE_Spacing.XX_SMALL}px;
   padding: ${Spacing.MIDDLE}px ${Spacing.XXX_LARGE}px;
   transition: ${Transitions.HOVER_TRANSITION_NORMAL};
   border: ${LINE.ShorHand.THIN};

@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import { Typography } from '@/constants';
+import { Typography, Colors } from '@/constants';
 
 export const GlobalStyle = createGlobalStyle`
   
@@ -12,7 +12,8 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    ${Typography.Mixin.BASE}
+    ${Typography.Mixin.BASE};
+    background-color: ${Colors.UI_PAPER};
   }
 
   button {

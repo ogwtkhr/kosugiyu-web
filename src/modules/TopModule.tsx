@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 import { Link } from 'gatsby';
-import { Spacing, Typography, ScreenType, Colors, TextSize } from '@/constants';
+import { Spacing, Typography, ScreenType, Colors, TextSize, TextWeight } from '@/constants';
 import { Button, ButtonContainer, HeroImage, MainLogo } from '@/components';
 // import { IntersectionFadeIn } from '@/animations';
 import { useMenu } from '@/hooks';
@@ -111,10 +111,12 @@ const MenuItem = styled.li`
 const MenuType = styled.span`
   display: inline-block;
   ${Typography.Mixin.EXTENDED};
+  font-weight: ${TextWeight.BOLD};
 `;
 
 const LogoCopy = styled.p`
   ${Typography.Mixin.EXTENDED};
+  font-weight: ${TextWeight.BOLD};
   ${media.lessThan(ScreenType.MEDIUM)`
     font-size: ${TextSize.SMALL}rem;
   `}

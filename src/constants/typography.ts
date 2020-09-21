@@ -12,7 +12,15 @@ export const TextSize = {
 export const TypeFace = {
   // TODO: 英字等
   BASE: `'Noto Sans JP', sans-serif;`,
-  // BASE: `sans-serif;`,
+} as const;
+
+export const TextWeight = {
+  NORMAL: 300,
+  BOLD: 500,
+};
+
+export const TypeStyle = {
+  EXTENDED: 'scale(1, 0.9)',
 } as const;
 
 export const LineHeight = {
@@ -28,7 +36,7 @@ const Mixin = {
     font-family: ${TypeFace.BASE};
     font-feature-settings: 'palt';
     font-size: ${TextSize.NORMAL}rem;
-    font-weight: 500;
+    font-weight: ${TextWeight.NORMAL};
     line-height: ${LineHeight.THICK};
     letter-spacing: 0.1em;
   `,
@@ -36,7 +44,7 @@ const Mixin = {
     color: ${Colors.UI_TEXT_MAIN};
     font-family: ${TypeFace.BASE};
     font-size: ${TextSize.X_LARGE}rem;
-    font-weight: 500;
+    font-weight: ${TextWeight.BOLD};
     line-height: ${LineHeight.NORMAL};
   `,
   SUB: css`
@@ -45,13 +53,15 @@ const Mixin = {
     font-size: ${TextSize.SMALL}rem;
   `,
   EXTENDED: css`
-    transform: scale(1, 0.9);
+    transform: ${TypeStyle.EXTENDED};
   `,
 } as const;
 
 export const Typography = {
   TextSize,
+  TextWeight,
   TypeFace,
+  TypeStyle,
   LineHeight,
   Mixin,
 } as const;

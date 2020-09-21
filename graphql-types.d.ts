@@ -3036,7 +3036,10 @@ export type Unnamed_2_QueryVariables = Exact<{
 }>;
 
 
-export type Unnamed_2_Query = { microcmsPersons?: Maybe<Pick<MicrocmsPersons, 'title'>> };
+export type Unnamed_2_Query = { microcmsPersons?: Maybe<(
+    Pick<MicrocmsPersons, 'title' | 'body' | 'publishedAt'>
+    & { mainVisual?: Maybe<Pick<MicrocmsPersonsMainVisual, 'url'>> }
+  )> };
 
 export type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 

@@ -25,6 +25,8 @@ import {
   ScreenValue,
   Transitions,
   Spacing,
+  TextWeight,
+  TypeStyle,
 } from '@/constants';
 import { isString } from '@/util/type';
 import { floorInRange0to1 } from '@/util/number';
@@ -222,6 +224,9 @@ export const IntroModule: React.FC = () => {
             box={{
               marginRight: -2,
               marginBottom: -2,
+            }}
+            boxSmall={{
+              marginRight: 0,
             }}
           >
             <GridImage src="photos/top/town_5.jpg" />
@@ -470,6 +475,7 @@ const MessageTypography = styled.p<MessageTypographyProps>`
   transition: 1s ease;
   color: ${({ color = Colors.UI_BASE }) => color};
   font-size: ${({ dynamicTextSize }) => (dynamicTextSize ? `1.8vw` : `${TextSize.LARGE}rem`)};
+  font-weight: ${TextWeight.BOLD};
   letter-spacing: 0.3em;
   line-height: 2;
   text-align: ${({ align }) => (align === 'center' ? 'center' : 'justify')};
@@ -497,7 +503,7 @@ const EndingMessageTypography = styled(MessageTypography)<EndingMessageTypograph
   top: 50%;
   left: 50%;
   width: 600px;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) ${TypeStyle.EXTENDED};
   transition: ${Transitions.BASE_TRANSITION};
   opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
 

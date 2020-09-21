@@ -2,27 +2,30 @@ import React from 'react';
 import { Link, graphql } from 'gatsby';
 
 import { Query } from '@/types';
-
-// import Layout from '../layout/layout';
-// import SEO from '../layout/seo';
+import { BaseLayout, SEO } from '@/layouts';
+import styled from 'styled-components';
+import { ModuleWidth, TextWeight, Spacing } from '@/constants';
 
 type PersonsPageProps = {
   data: Pick<Query, 'microcmsPersons'>;
 };
 
 const PersonsPage: React.FC<PersonsPageProps> = ({ data }) => {
-  console.log(data.microcmsPersons?.title);
+  const title = data.microcmsPersons?.title;
+  const publishedAt = data.microcmsPersons?.publishedAt;
+  const mainVisual = data.microcmsPersons?.mainVisual;
+  const body = data.microcmsPersons?.body;
+
+  if (!title || !publishedAt || !mainVisual || !body) return <div>data not exists.</div>;
   return (
-    // <Layout>
-    //   <SEO title="Work" />
-    //   <h1>{data.worksYaml?.title}</h1>
-    //   <p>{data.worksYaml?.description}</p>
-    //   <p>
-    //     {data.worksYaml?.year} - {data.worksYaml?.category}
-    //   </p>
-    //   <Link to="/">Go to home</Link>
-    // </Layout>
-    <div>hoge</div>
+    <BaseLayout>
+      <SEO title={title} />
+      <Article
+        dangerouslySetInnerHTML={{
+          __html: data.microcmsPersons?.body || '',
+        }}
+      />
+    </BaseLayout>
   );
 };
 
@@ -30,7 +33,35 @@ export const query = graphql`
   query($slug: String!) {
     microcmsPersons(slug: { eq: $slug }) {
       title
+      body
+      publishedAt
+      mainVisual {
+        url
+      }
     }
+  }
+`;
+
+const MainVisual = styled.div`
+  /* backg */
+`;
+
+const Article = styled.article`
+  max-width: ${ModuleWidth.ARTICLE}px;
+  margin: 0 auto;
+
+  & p {
+    font-weight: ${TextWeight.NORMAL};
+  }
+
+  & strong {
+    font-weight: ${TextWeight.BOLD};
+  }
+
+  & img {
+    display: block;
+    width: 100%;
+    margin: ${Spacing.LARGE}px 0;
   }
 `;
 
