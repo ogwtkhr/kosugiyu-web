@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import media from 'styled-media-query';
 import { Link } from 'gatsby';
 import { Spacing, Typography, ScreenType, Colors, TextSize, TextWeight } from '@/constants';
-import { Button, ButtonContainer, HeroImage, MainLogo } from '@/components';
-// import { IntersectionFadeIn } from '@/animations';
+import { HeroImage, MainLogo } from '@/components';
 import { useMenu } from '@/hooks';
 
 export const TopModule: React.FC = () => {
