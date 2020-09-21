@@ -1707,6 +1707,8 @@ export type QueryAllDirectoryArgs = {
 export type QuerySiteArgs = {
   buildTime?: Maybe<DateQueryOperatorInput>;
   siteMetadata?: Maybe<SiteSiteMetadataFilterInput>;
+  port?: Maybe<IntQueryOperatorInput>;
+  host?: Maybe<StringQueryOperatorInput>;
   polyfill?: Maybe<BooleanQueryOperatorInput>;
   pathPrefix?: Maybe<StringQueryOperatorInput>;
   id?: Maybe<StringQueryOperatorInput>;
@@ -2019,6 +2021,8 @@ export type SettingYamlSortInput = {
 export type Site = Node & {
   buildTime?: Maybe<Scalars['Date']>;
   siteMetadata?: Maybe<SiteSiteMetadata>;
+  port?: Maybe<Scalars['Int']>;
+  host?: Maybe<Scalars['String']>;
   polyfill?: Maybe<Scalars['Boolean']>;
   pathPrefix?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
@@ -2223,6 +2227,8 @@ export type SiteFieldsEnum =
   | 'siteMetadata___author'
   | 'siteMetadata___googleApiKey'
   | 'siteMetadata___siteUrl'
+  | 'port'
+  | 'host'
   | 'polyfill'
   | 'pathPrefix'
   | 'id'
@@ -2315,6 +2321,8 @@ export type SiteFieldsEnum =
 export type SiteFilterInput = {
   buildTime?: Maybe<DateQueryOperatorInput>;
   siteMetadata?: Maybe<SiteSiteMetadataFilterInput>;
+  port?: Maybe<IntQueryOperatorInput>;
+  host?: Maybe<StringQueryOperatorInput>;
   polyfill?: Maybe<BooleanQueryOperatorInput>;
   pathPrefix?: Maybe<StringQueryOperatorInput>;
   id?: Maybe<StringQueryOperatorInput>;
@@ -2979,10 +2987,10 @@ export type StringQueryOperatorInput = {
   glob?: Maybe<Scalars['String']>;
 };
 
-export type AllImageFileQueryQueryVariables = Exact<{ [key: string]: never; }>;
+export type AllImageFileQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AllImageFileQueryQuery = { desktopImages: { edges: Array<{ node: (
+export type AllImageFileQuery = { desktopImages: { edges: Array<{ node: (
         Pick<File, 'relativePath'>
         & { childImageSharp?: Maybe<{ fluid?: Maybe<GatsbyImageSharpFluid_WithWebp_NoBase64Fragment> }> }
       ) }> }, mobileImages: { edges: Array<{ node: (
@@ -2995,10 +3003,10 @@ export type GoogleApiKeyQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GoogleApiKeyQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'googleApiKey'>> }> };
 
-export type MenuQueryQueryVariables = Exact<{ [key: string]: never; }>;
+export type MenuQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MenuQueryQuery = { settingYaml?: Maybe<{ menu?: Maybe<Array<Maybe<Pick<SettingYamlMenu, 'id' | 'label'>>>> }> };
+export type MenuQuery = { settingYaml?: Maybe<{ menu?: Maybe<Array<Maybe<Pick<SettingYamlMenu, 'id' | 'label'>>>> }> };
 
 export type SiteTitleQueryVariables = Exact<{ [key: string]: never; }>;
 

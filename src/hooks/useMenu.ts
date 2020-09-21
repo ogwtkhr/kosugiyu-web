@@ -1,13 +1,13 @@
 import { graphql, useStaticQuery } from 'gatsby';
-import { Query, SettingYamlMenu } from '@/types';
+import { MenuQuery, SettingYamlMenu } from '@/types';
 
 type Parameter = {
   ignoreTopData?: boolean;
 };
 
 export const useMenu = ({ ignoreTopData }: Parameter = {}): SettingYamlMenu[] => {
-  const data: Query = useStaticQuery(graphql`
-    query MenuQuery {
+  const data = useStaticQuery<MenuQuery>(graphql`
+    query Menu {
       settingYaml {
         menu {
           id

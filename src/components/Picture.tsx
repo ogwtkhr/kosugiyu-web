@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
-import { AllImageFileQueryQuery } from '@/types';
+import { AllImageFileQuery } from '@/types';
 import Img, { FluidObject } from 'gatsby-image';
 
 type PictureProps = {
@@ -11,8 +11,8 @@ type PictureProps = {
 };
 
 export const Picture: React.FC<PictureProps> = ({ relativePath, alt, style, className }) => {
-  const data: AllImageFileQueryQuery = useStaticQuery(graphql`
-    query allImageFileQuery {
+  const data = useStaticQuery<AllImageFileQuery>(graphql`
+    query allImageFile {
       desktopImages: allFile(filter: { ext: { regex: "/(png|jpg)/" } }) {
         edges {
           node {

@@ -17,7 +17,7 @@ import { SiteTitleQuery } from '@/types';
 import { Menu } from '@/components';
 
 export const BaseLayout: React.FC = ({ children }) => {
-  const data: SiteTitleQuery = useStaticQuery(graphql`
+  const data = useStaticQuery<SiteTitleQuery>(graphql`
     query SiteTitle {
       site {
         siteMetadata {
