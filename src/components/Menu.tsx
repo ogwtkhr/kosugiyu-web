@@ -9,6 +9,7 @@ import {
   StyleMixin,
   ScreenType,
   TextSize,
+  TextWeight,
 } from '@/constants';
 import Transition, { TransitionStatus } from 'react-transition-group/Transition';
 import { useMenu } from '@/hooks';
@@ -102,6 +103,7 @@ const Item = styled.li`
 const Type = styled.span`
   display: inline-block;
   font-size: ${TextSize.XX_LARGE}rem;
+  font-weight: ${TextWeight.BOLD};
   letter-spacing: 0.2em;
   ${Typography.Mixin.EXTENDED};
 

@@ -9,3 +9,4 @@ export * from './opacity';
 export * from './layer';
 export * from './styleUnit';
 export * from './styleMixin';
+export * from './aspectRatio';

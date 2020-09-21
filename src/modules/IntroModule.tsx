@@ -402,7 +402,6 @@ export const IntroModule: React.FC = () => {
           </EndingMessageContainer>
         )}
       </StickyArea>
-      <div style={{ height: '1000px', backgroundColor: 'blue' }} />
       <Indicator current={1} total={8} />
     </>
   );

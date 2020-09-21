@@ -3018,17 +3018,17 @@ export type ComponentsSeoQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type ComponentsSeoQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
 
-export type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
+export type AllMicrocmsPersonsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_1_Query = { allMicrocmsPersons: { nodes: Array<Pick<MicrocmsPersons, 'id' | 'title' | 'body' | 'slug'>> } };
+export type AllMicrocmsPersonsQuery = { allMicrocmsPersons: { nodes: Array<Pick<MicrocmsPersons, 'id' | 'title' | 'body' | 'slug'>> } };
 
-export type Unnamed_2_QueryVariables = Exact<{
+export type Unnamed_1_QueryVariables = Exact<{
   slug: Scalars['String'];
 }>;
 
 
-export type Unnamed_2_Query = { microcmsPersons?: Maybe<(
+export type Unnamed_1_Query = { microcmsPersons?: Maybe<(
     Pick<MicrocmsPersons, 'title' | 'body' | 'publishedAt'>
     & { mainVisual?: Maybe<Pick<MicrocmsPersonsMainVisual, 'url'>> }
   )> };
