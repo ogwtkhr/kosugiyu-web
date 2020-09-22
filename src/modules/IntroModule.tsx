@@ -13,7 +13,7 @@ import {
   Box,
   Tape,
   Indicator,
-  PersonsLogo,
+  PersonsLogoVertical,
 } from '@/components';
 
 import {
@@ -395,7 +395,7 @@ export const IntroModule: React.FC = () => {
                     transition: Transitions.BASE_TRANSITION,
                   }}
                 >
-                  <PersonsLogo />
+                  <PersonsLogoVertical />
                 </div>
               )}
             </Transition>
@@ -485,7 +485,6 @@ const MessageTypography = styled.p<MessageTypographyProps>`
 
   @media (max-width: ${ScreenType.MEDIUM}px) {
     font-size: ${({ dynamicTextSize }) => (dynamicTextSize ? `1.8vw` : `${TextSize.NORMAL}rem`)};
-    text-align: justify;
   }
 
   ${media.lessThan(ScreenType.SMALL)`

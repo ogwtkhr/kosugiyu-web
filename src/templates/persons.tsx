@@ -1,10 +1,24 @@
 import React from 'react';
 import { Link, graphql } from 'gatsby';
+import dayjs from 'dayjs';
 
 import { Query } from '@/types';
 import { BaseLayout, SEO } from '@/layouts';
 import styled from 'styled-components';
-import { ModuleWidth, TextWeight, Spacing } from '@/constants';
+import {
+  ModuleWidth,
+  TextWeight,
+  Spacing,
+  StyleMixin,
+  AspectRatio,
+  Colors,
+  Typography,
+  TextSize,
+  ScreenType,
+  LineHeight,
+  ScreenValue,
+} from '@/constants';
+import media from 'styled-media-query';
 
 type PersonsPageProps = {
   data: Pick<Query, 'microcmsPersons'>;
@@ -13,18 +27,31 @@ type PersonsPageProps = {
 const PersonsPage: React.FC<PersonsPageProps> = ({ data }) => {
   const title = data.microcmsPersons?.title;
   const publishedAt = data.microcmsPersons?.publishedAt;
-  const mainVisual = data.microcmsPersons?.mainVisual;
+  const mainVisual = data.microcmsPersons?.mainVisual?.url;
+  const writerName = data.microcmsPersons?.writer?.name;
   const body = data.microcmsPersons?.body;
 
-  if (!title || !publishedAt || !mainVisual || !body) return <div>data not exists.</div>;
+  if (!title || !publishedAt || !writerName || !mainVisual || !body)
+    return <div>data not exists.</div>;
+  const publishedDate = dayjs(publishedAt).format('YYYY年M月D日');
   return (
-    <BaseLayout useHeader>
+    <BaseLayout useHeader usePersonsHeader>
       <SEO title={title} />
-      <Article
-        dangerouslySetInnerHTML={{
-          __html: data.microcmsPersons?.body || '',
-        }}
-      />
+      <Container>
+        <MainVisual src={mainVisual} />
+        <TitleContaier>
+          <Title>{title}</Title>
+          <MetaInfo>
+            <PublishedDate>{publishedDate}</PublishedDate>
+            <WriterName>{writerName}</WriterName>
+          </MetaInfo>
+        </TitleContaier>
+        <Article
+          dangerouslySetInnerHTML={{
+            __html: data.microcmsPersons?.body || '',
+          }}
+        />
+      </Container>
     </BaseLayout>
   );
 };
@@ -35,6 +62,9 @@ export const query = graphql`
       title
       body
       publishedAt
+      writer {
+        name
+      }
       mainVisual {
         url
       }
@@ -42,26 +72,95 @@ export const query = graphql`
   }
 `;
 
+const Container = styled.div`
+  background-color: ${Colors.UI_PAPER};
+`;
+
+const TitleContaier = styled.div`
+  max-width: ${ModuleWidth.ARTICLE}px;
+  margin: -${Spacing.XX_LARGE * 4}px auto ${Spacing.XX_LARGE}px;
+  padding: ${Spacing.XX_LARGE}px;
+  border: solid 1px ${Colors.ABSTRACT_NAVY};
+  background-color: ${Colors.ABSTRACT_WHITE};
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    margin: -${Spacing.XX_LARGE * 2}px ${Spacing.LARGE}px ${Spacing.LARGE}px;
+    padding: ${Spacing.LARGE}px;
+  `}
+`;
+
+const Title = styled.h2`
+  ${Typography.Mixin.EXTENDED};
+  color: ${Colors.ABSTRACT_NAVY};
+  font-size: ${TextSize.X_LARGE}rem;
+  font-weight: ${TextWeight.BOLD};
+  line-height: ${LineHeight.NORMAL};
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    font-size: ${TextSize.LARGE}rem;
+  `}
+`;
+
+const MetaInfo = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const PublishedDate = styled.p``;
+const WriterName = styled.p`
+  margin-left: ${Spacing.MIDDLE}px;
+`;
+
 const MainVisual = styled.div`
-  /* backg */
+  width: 100%;
+  max-width: ${ScreenValue.LARGE}px;
+  margin: 0 auto;
+  ${StyleMixin.BACKGROUND_IMAGE_WITH_SRC};
+
+  &::after {
+    content: '';
+    display: block;
+    padding-bottom: ${AspectRatio.R_16_BY_9}%;
+  }
+
+  ${media.greaterThan(ScreenType.LARGE)`
+    margin-top: ${Spacing.XX_LARGE}px;
+  `}
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    &::after {
+      padding-bottom: ${AspectRatio.R_1_BY_1}%;
+    }
+  `}
 `;
 
 const Article = styled.article`
   max-width: ${ModuleWidth.ARTICLE}px;
   margin: 0 auto;
 
+  ${media.lessThan(ScreenType.MEDIUM)`
+    margin: 0 ${Spacing.LARGE}px;
+  `}
+
   & p {
     font-weight: ${TextWeight.NORMAL};
   }
 
   & strong {
+    color: ${Colors.ABSTRACT_NAVY};
     font-weight: ${TextWeight.BOLD};
   }
 
   & img {
     display: block;
     width: 100%;
-    margin: ${Spacing.LARGE}px 0;
+    margin-top: ${Spacing.X_LARGE}px;
+
+    ${media.lessThan(ScreenType.MEDIUM)`
+      margin-left: -${Spacing.LARGE}px;
+      margin-right: -${Spacing.LARGE}px;
+      width: calc(100% + ${Spacing.LARGE * 2}px);
+    `}
   }
 `;
 

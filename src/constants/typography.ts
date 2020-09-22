@@ -39,6 +39,7 @@ const Mixin = {
     font-weight: ${TextWeight.NORMAL};
     line-height: ${LineHeight.THICK};
     letter-spacing: 0.1em;
+    text-align: justify;
   `,
   DISPLAY: css`
     color: ${Colors.UI_TEXT_MAIN};

@@ -14,7 +14,9 @@ export const TopModule: React.FC = () => {
       <SideColumn>
         <SideColumnInner>
           <LogoContainer>
-            <Logo />
+            <Logo>
+              <MainLogo />
+            </Logo>
             <LogoCopy>高円寺・昭和八年創業</LogoCopy>
           </LogoContainer>
         </SideColumnInner>
@@ -74,10 +76,19 @@ const SideColumnInner = styled.div`
   justify-content: center;
 `;
 
-const LogoContainer = styled.h1``;
+const LogoContainer = styled.div``;
 
-const Logo = styled(MainLogo)`
-  display: block;
+const Logo = styled.h1`
+  width: 130px;
+`;
+
+const LogoCopy = styled.p`
+  ${Typography.Mixin.EXTENDED};
+  margin-top: ${Spacing.NORMAL}px;
+  font-weight: ${TextWeight.BOLD};
+  ${media.lessThan(ScreenType.MEDIUM)`
+    font-size: ${TextSize.SMALL}rem;
+  `}
 `;
 
 const MenuList = styled.ul``;
@@ -112,14 +123,6 @@ const MenuType = styled.span`
   display: inline-block;
   ${Typography.Mixin.EXTENDED};
   font-weight: ${TextWeight.BOLD};
-`;
-
-const LogoCopy = styled.p`
-  ${Typography.Mixin.EXTENDED};
-  font-weight: ${TextWeight.BOLD};
-  ${media.lessThan(ScreenType.MEDIUM)`
-    font-size: ${TextSize.SMALL}rem;
-  `}
 `;
 
 const HeroArea = styled.div`

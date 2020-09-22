@@ -1,9 +1,3 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
 import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import styled from 'styled-components';
@@ -19,9 +13,14 @@ import Header from './Header';
 
 type BaseLayoutProps = {
   useHeader?: boolean;
+  usePersonsHeader?: boolean;
 };
 
-export const BaseLayout: React.FC<BaseLayoutProps> = ({ useHeader, children }) => {
+export const BaseLayout: React.FC<BaseLayoutProps> = ({
+  useHeader,
+  usePersonsHeader,
+  children,
+}) => {
   const data = useStaticQuery<SiteTitleQuery>(graphql`
     query SiteTitle {
       site {
@@ -34,7 +33,12 @@ export const BaseLayout: React.FC<BaseLayoutProps> = ({ useHeader, children }) =
 
   return (
     <>
-      {useHeader && <Header siteTitle={data.site?.siteMetadata?.title || ''} />}
+      {useHeader && (
+        <Header
+          usePersonsHeader={usePersonsHeader}
+          siteTitle={data.site?.siteMetadata?.title || ''}
+        />
+      )}
       <GlobalStyle />
       <Main>{children}</Main>
       <Footer />

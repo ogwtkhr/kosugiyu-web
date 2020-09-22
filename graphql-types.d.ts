@@ -1345,6 +1345,7 @@ export type MicrocmsPersons = Node & {
   mainVisual?: Maybe<MicrocmsPersonsMainVisual>;
   body?: Maybe<Scalars['String']>;
   slug?: Maybe<Scalars['String']>;
+  writer?: Maybe<MicrocmsPersonsWriter>;
   personsId?: Maybe<Scalars['String']>;
 };
 
@@ -1493,6 +1494,11 @@ export type MicrocmsPersonsFieldsEnum =
   | 'mainVisual___url'
   | 'body'
   | 'slug'
+  | 'writer___id'
+  | 'writer___createdAt'
+  | 'writer___updatedAt'
+  | 'writer___publishedAt'
+  | 'writer___name'
   | 'personsId';
 
 export type MicrocmsPersonsFilterInput = {
@@ -1507,6 +1513,7 @@ export type MicrocmsPersonsFilterInput = {
   mainVisual?: Maybe<MicrocmsPersonsMainVisualFilterInput>;
   body?: Maybe<StringQueryOperatorInput>;
   slug?: Maybe<StringQueryOperatorInput>;
+  writer?: Maybe<MicrocmsPersonsWriterFilterInput>;
   personsId?: Maybe<StringQueryOperatorInput>;
 };
 
@@ -1530,6 +1537,46 @@ export type MicrocmsPersonsMainVisualFilterInput = {
 export type MicrocmsPersonsSortInput = {
   fields?: Maybe<Array<Maybe<MicrocmsPersonsFieldsEnum>>>;
   order?: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
+export type MicrocmsPersonsWriter = {
+  id?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['Date']>;
+  updatedAt?: Maybe<Scalars['Date']>;
+  publishedAt?: Maybe<Scalars['Date']>;
+  name?: Maybe<Scalars['String']>;
+};
+
+
+export type MicrocmsPersonsWriterCreatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+export type MicrocmsPersonsWriterUpdatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+export type MicrocmsPersonsWriterPublishedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+export type MicrocmsPersonsWriterFilterInput = {
+  id?: Maybe<StringQueryOperatorInput>;
+  createdAt?: Maybe<DateQueryOperatorInput>;
+  updatedAt?: Maybe<DateQueryOperatorInput>;
+  publishedAt?: Maybe<DateQueryOperatorInput>;
+  name?: Maybe<StringQueryOperatorInput>;
 };
 
 /** Node Interface */
@@ -1786,6 +1833,7 @@ export type QueryMicrocmsPersonsArgs = {
   mainVisual?: Maybe<MicrocmsPersonsMainVisualFilterInput>;
   body?: Maybe<StringQueryOperatorInput>;
   slug?: Maybe<StringQueryOperatorInput>;
+  writer?: Maybe<MicrocmsPersonsWriterFilterInput>;
   personsId?: Maybe<StringQueryOperatorInput>;
 };
 
@@ -3033,7 +3081,7 @@ export type Unnamed_1_QueryVariables = Exact<{
 
 export type Unnamed_1_Query = { microcmsPersons?: Maybe<(
     Pick<MicrocmsPersons, 'title' | 'body' | 'publishedAt'>
-    & { mainVisual?: Maybe<Pick<MicrocmsPersonsMainVisual, 'url'>> }
+    & { writer?: Maybe<Pick<MicrocmsPersonsWriter, 'name'>>, mainVisual?: Maybe<Pick<MicrocmsPersonsMainVisual, 'url'>> }
   )> };
 
 export type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
