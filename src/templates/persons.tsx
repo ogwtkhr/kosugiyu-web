@@ -19,6 +19,7 @@ import {
   LineHeight,
   ScreenValue,
   Layer,
+  DateFormat,
 } from '@/constants';
 import media from 'styled-media-query';
 import { useParallax } from '@/hooks';
@@ -44,7 +45,9 @@ const PersonsPage: React.FC<PersonsPageProps> = ({ data }) => {
   const mainVisualTransformProperty = useMemo(() => `translateY(${parallaxSeed}px)`, [
     parallaxSeed,
   ]);
-  const publishedDate = useMemo(() => dayjs(publishedAt).format('YYYY年M月D日'), [publishedAt]);
+  const publishedDate = useMemo(() => dayjs(publishedAt).format(DateFormat.YEAR_MONTH_DATE_JP), [
+    publishedAt,
+  ]);
 
   if (!title || !publishedAt || !writerName || !mainVisual || !body)
     return <div>data not exists.</div>;

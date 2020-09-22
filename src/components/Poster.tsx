@@ -103,8 +103,6 @@ export const StaticPoster: React.FC<StaticPosterProps> = ({ data, progress }) =>
     parallax && parallax.includes('scroll') ? `translateY(${-(progress - 0.5) * 100}px)` : '',
   ].join(' ');
 
-  console.log(parallaxStyle);
-
   return (
     <PosterImage>
       <PosterInner

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { graphql, useStaticQuery, Link } from 'gatsby';
 import { AllMicrocmsPersonsQuery } from '@/types';
 import styled from 'styled-components';
@@ -14,10 +14,10 @@ import {
   ScreenValue,
   BigSpacing,
   ScreenType,
+  DateFormat,
 } from '@/constants';
 import dayjs from 'dayjs';
 import media from 'styled-media-query';
-// import media from 'styled-media-query';
 
 type PersonsModuleProps = {
   useTitle?: boolean;
@@ -49,26 +49,47 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({ useTitle }) => {
           const title = entry.title || '';
           const mainVisualUrl = entry?.mainVisual?.url || '';
           const publishedAt = entry?.publishedAt || '';
-          const formattedPublishedAt = dayjs(publishedAt).format('YYYY年M月D日');
-
           return (
-            <ArticleListItem key={slug}>
-              <ArticleItem>
-                <ArticleLink to={`/persons/${slug}`}>
-                  <ArticleThumbnailContainer>
-                    <ArticleThumbnail src={mainVisualUrl} />
-                    <ArticleTitleContainer>
-                      {formattedPublishedAt}
-                      <ArticleTitle>{title}</ArticleTitle>
-                    </ArticleTitleContainer>
-                  </ArticleThumbnailContainer>
-                </ArticleLink>
-              </ArticleItem>
+            <ArticleListItem key={entry.slug}>
+              <ArticleItem
+                slug={slug}
+                title={title}
+                mainVisualUrl={mainVisualUrl}
+                publishedAt={publishedAt}
+              />
             </ArticleListItem>
           );
         })}
       </ArticleList>
     </Container>
+  );
+};
+
+type ArticleItemProps = {
+  slug: string;
+  title: string;
+  mainVisualUrl: string;
+  publishedAt: string;
+};
+
+const ArticleItem: React.FC<ArticleItemProps> = ({ slug, title, mainVisualUrl, publishedAt }) => {
+  const formattedPublishedAt = useMemo(
+    () => dayjs(publishedAt).format(DateFormat.YEAR_MONTH_DATE_JP),
+    [publishedAt],
+  );
+
+  return (
+    <ArticleItemContainer>
+      <ArticleLink to={`/persons/${slug}`}>
+        <ArticleThumbnailContainer>
+          <ArticleThumbnail src={mainVisualUrl} />
+          <ArticleTitleContainer>
+            <PublishDate>{formattedPublishedAt}</PublishDate>
+            <ArticleTitle>{title}</ArticleTitle>
+          </ArticleTitleContainer>
+        </ArticleThumbnailContainer>
+      </ArticleLink>
+    </ArticleItemContainer>
   );
 };
 
@@ -90,12 +111,13 @@ const ArticleList = styled.ul`
 const ArticleListItem = styled.li`
   margin-bottom: ${Spacing.XX_LARGE}px;
 
+  /* TODO: 調整の余地あり */
   ${media.lessThan(ScreenType.MEDIUM)`
-    margin-bottom: ${BigSpacing.LARGE}px;
+    margin-bottom: ${BigSpacing.XX_LARGE}px;
   `}
 `;
 
-const ArticleItem = styled.article`
+const ArticleItemContainer = styled.article`
   position: relative;
 `;
 
@@ -116,9 +138,12 @@ const ArticleTitleContainer = styled.div`
   }
 
   ${media.lessThan(ScreenType.MEDIUM)`
+    right: ${Spacing.LARGE}px;
+    left: ${Spacing.LARGE}px;
     top: 90%;
   `}
 `;
+
 const ArticleTitle = styled.h3`
   ${Typography.Mixin.EXTENDED};
   color: ${Colors.ABSTRACT_NAVY};
@@ -126,6 +151,10 @@ const ArticleTitle = styled.h3`
   font-weight: ${TextWeight.BOLD};
   line-height: ${LineHeight.NORMAL};
   text-decoration: none;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    font-size: ${TextSize.NORMAL}rem;
+  `}
 `;
 
 const ArticleThumbnailContainer = styled.div`
@@ -178,6 +207,11 @@ const ArticleThumbnail = styled.div`
       margin-left: ${Spacing.XX_LARGE}px;
     }
   `}
+`;
+
+const PublishDate = styled.p`
+  color: ${Colors.UI_BASE};
+  text-align: center;
 `;
 
 export default PersonsModule;

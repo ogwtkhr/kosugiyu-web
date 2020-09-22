@@ -10,3 +10,4 @@ export * from './layer';
 export * from './styleUnit';
 export * from './styleMixin';
 export * from './aspectRatio';
+export * from './format';
