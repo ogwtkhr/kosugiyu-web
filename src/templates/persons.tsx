@@ -1,10 +1,11 @@
 import React, { useMemo } from 'react';
 import { graphql } from 'gatsby';
 import dayjs from 'dayjs';
+import { Twitter, FacebookCircle } from '@styled-icons/boxicons-logos';
 
 import { Query } from '@/types';
 import { BaseLayout, SEO } from '@/layouts';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import {
   ModuleWidth,
   TextWeight,
@@ -21,6 +22,7 @@ import {
 } from '@/constants';
 import media from 'styled-media-query';
 import { useParallax } from '@/hooks';
+import { stripTag } from '@/util/string';
 
 type PersonsPageProps = {
   data: Pick<Query, 'microcmsPersons'>;
@@ -38,17 +40,17 @@ const PersonsPage: React.FC<PersonsPageProps> = ({ data }) => {
     max: 1000,
     coefficient: 0.2,
   });
+  const strippedBody = useMemo(() => stripTag(body || '').slice(0, 200), [body]);
   const mainVisualTransformProperty = useMemo(() => `translateY(${parallaxSeed}px)`, [
     parallaxSeed,
   ]);
-  console.log(mainVisualTransformProperty);
   const publishedDate = useMemo(() => dayjs(publishedAt).format('YYYY年M月D日'), [publishedAt]);
 
   if (!title || !publishedAt || !writerName || !mainVisual || !body)
     return <div>data not exists.</div>;
   return (
     <BaseLayout useHeader usePersonsHeader>
-      <SEO title={title} />
+      <SEO title={title} description={strippedBody} />
       <Container>
         <MainVisualContainer ref={mainVisualRef}>
           <MainVisual
@@ -60,10 +62,16 @@ const PersonsPage: React.FC<PersonsPageProps> = ({ data }) => {
         </MainVisualContainer>
         <TitleContaier>
           <Title>{title}</Title>
-          <MetaInfo>
-            <PublishedDate>{publishedDate}</PublishedDate>
-            <WriterName>{writerName}</WriterName>
-          </MetaInfo>
+          <MetaInfoCotainer>
+            <SocialIcons>
+              <TwitterIcon />
+              <FacebookIcon />
+            </SocialIcons>
+            <MetaInfo>
+              <PublishedDate>{publishedDate}</PublishedDate>
+              <WriterName>{writerName}</WriterName>
+            </MetaInfo>
+          </MetaInfoCotainer>
         </TitleContaier>
         <Article
           dangerouslySetInnerHTML={{
@@ -122,11 +130,37 @@ const Title = styled.h2`
   `}
 `;
 
+const MetaInfoCotainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const SocialIcons = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+`;
+
+const iconMixin = css`
+  width: ${Spacing.X_LARGE}px;
+  height: ${Spacing.X_LARGE}px;
+  color: ${Colors.ABSTRACT_NAVY};
+`;
+
+const TwitterIcon = styled(Twitter)`
+  ${iconMixin};
+`;
+
+const FacebookIcon = styled(FacebookCircle)`
+  ${iconMixin};
+  margin-left: ${Spacing.NORMAL}px;
+`;
+
 const MetaInfo = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
-
 const PublishedDate = styled.p``;
 const WriterName = styled.p`
   margin-left: ${Spacing.MIDDLE}px;
