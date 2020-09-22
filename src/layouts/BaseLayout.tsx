@@ -15,8 +15,13 @@ import 'reset.css';
 
 import { SiteTitleQuery } from '@/types';
 import { Menu } from '@/components';
+import Header from './Header';
 
-export const BaseLayout: React.FC = ({ children }) => {
+type BaseLayoutProps = {
+  useHeader?: boolean;
+};
+
+export const BaseLayout: React.FC<BaseLayoutProps> = ({ useHeader, children }) => {
   const data = useStaticQuery<SiteTitleQuery>(graphql`
     query SiteTitle {
       site {
@@ -29,6 +34,7 @@ export const BaseLayout: React.FC = ({ children }) => {
 
   return (
     <>
+      {useHeader && <Header siteTitle={data.site?.siteMetadata?.title || ''} />}
       <GlobalStyle />
       <Main>{children}</Main>
       <Footer />

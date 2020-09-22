@@ -1,38 +1,33 @@
 import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
+import { MainLogo } from '@/components';
+import { Spacing, Colors } from '@/constants';
 
 type Props = {
   siteTitle: string;
 };
 
 export const Header: React.FC<Props> = ({ siteTitle }) => (
-  <StyledHeader>
-    <HeaderInner>
-      <Heading>
-        <StyledLink to="/">{siteTitle}</StyledLink>
-      </Heading>
-    </HeaderInner>
-  </StyledHeader>
+  <Container>
+    <Heading>
+      <StyledLink to="/">
+        <MainLogo width={120} />
+      </StyledLink>
+    </Heading>
+  </Container>
 );
 
-const StyledHeader = styled.header`
-  margin-bottom: 1.45rem;
-  background: rebeccapurple;
+const Container = styled.header`
+  display: flex;
+  justify-content: center;
+  padding: ${Spacing.XX_LARGE}px;
+  background-color: ${Colors.UI_PAPER};
 `;
 
-const HeaderInner = styled.div`
-  max-width: 960;
-  margin: 0 auto;
-  padding: 1.45rem 1.0875rem;
-`;
-
-const Heading = styled.h1`
-  margin: 0;
-`;
+const Heading = styled.h1``;
 
 const StyledLink = styled(Link)`
-  color: white;
   text-decoration: none;
 `;
 

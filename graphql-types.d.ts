@@ -3021,7 +3021,10 @@ export type ComponentsSeoQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<Site
 export type AllMicrocmsPersonsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AllMicrocmsPersonsQuery = { allMicrocmsPersons: { nodes: Array<Pick<MicrocmsPersons, 'id' | 'title' | 'body' | 'slug'>> } };
+export type AllMicrocmsPersonsQuery = { allMicrocmsPersons: { nodes: Array<(
+      Pick<MicrocmsPersons, 'id' | 'title' | 'slug'>
+      & { mainVisual?: Maybe<Pick<MicrocmsPersonsMainVisual, 'url'>> }
+    )> } };
 
 export type Unnamed_1_QueryVariables = Exact<{
   slug: Scalars['String'];

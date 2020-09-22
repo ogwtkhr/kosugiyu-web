@@ -74,7 +74,7 @@ const SideColumnInner = styled.div`
   justify-content: center;
 `;
 
-const LogoContainer = styled.div``;
+const LogoContainer = styled.h1``;
 
 const Logo = styled(MainLogo)`
   display: block;

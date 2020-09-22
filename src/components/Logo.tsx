@@ -22,6 +22,7 @@ export const MainLogo: React.FC<LogoProps> = ({
     // </svg>
 
     <svg width={width} height={height} viewBox="0 0 1503.77 426.99">
+      <title>小杉湯</title>
       <path
         fillRule="evenodd"
         fill={color}
@@ -38,6 +39,7 @@ export const PersonsLogo: React.FC<LogoProps> = ({
 }) => {
   return (
     <svg width={width} height={height} viewBox="0 0 497.05 2365.01">
+      <title>小杉湯と人</title>
       <path
         fillRule="evenodd"
         fill={color}

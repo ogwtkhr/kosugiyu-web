@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 import { Picture } from '@/components';
-import { Colors } from '@/constants';
+import { Colors, StyleMixin } from '@/constants';
 import { getRandom } from '@/util/number';
 
 export const HeroImage: React.FC = () => {
@@ -18,7 +18,5 @@ const Container = styled.div`
   height: 100%;
   overflow: hidden;
   background-color: ${Colors.UI_OBJECT_PLAEHOLDER};
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  ${StyleMixin.BACKGROUND_IMAGE}
 `;

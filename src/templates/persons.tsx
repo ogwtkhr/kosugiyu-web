@@ -18,7 +18,7 @@ const PersonsPage: React.FC<PersonsPageProps> = ({ data }) => {
 
   if (!title || !publishedAt || !mainVisual || !body) return <div>data not exists.</div>;
   return (
-    <BaseLayout>
+    <BaseLayout useHeader>
       <SEO title={title} />
       <Article
         dangerouslySetInnerHTML={{

@@ -17,7 +17,7 @@ export const TypeFace = {
 export const TextWeight = {
   NORMAL: 300,
   BOLD: 500,
-};
+} as const;
 
 export const TypeStyle = {
   EXTENDED: 'scale(1, 0.9)',
