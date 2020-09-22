@@ -53,7 +53,8 @@ const SideColumn = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 340px;
+  width: 30%;
+  min-width: 280px;
   padding: ${Spacing.XXX_LARGE}px;
 
   ${media.lessThan(ScreenType.MEDIUM)`
