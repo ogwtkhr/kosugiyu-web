@@ -395,7 +395,9 @@ export const IntroModule: React.FC = () => {
                     transition: Transitions.BASE_TRANSITION,
                   }}
                 >
-                  <PersonsLogoVertical />
+                  <PersonsLogoContainer>
+                    <PersonsLogoVertical />
+                  </PersonsLogoContainer>
                 </div>
               )}
             </Transition>
@@ -489,6 +491,11 @@ const MessageTypography = styled.p<MessageTypographyProps>`
 
   ${media.lessThan(ScreenType.SMALL)`
     font-size: ${TextSize.NORMAL}rem;
+    text-align: justify;
+
+    & br {
+      display: none;
+    }
   `}
 `;
 
@@ -533,6 +540,10 @@ const GridOuter = styled.div`
   ${media.lessThan(ScreenType.MEDIUM)`
     margin: ${Spacing.X_LARGE}px 0;
   `}
+`;
+
+const PersonsLogoContainer = styled.div`
+  width: 40px;
 `;
 
 export default IntroModule;

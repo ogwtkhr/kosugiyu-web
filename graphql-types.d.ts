@@ -3070,7 +3070,7 @@ export type AllMicrocmsPersonsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type AllMicrocmsPersonsQuery = { allMicrocmsPersons: { nodes: Array<(
-      Pick<MicrocmsPersons, 'id' | 'title' | 'slug'>
+      Pick<MicrocmsPersons, 'id' | 'title' | 'slug' | 'publishedAt'>
       & { mainVisual?: Maybe<Pick<MicrocmsPersonsMainVisual, 'url'>> }
     )> } };
 
