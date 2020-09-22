@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link, graphql } from 'gatsby';
+import React, { useMemo } from 'react';
+import { graphql } from 'gatsby';
 import dayjs from 'dayjs';
 
 import { Query } from '@/types';
@@ -17,8 +17,10 @@ import {
   ScreenType,
   LineHeight,
   ScreenValue,
+  Layer,
 } from '@/constants';
 import media from 'styled-media-query';
+import { useParallax } from '@/hooks';
 
 type PersonsPageProps = {
   data: Pick<Query, 'microcmsPersons'>;
@@ -31,14 +33,31 @@ const PersonsPage: React.FC<PersonsPageProps> = ({ data }) => {
   const writerName = data.microcmsPersons?.writer?.name;
   const body = data.microcmsPersons?.body;
 
+  const [mainVisualRef, { top: parallaxSeed }] = useParallax<HTMLDivElement>({
+    min: 0,
+    max: 1000,
+    coefficient: 0.2,
+  });
+  const mainVisualTransformProperty = useMemo(() => `translateY(${parallaxSeed}px)`, [
+    parallaxSeed,
+  ]);
+  console.log(mainVisualTransformProperty);
+  const publishedDate = useMemo(() => dayjs(publishedAt).format('YYYY年M月D日'), [publishedAt]);
+
   if (!title || !publishedAt || !writerName || !mainVisual || !body)
     return <div>data not exists.</div>;
-  const publishedDate = dayjs(publishedAt).format('YYYY年M月D日');
   return (
     <BaseLayout useHeader usePersonsHeader>
       <SEO title={title} />
       <Container>
-        <MainVisual src={mainVisual} />
+        <MainVisualContainer ref={mainVisualRef}>
+          <MainVisual
+            src={mainVisual}
+            style={{
+              transform: mainVisualTransformProperty,
+            }}
+          />
+        </MainVisualContainer>
         <TitleContaier>
           <Title>{title}</Title>
           <MetaInfo>
@@ -77,6 +96,8 @@ const Container = styled.div`
 `;
 
 const TitleContaier = styled.div`
+  position: relative;
+  z-index: ${Layer.BASE};
   max-width: ${ModuleWidth.ARTICLE}px;
   margin: -${Spacing.XX_LARGE * 4}px auto ${Spacing.XX_LARGE}px;
   padding: ${Spacing.XX_LARGE}px;
@@ -111,10 +132,19 @@ const WriterName = styled.p`
   margin-left: ${Spacing.MIDDLE}px;
 `;
 
-const MainVisual = styled.div`
+const MainVisualContainer = styled.div`
   width: 100%;
   max-width: ${ScreenValue.LARGE}px;
   margin: 0 auto;
+
+  ${media.greaterThan(ScreenType.LARGE)`
+    margin-top: ${Spacing.XX_LARGE}px;
+  `}
+`;
+
+const MainVisual = styled.div`
+  width: 100%;
+  height: 100%;
   ${StyleMixin.BACKGROUND_IMAGE_WITH_SRC};
 
   &::after {
@@ -122,10 +152,6 @@ const MainVisual = styled.div`
     display: block;
     padding-bottom: ${AspectRatio.R_16_BY_9}%;
   }
-
-  ${media.greaterThan(ScreenType.LARGE)`
-    margin-top: ${Spacing.XX_LARGE}px;
-  `}
 
   ${media.lessThan(ScreenType.MEDIUM)`
     &::after {
