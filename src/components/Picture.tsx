@@ -1,16 +1,25 @@
 import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import { AllImageFileQuery } from '@/types';
-import Img, { FluidObject } from 'gatsby-image';
+import Img, { FluidObject, GatsbyImageProps } from 'gatsby-image';
 
 type PictureProps = {
   relativePath: string;
   alt?: string;
   style?: React.CSSProperties;
   className?: string;
+  fadeIn?: boolean;
+  loading?: GatsbyImageProps['loading'];
 };
 
-export const Picture: React.FC<PictureProps> = ({ relativePath, alt, style, className }) => {
+export const Picture: React.FC<PictureProps> = ({
+  relativePath,
+  alt,
+  fadeIn = false,
+  style,
+  loading = 'eager',
+  className,
+}) => {
   const data = useStaticQuery<AllImageFileQuery>(graphql`
     query allImageFile {
       desktopImages: allFile(filter: { ext: { regex: "/(png|jpg)/" } }) {
@@ -74,8 +83,8 @@ export const Picture: React.FC<PictureProps> = ({ relativePath, alt, style, clas
       {imageSources ? (
         <Img
           fluid={imageSources}
-          fadeIn={false}
-          loading="eager"
+          fadeIn={fadeIn}
+          loading={loading}
           style={{
             width: '100%',
             height: '100%',

@@ -15,18 +15,11 @@ export const Tape: React.FC<TapeProps> = ({ isAnimate = true, children }) => {
   );
 };
 
-const mixin = getCurtainAnimationMixin() as any; // TODO: 敗北…
-
 const Container = styled.span<Pick<TapeProps, 'isAnimate'>>`
   display: inline-block;
-  position: relative;
   margin-bottom: ${Spacing.LARGE}px;
   background-color: ${Colors.ABSTRACT_WHITE};
-  ${mixin}
-
-  &::after {
-    background-color: ${Colors.ABSTRACT_WHITE};
-  }
+  ${getCurtainAnimationMixin() as any}
 `;
 
 const Text = styled.span`

@@ -34,7 +34,8 @@ export const useIntersectionObserver = <T extends Element = HTMLElement>(
   const ref = useCoreIntersectionObserver<T>(([entry]) => {
     const { isIntersecting: currentIsIntersecting } = entry;
     setIsIntersecting(currentIsIntersecting);
-    if (isIntersecting && !hasIntersected) setHasIntersected(true);
+    if (currentIsIntersecting && !hasIntersected) setHasIntersected(true);
+
     setEntry(entry);
     if (callback) callback();
   }, options);

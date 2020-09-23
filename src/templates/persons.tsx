@@ -40,6 +40,7 @@ const PersonsPage: React.FC<PersonsPageProps> = ({ data }) => {
     min: 0,
     max: 1000,
     coefficient: 0.2,
+    direction: 'reverse',
   });
   const strippedBody = useMemo(() => stripTag(body || '').slice(0, 200), [body]);
   const mainVisualTransformProperty = useMemo(() => `translateY(${parallaxSeed}px)`, [

@@ -59,7 +59,7 @@ const endingPosterData = [
   },
   {
     src: 'photos/top/facility_6.jpg',
-    duration: 1,
+    duration: 1.3,
     parallax: 'zoomin',
   },
   {
@@ -142,7 +142,7 @@ export const IntroModule: React.FC = () => {
               rowEnd: 5,
             }}
           >
-            <GridImage src="photos/top/town_1.jpg" />
+            <GridImage src="photos/top/town_1.jpg" parallaxSpeed={0.09} />
           </GridItem>
           <GridItem
             grid={{
@@ -161,7 +161,7 @@ export const IntroModule: React.FC = () => {
               marginRight: -4,
             }}
           >
-            <GridImage src="photos/top/town_2.jpg" />
+            <GridImage src="photos/top/town_2.jpg" parallaxSpeed={0.06} />
           </GridItem>
           <GridItem
             grid={{
@@ -202,7 +202,7 @@ export const IntroModule: React.FC = () => {
               marginRight: 2,
             }}
           >
-            <GridImage src="photos/top/town_6.jpg" />
+            <GridImage src="photos/top/town_6.jpg" parallaxSpeed={0.07} />
           </GridItem>
         </GridContainer>
       </GridOuter>
@@ -220,7 +220,7 @@ export const IntroModule: React.FC = () => {
               rowEnd: 5,
             }}
           >
-            <GridImage src="photos/top/town_3.jpg" />
+            <GridImage src="photos/top/town_3.jpg" parallaxSpeed={0.02} />
           </GridItem>
           <GridItem
             grid={{
@@ -243,7 +243,7 @@ export const IntroModule: React.FC = () => {
               marginRight: 0,
             }}
           >
-            <GridImage src="photos/top/town_5.jpg" />
+            <GridImage src="photos/top/town_5.jpg" parallaxSpeed={0.08} />
           </GridItem>
           <GridItem
             grid={{
@@ -283,7 +283,7 @@ export const IntroModule: React.FC = () => {
               rowEnd: 11,
             }}
           >
-            <GridImage src="photos/top/town_4.jpg" />
+            <GridImage src="photos/top/town_4.jpg" parallaxSpeed={0.02} />
           </GridItem>
           <GridItem
             grid={{
@@ -302,7 +302,7 @@ export const IntroModule: React.FC = () => {
               marginLeft: 2,
             }}
           >
-            <GridImage src="photos/top/town_7.jpg" />
+            <GridImage src="photos/top/town_7.jpg" parallaxSpeed={0.03} />
           </GridItem>
           <GridItem
             grid={{
@@ -322,7 +322,7 @@ export const IntroModule: React.FC = () => {
               marginLeft: 2,
             }}
           >
-            <GridImage src="photos/top/town_8.jpg" />
+            <GridImage src="photos/top/town_8.jpg" parallaxSpeed={0.04} />
           </GridItem>
         </GridContainer>
       </GridOuter>
@@ -334,8 +334,8 @@ export const IntroModule: React.FC = () => {
           const MAX = 1;
           const opacity = floorInRange0to1((progress - MIN) / (MAX - MIN));
 
-          setIsEndingPhase1(progress > 0.9);
-          setIsEndingPhase2(progress > 0.92);
+          setIsEndingPhase1(progress > 0.92);
+          setIsEndingPhase2(progress > 0.97);
           setIsEndingPhase3(progress > 0.99);
 
           setEndingOverlayOpacity(opacity);

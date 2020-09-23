@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import styled from 'styled-components';
 import media from 'styled-media-query';
-import { useIntersectionObserver } from '@/hooks';
+import { useIntersectionObserver, useParallax } from '@/hooks';
 import { BoxProps, boxMixin, getBoxExpression } from './Box';
 import Picture from './Picture';
-import { ScreenType, ScreenValue } from '@/constants';
+import { Colors, ScreenType, ScreenValue } from '@/constants';
+import { getCurtainAnimationMixin, AnimationMixinProps, getFadeinMixin } from '@/util/animation';
 
 export type GridContainerProps = {
   columns?: number;
@@ -64,8 +65,7 @@ export const GridItem = styled.div<GridItemProps>`
     `;
   }}
 
-  ${({ box }) =>
-    box ? getBoxExpression(box) : ''}
+  ${({ box }) => (box ? getBoxExpression(box) : '')}
 
   @media(max-width: ${ScreenValue.SMALL}px) {
     ${({ boxSmall }) => (boxSmall ? getBoxExpression(boxSmall) : '')}
@@ -83,11 +83,41 @@ export const GridItem = styled.div<GridItemProps>`
 
 type GridImageProps = {
   src: string;
+  parallaxSpeed?: number;
 };
 
-export const GridImage: React.FC<GridImageProps> = ({ src }) => {
-  // const [ref, isIntersecting, hasIntersected] = useIntersectionObserver<HTMLDivElement>();
+export const GridImage: React.FC<GridImageProps> = ({ src, parallaxSpeed = 0.2 }) => {
+  // TODO: パララックスラッパー
+  const [intersectionRef, isIntersecting] = useIntersectionObserver<HTMLDivElement>();
+  const [parallaxRef, { center: parallaxSeed }] = useParallax<HTMLDivElement>({
+    coefficient: parallaxSpeed,
+    direction: 'normal',
+  });
 
-  // return <GridImageContainer src={src} ref={ref} />;
-  return <Picture relativePath={src} />;
+  const transform = useMemo(() => `translateY(${parallaxSeed}px)`, [parallaxSeed]);
+
+  return (
+    <GridImageContainer
+      ref={parallaxRef}
+      style={{
+        transform,
+      }}
+    >
+      <GridImageInner ref={intersectionRef} isAnimate={isIntersecting}>
+        <Picture relativePath={src} />
+      </GridImageInner>
+    </GridImageContainer>
+  );
 };
+
+const GridImageContainer = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+`;
+
+const GridImageInner = styled.div<AnimationMixinProps>`
+  width: 100%;
+  height: 100%;
+  ${getFadeinMixin()}
+`;

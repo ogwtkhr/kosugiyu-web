@@ -1,4 +1,15 @@
+import { Colors, Transitions } from '@/constants';
 import { css, keyframes, FlattenInterpolation, ThemedStyledProps } from 'styled-components';
+import { isBoolean } from './type';
+
+export type AnimationMixinProps = {
+  isAnimate: boolean;
+};
+
+const AnimationPlayState = {
+  RUNNING: 'running',
+  PAUSED: 'paused',
+};
 
 export const KeyframeAnimation = {
   CURTAIN_PANEL: keyframes`
@@ -38,24 +49,18 @@ export const KeyframeAnimation = {
 `,
 } as const;
 
-type CurtainAnimationMixinProps = {
-  isAnimate: boolean;
-};
-
-const AnimationPlayState = {
-  RUNNING: 'running',
-  PAUSED: 'paused',
-};
-
-export const getCurtainAnimationMixin = <T extends HTMLElement = HTMLElement>({
+// TODO: any問題
+export const getCurtainAnimationMixin = ({
   duration = 1000,
-  easing = 'ease',
+  easing = Transitions.BASE_TRANSITION,
   delay = 0,
+  panelColor = Colors.ABSTRACT_WHITE,
 }: {
   duration?: number;
   easing?: string;
   delay?: number;
-} = {}): FlattenInterpolation<ThemedStyledProps<CurtainAnimationMixinProps, T>> => {
+  panelColor?: string;
+} = {}): any => {
   const baseAnimationSetting = css`
     /* backface-visibility: hidden; */
     animation-duration: ${duration}ms;
@@ -64,10 +69,10 @@ export const getCurtainAnimationMixin = <T extends HTMLElement = HTMLElement>({
     animation-fill-mode: both;
   `;
 
-  const judgeIsAnimate = ({ isAnimate }: CurtainAnimationMixinProps) =>
+  const judgeIsAnimate = ({ isAnimate }: AnimationMixinProps) =>
     isAnimate ? AnimationPlayState.RUNNING : AnimationPlayState.PAUSED;
 
-  return css<CurtainAnimationMixinProps>`
+  return css<AnimationMixinProps>`
     position: relative;
     ${baseAnimationSetting};
     animation-name: ${KeyframeAnimation.CURTAIN_CONTENT};
@@ -75,18 +80,33 @@ export const getCurtainAnimationMixin = <T extends HTMLElement = HTMLElement>({
 
     &::after {
       content: '';
+      visibility: visible;
       position: absolute;
       z-index: 2;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      transform-origin: left top;
       transform: scale(0, 1);
-      visibility: visible;
+      transform-origin: left top;
       ${baseAnimationSetting};
       animation-name: ${KeyframeAnimation.CURTAIN_PANEL};
       animation-play-state: ${judgeIsAnimate};
+      background-color: ${panelColor};
     }
+  `;
+};
+
+export const getFadeinMixin = ({
+  duration = 1000,
+  easing = Transitions.BASE_TRANSITION,
+}: {
+  duration?: number;
+  easing?: string;
+} = {}): any => {
+  return css<AnimationMixinProps>`
+    position: relative;
+    transition: ${duration}ms ${easing};
+    opacity: ${({ isAnimate }) => (isAnimate ? 1 : 0)};
   `;
 };

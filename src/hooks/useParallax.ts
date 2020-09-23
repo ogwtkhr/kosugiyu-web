@@ -1,5 +1,5 @@
 import { DomEventType } from '@/constants';
-import { isUndefined } from '@/util/type';
+import { isString, isUndefined } from '@/util/type';
 import { useEffect, useRef, useState } from 'react';
 
 type Options = {
@@ -9,6 +9,8 @@ type Options = {
   min?: number;
   // 最大キャップ
   max?: number;
+  // スクロール方向 = normal -> 負方向に加算（閾値超えスクロールが負方向を向く）
+  direction?: 'normal' | 'reverse' | -1 | 1;
 };
 
 type ScrollInfo = {
@@ -24,19 +26,25 @@ const defaultOptions: Options = {
   coefficient: 1,
   min: undefined,
   max: undefined,
+  direction: 'normal',
 };
 
 export const useParallax = <T extends HTMLElement = HTMLElement>(
   options: Options = {},
 ): [React.RefObject<T>, ScrollInfo] => {
-  const { coefficient, min, max } = {
+  const { coefficient, min, max, direction: directionParam } = {
     ...defaultOptions,
     ...options,
   };
 
+  const direction = isString(directionParam)
+    ? directionParam === 'normal'
+      ? 1
+      : -1
+    : directionParam!;
+
   const getValue = (value: number): number => {
-    // 閾値超えスクロールが正方向を向くほうが使い勝手がいいので、座標変換しておく
-    const baseValue = value * -1;
+    const baseValue = value * direction;
     const minCapped = isUndefined(min) ? baseValue : Math.max(baseValue, min);
     const maxCapped = isUndefined(max) ? minCapped : Math.min(minCapped, max);
     return isUndefined(coefficient) ? maxCapped : maxCapped * coefficient;
