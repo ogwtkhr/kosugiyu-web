@@ -2,4 +2,4 @@ export * from './GlobalStyle';
 export * from './BaseLayout';
 export * from './Header';
 export * from './Footer';
-export * from './Seo';
+export * from './Meta';

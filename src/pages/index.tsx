@@ -1,12 +1,12 @@
 import React from 'react';
-import { BaseLayout, SEO } from '@/layouts';
+import { BaseLayout, Meta } from '@/layouts';
 import { TopModule, IntroModule, PersonsModule } from '@/modules';
 
 const IndexPage: React.FC = () => {
   return (
     <>
       <BaseLayout useHeader={false}>
-        <SEO />
+        <Meta />
         <TopModule />
         <IntroModule />
         <PersonsModule />

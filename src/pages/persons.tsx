@@ -1,12 +1,14 @@
 import React from 'react';
-import { BaseLayout, SEO } from '@/layouts';
+import { BaseLayout, Meta } from '@/layouts';
 import { PersonsModule } from '@/modules';
+import { usePageInfo } from '@/hooks';
 
 const IndexPage: React.FC = () => {
+  const { title, description } = usePageInfo({ id: 'persons' });
   return (
     <>
       <BaseLayout>
-        <SEO />
+        <Meta title={title} description={description} />
         <PersonsModule useTitle />
       </BaseLayout>
     </>

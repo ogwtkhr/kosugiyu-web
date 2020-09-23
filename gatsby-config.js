@@ -62,12 +62,6 @@ module.exports = {
       options: {
         alias: {
           '@': './src',
-          // '@components': './src/components',
-          // '@constants': './src/constants',
-          // '@layouts': './src/layouts',
-          // '@modules': './src/modules',
-          // '@pages': './src/pages',
-          // '@types': './src/types',
         },
         extensions: ['js', 'jsx', 'ts', 'tsx', 'css'],
       },

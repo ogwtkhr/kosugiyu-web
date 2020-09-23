@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import { Twitter, FacebookCircle } from '@styled-icons/boxicons-logos';
 
 import { Query } from '@/types';
-import { BaseLayout, SEO } from '@/layouts';
+import { BaseLayout, Meta } from '@/layouts';
 import styled, { css } from 'styled-components';
 import {
   ModuleWidth,
@@ -54,7 +54,7 @@ const PersonsPage: React.FC<PersonsPageProps> = ({ data }) => {
     return <div>data not exists.</div>;
   return (
     <BaseLayout useHeader usePersonsHeader>
-      <SEO title={title} description={strippedBody} />
+      <Meta title={title} description={strippedBody} ogImage={mainVisual} />
       <Container>
         <MainVisualContainer ref={mainVisualRef}>
           <MainVisual

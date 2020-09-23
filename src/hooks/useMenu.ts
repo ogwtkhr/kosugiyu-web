@@ -9,13 +9,16 @@ export const useMenu = ({ ignoreTopData }: Parameter = {}): SettingYamlMenu[] =>
   const data = useStaticQuery<MenuQuery>(graphql`
     query Menu {
       settingYaml {
-        menu {
+        pages {
           id
-          label
+          title
         }
       }
     }
   `);
-  const menu = (data.settingYaml?.menu || []) as SettingYamlMenu[];
+  const menu = ((data.settingYaml?.pages || []) as SettingYamlMenu[]).map(({ id, title }) => ({
+    id,
+    label: title,
+  }));
   return ignoreTopData ? menu.filter(({ id }) => id !== 'top') : menu;
 };

@@ -1,9 +1,22 @@
-- menu:
+- meta:
+    title: 小杉湯
+    description: 杉並区・高円寺にある銭湯「小杉湯」。
+    url: https://kosugiyu.co.jp
+    twitter: kosugiyu
+    ogImage: https://dummyimage.com/600x400/c4c2c4/0011ff
+
+- pages:
   - id: top
-    label: トップ
+    title: トップ
+    # TODO
+    description: 昭和八年創業。高円寺の銭湯「小杉湯」の公式ウェブサイトです。
   - id: persons
-    label: 小杉湯と人
+    title: 小杉湯と人
+    # TODO
+    description: 昭和八年創業。高円寺の銭湯「小杉湯」にまつわる人々をご紹介します。
   - id: archive
-    label: できごと
+    title: できごと
+    description: 'TODO: できごとのdescription'
   - id: facility
-    label: 施設・営業案内
+    title: 施設・営業案内
+    description: 'TODO: 施設・営業案内のdescription'

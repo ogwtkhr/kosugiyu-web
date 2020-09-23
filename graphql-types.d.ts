@@ -394,7 +394,7 @@ export type File = Node & {
   parent?: Maybe<Node>;
   children: Array<Node>;
   internal: Internal;
-  childSettingYaml?: Maybe<SettingYaml>;
+  childrenSettingYaml?: Maybe<Array<Maybe<SettingYaml>>>;
 };
 
 
@@ -692,47 +692,54 @@ export type FileFieldsEnum =
   | 'internal___mediaType'
   | 'internal___owner'
   | 'internal___type'
-  | 'childSettingYaml___id'
-  | 'childSettingYaml___parent___id'
-  | 'childSettingYaml___parent___parent___id'
-  | 'childSettingYaml___parent___parent___children'
-  | 'childSettingYaml___parent___children'
-  | 'childSettingYaml___parent___children___id'
-  | 'childSettingYaml___parent___children___children'
-  | 'childSettingYaml___parent___internal___content'
-  | 'childSettingYaml___parent___internal___contentDigest'
-  | 'childSettingYaml___parent___internal___description'
-  | 'childSettingYaml___parent___internal___fieldOwners'
-  | 'childSettingYaml___parent___internal___ignoreType'
-  | 'childSettingYaml___parent___internal___mediaType'
-  | 'childSettingYaml___parent___internal___owner'
-  | 'childSettingYaml___parent___internal___type'
-  | 'childSettingYaml___children'
-  | 'childSettingYaml___children___id'
-  | 'childSettingYaml___children___parent___id'
-  | 'childSettingYaml___children___parent___children'
-  | 'childSettingYaml___children___children'
-  | 'childSettingYaml___children___children___id'
-  | 'childSettingYaml___children___children___children'
-  | 'childSettingYaml___children___internal___content'
-  | 'childSettingYaml___children___internal___contentDigest'
-  | 'childSettingYaml___children___internal___description'
-  | 'childSettingYaml___children___internal___fieldOwners'
-  | 'childSettingYaml___children___internal___ignoreType'
-  | 'childSettingYaml___children___internal___mediaType'
-  | 'childSettingYaml___children___internal___owner'
-  | 'childSettingYaml___children___internal___type'
-  | 'childSettingYaml___internal___content'
-  | 'childSettingYaml___internal___contentDigest'
-  | 'childSettingYaml___internal___description'
-  | 'childSettingYaml___internal___fieldOwners'
-  | 'childSettingYaml___internal___ignoreType'
-  | 'childSettingYaml___internal___mediaType'
-  | 'childSettingYaml___internal___owner'
-  | 'childSettingYaml___internal___type'
-  | 'childSettingYaml___menu'
-  | 'childSettingYaml___menu___id'
-  | 'childSettingYaml___menu___label';
+  | 'childrenSettingYaml'
+  | 'childrenSettingYaml___id'
+  | 'childrenSettingYaml___parent___id'
+  | 'childrenSettingYaml___parent___parent___id'
+  | 'childrenSettingYaml___parent___parent___children'
+  | 'childrenSettingYaml___parent___children'
+  | 'childrenSettingYaml___parent___children___id'
+  | 'childrenSettingYaml___parent___children___children'
+  | 'childrenSettingYaml___parent___internal___content'
+  | 'childrenSettingYaml___parent___internal___contentDigest'
+  | 'childrenSettingYaml___parent___internal___description'
+  | 'childrenSettingYaml___parent___internal___fieldOwners'
+  | 'childrenSettingYaml___parent___internal___ignoreType'
+  | 'childrenSettingYaml___parent___internal___mediaType'
+  | 'childrenSettingYaml___parent___internal___owner'
+  | 'childrenSettingYaml___parent___internal___type'
+  | 'childrenSettingYaml___children'
+  | 'childrenSettingYaml___children___id'
+  | 'childrenSettingYaml___children___parent___id'
+  | 'childrenSettingYaml___children___parent___children'
+  | 'childrenSettingYaml___children___children'
+  | 'childrenSettingYaml___children___children___id'
+  | 'childrenSettingYaml___children___children___children'
+  | 'childrenSettingYaml___children___internal___content'
+  | 'childrenSettingYaml___children___internal___contentDigest'
+  | 'childrenSettingYaml___children___internal___description'
+  | 'childrenSettingYaml___children___internal___fieldOwners'
+  | 'childrenSettingYaml___children___internal___ignoreType'
+  | 'childrenSettingYaml___children___internal___mediaType'
+  | 'childrenSettingYaml___children___internal___owner'
+  | 'childrenSettingYaml___children___internal___type'
+  | 'childrenSettingYaml___internal___content'
+  | 'childrenSettingYaml___internal___contentDigest'
+  | 'childrenSettingYaml___internal___description'
+  | 'childrenSettingYaml___internal___fieldOwners'
+  | 'childrenSettingYaml___internal___ignoreType'
+  | 'childrenSettingYaml___internal___mediaType'
+  | 'childrenSettingYaml___internal___owner'
+  | 'childrenSettingYaml___internal___type'
+  | 'childrenSettingYaml___meta___title'
+  | 'childrenSettingYaml___meta___description'
+  | 'childrenSettingYaml___meta___url'
+  | 'childrenSettingYaml___meta___twitter'
+  | 'childrenSettingYaml___meta___ogImage'
+  | 'childrenSettingYaml___pages'
+  | 'childrenSettingYaml___pages___id'
+  | 'childrenSettingYaml___pages___title'
+  | 'childrenSettingYaml___pages___description';
 
 export type FileFilterInput = {
   sourceInstanceName?: Maybe<StringQueryOperatorInput>;
@@ -774,7 +781,7 @@ export type FileFilterInput = {
   parent?: Maybe<NodeFilterInput>;
   children?: Maybe<NodeFilterListInput>;
   internal?: Maybe<InternalFilterInput>;
-  childSettingYaml?: Maybe<SettingYamlFilterInput>;
+  childrenSettingYaml?: Maybe<SettingYamlFilterListInput>;
 };
 
 export type FileGroupConnection = {
@@ -1639,10 +1646,10 @@ export type Query = {
   allSitePage: SitePageConnection;
   imageSharp?: Maybe<ImageSharp>;
   allImageSharp: ImageSharpConnection;
-  microcmsPersons?: Maybe<MicrocmsPersons>;
-  allMicrocmsPersons: MicrocmsPersonsConnection;
   settingYaml?: Maybe<SettingYaml>;
   allSettingYaml: SettingYamlConnection;
+  microcmsPersons?: Maybe<MicrocmsPersons>;
+  allMicrocmsPersons: MicrocmsPersonsConnection;
   siteBuildMetadata?: Maybe<SiteBuildMetadata>;
   allSiteBuildMetadata: SiteBuildMetadataConnection;
   sitePlugin?: Maybe<SitePlugin>;
@@ -1690,7 +1697,7 @@ export type QueryFileArgs = {
   parent?: Maybe<NodeFilterInput>;
   children?: Maybe<NodeFilterListInput>;
   internal?: Maybe<InternalFilterInput>;
-  childSettingYaml?: Maybe<SettingYamlFilterInput>;
+  childrenSettingYaml?: Maybe<SettingYamlFilterListInput>;
 };
 
 
@@ -1821,6 +1828,24 @@ export type QueryAllImageSharpArgs = {
 };
 
 
+export type QuerySettingYamlArgs = {
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+  meta?: Maybe<SettingYamlMetaFilterInput>;
+  pages?: Maybe<SettingYamlPagesFilterListInput>;
+};
+
+
+export type QueryAllSettingYamlArgs = {
+  filter?: Maybe<SettingYamlFilterInput>;
+  sort?: Maybe<SettingYamlSortInput>;
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+};
+
+
 export type QueryMicrocmsPersonsArgs = {
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
@@ -1841,23 +1866,6 @@ export type QueryMicrocmsPersonsArgs = {
 export type QueryAllMicrocmsPersonsArgs = {
   filter?: Maybe<MicrocmsPersonsFilterInput>;
   sort?: Maybe<MicrocmsPersonsSortInput>;
-  skip?: Maybe<Scalars['Int']>;
-  limit?: Maybe<Scalars['Int']>;
-};
-
-
-export type QuerySettingYamlArgs = {
-  id?: Maybe<StringQueryOperatorInput>;
-  parent?: Maybe<NodeFilterInput>;
-  children?: Maybe<NodeFilterListInput>;
-  internal?: Maybe<InternalFilterInput>;
-  menu?: Maybe<SettingYamlMenuFilterListInput>;
-};
-
-
-export type QueryAllSettingYamlArgs = {
-  filter?: Maybe<SettingYamlFilterInput>;
-  sort?: Maybe<SettingYamlSortInput>;
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
 };
@@ -1909,7 +1917,8 @@ export type SettingYaml = Node & {
   parent?: Maybe<Node>;
   children: Array<Node>;
   internal: Internal;
-  menu?: Maybe<Array<Maybe<SettingYamlMenu>>>;
+  meta?: Maybe<SettingYamlMeta>;
+  pages?: Maybe<Array<Maybe<SettingYamlPages>>>;
 };
 
 export type SettingYamlConnection = {
@@ -2026,16 +2035,27 @@ export type SettingYamlFieldsEnum =
   | 'internal___mediaType'
   | 'internal___owner'
   | 'internal___type'
-  | 'menu'
-  | 'menu___id'
-  | 'menu___label';
+  | 'meta___title'
+  | 'meta___description'
+  | 'meta___url'
+  | 'meta___twitter'
+  | 'meta___ogImage'
+  | 'pages'
+  | 'pages___id'
+  | 'pages___title'
+  | 'pages___description';
 
 export type SettingYamlFilterInput = {
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
   children?: Maybe<NodeFilterListInput>;
   internal?: Maybe<InternalFilterInput>;
-  menu?: Maybe<SettingYamlMenuFilterListInput>;
+  meta?: Maybe<SettingYamlMetaFilterInput>;
+  pages?: Maybe<SettingYamlPagesFilterListInput>;
+};
+
+export type SettingYamlFilterListInput = {
+  elemMatch?: Maybe<SettingYamlFilterInput>;
 };
 
 export type SettingYamlGroupConnection = {
@@ -2047,18 +2067,36 @@ export type SettingYamlGroupConnection = {
   fieldValue?: Maybe<Scalars['String']>;
 };
 
-export type SettingYamlMenu = {
+export type SettingYamlMeta = {
+  title?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
+  twitter?: Maybe<Scalars['String']>;
+  ogImage?: Maybe<Scalars['String']>;
+};
+
+export type SettingYamlMetaFilterInput = {
+  title?: Maybe<StringQueryOperatorInput>;
+  description?: Maybe<StringQueryOperatorInput>;
+  url?: Maybe<StringQueryOperatorInput>;
+  twitter?: Maybe<StringQueryOperatorInput>;
+  ogImage?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SettingYamlPages = {
   id?: Maybe<Scalars['String']>;
-  label?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
 };
 
-export type SettingYamlMenuFilterInput = {
+export type SettingYamlPagesFilterInput = {
   id?: Maybe<StringQueryOperatorInput>;
-  label?: Maybe<StringQueryOperatorInput>;
+  title?: Maybe<StringQueryOperatorInput>;
+  description?: Maybe<StringQueryOperatorInput>;
 };
 
-export type SettingYamlMenuFilterListInput = {
-  elemMatch?: Maybe<SettingYamlMenuFilterInput>;
+export type SettingYamlPagesFilterListInput = {
+  elemMatch?: Maybe<SettingYamlPagesFilterInput>;
 };
 
 export type SettingYamlSortInput = {
@@ -3054,17 +3092,22 @@ export type GoogleApiKeyQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteS
 export type MenuQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MenuQuery = { settingYaml?: Maybe<{ menu?: Maybe<Array<Maybe<Pick<SettingYamlMenu, 'id' | 'label'>>>> }> };
+export type MenuQuery = { settingYaml?: Maybe<{ pages?: Maybe<Array<Maybe<Pick<SettingYamlPages, 'id' | 'title'>>>> }> };
+
+export type PageInfoQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type PageInfoQuery = { settingYaml?: Maybe<{ pages?: Maybe<Array<Maybe<Pick<SettingYamlPages, 'id' | 'title' | 'description'>>>> }> };
 
 export type SiteTitleQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type SiteTitleQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'title'>> }> };
 
-export type ComponentsSeoQueryVariables = Exact<{ [key: string]: never; }>;
+export type SiteMetaDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ComponentsSeoQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
+export type SiteMetaDataQuery = { settingYaml?: Maybe<{ meta?: Maybe<Pick<SettingYamlMeta, 'title' | 'twitter' | 'description' | 'ogImage'>> }> };
 
 export type AllMicrocmsPersonsQueryVariables = Exact<{ [key: string]: never; }>;
 

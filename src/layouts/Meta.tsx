@@ -1,15 +1,8 @@
-/**
- * SEO component that queries for data with
- *  Gatsby's useStaticQuery React hook
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
 import React from 'react';
 import Helmet from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
 
-import { ComponentsSeoQuery } from '@/types';
+import { SiteMetaDataQuery } from '@/types';
 
 type MetaItem = JSX.IntrinsicElements['meta'];
 
@@ -17,27 +10,30 @@ type Props = {
   title?: string;
   description?: string;
   lang?: string;
+  ogImage?: string;
   meta?: MetaItem[];
 };
 
-export const SEO: React.FC<Props> = ({ title, description, lang = 'en', meta = [] }) => {
-  const { site } = useStaticQuery<ComponentsSeoQuery>(
-    graphql`
-      query ComponentsSeo {
-        site {
-          siteMetadata {
-            title
-            description
-            author
-          }
+export const Meta: React.FC<Props> = ({ title, description, ogImage, lang = 'en', meta = [] }) => {
+  const data = useStaticQuery<SiteMetaDataQuery>(graphql`
+    query SiteMetaData {
+      settingYaml {
+        meta {
+          title
+          twitter
+          description
+          ogImage
         }
       }
-    `,
-  );
+    }
+  `);
 
-  const metaDescription = description || site?.siteMetadata?.description || '';
-  const author = site?.siteMetadata?.author || '';
-  const defaultTitle = site?.siteMetadata?.title;
+  const baseMeta = data.settingYaml?.meta;
+
+  const metaDescription = description || baseMeta?.description || '';
+  const twitterAccount = `@${baseMeta?.twitter || ''}`;
+  const image = ogImage || baseMeta?.ogImage || '';
+  const defaultTitle = baseMeta?.title;
 
   return (
     <Helmet
@@ -65,16 +61,20 @@ export const SEO: React.FC<Props> = ({ title, description, lang = 'en', meta = [
           content: 'website',
         },
         {
+          property: 'og:image',
+          content: image,
+        },
+        {
           name: 'twitter:card',
-          content: 'summary',
+          content: 'summary_large_image',
         },
         {
           name: 'twitter:creator',
-          content: author,
+          content: twitterAccount,
         },
         {
-          name: 'twitter:title',
-          content: title,
+          name: 'twitter:site',
+          content: twitterAccount,
         },
         {
           name: 'twitter:description',
@@ -99,4 +99,4 @@ export const SEO: React.FC<Props> = ({ title, description, lang = 'en', meta = [
   );
 };
 
-export default SEO;
+export default Meta;
