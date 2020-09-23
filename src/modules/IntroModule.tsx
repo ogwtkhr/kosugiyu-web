@@ -81,6 +81,20 @@ export const IntroModule: React.FC = () => {
   const [endingPosterScrollProgress, setEndingPosterScrollProgress] = useState(0);
   const [currentDynamicPosterIndex, setCurrentDynamicPosterIndex] = useState(0);
 
+  const isShowEnding1stMessage = useMemo(
+    () => currentDynamicPosterIndex < 2 && endingPosterScrollProgress > 0.05,
+    [currentDynamicPosterIndex, endingPosterScrollProgress],
+  );
+
+  const isShowEnding2ndMessage = useMemo(
+    () => currentDynamicPosterIndex >= 2 && currentDynamicPosterIndex < 5,
+    [currentDynamicPosterIndex],
+  );
+
+  const isShowEnding3rdMessage = useMemo(() => currentDynamicPosterIndex >= 5, [
+    currentDynamicPosterIndex,
+  ]);
+
   const endingPosterTextColor = useMemo(() => {
     if (endingPosterScrollProgress < 0.8) return Colors.UI_TEXT_DARK_BACKGROUND;
     return Colors.ABSTRACT_NAVY;
@@ -335,7 +349,7 @@ export const IntroModule: React.FC = () => {
           }}
         />
         <Overlay color={Colors.ABSTRACT_WHITE} style={{ opacity: endingOverlayOpacity }} />
-        {currentDynamicPosterIndex < 3 && (
+        {isShowEnding1stMessage && (
           <MessageContainer centering>
             <MessageTypography align="center" color={Colors.UI_BASE}>
               <Tape>小杉湯は昭和8年（1933年）にこの街で生まれました。</Tape>
@@ -344,7 +358,7 @@ export const IntroModule: React.FC = () => {
             </MessageTypography>
           </MessageContainer>
         )}
-        {currentDynamicPosterIndex >= 3 && currentDynamicPosterIndex < 5 && (
+        {isShowEnding2ndMessage && (
           <MessageContainer centering>
             <MessageTypography align="center" color={Colors.UI_BASE}>
               <Tape>創業当時の建物を守りつつ、時代に合わせて中身を変え続け </Tape>
@@ -354,7 +368,7 @@ export const IntroModule: React.FC = () => {
           </MessageContainer>
         )}
 
-        {currentDynamicPosterIndex >= 5 && (
+        {isShowEnding3rdMessage && (
           <EndingMessageContainer
             centering
             borderColor={endingPosterTextColor}

@@ -10,8 +10,12 @@ export const useCoreIntersectionObserver = <T extends Element = HTMLElement>(
 
   useEffect(() => {
     if (!ref.current) return;
+    const { current } = ref;
     const observer = new IntersectionObserver(callback, options);
-    observer.observe(ref.current);
+    observer.observe(current);
+    return () => {
+      observer.unobserve(current);
+    };
   }, []);
 
   return ref;
