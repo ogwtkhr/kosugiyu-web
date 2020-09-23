@@ -1,11 +1,11 @@
 import { graphql, useStaticQuery } from 'gatsby';
-import { MenuQuery, SettingYamlMenu } from '@/types';
+import { MenuQuery } from '@/types';
 
 type Parameter = {
   ignoreTopData?: boolean;
 };
 
-export const useMenu = ({ ignoreTopData }: Parameter = {}): SettingYamlMenu[] => {
+export const useMenu = ({ ignoreTopData }: Parameter = {}) => {
   const data = useStaticQuery<MenuQuery>(graphql`
     query Menu {
       settingYaml {
@@ -16,7 +16,7 @@ export const useMenu = ({ ignoreTopData }: Parameter = {}): SettingYamlMenu[] =>
       }
     }
   `);
-  const menu = ((data.settingYaml?.pages || []) as SettingYamlMenu[]).map(({ id, title }) => ({
+  const menu = (data.settingYaml?.pages || []).map(({ id, title }) => ({
     id,
     label: title,
   }));

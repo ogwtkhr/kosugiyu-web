@@ -138,12 +138,20 @@ const MetaInfoCotainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    display: block;
+  `}
 `;
 
 const SocialIcons = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    justify-content: flex-end;
+  `}
 `;
 
 const iconMixin = css`

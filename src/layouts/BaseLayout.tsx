@@ -10,6 +10,7 @@ import 'reset.css';
 import { SiteTitleQuery } from '@/types';
 import { Menu } from '@/components';
 import Header from './Header';
+import Loading from './Loading';
 
 type BaseLayoutProps = {
   useHeader?: boolean;
@@ -43,6 +44,7 @@ export const BaseLayout: React.FC<BaseLayoutProps> = ({
       <Main>{children}</Main>
       <Footer />
       <Menu />
+      <Loading />
     </>
   );
 };

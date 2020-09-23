@@ -4,19 +4,18 @@
     url: https://kosugiyu.co.jp
     twitter: kosugiyu
     ogImage: https://dummyimage.com/600x400/c4c2c4/0011ff
-
-- pages:
-  - id: top
-    title: トップ
-    # TODO
-    description: 昭和八年創業。高円寺の銭湯「小杉湯」の公式ウェブサイトです。
-  - id: persons
-    title: 小杉湯と人
-    # TODO
-    description: 昭和八年創業。高円寺の銭湯「小杉湯」にまつわる人々をご紹介します。
-  - id: archive
-    title: できごと
-    description: 'TODO: できごとのdescription'
-  - id: facility
-    title: 施設・営業案内
-    description: 'TODO: 施設・営業案内のdescription'
+  pages:
+    - id: top
+      title: トップ
+      # TODO
+      description: 昭和八年創業。高円寺の銭湯「小杉湯」の公式ウェブサイトです。
+    - id: persons
+      title: 小杉湯と人
+      # TODO
+      description: 昭和八年創業。高円寺の銭湯「小杉湯」にまつわる人々をご紹介します。
+    - id: archive
+      title: できごと
+      description: 'TODO: できごとのdescription'
+    - id: facility
+      title: 施設・営業案内
+      description: 'TODO: 施設・営業案内のdescription'
