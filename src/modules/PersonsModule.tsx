@@ -18,6 +18,9 @@ import {
 } from '@/constants';
 import dayjs from 'dayjs';
 import media from 'styled-media-query';
+import { PersonsLogoVertical } from '@/components';
+
+import headingImage from '@/images/photos/persons/persons_heading.jpg';
 
 type PersonsModuleProps = {
   useTitle?: boolean;
@@ -42,7 +45,15 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({ useTitle }) => {
 
   return (
     <Container>
-      {useTitle && <h2>小杉湯と人</h2>}
+      {useTitle && (
+        <PersonsHeading src={headingImage}>
+          <PersonsLogoContainer>
+            <PersonsLogoInner>
+              <PersonsLogoVertical />
+            </PersonsLogoInner>
+          </PersonsLogoContainer>
+        </PersonsHeading>
+      )}
       <ArticleList>
         {data.allMicrocmsPersons.nodes.map((entry) => {
           const slug = entry.slug || '';
@@ -64,6 +75,38 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({ useTitle }) => {
     </Container>
   );
 };
+
+const PersonsHeading = styled.div`
+  width: 100%;
+  ${StyleMixin.BACKGROUND_IMAGE_WITH_SRC};
+  margin-bottom: ${Spacing.XX_LARGE}px;
+  padding: ${Spacing.XX_LARGE}px;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    padding: ${Spacing.LARGE}px auto;
+  `}
+`;
+
+const PersonsLogoContainer = styled.h2`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 140px;
+  height: 200px;
+  margin: 0 auto;
+  border: solid 1px ${Colors.ABSTRACT_NAVY};
+  background-color: ${Colors.ABSTRACT_WHITE};
+`;
+
+const PersonsLogoInner = styled.div`
+  width: 32px;
+  height: 160px;
+`;
+
+const Container = styled.div`
+  width: 100%;
+  background-color: ${Colors.UI_PAPER};
+`;
 
 type ArticleItemProps = {
   slug: string;
@@ -92,11 +135,6 @@ const ArticleItem: React.FC<ArticleItemProps> = ({ slug, title, mainVisualUrl, p
     </ArticleItemContainer>
   );
 };
-
-const Container = styled.div`
-  width: 100%;
-  background-color: ${Colors.UI_PAPER};
-`;
 
 const ArticleLink = styled(Link)`
   text-decoration: none;

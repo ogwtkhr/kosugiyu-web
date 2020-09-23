@@ -5,7 +5,7 @@ import { TopModule, IntroModule, PersonsModule } from '@/modules';
 const IndexPage: React.FC = () => {
   return (
     <>
-      <BaseLayout>
+      <BaseLayout useHeader={false}>
         <SEO />
         <TopModule />
         <IntroModule />

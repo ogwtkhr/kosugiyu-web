@@ -17,7 +17,7 @@ type BaseLayoutProps = {
 };
 
 export const BaseLayout: React.FC<BaseLayoutProps> = ({
-  useHeader,
+  useHeader = true,
   usePersonsHeader,
   children,
 }) => {
