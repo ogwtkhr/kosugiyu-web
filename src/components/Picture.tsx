@@ -9,7 +9,8 @@ type PictureProps = {
   style?: React.CSSProperties;
   className?: string;
   fadeIn?: boolean;
-  loading?: GatsbyImageProps['loading'];
+  loading: GatsbyImageProps['loading'];
+  onLoad: GatsbyImageProps['onLoad'];
 };
 
 export const Picture: React.FC<PictureProps> = ({
@@ -19,6 +20,7 @@ export const Picture: React.FC<PictureProps> = ({
   style,
   loading = 'eager',
   className,
+  onLoad,
 }) => {
   const data = useStaticQuery<AllImageFileQuery>(graphql`
     query allImageFile {
@@ -97,7 +99,7 @@ export const Picture: React.FC<PictureProps> = ({
           className={className}
           alt={alt}
           onLoad={() => {
-            console.log('load');
+            if (onLoad) onLoad();
           }}
         />
       ) : (
