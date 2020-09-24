@@ -43,6 +43,24 @@ const facilityInfos: FacilityInfo[] = [
       y: -110,
     },
   },
+  {
+    title: '番台',
+    description:
+      'フロント形式の番台です。大学生から80代まで様々な年代のスタッフが温かくお迎えします。入浴料金の精算、ドリンクの販売、両替など、何かお困りのことがあれば、番台に何でもお声がけください。脱衣所の小窓から声をかけてもらうこともできるので、服を脱いだ後はそちらから。脱衣所や待合室で展示しているグッズもこちらでお買い求めいただけます。',
+    position: {
+      x: -80,
+      y: -110,
+    },
+  },
+  {
+    title: '脱衣所',
+    description:
+      '番台脇の女湯男湯の引き戸を開くと、途端に天井が高くなり開放的な雰囲気に。角材で格子状に区切った格天井と、白い漆喰壁が造る日本的な空間です。鏡のようにピカピカなヒノキ材の床は、素足で歩くと気持ちがいい滑らかさ。',
+    position: {
+      x: -70,
+      y: -70,
+    },
+  },
 ];
 
 const businessInfo: BusinessInfo[] = [
@@ -104,15 +122,30 @@ const FacilityPage: React.FC = () => {
               <DescriptionTitle>{title}</DescriptionTitle>
               <DescriptionBody>{description}</DescriptionBody>
               <DescriptionPhoto />
+              <FacilityInfoControls>
+                <UpButton
+                  onClick={() => {
+                    if (currentIndex > 0) setCurrentIndex(currentIndex - 1);
+                  }}
+                />
+                <Indicator>
+                  <IndicatorCurrent>{currentIndex + 1}</IndicatorCurrent>/{facilityInfos.length}
+                </Indicator>
+                <DownButton
+                  onClick={() => {
+                    if (currentIndex < facilityInfos.length - 1) setCurrentIndex(currentIndex + 1);
+                  }}
+                />
+              </FacilityInfoControls>
             </DescriptionContainer>
             <ModuleHeading>
-              <FacilityLogo />
+              <FacilityLogo color={Colors.ABSTRACT_NAVY} />
             </ModuleHeading>
           </FacilityView>
         </FacilityModule>
         <BuissinessModule>
           <ModuleHeading>
-            <BusinessLogo />
+            <BusinessLogo color={Colors.ABSTRACT_NAVY} />
           </ModuleHeading>
           <BusinessContents>
             {businessInfo.map(({ title, description }) => {
@@ -139,7 +172,7 @@ const DescriptionContainer = styled.div`
   bottom: 5vw;
   width: 600px;
   background-color: ${Colors.ABSTRACT_WHITE};
-  /* box-shadow: ${Shadow.GRAY}; */
+  box-shadow: ${Shadow.GRAY};
 `;
 
 const DescriptionTitle = styled.h3`
@@ -203,11 +236,34 @@ const ModuleHeading = styled.div`
   /* mix-blend-mode: difference; */
 `;
 
-const UpButton = styled(ChevronUp)`
+const FacilityInfoControls = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 100%;
   position: absolute;
+  top: 0;
+  left: -80px;
 `;
-const DownButton = styled(ChevronUp)`
-  position: absolute;
+
+const Indicator = styled.p``;
+
+const IndicatorCurrent = styled.span`
+  font-size: ${TextSize.X_LARGE}rem;
+`;
+
+const UpButton = styled(ChevronUp)`
+  /* position: absolute;
+  top: ${Spacing.XX_LARGE}px;
+  left: 0; */
+  cursor: pointer;
+`;
+const DownButton = styled(ChevronDown)`
+  /* position: absolute;
+  bottom: ${Spacing.XX_LARGE}px;
+  left: 0; */
+  cursor: pointer;
 `;
 
 const BuissinessModule = styled.section`
