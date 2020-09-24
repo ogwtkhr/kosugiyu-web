@@ -3,7 +3,7 @@ import { BaseLayout, Meta } from '@/layouts';
 import { PersonsModule } from '@/modules';
 import { usePageInfo } from '@/hooks';
 
-const IndexPage: React.FC = () => {
+const PersonsPage: React.FC = () => {
   const { title, description } = usePageInfo({ id: 'persons' });
   return (
     <>
@@ -15,4 +15,4 @@ const IndexPage: React.FC = () => {
   );
 };
 
-export default IndexPage;
+export default PersonsPage;

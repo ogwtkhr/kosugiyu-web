@@ -387,7 +387,7 @@ export const IntroModule: React.FC = () => {
                 <EndingMessageTypography state={state} align="center" color={endingPosterTextColor}>
                   その長い歴史の中で、
                   <br />
-                  さまざま人たちが小杉湯に集まり、
+                  さまざまな人たちが小杉湯に集まり、
                   <br />
                   さまざまな物語が生まれてきました。
                 </EndingMessageTypography>

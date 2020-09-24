@@ -6,6 +6,7 @@ import { BoxProps, boxMixin, getBoxExpression } from './Box';
 import Picture from './Picture';
 import { Colors, ScreenType, ScreenValue } from '@/constants';
 import { getCurtainAnimationMixin, AnimationMixinProps, getFadeinMixin } from '@/util/animation';
+import { Shadow } from '@/constants/shadow';
 
 export type GridContainerProps = {
   columns?: number;
