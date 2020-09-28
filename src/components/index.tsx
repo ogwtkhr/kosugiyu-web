@@ -11,3 +11,4 @@ export * from './GoogleMap';
 export * from './Indicator';
 export * from './Picture';
 export * from './Menu';
+export * from './SineWave';

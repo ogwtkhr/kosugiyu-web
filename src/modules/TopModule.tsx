@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import media from 'styled-media-query';
 import { Link } from 'gatsby';
 import { Spacing, Typography, ScreenType, Colors, TextSize, TextWeight } from '@/constants';
-import { HeroImage, MainLogo } from '@/components';
+import { HeroImage, MainLogo, SineWave } from '@/components';
 import { useMenu } from '@/hooks';
 
 export const TopModule: React.FC = () => {
@@ -35,6 +35,9 @@ export const TopModule: React.FC = () => {
           <HeroImage />
         </HeroArea>
       </MainColumn>
+      <WaveContainer>
+        <SineWave />
+      </WaveContainer>
     </Container>
   );
 };
@@ -136,6 +139,14 @@ const HeroArea = styled.div`
     margin: 0;
     height: 100%;
   `}
+`;
+
+const WaveContainer = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30px;
 `;
 
 export default TopModule;
