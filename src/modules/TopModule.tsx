@@ -35,9 +35,9 @@ export const TopModule: React.FC = () => {
           <HeroImage />
         </HeroArea>
       </MainColumn>
-      <WaveContainer>
+      {/* <WaveContainer>
         <SineWave />
-      </WaveContainer>
+      </WaveContainer> */}
     </Container>
   );
 };

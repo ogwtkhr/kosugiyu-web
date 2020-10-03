@@ -21,12 +21,22 @@ export const useCoreIntersectionObserver = <T extends Element = HTMLElement>(
   return ref;
 };
 
-export const useIntersectionObserver = <T extends Element = HTMLElement>(
-  callback?: VoidFunction,
-  options: IntersectionObserverInit = {
+type UseIntersectionObserverOptions = {
+  callback?: VoidFunction;
+  init?: IntersectionObserverInit;
+};
+
+export const useIntersectionObserver = <T extends Element = HTMLElement>({
+  callback,
+  init = {
     threshold: [0],
   },
-): [React.RefObject<T>, boolean, boolean, IntersectionObserverEntry | null] => {
+}: UseIntersectionObserverOptions = {}): [
+  React.RefObject<T>,
+  boolean,
+  boolean,
+  IntersectionObserverEntry | null,
+] => {
   const [hasIntersected, setHasIntersected] = useState<boolean>(false);
   const [isIntersecting, setIsIntersecting] = useState<boolean>(false);
   const [entry, setEntry] = useState<IntersectionObserverEntry | null>(null);
@@ -38,7 +48,7 @@ export const useIntersectionObserver = <T extends Element = HTMLElement>(
 
     setEntry(entry);
     if (callback) callback();
-  }, options);
+  }, init);
 
   return [ref, isIntersecting, hasIntersected, entry];
 };

@@ -1,6 +1,6 @@
 import { DomEventType } from '@/constants';
 import { isString, isUndefined } from '@/util/type';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 type Options = {
   // 係数
@@ -37,26 +37,31 @@ export const useParallax = <T extends HTMLElement = HTMLElement>(
     ...options,
   };
 
-  const direction = isString(directionParam)
-    ? directionParam === 'normal'
-      ? 1
-      : -1
-    : directionParam!;
-
-  const getValue = (value: number): number => {
-    const baseValue = value * direction;
-    const minCapped = isUndefined(min) ? baseValue : Math.max(baseValue, min);
-    const maxCapped = isUndefined(max) ? minCapped : Math.min(minCapped, max);
-    return isUndefined(coefficient) ? maxCapped : maxCapped * coefficient;
-  };
-
   const ref = useRef<T>(null);
+
   const [current, setCurrent] = useState<ScrollInfo>({
     top: 0,
     center: 0,
     bottom: 0,
   });
-  const handler = () => {
+
+  const direction = useMemo(
+    () => (isString(directionParam) ? (directionParam === 'normal' ? 1 : -1) : directionParam!),
+    [directionParam],
+  );
+
+  const getValue = useCallback(
+    (value: number): number => {
+      const baseValue = value * direction;
+      const minCapped = isUndefined(min) ? baseValue : Math.max(baseValue, min);
+      const maxCapped = isUndefined(max) ? minCapped : Math.min(minCapped, max);
+      return isUndefined(coefficient) ? maxCapped : maxCapped * coefficient;
+    },
+    [coefficient, direction, min, max],
+  );
+
+  const handler = useCallback(() => {
+    console.log('`useParallax` scroll handler called.');
     const target = ref.current;
     const rect = target?.getBoundingClientRect();
     if (!rect) return;
@@ -66,7 +71,7 @@ export const useParallax = <T extends HTMLElement = HTMLElement>(
       bottom: getValue(rect.bottom),
     };
     setCurrent(result);
-  };
+  }, [getValue]);
 
   useEffect(() => {
     window.addEventListener(DomEventType.SCROLL, handler);
@@ -74,7 +79,7 @@ export const useParallax = <T extends HTMLElement = HTMLElement>(
     return () => {
       window.removeEventListener(DomEventType.SCROLL, handler);
     };
-  }, [ref]);
+  }, [handler]);
 
   return [ref, current];
 };

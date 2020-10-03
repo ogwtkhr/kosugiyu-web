@@ -2,6 +2,8 @@ import { Colors } from '@/constants';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
 
+const windowGlobal = (typeof window !== 'undefined' && window) as Window;
+
 // type SineWaveProps = {};
 
 export const SineWave: React.FC = () => {
@@ -19,8 +21,8 @@ export const SineWave: React.FC = () => {
   const deflection = 2;
   const resolution = 50;
 
-  const width = useMemo(() => cssWidth * devicePixelRatio, [cssWidth]);
-  const height = useMemo(() => cssHeight * devicePixelRatio, [cssHeight]);
+  const width = useMemo(() => cssWidth * windowGlobal.devicePixelRatio, [cssWidth]);
+  const height = useMemo(() => cssHeight * windowGlobal.devicePixelRatio, [cssHeight]);
   const T = useMemo(() => width * period, [width]);
   const r = useMemo(() => height / deflection, [height]);
   const angularVelocity = useMemo(() => (Math.PI * 2) / T, [T]);

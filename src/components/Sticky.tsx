@@ -25,6 +25,7 @@ export const StickyArea: React.FC<StickyAreaProps> = ({ height, onScroll, childr
   const yMoment = useMemo(() => topOffset * -1 + windowGlobal.innerHeight, [topOffset]);
 
   const handleScroll = useCallback((): void => {
+    // console.log('`Sticky.tsx` scroll handler called.');
     if (!observerTargetRef.current) return;
     setTopOffset(observerTargetRef.current.getBoundingClientRect().top);
   }, [observerTargetRef]);
