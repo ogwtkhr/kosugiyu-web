@@ -19,7 +19,9 @@ const Container = styled.span<Pick<TapeProps, 'isAnimate'>>`
   display: inline-block;
   margin-bottom: ${Spacing.LARGE}px;
   background-color: ${Colors.ABSTRACT_WHITE};
-  ${getCurtainAnimationMixin() as any}
+  ${getCurtainAnimationMixin({
+    duration: 1500,
+  }) as any}
 `;
 
 const Text = styled.span`

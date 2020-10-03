@@ -89,7 +89,12 @@ type GridImageProps = {
 
 export const GridImage: React.FC<GridImageProps> = ({ src, parallaxSpeed = 0.2 }) => {
   // TODO: パララックスラッパー
-  const [intersectionRef, isIntersecting] = useIntersectionObserver<HTMLDivElement>();
+  const [intersectionRef, isIntersecting] = useIntersectionObserver<HTMLDivElement>({
+    init: {
+      threshold: [0],
+      rootMargin: '100px',
+    },
+  });
   const [parallaxRef, { center: parallaxSeed }] = useParallax<HTMLDivElement>({
     coefficient: parallaxSpeed,
     direction: 'normal',
