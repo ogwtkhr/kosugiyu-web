@@ -81,6 +81,9 @@ module.exports = {
           {
             endpoint: 'persons',
           },
+          {
+            endpoint: 'archive',
+          },
         ],
       },
     },

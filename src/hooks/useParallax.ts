@@ -61,7 +61,7 @@ export const useParallax = <T extends HTMLElement = HTMLElement>(
   );
 
   const handler = useCallback(() => {
-    console.log('`useParallax` scroll handler called.');
+    // console.log('`useParallax` scroll handler called.');
     const target = ref.current;
     const rect = target?.getBoundingClientRect();
     if (!rect) return;

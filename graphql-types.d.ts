@@ -1339,6 +1339,274 @@ export type IntQueryOperatorInput = {
 };
 
 
+export type MicrocmsArchive = Node & {
+  id: Scalars['ID'];
+  parent?: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+  createdAt?: Maybe<Scalars['Date']>;
+  updatedAt?: Maybe<Scalars['Date']>;
+  publishedAt?: Maybe<Scalars['Date']>;
+  slug?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  mainVisual?: Maybe<MicrocmsArchiveMainVisual>;
+  body?: Maybe<Scalars['String']>;
+  info?: Maybe<Array<Maybe<MicrocmsArchiveInfo>>>;
+  writer?: Maybe<MicrocmsArchiveWriter>;
+  archiveId?: Maybe<Scalars['String']>;
+};
+
+
+export type MicrocmsArchiveCreatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+export type MicrocmsArchiveUpdatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+export type MicrocmsArchivePublishedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+export type MicrocmsArchiveConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<MicrocmsArchiveEdge>;
+  nodes: Array<MicrocmsArchive>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  group: Array<MicrocmsArchiveGroupConnection>;
+};
+
+
+export type MicrocmsArchiveConnectionDistinctArgs = {
+  field: MicrocmsArchiveFieldsEnum;
+};
+
+
+export type MicrocmsArchiveConnectionGroupArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  field: MicrocmsArchiveFieldsEnum;
+};
+
+export type MicrocmsArchiveEdge = {
+  next?: Maybe<MicrocmsArchive>;
+  node: MicrocmsArchive;
+  previous?: Maybe<MicrocmsArchive>;
+};
+
+export type MicrocmsArchiveFieldsEnum = 
+  | 'id'
+  | 'parent___id'
+  | 'parent___parent___id'
+  | 'parent___parent___parent___id'
+  | 'parent___parent___parent___children'
+  | 'parent___parent___children'
+  | 'parent___parent___children___id'
+  | 'parent___parent___children___children'
+  | 'parent___parent___internal___content'
+  | 'parent___parent___internal___contentDigest'
+  | 'parent___parent___internal___description'
+  | 'parent___parent___internal___fieldOwners'
+  | 'parent___parent___internal___ignoreType'
+  | 'parent___parent___internal___mediaType'
+  | 'parent___parent___internal___owner'
+  | 'parent___parent___internal___type'
+  | 'parent___children'
+  | 'parent___children___id'
+  | 'parent___children___parent___id'
+  | 'parent___children___parent___children'
+  | 'parent___children___children'
+  | 'parent___children___children___id'
+  | 'parent___children___children___children'
+  | 'parent___children___internal___content'
+  | 'parent___children___internal___contentDigest'
+  | 'parent___children___internal___description'
+  | 'parent___children___internal___fieldOwners'
+  | 'parent___children___internal___ignoreType'
+  | 'parent___children___internal___mediaType'
+  | 'parent___children___internal___owner'
+  | 'parent___children___internal___type'
+  | 'parent___internal___content'
+  | 'parent___internal___contentDigest'
+  | 'parent___internal___description'
+  | 'parent___internal___fieldOwners'
+  | 'parent___internal___ignoreType'
+  | 'parent___internal___mediaType'
+  | 'parent___internal___owner'
+  | 'parent___internal___type'
+  | 'children'
+  | 'children___id'
+  | 'children___parent___id'
+  | 'children___parent___parent___id'
+  | 'children___parent___parent___children'
+  | 'children___parent___children'
+  | 'children___parent___children___id'
+  | 'children___parent___children___children'
+  | 'children___parent___internal___content'
+  | 'children___parent___internal___contentDigest'
+  | 'children___parent___internal___description'
+  | 'children___parent___internal___fieldOwners'
+  | 'children___parent___internal___ignoreType'
+  | 'children___parent___internal___mediaType'
+  | 'children___parent___internal___owner'
+  | 'children___parent___internal___type'
+  | 'children___children'
+  | 'children___children___id'
+  | 'children___children___parent___id'
+  | 'children___children___parent___children'
+  | 'children___children___children'
+  | 'children___children___children___id'
+  | 'children___children___children___children'
+  | 'children___children___internal___content'
+  | 'children___children___internal___contentDigest'
+  | 'children___children___internal___description'
+  | 'children___children___internal___fieldOwners'
+  | 'children___children___internal___ignoreType'
+  | 'children___children___internal___mediaType'
+  | 'children___children___internal___owner'
+  | 'children___children___internal___type'
+  | 'children___internal___content'
+  | 'children___internal___contentDigest'
+  | 'children___internal___description'
+  | 'children___internal___fieldOwners'
+  | 'children___internal___ignoreType'
+  | 'children___internal___mediaType'
+  | 'children___internal___owner'
+  | 'children___internal___type'
+  | 'internal___content'
+  | 'internal___contentDigest'
+  | 'internal___description'
+  | 'internal___fieldOwners'
+  | 'internal___ignoreType'
+  | 'internal___mediaType'
+  | 'internal___owner'
+  | 'internal___type'
+  | 'createdAt'
+  | 'updatedAt'
+  | 'publishedAt'
+  | 'slug'
+  | 'title'
+  | 'mainVisual___url'
+  | 'body'
+  | 'info'
+  | 'info___fieldId'
+  | 'info___head'
+  | 'info___body'
+  | 'writer___id'
+  | 'writer___createdAt'
+  | 'writer___updatedAt'
+  | 'writer___publishedAt'
+  | 'writer___name'
+  | 'archiveId';
+
+export type MicrocmsArchiveFilterInput = {
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+  createdAt?: Maybe<DateQueryOperatorInput>;
+  updatedAt?: Maybe<DateQueryOperatorInput>;
+  publishedAt?: Maybe<DateQueryOperatorInput>;
+  slug?: Maybe<StringQueryOperatorInput>;
+  title?: Maybe<StringQueryOperatorInput>;
+  mainVisual?: Maybe<MicrocmsArchiveMainVisualFilterInput>;
+  body?: Maybe<StringQueryOperatorInput>;
+  info?: Maybe<MicrocmsArchiveInfoFilterListInput>;
+  writer?: Maybe<MicrocmsArchiveWriterFilterInput>;
+  archiveId?: Maybe<StringQueryOperatorInput>;
+};
+
+export type MicrocmsArchiveGroupConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<MicrocmsArchiveEdge>;
+  nodes: Array<MicrocmsArchive>;
+  pageInfo: PageInfo;
+  field: Scalars['String'];
+  fieldValue?: Maybe<Scalars['String']>;
+};
+
+export type MicrocmsArchiveInfo = {
+  fieldId?: Maybe<Scalars['String']>;
+  head?: Maybe<Scalars['String']>;
+  body?: Maybe<Scalars['String']>;
+};
+
+export type MicrocmsArchiveInfoFilterInput = {
+  fieldId?: Maybe<StringQueryOperatorInput>;
+  head?: Maybe<StringQueryOperatorInput>;
+  body?: Maybe<StringQueryOperatorInput>;
+};
+
+export type MicrocmsArchiveInfoFilterListInput = {
+  elemMatch?: Maybe<MicrocmsArchiveInfoFilterInput>;
+};
+
+export type MicrocmsArchiveMainVisual = {
+  url?: Maybe<Scalars['String']>;
+};
+
+export type MicrocmsArchiveMainVisualFilterInput = {
+  url?: Maybe<StringQueryOperatorInput>;
+};
+
+export type MicrocmsArchiveSortInput = {
+  fields?: Maybe<Array<Maybe<MicrocmsArchiveFieldsEnum>>>;
+  order?: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
+export type MicrocmsArchiveWriter = {
+  id?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['Date']>;
+  updatedAt?: Maybe<Scalars['Date']>;
+  publishedAt?: Maybe<Scalars['Date']>;
+  name?: Maybe<Scalars['String']>;
+};
+
+
+export type MicrocmsArchiveWriterCreatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+export type MicrocmsArchiveWriterUpdatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+export type MicrocmsArchiveWriterPublishedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+export type MicrocmsArchiveWriterFilterInput = {
+  id?: Maybe<StringQueryOperatorInput>;
+  createdAt?: Maybe<DateQueryOperatorInput>;
+  updatedAt?: Maybe<DateQueryOperatorInput>;
+  publishedAt?: Maybe<DateQueryOperatorInput>;
+  name?: Maybe<StringQueryOperatorInput>;
+};
+
 export type MicrocmsPersons = Node & {
   id: Scalars['ID'];
   parent?: Maybe<Node>;
@@ -1347,10 +1615,10 @@ export type MicrocmsPersons = Node & {
   createdAt?: Maybe<Scalars['Date']>;
   updatedAt?: Maybe<Scalars['Date']>;
   publishedAt?: Maybe<Scalars['Date']>;
+  slug?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   mainVisual?: Maybe<MicrocmsPersonsMainVisual>;
   body?: Maybe<Scalars['String']>;
-  slug?: Maybe<Scalars['String']>;
   writer?: Maybe<MicrocmsPersonsWriter>;
   personsId?: Maybe<Scalars['String']>;
 };
@@ -1496,10 +1764,10 @@ export type MicrocmsPersonsFieldsEnum =
   | 'createdAt'
   | 'updatedAt'
   | 'publishedAt'
+  | 'slug'
   | 'title'
   | 'mainVisual___url'
   | 'body'
-  | 'slug'
   | 'writer___id'
   | 'writer___createdAt'
   | 'writer___updatedAt'
@@ -1515,10 +1783,10 @@ export type MicrocmsPersonsFilterInput = {
   createdAt?: Maybe<DateQueryOperatorInput>;
   updatedAt?: Maybe<DateQueryOperatorInput>;
   publishedAt?: Maybe<DateQueryOperatorInput>;
+  slug?: Maybe<StringQueryOperatorInput>;
   title?: Maybe<StringQueryOperatorInput>;
   mainVisual?: Maybe<MicrocmsPersonsMainVisualFilterInput>;
   body?: Maybe<StringQueryOperatorInput>;
-  slug?: Maybe<StringQueryOperatorInput>;
   writer?: Maybe<MicrocmsPersonsWriterFilterInput>;
   personsId?: Maybe<StringQueryOperatorInput>;
 };
@@ -1645,10 +1913,12 @@ export type Query = {
   allSitePage: SitePageConnection;
   imageSharp?: Maybe<ImageSharp>;
   allImageSharp: ImageSharpConnection;
-  settingYaml?: Maybe<SettingYaml>;
-  allSettingYaml: SettingYamlConnection;
+  microcmsArchive?: Maybe<MicrocmsArchive>;
+  allMicrocmsArchive: MicrocmsArchiveConnection;
   microcmsPersons?: Maybe<MicrocmsPersons>;
   allMicrocmsPersons: MicrocmsPersonsConnection;
+  settingYaml?: Maybe<SettingYaml>;
+  allSettingYaml: SettingYamlConnection;
   siteBuildMetadata?: Maybe<SiteBuildMetadata>;
   allSiteBuildMetadata: SiteBuildMetadataConnection;
   sitePlugin?: Maybe<SitePlugin>;
@@ -1827,19 +2097,27 @@ export type QueryAllImageSharpArgs = {
 };
 
 
-export type QuerySettingYamlArgs = {
+export type QueryMicrocmsArchiveArgs = {
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
   children?: Maybe<NodeFilterListInput>;
   internal?: Maybe<InternalFilterInput>;
-  meta?: Maybe<SettingYamlMetaFilterInput>;
-  pages?: Maybe<SettingYamlPagesFilterListInput>;
+  createdAt?: Maybe<DateQueryOperatorInput>;
+  updatedAt?: Maybe<DateQueryOperatorInput>;
+  publishedAt?: Maybe<DateQueryOperatorInput>;
+  slug?: Maybe<StringQueryOperatorInput>;
+  title?: Maybe<StringQueryOperatorInput>;
+  mainVisual?: Maybe<MicrocmsArchiveMainVisualFilterInput>;
+  body?: Maybe<StringQueryOperatorInput>;
+  info?: Maybe<MicrocmsArchiveInfoFilterListInput>;
+  writer?: Maybe<MicrocmsArchiveWriterFilterInput>;
+  archiveId?: Maybe<StringQueryOperatorInput>;
 };
 
 
-export type QueryAllSettingYamlArgs = {
-  filter?: Maybe<SettingYamlFilterInput>;
-  sort?: Maybe<SettingYamlSortInput>;
+export type QueryAllMicrocmsArchiveArgs = {
+  filter?: Maybe<MicrocmsArchiveFilterInput>;
+  sort?: Maybe<MicrocmsArchiveSortInput>;
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
 };
@@ -1853,10 +2131,10 @@ export type QueryMicrocmsPersonsArgs = {
   createdAt?: Maybe<DateQueryOperatorInput>;
   updatedAt?: Maybe<DateQueryOperatorInput>;
   publishedAt?: Maybe<DateQueryOperatorInput>;
+  slug?: Maybe<StringQueryOperatorInput>;
   title?: Maybe<StringQueryOperatorInput>;
   mainVisual?: Maybe<MicrocmsPersonsMainVisualFilterInput>;
   body?: Maybe<StringQueryOperatorInput>;
-  slug?: Maybe<StringQueryOperatorInput>;
   writer?: Maybe<MicrocmsPersonsWriterFilterInput>;
   personsId?: Maybe<StringQueryOperatorInput>;
 };
@@ -1865,6 +2143,24 @@ export type QueryMicrocmsPersonsArgs = {
 export type QueryAllMicrocmsPersonsArgs = {
   filter?: Maybe<MicrocmsPersonsFilterInput>;
   sort?: Maybe<MicrocmsPersonsSortInput>;
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+};
+
+
+export type QuerySettingYamlArgs = {
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+  meta?: Maybe<SettingYamlMetaFilterInput>;
+  pages?: Maybe<SettingYamlPagesFilterListInput>;
+};
+
+
+export type QueryAllSettingYamlArgs = {
+  filter?: Maybe<SettingYamlFilterInput>;
+  sort?: Maybe<SettingYamlSortInput>;
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
 };
@@ -3104,6 +3400,14 @@ export type SiteMetaDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type SiteMetaDataQuery = { settingYaml?: Maybe<{ meta?: Maybe<Pick<SettingYamlMeta, 'title' | 'twitter' | 'description' | 'ogImage'>> }> };
 
+export type AllMicrocmsArchiveQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllMicrocmsArchiveQuery = { allMicrocmsArchive: { nodes: Array<(
+      Pick<MicrocmsArchive, 'id' | 'title' | 'slug' | 'publishedAt'>
+      & { mainVisual?: Maybe<Pick<MicrocmsArchiveMainVisual, 'url'>> }
+    )> } };
+
 export type AllMicrocmsPersonsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -3117,7 +3421,17 @@ export type Unnamed_1_QueryVariables = Exact<{
 }>;
 
 
-export type Unnamed_1_Query = { microcmsPersons?: Maybe<(
+export type Unnamed_1_Query = { microcmsArchive?: Maybe<(
+    Pick<MicrocmsArchive, 'title' | 'body' | 'publishedAt'>
+    & { writer?: Maybe<Pick<MicrocmsArchiveWriter, 'name'>>, mainVisual?: Maybe<Pick<MicrocmsArchiveMainVisual, 'url'>> }
+  )> };
+
+export type Unnamed_2_QueryVariables = Exact<{
+  slug: Scalars['String'];
+}>;
+
+
+export type Unnamed_2_Query = { microcmsPersons?: Maybe<(
     Pick<MicrocmsPersons, 'title' | 'body' | 'publishedAt'>
     & { writer?: Maybe<Pick<MicrocmsPersonsWriter, 'name'>>, mainVisual?: Maybe<Pick<MicrocmsPersonsMainVisual, 'url'>> }
   )> };
