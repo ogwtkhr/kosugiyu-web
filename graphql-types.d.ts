@@ -3423,7 +3423,7 @@ export type Unnamed_1_QueryVariables = Exact<{
 
 export type Unnamed_1_Query = { microcmsArchive?: Maybe<(
     Pick<MicrocmsArchive, 'title' | 'body' | 'publishedAt'>
-    & { writer?: Maybe<Pick<MicrocmsArchiveWriter, 'name'>>, mainVisual?: Maybe<Pick<MicrocmsArchiveMainVisual, 'url'>> }
+    & { writer?: Maybe<Pick<MicrocmsArchiveWriter, 'name'>>, mainVisual?: Maybe<Pick<MicrocmsArchiveMainVisual, 'url'>>, info?: Maybe<Array<Maybe<Pick<MicrocmsArchiveInfo, 'fieldId' | 'head' | 'body'>>>> }
   )> };
 
 export type Unnamed_2_QueryVariables = Exact<{

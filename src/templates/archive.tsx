@@ -73,7 +73,7 @@ const ArchivePage: React.FC<ArchivePageProps> = ({ data }) => {
             </SocialIcons>
             <MetaInfo>
               <PublishedDate>{publishedDate}</PublishedDate>
-              <WriterName>{writerName}</WriterName>
+              {/* <WriterName>{writerName}</WriterName> */}
             </MetaInfo>
           </MetaInfoCotainer>
         </TitleContaier>
@@ -82,6 +82,20 @@ const ArchivePage: React.FC<ArchivePageProps> = ({ data }) => {
             __html: data.microcmsArchive?.body || '',
           }}
         />
+        <InfoList>
+          {data.microcmsArchive?.info?.map(
+            (item) =>
+              item?.head &&
+              item?.body && (
+                <InfoListItem>
+                  <InfoItem>
+                    <InfoItemHead>{item.head}</InfoItemHead>
+                    <InfoItemBody>{item.body}</InfoItemBody>
+                  </InfoItem>
+                </InfoListItem>
+              ),
+          )}
+        </InfoList>
       </Container>
     </BaseLayout>
   );
@@ -99,6 +113,11 @@ export const query = graphql`
       mainVisual {
         url
       }
+      info {
+        fieldId
+        head
+        body
+      }
     }
   }
 `;
@@ -109,16 +128,16 @@ const Container = styled.div`
 
 const TitleContaier = styled.div`
   max-width: ${ModuleWidth.ARTICLE}px;
-  margin: 0 auto;
+  margin: ${Spacing.XXX_LARGE}px auto;
   position: relative;
   z-index: ${Layer.BASE};
   max-width: ${ModuleWidth.ARTICLE}px;
   /* margin: -${Spacing.XX_LARGE * 4}px auto ${Spacing.XX_LARGE}px; */
   /* padding: ${Spacing.XX_LARGE}px; */
-  background-color: ${Colors.ABSTRACT_WHITE};
+  /* background-color: ${Colors.ABSTRACT_WHITE}; */
 
   ${media.lessThan(ScreenType.MEDIUM)`
-    /* margin: -${Spacing.XX_LARGE * 2}px ${Spacing.LARGE}px ${Spacing.LARGE}px; */
+    margin: 0;
     padding: ${Spacing.LARGE}px;
   `}
 `;
@@ -183,6 +202,7 @@ const MainVisualContainer = styled.div`
   width: 100%;
   max-width: ${ScreenValue.LARGE}px;
   margin: 0 auto;
+  overflow: hidden;
 
   ${media.greaterThan(ScreenType.LARGE)`
     margin-top: ${Spacing.XX_LARGE}px;
@@ -237,6 +257,35 @@ const Article = styled.article`
       width: calc(100% + ${Spacing.LARGE * 2}px);
     `}
   }
+`;
+
+const InfoList = styled.ul`
+  margin: ${Spacing.LARGE}px auto 0;
+  max-width: ${ModuleWidth.ARTICLE}px;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    margin: 0;
+    padding: ${Spacing.LARGE}px;
+  `}
+`;
+
+const InfoListItem = styled.li`
+  &:not(:first-child) {
+    margin-top: ${Spacing.NORMAL}px;
+  }
+`;
+
+const InfoItem = styled.dl``;
+
+const InfoItemHead = styled.dt`
+  display: inline-block;
+  border-bottom: solid 1px ${Colors.ABSTRACT_GRAY};
+  color: ${Colors.ABSTRACT_GRAY};
+  font-size: ${TextSize.SMALL}rem;
+`;
+
+const InfoItemBody = styled.dd`
+  color: ${Colors.ABSTRACT_STRONG_GRAY};
 `;
 
 export default ArchivePage;
