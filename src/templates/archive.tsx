@@ -150,7 +150,7 @@ const Title = styled.h2`
   line-height: ${LineHeight.NORMAL};
 
   ${media.lessThan(ScreenType.MEDIUM)`
-    font-size: ${TextSize.LARGE}rem;
+    font-size: 2.4rem;
   `}
 `;
 
