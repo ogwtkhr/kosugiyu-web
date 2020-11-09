@@ -4,6 +4,8 @@ import { usePageInfo } from '@/hooks';
 import { FacilityLogo, BusinessLogo, Picture, GoogleMap } from '@/components';
 import styled from 'styled-components';
 import { ChevronUp, ChevronDown } from '@styled-icons/bootstrap';
+
+import { getTextBreakFragment } from '@/util/jsx';
 import {
   AspectRatio,
   Colors,
@@ -214,17 +216,6 @@ const businessInfo: BusinessInfo[] = [
       '大人: 470円\\n中人: 180円（小学生）\\n小人: 80円（0〜5歳）\\n共通入浴券: 4400円（10枚。1回につき30円お得）',
   },
 ];
-
-const getTextBreakFragment = (str: string): JSX.Element[] => {
-  const array = str.split(/\\n/);
-  return array.map((textFragment, index) => (
-    // eslint-disable-next-line react/no-array-index-key
-    <React.Fragment key={index}>
-      {textFragment}
-      {index < array.length - 1 && <br />}
-    </React.Fragment>
-  ));
-};
 
 const FacilityPage: React.FC = () => {
   const { title: pageTitle, description: pageDescription } = usePageInfo({ id: 'facility' });

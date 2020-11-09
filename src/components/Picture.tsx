@@ -9,8 +9,8 @@ type PictureProps = {
   style?: React.CSSProperties;
   className?: string;
   fadeIn?: boolean;
-  loading: GatsbyImageProps['loading'];
-  onLoad: GatsbyImageProps['onLoad'];
+  loading?: GatsbyImageProps['loading'];
+  onLoad?: GatsbyImageProps['onLoad'];
 };
 
 export const Picture: React.FC<PictureProps> = ({
