@@ -126,7 +126,7 @@ export const IntroModule: React.FC = () => {
           }}
           progress={OpeningPosterScrollProgress}
         />
-        <Overlay color={Colors.ABSTRACT_NAVY} style={{ opacity: openingOverlayOpacity }} />
+        <Overlay color={'#0a1930'} style={{ opacity: openingOverlayOpacity }} />
       </StickyArea>
       <GridOuter>
         <GridContainer>
@@ -500,7 +500,7 @@ const MessageTypography = styled.p<MessageTypographyProps>`
   `}
 
   @media (max-width: ${ScreenType.MEDIUM}px) {
-    font-size: ${({ dynamicTextSize }) => (dynamicTextSize ? `1.8vw` : `${TextSize.NORMAL}rem`)};
+    font-size: ${({ dynamicTextSize }) => (dynamicTextSize ? '1.8vw' : `${TextSize.NORMAL}rem`)};
   }
 
   ${media.lessThan(ScreenType.SMALL)`

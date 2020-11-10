@@ -1,3 +1,5 @@
+import React from 'react';
+
 export const getTextBreakFragment = (str: string): JSX.Element[] => {
   const array = str.split(/\\n/);
   return array.map((textFragment, index) => (

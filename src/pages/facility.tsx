@@ -255,15 +255,15 @@ const FacilityPage: React.FC = () => {
                 />
               </FacilityInfoControls>
             </DescriptionContainer>
-            <ModuleHeading>
+            {/* <ModuleHeading>
               <FacilityLogo color={Colors.ABSTRACT_NAVY} />
-            </ModuleHeading>
+            </ModuleHeading> */}
           </FacilityView>
         </FacilityModule>
         <BuissinessModule>
-          <ModuleHeading>
+          {/* <ModuleHeading>
             <BusinessLogo color={Colors.ABSTRACT_NAVY} />
-          </ModuleHeading>
+          </ModuleHeading> */}
           <BusinessContents>
             {businessInfo.map(({ title, description }) => {
               return (
@@ -394,12 +394,14 @@ const BusinessContents = styled.ul`
 
 const BusinessContent = styled.li`
   margin: ${Spacing.XX_LARGE}px;
+  padding-bottom: ${Spacing.XXX_LARGE}px;
+  border-bottom: 1px solid black;
 `;
 
 const BusinessTitle = styled.h3`
   ${Typography.Mixin.EXTENDED};
   font-weight: ${TextWeight.BOLD};
-  font-size: ${TextSize.LARGE}rem;
+  font-size: ${TextSize.X_LARGE}rem;
 `;
 //   position: absolute;
 //   width: 100%;
