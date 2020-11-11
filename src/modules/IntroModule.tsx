@@ -491,7 +491,7 @@ const MessageTypography = styled.p<MessageTypographyProps>`
   color: ${({ color = Colors.UI_BASE }) => color};
   font-size: ${({ dynamicTextSize }) => (dynamicTextSize ? `1.8vw` : `${TextSize.LARGE}rem`)};
   font-weight: ${TextWeight.BOLD};
-  letter-spacing: 0.3em;
+  letter-spacing: 0.1em;
   line-height: 2;
   text-align: ${({ align }) => (align === 'center' ? 'center' : 'justify')};
 

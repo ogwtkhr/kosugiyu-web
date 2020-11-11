@@ -14,11 +14,13 @@ import Loading from './Loading';
 
 type BaseLayoutProps = {
   useHeader?: boolean;
+  useFooter?: boolean;
   usePersonsHeader?: boolean;
 };
 
 export const BaseLayout: React.FC<BaseLayoutProps> = ({
   useHeader = true,
+  useFooter = true,
   usePersonsHeader,
   children,
 }) => {
@@ -42,7 +44,7 @@ export const BaseLayout: React.FC<BaseLayoutProps> = ({
       )}
       <GlobalStyle />
       <Main>{children}</Main>
-      <Footer />
+      {useFooter && <Footer />}
       <Menu />
       <Loading />
     </>
