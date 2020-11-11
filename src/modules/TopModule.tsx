@@ -1,13 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import media from 'styled-media-query';
-import { Link } from 'gatsby';
+import { Link, navigate } from 'gatsby';
 import { Spacing, Typography, ScreenType, Colors, TextSize, TextWeight } from '@/constants';
 import { HeroImage, MainLogo, SineWave } from '@/components';
 import { useMenu } from '@/hooks';
 
+type Position = {
+  x: number;
+  y: number;
+};
+
 export const TopModule: React.FC = () => {
   const menuList = useMenu({ ignoreTopData: true });
+  const [isShowMouseTracker, setIsShowMouseTracker] = useState<boolean>(false);
+  const [mouseTrackerPosition, setMouseTrackerPosition] = useState<Position>({ x: 0, y: 0 });
 
   return (
     <Container>
@@ -31,13 +38,35 @@ export const TopModule: React.FC = () => {
         </MenuList>
       </SideColumn>
       <MainColumn>
-        <HeroArea>
+        <HeroArea
+          onMouseOver={() => {
+            setIsShowMouseTracker(true);
+          }}
+          onMouseMove={(e) => {
+            setMouseTrackerPosition({
+              x: e.pageX - (e.pageX - mouseTrackerPosition.x) / 100,
+              y: e.pageY - (e.pageY - mouseTrackerPosition.y) / 100,
+            });
+          }}
+          onMouseOut={() => {
+            setIsShowMouseTracker(false);
+          }}
+          onClick={() => {
+            navigate('/introduce');
+          }}
+        >
           <HeroImage />
         </HeroArea>
       </MainColumn>
-      {/* <WaveContainer>
-        <SineWave />
-      </WaveContainer> */}
+      <MouseTracker
+        style={{
+          top: mouseTrackerPosition.y,
+          left: mouseTrackerPosition.x,
+          visibility: isShowMouseTracker ? 'visible' : 'hidden',
+        }}
+      >
+        <MouseTrackerInner />
+      </MouseTracker>
     </Container>
   );
 };
@@ -134,6 +163,7 @@ const HeroArea = styled.div`
   justify-content: center;
   height: calc(100% - ${Spacing.XXX_LARGE}px * 2);
   margin: ${Spacing.XXX_LARGE}px 0;
+  cursor: none;
 
   ${media.lessThan(ScreenType.MEDIUM)`
     margin: 0;
@@ -141,12 +171,28 @@ const HeroArea = styled.div`
   `}
 `;
 
-const WaveContainer = styled.div`
+const MouseTracker = styled.div`
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 30px;
+  transition: 0.5s ease-out;
+  pointer-events: none;
 `;
+
+const MouseTrackerInner = styled.div`
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  border: solid 1px #fff;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+`;
+
+// const WaveContainer = styled.div`
+//   position: absolute;
+//   bottom: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 30px;
+// `;
 
 export default TopModule;
