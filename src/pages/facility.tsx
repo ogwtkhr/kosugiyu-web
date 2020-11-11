@@ -24,6 +24,7 @@ import { Shadow } from '@/constants/shadow';
 type FacilityInfo = {
   title: string;
   description: string;
+  hide?: boolean;
   position: {
     x: number;
     y: number;
@@ -41,7 +42,7 @@ const facilityInfos: FacilityInfo[] = [
     description:
       '昭和8年の創業時から変わらない、神社仏閣を思わせる宮造りの木造建築。中央のカーブを描いた唐破風（からはふ）屋根は、関東大震災の復興シンボルとして当時の銭湯建築で流行しました。唐破風の下に垂れた木彫りの鯉は「懸魚（げぎょ）」と呼ばれ、火に弱い木造寺院を火災から守るお守りとして取り付けています。',
     position: {
-      x: -110,
+      x: -100,
       y: -110,
     },
   },
@@ -50,140 +51,124 @@ const facilityInfos: FacilityInfo[] = [
     description:
       'フロント形式の番台です。大学生から80代まで様々な年代のスタッフが温かくお迎えします。入浴料金の精算、ドリンクの販売、両替など、何かお困りのことがあれば、番台に何でもお声がけください。脱衣所の小窓から声をかけてもらうこともできるので、服を脱いだ後はそちらから。脱衣所や待合室で展示しているグッズもこちらでお買い求めいただけます。',
     position: {
-      x: -80,
-      y: -110,
+      x: -100,
+      y: -90,
     },
   },
-  {
-    title: '水飲み場',
-    description:
-      '浄水器「自然回帰水」を通した地下水の水飲み場。お風呂あがりや、お風呂に入る前の水分補給に。水飲み場の上には木彫りの欄間があります。これは玄関だった頃の名残で、表からも反対側からも楽しめる両面彫りが施されています。どんな柄に見えるか、ぜひ想像してみてください。足下の棚には、小杉湯オリジナル商品や小杉湯と縁のある生産者・企業さんの商品が陳列されています。気になった商品があれば、番台に。',
-    position: {
-      x: -70,
-      y: -70,
-    },
-  },
+  // {
+  //   title: '水飲み場',
+  //   description:
+  //     '浄水器「自然回帰水」を通した地下水の水飲み場。お風呂あがりや、お風呂に入る前の水分補給に。水飲み場の上には木彫りの欄間があります。これは玄関だった頃の名残で、表からも反対側からも楽しめる両面彫りが施されています。どんな柄に見えるか、ぜひ想像してみてください。足下の棚には、小杉湯オリジナル商品や小杉湯と縁のある生産者・企業さんの商品が陳列されています。気になった商品があれば、番台に。',
+  //   position: {
+  //     x: -110,
+  //     y: -90,
+  //   },
+  // },
   {
     title: '脱衣所',
     description:
       '番台脇の女湯男湯の引き戸を開くと、途端に天井が高くなり開放的な雰囲気に。角材で格子状に区切った格天井と、白い漆喰壁が造る日本的な空間です。鏡のようにピカピカなヒノキ材の床は、素足で歩くと気持ちがいい滑らかさ。',
     position: {
       x: -70,
-      y: -70,
+      y: -80,
     },
   },
-  {
-    title: '洗面台',
-    description:
-      '化粧水、乳液、綿棒、アウトバストリートメントなど、お風呂上がりに必要な基本のアメニティはすべて用意しています。ナノイー搭載のドライヤーも。',
-    position: {
-      x: -70,
-      y: -70,
-    },
-  },
-  {
-    title: 'メイクカウンター',
-    description:
-      '女湯脱衣所の隅には、メイク用の机が設けられています。自然光や電球色など色味が変わるLEDライト付きの鏡も自由に利用できます。',
-    position: {
-      x: -70,
-      y: -70,
-    },
-  },
+  // {
+  //   title: '洗面台',
+  //   description:
+  //     '化粧水、乳液、綿棒、アウトバストリートメントなど、お風呂上がりに必要な基本のアメニティはすべて用意しています。ナノイー搭載のドライヤーも。',
+  //   position: {
+  //     x: -60,
+  //     y: -70,
+  //   },
+  // },
+  // {
+  //   title: 'メイクカウンター',
+  //   description:
+  //     '女湯脱衣所の隅には、メイク用の机が設けられています。自然光や電球色など色味が変わるLEDライト付きの鏡も自由に利用できます。',
+  //   position: {
+  //     x: -70,
+  //     y: -70,
+  //   },
+  // },
   {
     title: '浴室',
     description:
       '手前に洗面台、奥には4つの浴槽、高い天井、壁には富士山の壁画という銭湯の典型のような浴室です。白いタイルで構成された浴室は明るく清潔感があり、朝から昼にかけては高い天井の窓から光がサンサンと入り込んで湯面を照らします。洗い場にはシャンプー、コンディショナー、ボディソープ、クレンジング、洗顔料など必要なアメニティは全て揃っています。',
     position: {
-      x: -70,
-      y: -70,
+      x: -30,
+      y: -30,
     },
   },
+  // {
+  //   title: '変わり湯',
+  //   description:
+  //     'よもぎ、ゆず、ヒバなど天然素材を使ったお湯を日替わりで楽しむことができます。廃棄せざるを得ない果物などをお風呂に入れて生産者を応援する「もったいない風呂」を、あつ湯とジェットバスで定期的に実施しています。',
+  //   position: {
+  //     x: -70,
+  //     y: -70,
+  //   },
+  // },
+  // {
+  //   title: 'ジェットバス（42度）',
+  //   description:
+  //     '3種類のジェットバスが体の疲れを癒します。リラックスバスで体全体の疲れをほぐし、ジェットエステでコリをピンポイントで刺激するのがオススメです。ハーブや温泉地のお湯など、お風呂は週ごとに変わります。。',
+  //   position: {
+  //     x: -70,
+  //     y: -70,
+  //   },
+  // },
+  // {
+  //   title: '水風呂（16~19度）',
+  //   description:
+  //     'あつ湯との交互浴が楽しめる水風呂。肌触りの柔らかい掛け流しの地下水を、地下90mから汲み上げています。陶器の吐水口は小杉湯女将の手作り。',
+  //   position: {
+  //     x: -70,
+  //     y: -70,
+  //   },
+  // },
+  // {
+  //   title: '壁画',
+  //   description:
+  //     '銭湯絵師・丸山清人さんによる壁画。男湯には「三浦半島からみた富士山」、女湯には「西伊豆からみた富士山」がそれぞれ描かれています。',
+  //   position: {
+  //     x: -70,
+  //     y: -70,
+  //   },
+  // },
   {
-    title: '変わり湯',
+    title: '待合室兼ギャラリー',
     description:
-      'よもぎ、ゆず、ヒバなど天然素材を使ったお湯を日替わりで楽しむことができます。廃棄せざるを得ない果物などをお風呂に入れて生産者を応援する「もったいない風呂」を、あつ湯とジェットバスで定期的に実施しています。',
+      'お風呂あがりに漫画や絵本を読みながらゆったりできる待合室です。壁は毎月展示が変わるギャラリーになっていて、様々な作品を月替わりで楽しむことができます。',
     position: {
-      x: -70,
-      y: -70,
+      x: -120,
+      y: -90,
     },
   },
-  {
-    title: 'ジェットバス（42度）',
-    description:
-      '3種類のジェットバスが体の疲れを癒します。リラックスバスで体全体の疲れをほぐし、ジェットエステでコリをピンポイントで刺激するのがオススメです。ハーブや温泉地のお湯など、お風呂は週ごとに変わります。。',
-    position: {
-      x: -70,
-      y: -70,
-    },
-  },
-  {
-    title: 'ジェットバス（42度）',
-    description:
-      '3種類のジェットバスが体の疲れを癒します。リラックスバスで体全体の疲れをほぐし、ジェットエステでコリをピンポイントで刺激するのがオススメです。ハーブや温泉地のお湯など、お風呂は週ごとに変わります。',
-    position: {
-      x: -70,
-      y: -70,
-    },
-  },
-  {
-    title: '水風呂（16~19度）',
-    description:
-      'あつ湯との交互浴が楽しめる水風呂。肌触りの柔らかい掛け流しの地下水を、地下90mから汲み上げています。陶器の吐水口は小杉湯女将の手作り。',
-    position: {
-      x: -70,
-      y: -70,
-    },
-  },
-  {
-    title: '壁画',
-    description:
-      '銭湯絵師・丸山清人さんによる壁画。男湯には「三浦半島からみた富士山」、女湯には「西伊豆からみた富士山」がそれぞれ描かれています。',
-    position: {
-      x: -70,
-      y: -70,
-    },
-  },
-  {
-    title: 'アイス',
-    description:
-      'ブラックモンブランやカバさんアイスなど、コンビニでは購入できないアイスを楽しめます。アイスケース上の棚では、小杉湯オリジナル商品や、コラボグッズを販売中。お会計は番台で。',
-    position: {
-      x: -70,
-      y: -70,
-    },
-  },
+  // {
+  //   title: 'アイス',
+  //   description:
+  //     'ブラックモンブランやカバさんアイスなど、コンビニでは購入できないアイスを楽しめます。アイスケース上の棚では、小杉湯オリジナル商品や、コラボグッズを販売中。お会計は番台で。',
+  //   position: {
+  //     x: -70,
+  //     y: -70,
+  //   },
+  // },
   {
     title: 'コインランドリー',
     description:
       '6台の乾燥機と洗濯機が並びます。10kgまで洗える洗濯乾燥機もあるのでお布団も洗えます。お風呂に入る前に洗濯機に入れて、お風呂上がりに回収するのもあり。女湯側には女性専用のコインランドリーがあり、午後18時以降は、女性脱衣所側の入口からのみご利用いただけます。',
+    hide: true,
     position: {
-      x: -70,
-      y: -70,
+      x: -100,
+      y: -90,
     },
   },
   {
     title: '小杉湯となり',
     description:
       '「銭湯のあるくらし」をコンセプトに、 2020年３月にオープンした「小杉湯となり」。お風呂あがりにくつろいだり、 食事をしたり、 本を読んだり仕事をしたりす、 大人から子どもまで 思い思いの過ごし方ができる場所です。2020年８月現在は、新型コロナウイルス感染予防の観点より、会員制のセカンドハウスとして運営中です。',
-    position: {
-      x: -70,
-      y: -70,
-    },
-  },
-  {
-    title: '待合室兼ギャラリー',
-    description:
-      '3お風呂あがりに漫画や絵本を読みながらゆったりできる待合室です。壁は毎月展示が変わるギャラリーになっていて、様々な作品を月替わりで楽しむことができます。',
-    position: {
-      x: -70,
-      y: -70,
-    },
-  },
-  {
-    title: '待合室兼ギャラリー',
-    description:
-      '3お風呂あがりに漫画や絵本を読みながらゆったりできる待合室です。壁は毎月展示が変わるギャラリーになっていて、様々な作品を月替わりで楽しむことができます。',
+    hide: true,
     position: {
       x: -70,
       y: -70,
@@ -220,7 +205,7 @@ const businessInfo: BusinessInfo[] = [
 const FacilityPage: React.FC = () => {
   const { title: pageTitle, description: pageDescription } = usePageInfo({ id: 'facility' });
   const [currentIndex, setCurrentIndex] = useState(0);
-  const { title, description, position } = facilityInfos[currentIndex];
+  const { title, description, position, hide } = facilityInfos[currentIndex];
   return (
     <>
       <BaseLayout>
@@ -231,6 +216,7 @@ const FacilityPage: React.FC = () => {
               style={{
                 top: `${position.y}vw`,
                 left: `${position.x}vw`,
+                visibility: hide ? 'hidden' : 'visible',
               }}
             >
               <Picture relativePath="illustrations/facility/all_facilities.jpg" />
@@ -255,15 +241,9 @@ const FacilityPage: React.FC = () => {
                 />
               </FacilityInfoControls>
             </DescriptionContainer>
-            {/* <ModuleHeading>
-              <FacilityLogo color={Colors.ABSTRACT_NAVY} />
-            </ModuleHeading> */}
           </FacilityView>
         </FacilityModule>
         <BuissinessModule>
-          {/* <ModuleHeading>
-            <BusinessLogo color={Colors.ABSTRACT_NAVY} />
-          </ModuleHeading> */}
           <BusinessContents>
             {businessInfo.map(({ title, description }) => {
               return (
@@ -283,13 +263,14 @@ const FacilityPage: React.FC = () => {
 const FacilityModule = styled.section``;
 
 const DescriptionContainer = styled.div`
-  padding: ${Spacing.X_LARGE}px;
+  padding: ${Spacing.X_LARGE}px ${Spacing.XXX_LARGE}px;
   position: absolute;
   right: 5vw;
   bottom: 5vw;
   width: 600px;
   background-color: ${Colors.ABSTRACT_WHITE};
   box-shadow: ${Shadow.GRAY};
+  transition: 1s ease;
 `;
 
 const DescriptionTitle = styled.h3`
@@ -326,7 +307,7 @@ const FacilityView = styled.div`
   &::after {
     content: '';
     display: block;
-    padding-bottom: 60%;
+    padding-bottom: 50%;
 
     ${media.lessThan(ScreenType.MEDIUM)`
       padding-bottom: 80vh;
@@ -344,30 +325,32 @@ const BigImageContainer = styled.div`
   transition: 1s ease;
 `;
 
-const ModuleHeading = styled.div`
-  width: 60px;
-  height: 200px;
-  position: absolute;
-  top: ${Spacing.XX_LARGE}px;
-  left: ${Spacing.XX_LARGE}px;
-  /* mix-blend-mode: difference; */
-`;
+// const ModuleHeading = styled.div`
+//   width: 60px;
+//   height: 200px;
+//   position: absolute;
+//   top: ${Spacing.XX_LARGE}px;
+//   left: ${Spacing.XX_LARGE}px;
+//   /* mix-blend-mode: difference; */
+// `;
 
 const FacilityInfoControls = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 30px;
-  height: 100%;
+  height: 130px;
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: -80px;
 `;
 
-const Indicator = styled.p``;
+const Indicator = styled.p`
+  font-family: 'Roboto Condensed';
+`;
 
 const IndicatorCurrent = styled.span`
-  font-size: ${TextSize.X_LARGE}rem;
+  font-size: 4rem;
 `;
 
 const UpButton = styled(ChevronUp)`

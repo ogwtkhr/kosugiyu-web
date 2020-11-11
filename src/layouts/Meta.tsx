@@ -84,7 +84,8 @@ export const Meta: React.FC<Props> = ({ title, description, ogImage, lang = 'en'
       ]}
       link={[
         {
-          href: 'https://fonts.googleapis.com/css?family=Noto+Sans+JP:300,500&display=swap',
+          href:
+            'https://fonts.googleapis.com/css?family=Noto+Sans+JP:300,500|Roboto+Condensed&display=swap',
           rel: 'stylesheet',
           type: 'text/css',
         },
