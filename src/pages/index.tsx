@@ -1,6 +1,6 @@
 import React from 'react';
 import { BaseLayout, Meta } from '@/layouts';
-import { TopModule } from '@/modules';
+import { TopModule, IntroModule, PersonsModule } from '@/modules';
 
 const IndexPage: React.FC = () => {
   return (
@@ -8,6 +8,8 @@ const IndexPage: React.FC = () => {
       <BaseLayout useHeader={false} useFooter={false}>
         <Meta />
         <TopModule />
+        <IntroModule />
+        <PersonsModule />
       </BaseLayout>
     </>
   );

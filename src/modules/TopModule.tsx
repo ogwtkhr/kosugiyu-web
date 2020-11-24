@@ -21,6 +21,9 @@ export const TopModule: React.FC = () => {
           </LogoContainer>
         </SideColumnInner>
         <MenuList>
+          <MenuItem>
+            <MenuType>小杉湯について</MenuType>
+          </MenuItem>
           {menuList.map(({ id, label }) => (
             <MenuItem key={id}>
               <Link to={`/${id}`}>
