@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BaseLayout, Meta } from '@/layouts';
 import { usePageInfo } from '@/hooks';
 import { FacilityLogo, BusinessLogo, Picture, GoogleMap } from '@/components';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { ChevronUp, ChevronDown } from '@styled-icons/bootstrap';
 
 import { getTextBreakFragment } from '@/util/jsx';
@@ -25,6 +25,7 @@ type FacilityInfo = {
   title: string;
   description: string;
   hide?: boolean;
+  zoom?: number;
   position: {
     x: number;
     y: number;
@@ -38,9 +39,19 @@ type BusinessInfo = {
 
 const facilityInfos: FacilityInfo[] = [
   {
-    title: '玄関',
+    title: '外観',
     description:
       '昭和8年の創業時から変わらない、神社仏閣を思わせる宮造りの木造建築。中央のカーブを描いた唐破風（からはふ）屋根は、関東大震災の復興シンボルとして当時の銭湯建築で流行しました。唐破風の下に垂れた木彫りの鯉は「懸魚（げぎょ）」と呼ばれ、火に弱い木造寺院を火災から守るお守りとして取り付けています。',
+    zoom: 0.3,
+    position: {
+      x: -70,
+      y: -60,
+    },
+  },
+  {
+    title: '玄関',
+    description:
+      '風にふんわり揺らいで玄関を彩るのは、鯉ののれん。布絵作家の市川正美さんが、懸魚の鯉をモチーフに絞りや藍染の着物の生地を使って作ったものです。玄関の広々した壁は「小杉湯玄関ギャラリー」として、数ヶ月おきに多様なアーティストの作品が展示されます。ぜひ、お風呂に入る前に立ち止まってご覧ください。',
     position: {
       x: -100,
       y: -110,
@@ -91,6 +102,15 @@ const facilityInfos: FacilityInfo[] = [
   //     y: -70,
   //   },
   // },
+  {
+    title: '外観',
+    description:
+      '昭和8年の創業時から変わらない、神社仏閣を思わせる宮造りの木造建築。中央のカーブを描いた唐破風（からはふ）屋根は、関東大震災の復興シンボルとして当時の銭湯建築で流行しました。唐破風の下に垂れた木彫りの鯉は「懸魚（げぎょ）」と呼ばれ、火に弱い木造寺院を火災から守るお守りとして取り付けています。',
+    position: {
+      x: -30,
+      y: -30,
+    },
+  },
   {
     title: '浴室',
     description:
@@ -205,7 +225,7 @@ const businessInfo: BusinessInfo[] = [
 const FacilityPage: React.FC = () => {
   const { title: pageTitle, description: pageDescription } = usePageInfo({ id: 'facility' });
   const [currentIndex, setCurrentIndex] = useState(0);
-  const { title, description, position, hide } = facilityInfos[currentIndex];
+  const { title, description, position, hide, zoom = 1 } = facilityInfos[currentIndex];
   return (
     <>
       <BaseLayout>
@@ -216,11 +236,21 @@ const FacilityPage: React.FC = () => {
               style={{
                 top: `${position.y}vw`,
                 left: `${position.x}vw`,
+                transform: `scale(${zoom})`,
                 visibility: hide ? 'hidden' : 'visible',
               }}
             >
               <Picture relativePath="illustrations/facility/all_facilities.jpg" />
             </BigImageContainer>
+
+            {currentIndex === 2 && (
+              <RippleCircle
+                style={{
+                  top: '33vw',
+                  left: '40vw',
+                }}
+              />
+            )}
             <DescriptionContainer>
               <DescriptionTitle>{title}</DescriptionTitle>
               <DescriptionBody>{description}</DescriptionBody>
@@ -256,6 +286,7 @@ const FacilityPage: React.FC = () => {
           </BusinessContents>
           <GoogleMap />
         </BuissinessModule>
+        <OverWindow></OverWindow>
       </BaseLayout>
     </>
   );
@@ -365,6 +396,46 @@ const DownButton = styled(ChevronDown)`
   left: 0; */
   cursor: pointer;
 `;
+
+export const rgba = (hex: string, alpha = 1): string => {
+  let r = hex.match(/^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i);
+  let c = null;
+  if (r) {
+    c = r.slice(1, 4).map((x: string) => parseInt(x, 16));
+  }
+  r = hex.match(/^#([0-9a-f])([0-9a-f])([0-9a-f])$/i);
+  if (r) {
+    c = r.slice(1, 4).map((x) => 0x11 * parseInt(x, 16));
+  }
+  if (!c) {
+    return '';
+  }
+  return `rgba(${c[0]}, ${c[1]}, ${c[2]}, ${alpha})`;
+};
+
+const rippleEffect = keyframes`
+  0% {
+    /* box-shadow: 0 0 0 0 ${rgba(Colors.ABSTRACT_NAVY, 0.5)}; */
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.5);
+  }
+
+  100% {
+    /* box-shadow: 0 0 0 1em ${rgba(Colors.ABSTRACT_NAVY, 0)}); */
+    box-shadow: 0 0 0 16px rgba(255, 255, 255, 0);
+  }
+`;
+
+const RippleCircle = styled.div`
+  position: absolute;
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  animation: ${rippleEffect} 0.7s linear infinite;
+  background-color: #fff;
+`;
+
+const OverWindow = styled.div``;
 
 const BuissinessModule = styled.section`
   position: relative;
