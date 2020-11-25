@@ -23,6 +23,9 @@ import { ArchiveLogoVertical } from '@/components';
 
 import headingImage from '@/images/photos/archive/archive_heading.jpg';
 
+// TODO
+const tags = ['タグ1', 'タグ2'];
+
 export const ArchiveModule: React.FC = () => {
   const data = useStaticQuery<AllMicrocmsArchiveQuery>(graphql`
     query allMicrocmsArchive {
@@ -131,13 +134,14 @@ const ArticleItem: React.FC<ArticleItemProps> = ({ slug, title, mainVisualUrl, p
   return (
     <ArticleItemContainer>
       <ArticleLink to={`/archive/${slug}`}>
-        <ArticleThumbnailContainer>
-          <ArticleThumbnail src={mainVisualUrl} />
-          <ArticleTitleContainer>
-            <PublishDate>{formattedPublishedAt}</PublishDate>
-            <ArticleTitle>{title}</ArticleTitle>
-          </ArticleTitleContainer>
-        </ArticleThumbnailContainer>
+        <ArticleThumbnail src={mainVisualUrl} />
+        <ArticleTitleContainer>
+          <PublishDate>{formattedPublishedAt}</PublishDate>
+          <ArticleTitle>{title}</ArticleTitle>
+          {tags.map((tag) => (
+            <ArticleTag key={tag}>{tag}</ArticleTag>
+          ))}
+        </ArticleTitleContainer>
       </ArticleLink>
     </ArticleItemContainer>
   );
@@ -238,13 +242,6 @@ const ArticleTitle = styled.h3`
   `}
 `;
 
-const ArticleThumbnailContainer = styled.div`
-  position: relative;
-  width: 100%;
-  /* max-width: ${ScreenValue.MEDIUM}px; */
-  margin: 0 auto;
-`;
-
 const ArticleThumbnail = styled.div`
   width: 100%;
   ${StyleMixin.BACKGROUND_IMAGE_WITH_SRC}
@@ -259,6 +256,19 @@ const ArticleThumbnail = styled.div`
     width: auto;
     position: static;
   `}
+`;
+
+const ArticleTag = styled.div`
+  display: inline-block;
+  padding: ${Spacing.SMALL}px;
+  border: solid 1px ${Colors.ABSTRACT_PALE_GRAY};
+  font-size: ${TextSize.XX_SMALL}rem;
+  line-height: ${LineHeight.MONOLITHIC};
+  color: ${Colors.ABSTRACT_GRAY};
+
+  & + & {
+    margin-left: ${Spacing.SMALL}px;
+  }
 `;
 
 const PublishDate = styled.p`
