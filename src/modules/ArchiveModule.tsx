@@ -134,7 +134,9 @@ const ArticleItem: React.FC<ArticleItemProps> = ({ slug, title, mainVisualUrl, p
   return (
     <ArticleItemContainer>
       <ArticleLink to={`/archive/${slug}`}>
-        <ArticleThumbnail src={mainVisualUrl} />
+        <ArticleThumbnailContainer>
+          <ArticleThumbnail src={mainVisualUrl} />
+        </ArticleThumbnailContainer>
         <ArticleTitleContainer>
           <PublishDate>{formattedPublishedAt}</PublishDate>
           <ArticleTitle>{title}</ArticleTitle>
@@ -160,15 +162,18 @@ const ArticlesByYear = styled.div`
   max-width: ${ScreenValue.LARGE}px;
 
   ${media.lessThan(ScreenType.LARGE)`
-    display: block;
     margin: 0 ${Spacing.LARGE}px;
+  `}
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    display: block;
   `}
 `;
 
 const ArticleYear = styled.div`
   width: 200px;
 
-  ${media.lessThan(ScreenType.LARGE)`
+  ${media.lessThan(ScreenType.MEDIUM)`
     width: 100%;
     margin-bottom: ${Spacing.LARGE}px;
   `}
@@ -242,9 +247,14 @@ const ArticleTitle = styled.h3`
   `}
 `;
 
+const ArticleThumbnailContainer = styled.div`
+  width: 100%;
+  overflow: hidden;
+`;
+
 const ArticleThumbnail = styled.div`
   width: 100%;
-  ${StyleMixin.BACKGROUND_IMAGE_WITH_SRC}
+  ${StyleMixin.BACKGROUND_IMAGE_WITH_SRC};
 
   &::after {
     content: '';

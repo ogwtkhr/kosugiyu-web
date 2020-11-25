@@ -35,5 +35,5 @@ const LineInner = styled.div`
   height: 100%;
   background: #fff;
   /* TODO */
-  animation: ${lineEffect} 2s cubic-bezier(0.39, 0.575, 0.565, 1) infinite;
+  animation: ${lineEffect} 1.5s cubic-bezier(0.39, 0.575, 0.565, 1) infinite;
 `;

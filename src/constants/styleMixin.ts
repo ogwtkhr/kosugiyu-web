@@ -31,6 +31,14 @@ export const StyleMixin = {
         opacity: ${Opacity.HOVER_NORMAL};
       }
     `,
+    ZOOM_IN: css`
+      transition: transform ${Transitions.HOVER_TRANSITION_NORMAL};
+      transform: scale(1);
+
+      &:hover {
+        transform: scale(1.01);
+      }
+    `,
   },
 } as const;
 
