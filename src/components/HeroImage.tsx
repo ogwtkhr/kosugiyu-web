@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 import { Picture, ScrollLine } from '@/components';
-import { Colors, Spacing, StyleMixin, TextSize, TypeFace } from '@/constants';
+import { Colors, ScreenType, Spacing, StyleMixin, TextSize, TypeFace } from '@/constants';
 import { getRandom } from '@/util/number';
+import media from 'styled-media-query';
 
 export const HeroImage: React.FC = () => {
   return (
@@ -32,11 +33,22 @@ const ScrollLineContainer = styled.div`
   right: ${Spacing.XXX_LARGE}px;
   bottom: 0;
   align-items: center;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    right: auto;
+    left: ${Spacing.XXX_LARGE}px;
+    flex-direction: row-reverse;
+  `}
 `;
 
 const ScrollLineMessage = styled.p`
   margin-right: ${Spacing.X_LARGE}px;
   color: ${Colors.UI_TEXT_DARK_BACKGROUND};
   font-family: ${TypeFace.SANS_SERIF};
-  font-size: ${TextSize.XXX_SMALL}rem;
+  font-size: ${TextSize.X_SMALL}rem;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    margin-right: 0;
+    margin-left: ${Spacing.X_LARGE}px;
+  `}
 `;

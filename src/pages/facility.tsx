@@ -1,21 +1,18 @@
 import React, { useState } from 'react';
 import { BaseLayout, Meta } from '@/layouts';
 import { usePageInfo } from '@/hooks';
-import { FacilityLogo, BusinessLogo, Picture, GoogleMap, RippleCircle } from '@/components';
-import styled, { keyframes } from 'styled-components';
+import { Picture, GoogleMap, RippleCircle } from '@/components';
+import styled from 'styled-components';
 import { ChevronUp, ChevronDown } from '@styled-icons/bootstrap';
 
 import { getTextBreakFragment } from '@/util/jsx';
 import {
   AspectRatio,
   Colors,
-  LineHeight,
   ScreenType,
   Spacing,
   TextSize,
   TextWeight,
-  TypeFace,
-  TypeStyle,
   Typography,
 } from '@/constants';
 import media from 'styled-media-query';
@@ -396,22 +393,6 @@ const DownButton = styled(ChevronDown)`
   left: 0; */
   cursor: pointer;
 `;
-
-export const rgba = (hex: string, alpha = 1): string => {
-  let r = hex.match(/^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i);
-  let c = null;
-  if (r) {
-    c = r.slice(1, 4).map((x: string) => parseInt(x, 16));
-  }
-  r = hex.match(/^#([0-9a-f])([0-9a-f])([0-9a-f])$/i);
-  if (r) {
-    c = r.slice(1, 4).map((x) => 0x11 * parseInt(x, 16));
-  }
-  if (!c) {
-    return '';
-  }
-  return `rgba(${c[0]}, ${c[1]}, ${c[2]}, ${alpha})`;
-};
 
 const OverWindow = styled.div``;
 
