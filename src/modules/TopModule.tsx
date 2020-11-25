@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 import { Link } from 'gatsby';
@@ -8,37 +8,47 @@ import { useMenu } from '@/hooks';
 
 export const TopModule: React.FC = () => {
   const menuList = useMenu({ ignoreTopData: true });
+  const sentinelRef = useRef<HTMLDivElement>(null);
+  const scroll = () => {
+    sentinelRef.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  };
 
   return (
-    <Container>
-      <SideColumn>
-        <SideColumnInner>
-          <LogoContainer>
-            <Logo>
-              <MainLogo />
-            </Logo>
-            <LogoCopy>高円寺・昭和八年創業</LogoCopy>
-          </LogoContainer>
-        </SideColumnInner>
-        <MenuList>
-          <MenuItem>
-            <MenuType>小杉湯について</MenuType>
-          </MenuItem>
-          {menuList.map(({ id, label }) => (
-            <MenuItem key={id}>
-              <Link to={`/${id}`}>
-                <MenuType>{label}</MenuType>
-              </Link>
+    <>
+      <Container>
+        <SideColumn>
+          <SideColumnInner>
+            <LogoContainer>
+              <Logo>
+                <MainLogo />
+              </Logo>
+              <LogoCopy>高円寺・昭和八年創業</LogoCopy>
+            </LogoContainer>
+          </SideColumnInner>
+          <MenuList>
+            <MenuItem onClick={scroll}>
+              <MenuType>小杉湯について</MenuType>
             </MenuItem>
-          ))}
-        </MenuList>
-      </SideColumn>
-      <MainColumn>
-        <HeroArea>
-          <HeroImage />
-        </HeroArea>
-      </MainColumn>
-    </Container>
+            {menuList.map(({ id, label }) => (
+              <MenuItem key={id}>
+                <Link to={`/${id}`}>
+                  <MenuType>{label}</MenuType>
+                </Link>
+              </MenuItem>
+            ))}
+          </MenuList>
+        </SideColumn>
+        <MainColumn>
+          <HeroArea>
+            <HeroImage />
+          </HeroArea>
+        </MainColumn>
+      </Container>
+      <div ref={sentinelRef} />
+    </>
   );
 };
 
@@ -94,7 +104,9 @@ const LogoCopy = styled.p`
   `}
 `;
 
-const MenuList = styled.ul``;
+const MenuList = styled.ul`
+  cursor: pointer;
+`;
 
 const MenuItem = styled.li`
   margin-top: ${Spacing.MIDDLE}px;

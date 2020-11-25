@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BaseLayout, Meta } from '@/layouts';
 import { usePageInfo } from '@/hooks';
-import { FacilityLogo, BusinessLogo, Picture, GoogleMap } from '@/components';
+import { FacilityLogo, BusinessLogo, Picture, GoogleMap, RippleCircle } from '@/components';
 import styled, { keyframes } from 'styled-components';
 import { ChevronUp, ChevronDown } from '@styled-icons/bootstrap';
 
@@ -273,7 +273,7 @@ const FacilityPage: React.FC = () => {
             </DescriptionContainer>
           </FacilityView>
         </FacilityModule>
-        <BuissinessModule>
+        <BusinessModule>
           <BusinessContents>
             {businessInfo.map(({ title, description }) => {
               return (
@@ -285,7 +285,7 @@ const FacilityPage: React.FC = () => {
             })}
           </BusinessContents>
           <GoogleMap />
-        </BuissinessModule>
+        </BusinessModule>
         <OverWindow></OverWindow>
       </BaseLayout>
     </>
@@ -413,31 +413,9 @@ export const rgba = (hex: string, alpha = 1): string => {
   return `rgba(${c[0]}, ${c[1]}, ${c[2]}, ${alpha})`;
 };
 
-const rippleEffect = keyframes`
-  0% {
-    /* box-shadow: 0 0 0 0 ${rgba(Colors.ABSTRACT_NAVY, 0.5)}; */
-    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.5);
-  }
-
-  100% {
-    /* box-shadow: 0 0 0 1em ${rgba(Colors.ABSTRACT_NAVY, 0)}); */
-    box-shadow: 0 0 0 16px rgba(255, 255, 255, 0);
-  }
-`;
-
-const RippleCircle = styled.div`
-  position: absolute;
-  cursor: pointer;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  animation: ${rippleEffect} 0.7s linear infinite;
-  background-color: #fff;
-`;
-
 const OverWindow = styled.div``;
 
-const BuissinessModule = styled.section`
+const BusinessModule = styled.section`
   position: relative;
 `;
 

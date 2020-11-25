@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Colors, Spacing, ScreenType } from '@/constants';
+import { Colors, Spacing, ScreenType, TypeFace } from '@/constants';
 import media from 'styled-media-query';
 
 type IndicatorProps = {
@@ -25,7 +25,7 @@ const Container = styled.div`
   align-items: center;
   transform: translateY(-50%);
   color: ${Colors.UI_TEXT_DARK_BACKGROUND};
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: ${TypeFace.SANS_SERIF};
   mix-blend-mode: difference;
 
   ${media.lessThan(ScreenType.MEDIUM)`

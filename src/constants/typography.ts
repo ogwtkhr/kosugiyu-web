@@ -2,6 +2,9 @@ import { css } from 'styled-components';
 import { Colors } from './colors';
 
 export const TextSize = {
+  XXX_SMALL: 1,
+  XX_SMALL: 1.1,
+  X_SMALL: 1.2,
   SMALL: 1.4,
   NORMAL: 1.6,
   LARGE: 2,
@@ -10,8 +13,8 @@ export const TextSize = {
 } as const;
 
 export const TypeFace = {
-  // TODO: 英字等
-  BASE: `'Noto Sans JP', sans-serif;`,
+  BASE: `'Noto Sans JP', sans-serif`,
+  SANS_SERIF: 'Helvetica Neue, Helvetica, Arial, sans-serif',
 } as const;
 
 export const TextWeight = {

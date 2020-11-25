@@ -12,3 +12,5 @@ export * from './Indicator';
 export * from './Picture';
 export * from './Menu';
 export * from './SineWave';
+export * from './Ripple';
+export * from './ScrollLine';
