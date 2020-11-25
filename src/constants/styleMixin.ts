@@ -1,4 +1,6 @@
 import { css } from 'styled-components';
+import Opacity from './opacity';
+import Transitions from './transitions';
 
 const BASE_BACKGROUND_IMAGE = css`
   background-repeat: no-repeat;
@@ -20,6 +22,16 @@ export const StyleMixin = {
     ${BASE_BACKGROUND_IMAGE};
     background-image: ${({ src }: { src: string }) => `url(${src})`};
   `,
+  HOVER_EFFECT: {
+    NORMAL: css`
+      transition: opacity ${Transitions.HOVER_TRANSITION_NORMAL};
+      opacity: 1;
+
+      &:hover {
+        opacity: ${Opacity.HOVER_NORMAL};
+      }
+    `,
+  },
 } as const;
 
 export default StyleMixin;

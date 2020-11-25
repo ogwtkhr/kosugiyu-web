@@ -19,6 +19,7 @@ export const TypeFace = {
 
 export const TextWeight = {
   NORMAL: 300,
+  MEDIUM: 400,
   BOLD: 500,
 } as const;
 

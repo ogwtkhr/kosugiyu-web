@@ -1354,6 +1354,7 @@ export type MicrocmsArchive = Node & {
   info?: Maybe<Array<Maybe<MicrocmsArchiveInfo>>>;
   writer?: Maybe<MicrocmsArchiveWriter>;
   archiveId?: Maybe<Scalars['String']>;
+  revisedAt?: Maybe<Scalars['Date']>;
 };
 
 
@@ -1374,6 +1375,14 @@ export type MicrocmsArchiveUpdatedAtArgs = {
 
 
 export type MicrocmsArchivePublishedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+export type MicrocmsArchiveRevisedAtArgs = {
   formatString?: Maybe<Scalars['String']>;
   fromNow?: Maybe<Scalars['Boolean']>;
   difference?: Maybe<Scalars['String']>;
@@ -1510,7 +1519,8 @@ export type MicrocmsArchiveFieldsEnum =
   | 'writer___updatedAt'
   | 'writer___publishedAt'
   | 'writer___name'
-  | 'archiveId';
+  | 'archiveId'
+  | 'revisedAt';
 
 export type MicrocmsArchiveFilterInput = {
   id?: Maybe<StringQueryOperatorInput>;
@@ -1527,6 +1537,7 @@ export type MicrocmsArchiveFilterInput = {
   info?: Maybe<MicrocmsArchiveInfoFilterListInput>;
   writer?: Maybe<MicrocmsArchiveWriterFilterInput>;
   archiveId?: Maybe<StringQueryOperatorInput>;
+  revisedAt?: Maybe<DateQueryOperatorInput>;
 };
 
 export type MicrocmsArchiveGroupConnection = {
@@ -2112,6 +2123,7 @@ export type QueryMicrocmsArchiveArgs = {
   info?: Maybe<MicrocmsArchiveInfoFilterListInput>;
   writer?: Maybe<MicrocmsArchiveWriterFilterInput>;
   archiveId?: Maybe<StringQueryOperatorInput>;
+  revisedAt?: Maybe<DateQueryOperatorInput>;
 };
 
 

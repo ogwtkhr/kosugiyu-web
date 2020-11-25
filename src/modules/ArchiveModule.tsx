@@ -15,12 +15,13 @@ import {
   BigSpacing,
   ScreenType,
   DateFormat,
+  TypeFace,
 } from '@/constants';
 import dayjs from 'dayjs';
 import media from 'styled-media-query';
-import { PersonsLogoVertical } from '@/components';
+import { ArchiveLogoVertical } from '@/components';
 
-import headingImage from '@/images/photos/persons/persons_heading.jpg';
+import headingImage from '@/images/photos/archive/archive_heading.jpg';
 
 export const ArchiveModule: React.FC = () => {
   const data = useStaticQuery<AllMicrocmsArchiveQuery>(graphql`
@@ -44,28 +45,40 @@ export const ArchiveModule: React.FC = () => {
       <ArchiveHeading src={headingImage}>
         <ArchiveLogoContainer>
           <ArchiveLogoInner>
-            <PersonsLogoVertical />
+            <ArchiveLogoVertical />
           </ArchiveLogoInner>
         </ArchiveLogoContainer>
       </ArchiveHeading>
-      <ArticleList>
-        {data.allMicrocmsArchive.nodes.map((entry) => {
-          const slug = entry.slug || '';
-          const title = entry.title || '';
-          const mainVisualUrl = entry?.mainVisual?.url || '';
-          const publishedAt = entry?.publishedAt || '';
-          return (
-            <ArticleListItem key={entry.slug}>
-              <ArticleItem
-                slug={slug}
-                title={title}
-                mainVisualUrl={mainVisualUrl}
-                publishedAt={publishedAt}
-              />
-            </ArticleListItem>
-          );
-        })}
-      </ArticleList>
+
+      {['2021', '2020'].map((year) => (
+        <ArticlesByYear key={year}>
+          <ArticleYear>
+            <ArticleYearInner>
+              <ArticleYearText> {year}</ArticleYearText>
+            </ArticleYearInner>
+          </ArticleYear>
+          <ArticleListContainer>
+            <ArticleList>
+              {data.allMicrocmsArchive.nodes.map((entry) => {
+                const slug = entry.slug || '';
+                const title = entry.title || '';
+                const mainVisualUrl = entry?.mainVisual?.url || '';
+                const publishedAt = entry?.publishedAt || '';
+                return (
+                  <ArticleListItem key={entry.slug}>
+                    <ArticleItem
+                      slug={slug}
+                      title={title}
+                      mainVisualUrl={mainVisualUrl}
+                      publishedAt={publishedAt}
+                    />
+                  </ArticleListItem>
+                );
+              })}
+            </ArticleList>
+          </ArticleListContainer>
+        </ArticlesByYear>
+      ))}
     </Container>
   );
 };
@@ -111,7 +124,7 @@ type ArticleItemProps = {
 
 const ArticleItem: React.FC<ArticleItemProps> = ({ slug, title, mainVisualUrl, publishedAt }) => {
   const formattedPublishedAt = useMemo(
-    () => dayjs(publishedAt).format(DateFormat.YEAR_MONTH_DATE_JP),
+    () => dayjs(publishedAt).format(DateFormat.YEAR_MONTH_DATE_DOT),
     [publishedAt],
   );
 
@@ -131,48 +144,84 @@ const ArticleItem: React.FC<ArticleItemProps> = ({ slug, title, mainVisualUrl, p
 };
 
 const ArticleLink = styled(Link)`
+  display: block;
   text-decoration: none;
+  ${StyleMixin.HOVER_EFFECT.NORMAL};
+`;
+
+const ArticlesByYear = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: ${Spacing.XXX_LARGE}px auto;
+  max-width: ${ScreenValue.LARGE}px;
+
+  ${media.lessThan(ScreenType.LARGE)`
+    display: block;
+    margin: 0 ${Spacing.LARGE}px;
+  `}
+`;
+
+const ArticleYear = styled.div`
+  width: 200px;
+
+  ${media.lessThan(ScreenType.LARGE)`
+    width: 100%;
+    margin-bottom: ${Spacing.LARGE}px;
+  `}
+`;
+
+const ArticleYearInner = styled.div`
+  display: flex;
+  width: calc(100% - ${Spacing.LARGE}px * 2);
+  align-items: center;
+  height: 100px;
+  border-top: solid 1px ${Colors.ABSTRACT_GRAY};
+  border-bottom: solid 1px ${Colors.ABSTRACT_GRAY};
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    width: 100%;
+  `}
+`;
+
+const ArticleYearText = styled.p`
+  width: 100%;
+  font-size: ${TextSize.X_LARGE}rem;
+  font-family: ${TypeFace.SANS_SERIF};
+  font-weight: ${TextWeight.MEDIUM};
+  text-align: center;
+`;
+
+const ArticleListContainer = styled.div`
+  width: 100%;
 `;
 
 const ArticleList = styled.ul`
-  max-width: ${ScreenValue.LARGE}px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: ${Spacing.LARGE}px;
   margin: 0 auto;
   overflow: hidden;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    grid-template-columns: repeat(2, 1fr);
+  `}
 `;
 
 const ArticleListItem = styled.li`
   margin-bottom: ${Spacing.XX_LARGE}px;
-
-  /* TODO: 調整の余地あり */
   ${media.lessThan(ScreenType.MEDIUM)`
-    margin-bottom: ${BigSpacing.XX_LARGE}px;
+    margin-bottom: ${Spacing.LARGE}px;
   `}
 `;
 
-const ArticleItemContainer = styled.article`
-  position: relative;
-`;
+const ArticleItemContainer = styled.article``;
 
 const ArticleTitleContainer = styled.div`
-  position: absolute;
-  top: 70%;
   max-width: 400px;
-  padding: ${Spacing.LARGE}px;
-  border: solid 1px ${Colors.ABSTRACT_NAVY};
-  background-color: ${Colors.ABSTRACT_WHITE};
-
-  ${ArticleListItem}:nth-child(odd) & {
-    right: ${Spacing.LARGE}px;
-  }
-
-  ${ArticleListItem}:nth-child(even) & {
-    left: ${Spacing.LARGE}px;
-  }
+  padding: ${Spacing.LARGE}px 0;
 
   ${media.lessThan(ScreenType.MEDIUM)`
-    right: ${Spacing.LARGE}px;
-    left: ${Spacing.LARGE}px;
-    top: 90%;
+
   `}
 `;
 
@@ -192,24 +241,11 @@ const ArticleTitle = styled.h3`
 const ArticleThumbnailContainer = styled.div`
   position: relative;
   width: 100%;
-  max-width: ${ScreenValue.MEDIUM}px;
+  /* max-width: ${ScreenValue.MEDIUM}px; */
   margin: 0 auto;
-
-  &::after {
-    content: '';
-    display: block;
-    padding-bottom: ${AspectRatio.R_4_BY_3}%;
-  }
-
-  ${media.lessThan(ScreenType.MEDIUM)`
-    &::after {
-      display: none;
-    }
-  `}
 `;
 
 const ArticleThumbnail = styled.div`
-  position: absolute;
   width: 100%;
   ${StyleMixin.BACKGROUND_IMAGE_WITH_SRC}
 
@@ -219,31 +255,15 @@ const ArticleThumbnail = styled.div`
     padding-bottom: ${AspectRatio.R_4_BY_3}%;
   }
 
-  ${ArticleListItem}:nth-child(odd) & {
-    right: ${BigSpacing.SMALL}px;
-  }
-
-  ${ArticleListItem}:nth-child(even) & {
-    left: ${BigSpacing.SMALL}px;
-  }
-
   ${media.lessThan(ScreenType.MEDIUM)`
     width: auto;
     position: static;
-
-    ${ArticleListItem}:nth-child(odd) & {
-      margin-right: ${Spacing.XX_LARGE}px;
-    }
-
-    ${ArticleListItem}:nth-child(even) & {
-      margin-left: ${Spacing.XX_LARGE}px;
-    }
   `}
 `;
 
 const PublishDate = styled.p`
   color: ${Colors.UI_BASE};
-  text-align: center;
+  font-family: ${TypeFace.SANS_SERIF};
 `;
 
 export default ArchiveModule;
