@@ -17,6 +17,7 @@ import {
 } from '@/constants';
 import media from 'styled-media-query';
 import { Shadow } from '@/constants/shadow';
+import { rgba } from 'polished';
 
 type FacilityInfo = {
   title: string;
@@ -251,9 +252,12 @@ const FacilityPage: React.FC = () => {
             <DescriptionContainer>
               <DescriptionTitle>{title}</DescriptionTitle>
               <DescriptionBody>{description}</DescriptionBody>
-              <DescriptionPhoto />
+              <DescriptionPhoto>
+                <Picture relativePath={'photos/facility/facility_photo_1.jpg'} />
+              </DescriptionPhoto>
               <FacilityInfoControls>
                 <UpButton
+                  color={Colors.ABSTRACT_WHITE}
                   onClick={() => {
                     if (currentIndex > 0) setCurrentIndex(currentIndex - 1);
                   }}
@@ -262,6 +266,7 @@ const FacilityPage: React.FC = () => {
                   <IndicatorCurrent>{currentIndex + 1}</IndicatorCurrent>/{facilityInfos.length}
                 </Indicator>
                 <DownButton
+                  color={Colors.ABSTRACT_WHITE}
                   onClick={() => {
                     if (currentIndex < facilityInfos.length - 1) setCurrentIndex(currentIndex + 1);
                   }}
@@ -320,11 +325,11 @@ const DescriptionPhoto = styled.div`
   background-color: gray;
   /* box-shadow: ${Shadow.GRAY}; */
 
-  &::after {
+  /* &::after {
     content: '';
     display: block;
     padding-bottom: ${AspectRatio.R_4_BY_3}%;
-  }
+  } */
 `;
 
 const FacilityView = styled.div`
@@ -375,6 +380,9 @@ const FacilityInfoControls = styled.div`
 
 const Indicator = styled.p`
   font-family: 'Roboto Condensed';
+  color: ${Colors.ABSTRACT_WHITE};
+  text-shadow: ${`0 ${Spacing.SMALL}px ${Spacing.X_LARGE}px ${rgba(Colors.ABSTRACT_BLACK, 0.6)}`};
+  font-size: 2rem;
 `;
 
 const IndicatorCurrent = styled.span`
@@ -382,16 +390,14 @@ const IndicatorCurrent = styled.span`
 `;
 
 const UpButton = styled(ChevronUp)`
-  /* position: absolute;
-  top: ${Spacing.XX_LARGE}px;
-  left: 0; */
   cursor: pointer;
+
+  filter: drop-shadow(${`0 ${Spacing.SMALL}px 2px ${rgba(Colors.ABSTRACT_BLACK, 0.6)}`});
 `;
 const DownButton = styled(ChevronDown)`
-  /* position: absolute;
-  bottom: ${Spacing.XX_LARGE}px;
-  left: 0; */
   cursor: pointer;
+
+  filter: drop-shadow(${`0 ${Spacing.SMALL}px 2px ${rgba(Colors.ABSTRACT_BLACK, 0.6)}`});
 `;
 
 const OverWindow = styled.div``;
@@ -409,6 +415,10 @@ const BusinessContent = styled.li`
   margin: ${Spacing.XX_LARGE}px;
   padding-bottom: ${Spacing.XXX_LARGE}px;
   border-bottom: 1px solid black;
+
+  &:last-child {
+    border-bottom: none;
+  }
 `;
 
 const BusinessTitle = styled.h3`
@@ -416,12 +426,12 @@ const BusinessTitle = styled.h3`
   font-weight: ${TextWeight.BOLD};
   font-size: ${TextSize.X_LARGE}rem;
 `;
-//   position: absolute;
-//   width: 100%;
-//   height: 100%;
-//   top: 0;
-//   left: 0;
-//   transition: 1s ease;
-// `;
+
+const WindowContainer = styled.div`
+  position: fixed;
+  width: 800px;
+  top: 100px;
+  left: 100px;
+`;
 
 export default FacilityPage;

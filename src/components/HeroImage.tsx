@@ -1,14 +1,13 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Picture, ScrollLine } from '@/components';
 import { Colors, ScreenType, Spacing, StyleMixin, TextSize, TypeFace } from '@/constants';
-import { getRandom } from '@/util/number';
 import media from 'styled-media-query';
 
 export const HeroImage: React.FC = () => {
   return (
     <Container>
-      <Picture relativePath={`photos/top/hero_${getRandom(1, 1)}.jpg`} />
+      <Picture relativePath={`photos/top/hero_1.jpg`} />
 
       <ScrollLineContainer>
         <ScrollLineMessage>SCROLL</ScrollLineMessage>
