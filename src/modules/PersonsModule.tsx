@@ -4,19 +4,15 @@ import { AllMicrocmsPersonsQuery } from '@/types';
 import styled from 'styled-components';
 import {
   StyleMixin,
-  AspectRatio,
   Typography,
   TextSize,
-  TextWeight,
-  LineHeight,
-  LetterSpacing,
   Colors,
   Spacing,
   BigSpacing,
   ModuleWidth,
   ScreenType,
 } from '@/constants';
-import { ArrowIcon } from '@/components';
+import { PersonItem, TopPersonItem } from '@/components';
 import media from 'styled-media-query';
 
 import headingImage from '@/images/photos/persons/persons_heading.jpg';
@@ -70,17 +66,12 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({ useTitle, enableTo
       )}
 
       <PersonLink to={`/persons/${topPersonSlug}`}>
-        <TopPersonContainer>
-          <TopPersonThumbnail src={topPersonMainVisualUrl} />
-          <TopPersonInfo>
-            <TopPersonPosition>{topPersonPosition}</TopPersonPosition>
-            <TopPersonName>{topPersonName}</TopPersonName>
-            <TopPersonTitle>{topPersonTitle}</TopPersonTitle>
-            <TopPersonIconContainer>
-              <ArrowIcon />
-            </TopPersonIconContainer>
-          </TopPersonInfo>
-        </TopPersonContainer>
+        <TopPersonItem
+          position={topPersonPosition}
+          name={topPersonName}
+          title={topPersonTitle}
+          mainVisualUrl={topPersonMainVisualUrl}
+        />
       </PersonLink>
       <PersonListContainer>
         <PersonList>
@@ -91,12 +82,14 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({ useTitle, enableTo
             const mainVisualUrl = person?.mainVisual?.url || '';
             return (
               <PersonListItem key={person.slug}>
-                <PersonItem
-                  slug={slug}
-                  position={position}
-                  name={name}
-                  mainVisualUrl={mainVisualUrl}
-                />
+                <PersonLink to={`/persons/${slug}`}>
+                  <PersonItem
+                    slug={slug}
+                    position={position}
+                    name={name}
+                    mainVisualUrl={mainVisualUrl}
+                  />
+                </PersonLink>
               </PersonListItem>
             );
           })}
@@ -151,83 +144,6 @@ const Container = styled.div`
   background-color: ${Colors.UI_PAPER};
 `;
 
-type PersonItemProps = {
-  slug: string;
-  position: string;
-  name: string;
-  mainVisualUrl: string;
-};
-
-const PersonItem: React.FC<PersonItemProps> = ({ slug, position, name, mainVisualUrl }) => {
-  // const formattedPublishedAt = useMemo(
-  //   () => dayjs(publishedAt).format(DateFormat.YEAR_MONTH_DATE_JP),
-  //   [publishedAt],
-  // );
-
-  return (
-    <PersonLink to={`/persons/${slug}`}>
-      <PersonThumbnailContainer>
-        <PersonThumbnail src={mainVisualUrl} />
-        <PersonInfo>
-          <PersonPosition>{position}</PersonPosition>
-          <PersonNameContainer>
-            <PersonName>{name}</PersonName>
-            <PersonIconContainer>
-              <ArrowIcon />
-            </PersonIconContainer>
-          </PersonNameContainer>
-        </PersonInfo>
-      </PersonThumbnailContainer>
-    </PersonLink>
-  );
-};
-
-const TopPersonContainer = styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  max-width: ${ModuleWidth.SEMI_WIDE}px;
-  margin: ${BigSpacing.LARGE}px auto;
-`;
-
-const TopPersonThumbnail = styled.div`
-  width: 40%;
-  ${StyleMixin.BACKGROUND_IMAGE_WITH_SRC};
-
-  &::after {
-    content: '';
-    display: block;
-    padding-bottom: ${AspectRatio.R_3_BY_4}%;
-  }
-`;
-
-const TopPersonInfo = styled.div`
-  width: 40%;
-`;
-
-const TopPersonPosition = styled.p`
-  font-size: ${TextSize.SMALL}rem;
-  ${Typography.Mixin.DISPLAY};
-`;
-
-const TopPersonName = styled.h3`
-  margin-top: ${Spacing.NORMAL}px;
-  font-size: ${TextSize.X_LARGE}rem;
-  ${Typography.Mixin.DISPLAY};
-`;
-
-const TopPersonTitle = styled.p`
-  margin-top: ${Spacing.NORMAL}px;
-  font-size: ${TextSize.X_SMALL}rem;
-  ${Typography.Mixin.DISPLAY};
-`;
-
-const TopPersonIconContainer = styled.div`
-  width: ${Spacing.XX_LARGE}px;
-  margin-top: ${Spacing.NORMAL}px;
-  margin-left: auto;
-`;
-
 const PersonLink = styled(Link)`
   display: block;
   text-decoration: none;
@@ -252,54 +168,5 @@ const PersonList = styled.ul`
 `;
 
 const PersonListItem = styled.li``;
-
-const PersonInfo = styled.div`
-  margin-top: ${Spacing.NORMAL}px;
-`;
-
-const PersonPosition = styled.p`
-  font-size: ${TextSize.X_SMALL}rem;
-  ${Typography.Mixin.DISPLAY};
-`;
-
-const PersonNameContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-const PersonName = styled.h3`
-  color: ${Colors.ABSTRACT_BLACK};
-  font-size: ${TextSize.LARGE}rem;
-  line-height: ${LineHeight.NORMAL};
-  text-decoration: none;
-  ${Typography.Mixin.DISPLAY};
-
-  /* ${media.lessThan(ScreenType.MEDIUM)`
-    font-size: ${TextSize.NORMAL}rem;
-  `} */
-`;
-
-const PersonIconContainer = styled.div`
-  width: ${Spacing.XX_LARGE}px;
-`;
-
-const PersonThumbnailContainer = styled.div``;
-
-const PersonThumbnail = styled.div`
-  width: 100%;
-  ${StyleMixin.BACKGROUND_IMAGE_WITH_SRC}
-
-  &::after {
-    content: '';
-    display: block;
-    padding-bottom: ${AspectRatio.SILVER_VERTICAL}%;
-  }
-
-  ${media.lessThan(ScreenType.MEDIUM)`
-    width: auto;
-    position: static;
-  `}
-`;
 
 export default PersonsModule;

@@ -31,7 +31,6 @@ const Content = styled.header`
   justify-content: center;
   width: 100%;
   background-color: ${Colors.UI_PAPER};
-  box-shadow: ${Shadow.NORMAL};
 `;
 
 // const Spacer = styled.div`

@@ -15,3 +15,4 @@ export * from './Menu';
 export * from './SineWave';
 export * from './Ripple';
 export * from './ScrollLine';
+export * from './PersonItem';
