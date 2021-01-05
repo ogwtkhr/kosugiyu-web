@@ -1,20 +1,8 @@
 import React, { useState, useMemo } from 'react';
 import styled from 'styled-components';
 import media from 'styled-media-query';
-import Transition, { TransitionStatus } from 'react-transition-group/Transition';
-import {
-  StickyArea,
-  GridContainer,
-  GridItem,
-  GridImage,
-  StaticPoster,
-  DynamicPoster,
-  PosterData,
-  Box,
-  Tape,
-  Indicator,
-  PersonsLogoVertical,
-} from '@/components';
+// import Transition, { TransitionStatus } from 'react-transition-group/Transition';
+import { GridContainer, GridItem, GridImage, Tape, Picture } from '@/components';
 
 import {
   Typography,
@@ -25,6 +13,8 @@ import {
   ScreenValue,
   Transitions,
   Spacing,
+  AspectRatio,
+  ModuleWidth,
   TextWeight,
   TypeStyle,
 } from '@/constants';
@@ -34,13 +24,21 @@ import { floorInRange0to1 } from '@/util/number';
 export const IntroModule: React.FC = () => {
   return (
     <>
-      <MessageTypography>
-        東京の一大ターミナル、新宿駅から10分。
-        <br />
-        昔懐かしい商店街、古着屋、カフェ。 演劇にアート、阿波踊り……。
-        <br />
-        あらゆる文化が混ざり合い、老若男女が集う街、高円寺。
-      </MessageTypography>
+      <IntroStoryUnitNormal>
+        <IntroStoryUnitColumnMain>
+          <IntroStoryPhoto>
+            <Picture relativePath="photos/top/town_8.jpg" />
+          </IntroStoryPhoto>
+        </IntroStoryUnitColumnMain>
+        <IntroStoryUnitColumnSub>
+          <MessageTypography>
+            東京の一大ターミナル、新宿駅から10分。
+            <br />
+            昔懐かしい商店街、古着屋、カフェ。 演劇にアート、阿波踊り……。
+            あらゆる文化が混ざり合い、老若男女が集う街、高円寺。
+          </MessageTypography>
+        </IntroStoryUnitColumnSub>
+      </IntroStoryUnitNormal>
 
       <GridOuter>
         <GridContainer>
@@ -176,13 +174,7 @@ export const IntroModule: React.FC = () => {
               marginLeft: 4,
             }}
             centering
-          >
-            <MessageTypography>
-              車通りが少なく子どもや年配の方が安心して過ごせる、
-              子育てにも良い、働く人・サラリーマンもいっぱい住んでる。
-              まさに“混沌”ということばで形容するにふさわしい場所です。
-            </MessageTypography>
-          </GridItem>
+          ></GridItem>
           <GridItem
             grid={{
               columnStart: 0,
@@ -240,29 +232,75 @@ export const IntroModule: React.FC = () => {
           </GridItem>
         </GridContainer>
       </GridOuter>
-      <MessageTypography>
-        <Tape>小杉湯は昭和8年（1933年）にこの街で生まれました。</Tape>
-        <br />
-        <Tape>高円寺らしい“ごちゃ混ぜ感”をぎゅっと凝縮したような、街の銭湯。</Tape>
-      </MessageTypography>
-      <MessageTypography>
-        <Tape>創業当時の建物を守りつつ、時代に合わせて中身を変え続け </Tape>
-        <br />
-        <Tape>高円寺の人々とともにあり続けてきました。</Tape>
-      </MessageTypography>
+      <IntroStoryUnitNormal>
+        <IntroStoryUnitColumnSub>
+          <MessageTypography>
+            車通りが少なく子どもや年配の方が安心して過ごせる、
+            子育てにも良い、働く人・サラリーマンもいっぱい住んでる。
+            まさに“混沌”ということばで形容するにふさわしい場所です。
+          </MessageTypography>
+        </IntroStoryUnitColumnSub>
+        <IntroStoryUnitColumnMain>
+          <IntroStoryPhoto>
+            <Picture relativePath="photos/top/town_8.jpg" />
+          </IntroStoryPhoto>
+        </IntroStoryUnitColumnMain>
+      </IntroStoryUnitNormal>
+      <IntroStoryUnitNormal>
+        <IntroStoryUnitColumnMain>
+          <IntroStoryPhoto>
+            <Picture relativePath="photos/top/town_8.jpg" />
+          </IntroStoryPhoto>
+        </IntroStoryUnitColumnMain>
+        <IntroStoryUnitColumnSub>
+          <MessageTypography>
+            小杉湯は昭和8年（1933年）にこの街で生まれました。
+            高円寺らしい“ごちゃ混ぜ感”をぎゅっと凝縮したような、街の銭湯。
+            創業当時の建物を守りつつ、時代に合わせて中身を変え続け
+            高円寺の人々とともにあり続けてきました。
+          </MessageTypography>
+        </IntroStoryUnitColumnSub>
+      </IntroStoryUnitNormal>
 
       <MessageTypography>
-        その長い歴史の中で、
-        <br />
-        さまざまな人たちが小杉湯に集まり、
-        <br />
-        さまざまな物語が生まれてきました。
+        その長い歴史の中で、さまざまな人たちが小杉湯に集まり、さまざまな物語が生まれてきました。
       </MessageTypography>
     </>
   );
 };
 
-const MessageTypography = styled.p``;
+const IntroStoryUnitNormal = styled.section`
+  max-width: ${ModuleWidth.WIDE}px;
+  margin: ${BigSpacing.NORMAL}px auto;
+  display: flex;
+`;
+
+const IntroStoryUnitColumnSub = styled.div`
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+`;
+
+const IntroStoryUnitColumnMain = styled.div`
+  width: 80%;
+`;
+
+const IntroStoryPhoto = styled.div`
+  &::after {
+    content: '';
+    display: block;
+    padding-bottom: ${AspectRatio.GOLDEN_VERTICAL};
+  }
+`;
+
+const MessageTypography = styled.p`
+  ${Typography.Mixin.DISPLAY};
+  ${Typography.Mixin.VERTICAL_WRITING};
+  height: 400px;
+  font-size: ${TextSize.NORMAL}rem;
+`;
 
 const GridOuter = styled.div`
   margin: ${Spacing.XX_LARGE}px 0;

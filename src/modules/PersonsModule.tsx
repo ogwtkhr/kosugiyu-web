@@ -60,10 +60,7 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({
       {useTitle && (
         <PersonsHeading>
           <PersonsHeadingMain>
-            <PersonsHeadingTitle>
-              <PersonsHeadingTitleSub>日常の中の非日常を届ける</PersonsHeadingTitleSub>
-              <PersonsHeadingTitleMain>ケノ日のハレ</PersonsHeadingTitleMain>
-            </PersonsHeadingTitle>
+            <HeadingTitle />
             <PersonsHeadingBodyCopy>
               親譲りの無鉄砲で小供の時から損ばかりして居る。小学校に居る時分学校の二階から飛び降りて一週間程腰を抜かした事がある。なぜそんな無闇(むやみ)をしたと聞く人があるかも知れぬ。別段深い理由でもない。
             </PersonsHeadingBodyCopy>
@@ -87,10 +84,9 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({
 
       <PersonListContainer>
         {useSideTitle && (
-          <PersonsHeadingTitle>
-            <PersonsHeadingTitleSub>日常の中の非日常を届ける</PersonsHeadingTitleSub>
-            <PersonsHeadingTitleMain>ケノ日のハレ</PersonsHeadingTitleMain>
-          </PersonsHeadingTitle>
+          <PersonsHeadingSubTitle>
+            <HeadingTitle />
+          </PersonsHeadingSubTitle>
         )}
         <PersonList>
           {persons.map((person) => {
@@ -101,12 +97,7 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({
             return (
               <PersonListItem key={person.slug}>
                 <PersonLink to={`/persons/${slug}`}>
-                  <PersonItem
-                    slug={slug}
-                    position={position}
-                    name={name}
-                    mainVisualUrl={mainVisualUrl}
-                  />
+                  <PersonItem position={position} name={name} mainVisualUrl={mainVisualUrl} />
                 </PersonLink>
               </PersonListItem>
             );
@@ -116,6 +107,13 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({
     </Container>
   );
 };
+
+const HeadingTitle: React.FC = () => (
+  <PersonsHeadingTitle>
+    <PersonsHeadingTitleSub>日常の中の非日常を届ける</PersonsHeadingTitleSub>
+    <PersonsHeadingTitleMain>ケノ日のハレ</PersonsHeadingTitleMain>
+  </PersonsHeadingTitle>
+);
 
 const PersonsHeading = styled.div`
   display: flex;
@@ -133,6 +131,10 @@ const PersonsHeadingMain = styled.div`
   justify-content: space-between;
   width: 30%;
   padding: 0 ${Spacing.XX_LARGE}px;
+`;
+
+const PersonsHeadingSubTitle = styled.div`
+  margin-right: ${BigSpacing.SMALL}px;
 `;
 
 const PersonsHeadingTitle = styled.div`
@@ -174,17 +176,17 @@ const TopPersonContainer = styled.div`
 
 const PersonListContainer = styled.div`
   display: flex;
-  margin: ${BigSpacing.LARGE}px auto;
   max-width: ${ModuleWidth.MIDDLE}px;
+  margin: ${BigSpacing.LARGE}px auto;
 `;
 
 const PersonList = styled.ul`
   display: grid;
   grid-gap: ${BigSpacing.XX_SMALL}px;
   grid-template-columns: repeat(3, 1fr);
+  flex: 1;
   margin: 0 auto;
   overflow: hidden;
-  flex: 1;
 
   ${media.lessThan(ScreenType.MEDIUM)`
     /* grid-template-columns: repeat(2, 1fr); */
