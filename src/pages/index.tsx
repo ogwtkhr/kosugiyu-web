@@ -5,11 +5,11 @@ import { TopModule, IntroModule, PersonsModule } from '@/modules';
 const IndexPage: React.FC = () => {
   return (
     <>
-      <BaseLayout useHeader={false} useFooter={false}>
+      <BaseLayout useHeader={false}>
         <Meta />
         <TopModule />
         <IntroModule />
-        <PersonsModule />
+        <PersonsModule useSideTitle enableTopEmphasis={false} />
       </BaseLayout>
     </>
   );

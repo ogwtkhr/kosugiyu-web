@@ -19,10 +19,15 @@ import headingImage from '@/images/photos/persons/persons_heading.jpg';
 
 type PersonsModuleProps = {
   useTitle?: boolean;
+  useSideTitle?: boolean;
   enableTopEmphasis?: boolean;
 };
 
-export const PersonsModule: React.FC<PersonsModuleProps> = ({ useTitle, enableTopEmphasis }) => {
+export const PersonsModule: React.FC<PersonsModuleProps> = ({
+  useTitle,
+  useSideTitle,
+  enableTopEmphasis = true,
+}) => {
   const data = useStaticQuery<AllMicrocmsPersonsQuery>(graphql`
     query allMicrocmsPersons {
       allMicrocmsPersons {
@@ -40,7 +45,9 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({ useTitle, enableTo
     }
   `);
 
-  const [topPerson, ...persons] = data.allMicrocmsPersons.nodes;
+  const basePersons = data.allMicrocmsPersons.nodes;
+  const [topPerson, ...restPersons] = basePersons;
+  const persons = enableTopEmphasis ? restPersons : basePersons;
 
   const topPersonSlug = topPerson?.slug || '';
   const topPersonPosition = topPerson?.position || '';
@@ -65,17 +72,26 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({ useTitle, enableTo
         </PersonsHeading>
       )}
 
-      <TopPersonContainer>
-        <PersonLink to={`/persons/${topPersonSlug}`}>
-          <TopPersonItem
-            position={topPersonPosition}
-            name={topPersonName}
-            title={topPersonTitle}
-            mainVisualUrl={topPersonMainVisualUrl}
-          />
-        </PersonLink>
-      </TopPersonContainer>
+      {enableTopEmphasis && (
+        <TopPersonContainer>
+          <PersonLink to={`/persons/${topPersonSlug}`}>
+            <TopPersonItem
+              position={topPersonPosition}
+              name={topPersonName}
+              title={topPersonTitle}
+              mainVisualUrl={topPersonMainVisualUrl}
+            />
+          </PersonLink>
+        </TopPersonContainer>
+      )}
+
       <PersonListContainer>
+        {useSideTitle && (
+          <PersonsHeadingTitle>
+            <PersonsHeadingTitleSub>日常の中の非日常を届ける</PersonsHeadingTitleSub>
+            <PersonsHeadingTitleMain>ケノ日のハレ</PersonsHeadingTitleMain>
+          </PersonsHeadingTitle>
+        )}
         <PersonList>
           {persons.map((person) => {
             const slug = person.slug || '';
@@ -157,6 +173,7 @@ const TopPersonContainer = styled.div`
 `;
 
 const PersonListContainer = styled.div`
+  display: flex;
   margin: ${BigSpacing.LARGE}px auto;
   max-width: ${ModuleWidth.MIDDLE}px;
 `;
@@ -167,6 +184,7 @@ const PersonList = styled.ul`
   grid-template-columns: repeat(3, 1fr);
   margin: 0 auto;
   overflow: hidden;
+  flex: 1;
 
   ${media.lessThan(ScreenType.MEDIUM)`
     /* grid-template-columns: repeat(2, 1fr); */
