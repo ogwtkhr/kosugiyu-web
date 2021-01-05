@@ -3464,7 +3464,7 @@ export type Unnamed_2_QueryVariables = Exact<{
 
 
 export type Unnamed_2_Query = { microcmsPersons?: Maybe<(
-    Pick<MicrocmsPersons, 'title' | 'position' | 'body' | 'publishedAt'>
+    Pick<MicrocmsPersons, 'title' | 'position' | 'name' | 'body' | 'publishedAt'>
     & { writer?: Maybe<Pick<MicrocmsPersonsWriter, 'name'>>, mainVisual?: Maybe<Pick<MicrocmsPersonsMainVisual, 'url'>> }
   )> };
 

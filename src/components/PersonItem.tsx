@@ -21,9 +21,15 @@ type PersonItemProps = {
   position: string;
   name: string;
   mainVisualUrl: string;
+  showArrowIcon?: boolean;
 };
 
-export const PersonItem: React.FC<PersonItemProps> = ({ position, name, mainVisualUrl }) => {
+export const PersonItem: React.FC<PersonItemProps> = ({
+  position,
+  name,
+  mainVisualUrl,
+  showArrowIcon = true,
+}) => {
   // const formattedPublishedAt = useMemo(
   //   () => dayjs(publishedAt).format(DateFormat.YEAR_MONTH_DATE_JP),
   //   [publishedAt],
@@ -36,15 +42,16 @@ export const PersonItem: React.FC<PersonItemProps> = ({ position, name, mainVisu
         <PersonPosition>{position}</PersonPosition>
         <PersonNameContainer>
           <PersonName>{name}</PersonName>
-          <PersonIconContainer>
-            <ArrowIcon />
-          </PersonIconContainer>
+          {showArrowIcon && (
+            <PersonIconContainer>
+              <ArrowIcon />
+            </PersonIconContainer>
+          )}
         </PersonNameContainer>
       </PersonInfo>
     </PersonThumbnailContainer>
   );
 };
-
 const PersonInfo = styled.div`
   margin-top: ${Spacing.NORMAL}px;
 `;
@@ -103,6 +110,7 @@ export const TopPersonItem: React.FC<TopPersonItemProps> = ({
   name,
   title,
   mainVisualUrl,
+  showArrowIcon = true,
 }) => {
   return (
     <TopPersonContainer>
@@ -111,9 +119,11 @@ export const TopPersonItem: React.FC<TopPersonItemProps> = ({
         <TopPersonPosition>{position}</TopPersonPosition>
         <TopPersonName>{name}</TopPersonName>
         <TopPersonTitle>{title}</TopPersonTitle>
-        <TopPersonIconContainer>
-          <ArrowIcon />
-        </TopPersonIconContainer>
+        {showArrowIcon && (
+          <TopPersonIconContainer>
+            <ArrowIcon />
+          </TopPersonIconContainer>
+        )}
       </TopPersonInfo>
     </TopPersonContainer>
   );
@@ -124,7 +134,6 @@ const TopPersonContainer = styled.div`
   justify-content: space-around;
   align-items: center;
   max-width: ${ModuleWidth.SEMI_WIDE}px;
-  margin: ${BigSpacing.LARGE}px auto;
 `;
 
 const TopPersonThumbnail = styled.div`

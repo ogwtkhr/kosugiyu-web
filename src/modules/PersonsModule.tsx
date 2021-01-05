@@ -65,14 +65,16 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({ useTitle, enableTo
         </PersonsHeading>
       )}
 
-      <PersonLink to={`/persons/${topPersonSlug}`}>
-        <TopPersonItem
-          position={topPersonPosition}
-          name={topPersonName}
-          title={topPersonTitle}
-          mainVisualUrl={topPersonMainVisualUrl}
-        />
-      </PersonLink>
+      <TopPersonContainer>
+        <PersonLink to={`/persons/${topPersonSlug}`}>
+          <TopPersonItem
+            position={topPersonPosition}
+            name={topPersonName}
+            title={topPersonTitle}
+            mainVisualUrl={topPersonMainVisualUrl}
+          />
+        </PersonLink>
+      </TopPersonContainer>
       <PersonListContainer>
         <PersonList>
           {persons.map((person) => {
@@ -148,6 +150,10 @@ const PersonLink = styled(Link)`
   display: block;
   text-decoration: none;
   ${StyleMixin.HOVER_EFFECT.NORMAL};
+`;
+
+const TopPersonContainer = styled.div`
+  margin: ${BigSpacing.LARGE}px auto;
 `;
 
 const PersonListContainer = styled.div`
