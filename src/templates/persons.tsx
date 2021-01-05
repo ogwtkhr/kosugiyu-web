@@ -53,7 +53,7 @@ const PersonsPage: React.FC<PersonsPageProps> = ({ data }) => {
   if (!title || !publishedAt || !writerName || !mainVisual || !body)
     return <div>data not exists.</div>;
   return (
-    <BaseLayout useHeader usePersonsHeader>
+    <BaseLayout useHeader>
       <Meta title={title} description={strippedBody} ogImage={mainVisual} />
       <Container>
         <MainVisualContainer ref={mainVisualRef}>

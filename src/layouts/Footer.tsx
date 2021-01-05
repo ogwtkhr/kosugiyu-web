@@ -11,7 +11,7 @@ export const Footer: React.FC = () => (
         <CombinationLogo />
       </FooterLogo>
     </Link>
-    <FooterText>{new Date().getFullYear()} Kosugiyu inc.</FooterText>
+    <FooterText>{new Date().getFullYear()} Kosugiyu, inc.</FooterText>
   </Container>
 );
 

@@ -8,8 +8,8 @@ export const TextSize = {
   SMALL: 1.4,
   NORMAL: 1.6,
   LARGE: 2,
-  X_LARGE: 3,
-  XX_LARGE: 4,
+  X_LARGE: 3.2,
+  XX_LARGE: 4.8,
 } as const;
 
 export const TypeFace = {
@@ -43,7 +43,7 @@ const Mixin = {
     color: ${Colors.UI_TEXT_MAIN};
     font-family: ${TypeFace.BASE};
     font-feature-settings: 'palt';
-    font-size: ${TextSize.NORMAL}rem;
+    /* font-size: ${TextSize.NORMAL}rem; */
     font-weight: ${TextWeight.NORMAL};
     line-height: ${LineHeight.THICK};
     letter-spacing: 0.1em;
@@ -52,9 +52,11 @@ const Mixin = {
   DISPLAY: css`
     color: ${Colors.UI_TEXT_MAIN};
     font-family: ${TypeFace.BASE};
-    font-size: ${TextSize.X_LARGE}rem;
-    font-weight: ${TextWeight.BOLD};
+    font-feature-settings: 'palt';
+    /* font-size: ${TextSize.X_LARGE}rem; */
+    font-weight: ${TextWeight.MEDIUM};
     line-height: ${LineHeight.NORMAL};
+    letter-spacing: ${LetterSpacing.WIDE}em;
   `,
   SUB: css`
     color: ${Colors.UI_TEXT_SUB};
@@ -63,6 +65,9 @@ const Mixin = {
   `,
   EXTENDED: css`
     transform: ${TypeStyle.EXTENDED};
+  `,
+  VERTICAL_WRITING: css`
+    writing-mode: vertical-rl;
   `,
 } as const;
 

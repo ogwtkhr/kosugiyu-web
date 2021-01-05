@@ -15,13 +15,11 @@ import Loading from './Loading';
 type BaseLayoutProps = {
   useHeader?: boolean;
   useFooter?: boolean;
-  usePersonsHeader?: boolean;
 };
 
 export const BaseLayout: React.FC<BaseLayoutProps> = ({
   useHeader = true,
   useFooter = true,
-  usePersonsHeader,
   children,
 }) => {
   const data = useStaticQuery<SiteTitleQuery>(graphql`
@@ -36,12 +34,7 @@ export const BaseLayout: React.FC<BaseLayoutProps> = ({
 
   return (
     <>
-      {useHeader && (
-        <Header
-          usePersonsHeader={usePersonsHeader}
-          siteTitle={data.site?.siteMetadata?.title || ''}
-        />
-      )}
+      {useHeader && <Header siteTitle={data.site?.siteMetadata?.title || ''} />}
       <GlobalStyle />
       <Main>{children}</Main>
       {useFooter && <Footer />}

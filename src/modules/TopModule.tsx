@@ -99,11 +99,11 @@ const Logo = styled.h1`
 `;
 
 const LogoCopy = styled.p`
-  writing-mode: vertical-rl;
   margin-top: ${Spacing.X_LARGE}px;
   font-size: ${TextSize.SMALL}rem;
   font-weight: ${TextWeight.BOLD};
   letter-spacing: 0.3rem;
+  ${Typography.Mixin.VERTICAL_WRITING};
   ${media.lessThan(ScreenType.MEDIUM)`
     font-size: ${TextSize.SMALL}rem;
   `}

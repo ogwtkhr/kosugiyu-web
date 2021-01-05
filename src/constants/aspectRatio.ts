@@ -1,6 +1,6 @@
 const COEFFICIENT = 100;
 
-const GOLDEN_RATIO = 1.168;
+const GOLDEN_RATIO = 1.618;
 const SILVER_RATIO = 1.414;
 const PLATINUM_RATIO = 1.732;
 
