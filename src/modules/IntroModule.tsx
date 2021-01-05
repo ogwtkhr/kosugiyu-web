@@ -26,9 +26,9 @@ export const IntroModule: React.FC = () => {
     <>
       <IntroStoryUnitNormal>
         <IntroStoryUnitColumnMain>
-          <IntroStoryPhoto>
+          <IntroStoryNormalPhoto>
             <Picture relativePath="photos/top/town_8.jpg" />
-          </IntroStoryPhoto>
+          </IntroStoryNormalPhoto>
         </IntroStoryUnitColumnMain>
         <IntroStoryUnitColumnSub>
           <MessageTypography>
@@ -241,16 +241,16 @@ export const IntroModule: React.FC = () => {
           </MessageTypography>
         </IntroStoryUnitColumnSub>
         <IntroStoryUnitColumnMain>
-          <IntroStoryPhoto>
+          <IntroStoryNormalPhoto>
             <Picture relativePath="photos/top/town_8.jpg" />
-          </IntroStoryPhoto>
+          </IntroStoryNormalPhoto>
         </IntroStoryUnitColumnMain>
       </IntroStoryUnitNormal>
       <IntroStoryUnitNormal>
         <IntroStoryUnitColumnMain>
-          <IntroStoryPhoto>
+          <IntroStoryNormalPhoto>
             <Picture relativePath="photos/top/town_8.jpg" />
-          </IntroStoryPhoto>
+          </IntroStoryNormalPhoto>
         </IntroStoryUnitColumnMain>
         <IntroStoryUnitColumnSub>
           <MessageTypography>
@@ -262,32 +262,47 @@ export const IntroModule: React.FC = () => {
         </IntroStoryUnitColumnSub>
       </IntroStoryUnitNormal>
 
-      <MessageTypography>
-        その長い歴史の中で、さまざまな人たちが小杉湯に集まり、さまざまな物語が生まれてきました。
-      </MessageTypography>
+      <IntroStoryUnitFinal>
+        <IntroStoryFinalMessage>
+          <MessageTypography>
+            その長い歴史の中で、さまざまな人たちが小杉湯に集まり、さまざまな物語が生まれてきました。
+          </MessageTypography>
+        </IntroStoryFinalMessage>
+
+        <IntroStoryFinalPhoto>
+          <Picture relativePath="photos/top/facility_7.jpg" />
+        </IntroStoryFinalPhoto>
+      </IntroStoryUnitFinal>
     </>
   );
 };
 
+const MessageTypography = styled.p`
+  ${Typography.Mixin.DISPLAY};
+  ${Typography.Mixin.VERTICAL_WRITING};
+  height: 400px;
+  font-size: ${TextSize.NORMAL}rem;
+`;
+
 const IntroStoryUnitNormal = styled.section`
+  display: flex;
   max-width: ${ModuleWidth.WIDE}px;
   margin: ${BigSpacing.NORMAL}px auto;
-  display: flex;
 `;
 
 const IntroStoryUnitColumnSub = styled.div`
-  width: 20%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   align-items: center;
+  justify-content: flex-end;
+  width: 20%;
 `;
 
 const IntroStoryUnitColumnMain = styled.div`
   width: 80%;
 `;
 
-const IntroStoryPhoto = styled.div`
+const IntroStoryNormalPhoto = styled.div`
   &::after {
     content: '';
     display: block;
@@ -295,11 +310,34 @@ const IntroStoryPhoto = styled.div`
   }
 `;
 
-const MessageTypography = styled.p`
-  ${Typography.Mixin.DISPLAY};
-  ${Typography.Mixin.VERTICAL_WRITING};
+const IntroStoryUnitFinal = styled.section`
+  position: relative;
+
+  &::after {
+    content: '';
+    display: block;
+    padding-bottom: ${AspectRatio.R_1_BY_1}%;
+  }
+`;
+
+const IntroStoryFinalPhoto = styled.section`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+`;
+
+const IntroStoryFinalMessage = styled.div`
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  width: 100%;
   height: 400px;
-  font-size: ${TextSize.NORMAL}rem;
+  z-index: 1;
 `;
 
 const GridOuter = styled.div`
