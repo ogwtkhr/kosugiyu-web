@@ -2,7 +2,15 @@ import React, { useRef } from 'react';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 import { Link } from 'gatsby';
-import { Spacing, Typography, ScreenType, Colors, TextSize, TextWeight } from '@/constants';
+import {
+  Spacing,
+  Typography,
+  ScreenType,
+  Colors,
+  TextSize,
+  TextWeight,
+  LineHeight,
+} from '@/constants';
 import { HeroImage, MainLogo } from '@/components';
 import { useMenu } from '@/hooks';
 
@@ -20,14 +28,17 @@ export const TopModule: React.FC = () => {
     <>
       <Container>
         <SideColumn>
-          <SideColumnInner>
-            <LogoContainer>
-              <Logo>
-                <MainLogo />
-              </Logo>
-              <LogoCopy>高円寺・昭和八年創業</LogoCopy>
-            </LogoContainer>
-          </SideColumnInner>
+          <LogoContainer>
+            <Logo>
+              <MainLogo />
+            </Logo>
+            <LogoCopy>高円寺 昭和八年創業</LogoCopy>
+          </LogoContainer>
+        </SideColumn>
+        <MainColumn>
+          <HeroArea>
+            <HeroImage />
+          </HeroArea>
           <MenuList>
             <MenuItem onClick={scroll}>
               <MenuType>小杉湯について</MenuType>
@@ -40,13 +51,9 @@ export const TopModule: React.FC = () => {
               </MenuItem>
             ))}
           </MenuList>
-        </SideColumn>
-        <MainColumn>
-          <HeroArea>
-            <HeroImage />
-          </HeroArea>
         </MainColumn>
       </Container>
+
       <div ref={sentinelRef} />
     </>
   );
@@ -68,8 +75,7 @@ const SideColumn = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 30%;
-  min-width: 280px;
+  width: 130px;
   padding: ${Spacing.XXX_LARGE}px;
 
   ${media.lessThan(ScreenType.MEDIUM)`
@@ -82,34 +88,39 @@ const MainColumn = styled.div`
   flex: 1;
 `;
 
-const SideColumnInner = styled.div`
+const LogoContainer = styled.div`
   display: flex;
-  flex: 1;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
 `;
 
-const LogoContainer = styled.div``;
-
 const Logo = styled.h1`
-  width: 130px;
+  width: 43px;
 `;
 
 const LogoCopy = styled.p`
-  ${Typography.Mixin.EXTENDED};
-  margin-top: ${Spacing.NORMAL}px;
+  writing-mode: vertical-rl;
+  margin-top: ${Spacing.X_LARGE}px;
+  font-size: ${TextSize.SMALL}rem;
   font-weight: ${TextWeight.BOLD};
+  letter-spacing: 0.3rem;
   ${media.lessThan(ScreenType.MEDIUM)`
     font-size: ${TextSize.SMALL}rem;
   `}
 `;
 
 const MenuList = styled.ul`
-  cursor: pointer;
+  position: absolute;
+  top: 10px; // TODO
+  right: ${Spacing.XXX_LARGE}px;
+  /* cursor: pointer; */
 `;
 
 const MenuItem = styled.li`
-  margin-top: ${Spacing.MIDDLE}px;
+  display: inline-block;
+  margin-left: ${Spacing.MIDDLE}px;
+  line-height: ${LineHeight.MONOLITHIC};
+  font-size: ${TextSize.SMALL}rem;
 
   & a {
     color: black;
@@ -136,16 +147,21 @@ const MenuItem = styled.li`
 
 const MenuType = styled.span`
   display: inline-block;
-  ${Typography.Mixin.EXTENDED};
   font-weight: ${TextWeight.BOLD};
+
+  &::before {
+    content: '●';
+  }
 `;
 
 const HeroArea = styled.div`
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: center;
-  height: calc(100% - ${Spacing.XXX_LARGE}px * 2);
-  margin: ${Spacing.XXX_LARGE}px 0;
+  height: calc(100% - ${Spacing.XXX_LARGE}px);
+  margin-top: ${Spacing.XXX_LARGE}px;
+  margin-right: ${Spacing.XXX_LARGE}px;
 
   ${media.lessThan(ScreenType.MEDIUM)`
     margin: 0;

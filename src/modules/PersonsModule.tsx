@@ -6,19 +6,17 @@ import {
   StyleMixin,
   AspectRatio,
   TextSize,
-  Typography,
   TextWeight,
   LineHeight,
+  LetterSpacing,
   Colors,
   Spacing,
-  ScreenValue,
   BigSpacing,
   ScreenType,
-  DateFormat,
 } from '@/constants';
+import { ArrowIcon } from '@/components';
 import dayjs from 'dayjs';
 import media from 'styled-media-query';
-import { PersonsLogoVertical } from '@/components';
 
 import headingImage from '@/images/photos/persons/persons_heading.jpg';
 
@@ -29,12 +27,12 @@ type PersonsModuleProps = {
 export const PersonsModule: React.FC<PersonsModuleProps> = ({ useTitle }) => {
   const data = useStaticQuery<AllMicrocmsPersonsQuery>(graphql`
     query allMicrocmsPersons {
-      allMicrocmsPersons(sort: { fields: [createdAt], order: DESC }) {
+      allMicrocmsPersons {
         nodes {
           id
-          title
+          position
+          name
           slug
-          publishedAt
           mainVisual {
             url
           }
@@ -45,33 +43,27 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({ useTitle }) => {
 
   return (
     <Container>
-      {useTitle && (
-        <PersonsHeading src={headingImage}>
-          <PersonsLogoContainer>
-            <PersonsLogoInner>
-              <PersonsLogoVertical />
-            </PersonsLogoInner>
-          </PersonsLogoContainer>
-        </PersonsHeading>
-      )}
-      <ArticleList>
-        {data.allMicrocmsPersons.nodes.map((entry) => {
-          const slug = entry.slug || '';
-          const title = entry.title || '';
-          const mainVisualUrl = entry?.mainVisual?.url || '';
-          const publishedAt = entry?.publishedAt || '';
-          return (
-            <ArticleListItem key={entry.slug}>
-              <ArticleItem
-                slug={slug}
-                title={title}
-                mainVisualUrl={mainVisualUrl}
-                publishedAt={publishedAt}
-              />
-            </ArticleListItem>
-          );
-        })}
-      </ArticleList>
+      {useTitle && <PersonsHeading src={headingImage}></PersonsHeading>}
+      <ArticleListContainer>
+        <ArticleList>
+          {data.allMicrocmsPersons.nodes.map((entry) => {
+            const slug = entry.slug || '';
+            const position = entry.position || '';
+            const name = entry.name || '';
+            const mainVisualUrl = entry?.mainVisual?.url || '';
+            return (
+              <ArticleListItem key={entry.slug}>
+                <ArticleItem
+                  slug={slug}
+                  position={position}
+                  name={name}
+                  mainVisualUrl={mainVisualUrl}
+                />
+              </ArticleListItem>
+            );
+          })}
+        </ArticleList>
+      </ArticleListContainer>
     </Container>
   );
 };
@@ -87,22 +79,6 @@ const PersonsHeading = styled.div`
   `}
 `;
 
-const PersonsLogoContainer = styled.h2`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 140px;
-  height: 200px;
-  margin: 0 auto;
-  border: solid 1px ${Colors.ABSTRACT_NAVY};
-  background-color: ${Colors.ABSTRACT_WHITE};
-`;
-
-const PersonsLogoInner = styled.div`
-  width: 32px;
-  height: 160px;
-`;
-
 const Container = styled.div`
   width: 100%;
   background-color: ${Colors.UI_PAPER};
@@ -110,29 +86,32 @@ const Container = styled.div`
 
 type ArticleItemProps = {
   slug: string;
-  title: string;
+  position: string;
+  name: string;
   mainVisualUrl: string;
-  publishedAt: string;
 };
 
-const ArticleItem: React.FC<ArticleItemProps> = ({ slug, title, mainVisualUrl, publishedAt }) => {
-  const formattedPublishedAt = useMemo(
-    () => dayjs(publishedAt).format(DateFormat.YEAR_MONTH_DATE_JP),
-    [publishedAt],
-  );
+const ArticleItem: React.FC<ArticleItemProps> = ({ slug, position, name, mainVisualUrl }) => {
+  // const formattedPublishedAt = useMemo(
+  //   () => dayjs(publishedAt).format(DateFormat.YEAR_MONTH_DATE_JP),
+  //   [publishedAt],
+  // );
 
   return (
-    <ArticleItemContainer>
-      <ArticleLink to={`/persons/${slug}`}>
-        <ArticleThumbnailContainer>
-          <ArticleThumbnail src={mainVisualUrl} />
-          <ArticleTitleContainer>
-            <PublishDate>{formattedPublishedAt}</PublishDate>
-            <ArticleTitle>{title}</ArticleTitle>
-          </ArticleTitleContainer>
-        </ArticleThumbnailContainer>
-      </ArticleLink>
-    </ArticleItemContainer>
+    <ArticleLink to={`/persons/${slug}`}>
+      <ArticleThumbnailContainer>
+        <ArticleThumbnail src={mainVisualUrl} />
+        <PersonInfo>
+          <PersonPosition>{position}</PersonPosition>
+          <PersonNameContainer>
+            <PersonName>{name}</PersonName>
+            <PersonIconContainer>
+              <ArrowIcon />
+            </PersonIconContainer>
+          </PersonNameContainer>
+        </PersonInfo>
+      </ArticleThumbnailContainer>
+    </ArticleLink>
   );
 };
 
@@ -140,116 +119,75 @@ const ArticleLink = styled(Link)`
   text-decoration: none;
 `;
 
+const ArticleListContainer = styled.div`
+  margin: ${Spacing.LARGE}px auto;
+  max-width: 900px;
+`;
+
 const ArticleList = styled.ul`
-  max-width: ${ScreenValue.LARGE}px;
+  display: grid;
+  grid-gap: ${BigSpacing.XX_SMALL}px;
+  grid-template-columns: repeat(3, 1fr);
   margin: 0 auto;
   overflow: hidden;
-`;
 
-const ArticleListItem = styled.li`
-  margin-bottom: ${Spacing.XX_LARGE}px;
-
-  /* TODO: 調整の余地あり */
   ${media.lessThan(ScreenType.MEDIUM)`
-    margin-bottom: ${BigSpacing.XX_LARGE}px;
+    /* grid-template-columns: repeat(2, 1fr); */
   `}
 `;
 
-const ArticleItemContainer = styled.article`
-  position: relative;
+const ArticleListItem = styled.li``;
+
+const PersonInfo = styled.div`
+  margin-top: ${Spacing.NORMAL}px;
 `;
 
-const ArticleTitleContainer = styled.div`
-  position: absolute;
-  top: 70%;
-  max-width: 400px;
-  padding: ${Spacing.LARGE}px;
-  border: solid 1px ${Colors.ABSTRACT_NAVY};
-  background-color: ${Colors.ABSTRACT_WHITE};
-
-  ${ArticleListItem}:nth-child(odd) & {
-    right: ${Spacing.LARGE}px;
-  }
-
-  ${ArticleListItem}:nth-child(even) & {
-    left: ${Spacing.LARGE}px;
-  }
-
-  ${media.lessThan(ScreenType.MEDIUM)`
-    right: ${Spacing.LARGE}px;
-    left: ${Spacing.LARGE}px;
-    top: 90%;
-  `}
+const PersonPosition = styled.p`
+  color: ${Colors.UI_BASE};
+  font-size: ${TextSize.X_SMALL}rem;
+  font-weight: ${TextWeight.MEDIUM};
+  letter-spacing: ${LetterSpacing.WIDE}em;
 `;
 
-const ArticleTitle = styled.h3`
-  ${Typography.Mixin.EXTENDED};
-  color: ${Colors.ABSTRACT_NAVY};
+const PersonNameContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const PersonName = styled.h3`
+  color: ${Colors.ABSTRACT_BLACK};
   font-size: ${TextSize.LARGE}rem;
   font-weight: ${TextWeight.BOLD};
   line-height: ${LineHeight.NORMAL};
   text-decoration: none;
+  letter-spacing: ${LetterSpacing.WIDE}em;
 
-  ${media.lessThan(ScreenType.MEDIUM)`
+  /* ${media.lessThan(ScreenType.MEDIUM)`
     font-size: ${TextSize.NORMAL}rem;
-  `}
+  `} */
 `;
 
-const ArticleThumbnailContainer = styled.div`
-  position: relative;
-  width: 100%;
-  max-width: ${ScreenValue.MEDIUM}px;
-  margin: 0 auto;
-
-  &::after {
-    content: '';
-    display: block;
-    padding-bottom: ${AspectRatio.R_4_BY_3}%;
-  }
-
-  ${media.lessThan(ScreenType.MEDIUM)`
-    &::after {
-      display: none;
-    }
-  `}
+const PersonIconContainer = styled.div`
+  width: ${Spacing.XX_LARGE}px;
 `;
+
+const ArticleThumbnailContainer = styled.div``;
 
 const ArticleThumbnail = styled.div`
-  position: absolute;
   width: 100%;
   ${StyleMixin.BACKGROUND_IMAGE_WITH_SRC}
 
   &::after {
     content: '';
     display: block;
-    padding-bottom: ${AspectRatio.R_4_BY_3}%;
-  }
-
-  ${ArticleListItem}:nth-child(odd) & {
-    right: ${BigSpacing.SMALL}px;
-  }
-
-  ${ArticleListItem}:nth-child(even) & {
-    left: ${BigSpacing.SMALL}px;
+    padding-bottom: ${AspectRatio.SILVER_VERTICAL}%;
   }
 
   ${media.lessThan(ScreenType.MEDIUM)`
     width: auto;
     position: static;
-
-    ${ArticleListItem}:nth-child(odd) & {
-      margin-right: ${Spacing.XX_LARGE}px;
-    }
-
-    ${ArticleListItem}:nth-child(even) & {
-      margin-left: ${Spacing.XX_LARGE}px;
-    }
   `}
-`;
-
-const PublishDate = styled.p`
-  color: ${Colors.UI_BASE};
-  text-align: center;
 `;
 
 export default PersonsModule;

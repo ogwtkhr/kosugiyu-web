@@ -45,7 +45,7 @@ export const BaseLayout: React.FC<BaseLayoutProps> = ({
       <GlobalStyle />
       <Main>{children}</Main>
       {useFooter && <Footer />}
-      <Menu />
+      {/* <Menu /> */}
       <Loading />
     </>
   );

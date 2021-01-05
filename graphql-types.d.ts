@@ -1626,7 +1626,10 @@ export type MicrocmsPersons = Node & {
   createdAt?: Maybe<Scalars['Date']>;
   updatedAt?: Maybe<Scalars['Date']>;
   publishedAt?: Maybe<Scalars['Date']>;
+  revisedAt?: Maybe<Scalars['Date']>;
   slug?: Maybe<Scalars['String']>;
+  position?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   mainVisual?: Maybe<MicrocmsPersonsMainVisual>;
   body?: Maybe<Scalars['String']>;
@@ -1652,6 +1655,14 @@ export type MicrocmsPersonsUpdatedAtArgs = {
 
 
 export type MicrocmsPersonsPublishedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+export type MicrocmsPersonsRevisedAtArgs = {
   formatString?: Maybe<Scalars['String']>;
   fromNow?: Maybe<Scalars['Boolean']>;
   difference?: Maybe<Scalars['String']>;
@@ -1775,7 +1786,10 @@ export type MicrocmsPersonsFieldsEnum =
   | 'createdAt'
   | 'updatedAt'
   | 'publishedAt'
+  | 'revisedAt'
   | 'slug'
+  | 'position'
+  | 'name'
   | 'title'
   | 'mainVisual___url'
   | 'body'
@@ -1794,7 +1808,10 @@ export type MicrocmsPersonsFilterInput = {
   createdAt?: Maybe<DateQueryOperatorInput>;
   updatedAt?: Maybe<DateQueryOperatorInput>;
   publishedAt?: Maybe<DateQueryOperatorInput>;
+  revisedAt?: Maybe<DateQueryOperatorInput>;
   slug?: Maybe<StringQueryOperatorInput>;
+  position?: Maybe<StringQueryOperatorInput>;
+  name?: Maybe<StringQueryOperatorInput>;
   title?: Maybe<StringQueryOperatorInput>;
   mainVisual?: Maybe<MicrocmsPersonsMainVisualFilterInput>;
   body?: Maybe<StringQueryOperatorInput>;
@@ -1924,12 +1941,12 @@ export type Query = {
   allSitePage: SitePageConnection;
   imageSharp?: Maybe<ImageSharp>;
   allImageSharp: ImageSharpConnection;
+  settingYaml?: Maybe<SettingYaml>;
+  allSettingYaml: SettingYamlConnection;
   microcmsArchive?: Maybe<MicrocmsArchive>;
   allMicrocmsArchive: MicrocmsArchiveConnection;
   microcmsPersons?: Maybe<MicrocmsPersons>;
   allMicrocmsPersons: MicrocmsPersonsConnection;
-  settingYaml?: Maybe<SettingYaml>;
-  allSettingYaml: SettingYamlConnection;
   siteBuildMetadata?: Maybe<SiteBuildMetadata>;
   allSiteBuildMetadata: SiteBuildMetadataConnection;
   sitePlugin?: Maybe<SitePlugin>;
@@ -2108,6 +2125,24 @@ export type QueryAllImageSharpArgs = {
 };
 
 
+export type QuerySettingYamlArgs = {
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+  meta?: Maybe<SettingYamlMetaFilterInput>;
+  pages?: Maybe<SettingYamlPagesFilterListInput>;
+};
+
+
+export type QueryAllSettingYamlArgs = {
+  filter?: Maybe<SettingYamlFilterInput>;
+  sort?: Maybe<SettingYamlSortInput>;
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+};
+
+
 export type QueryMicrocmsArchiveArgs = {
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
@@ -2143,7 +2178,10 @@ export type QueryMicrocmsPersonsArgs = {
   createdAt?: Maybe<DateQueryOperatorInput>;
   updatedAt?: Maybe<DateQueryOperatorInput>;
   publishedAt?: Maybe<DateQueryOperatorInput>;
+  revisedAt?: Maybe<DateQueryOperatorInput>;
   slug?: Maybe<StringQueryOperatorInput>;
+  position?: Maybe<StringQueryOperatorInput>;
+  name?: Maybe<StringQueryOperatorInput>;
   title?: Maybe<StringQueryOperatorInput>;
   mainVisual?: Maybe<MicrocmsPersonsMainVisualFilterInput>;
   body?: Maybe<StringQueryOperatorInput>;
@@ -2155,24 +2193,6 @@ export type QueryMicrocmsPersonsArgs = {
 export type QueryAllMicrocmsPersonsArgs = {
   filter?: Maybe<MicrocmsPersonsFilterInput>;
   sort?: Maybe<MicrocmsPersonsSortInput>;
-  skip?: Maybe<Scalars['Int']>;
-  limit?: Maybe<Scalars['Int']>;
-};
-
-
-export type QuerySettingYamlArgs = {
-  id?: Maybe<StringQueryOperatorInput>;
-  parent?: Maybe<NodeFilterInput>;
-  children?: Maybe<NodeFilterListInput>;
-  internal?: Maybe<InternalFilterInput>;
-  meta?: Maybe<SettingYamlMetaFilterInput>;
-  pages?: Maybe<SettingYamlPagesFilterListInput>;
-};
-
-
-export type QueryAllSettingYamlArgs = {
-  filter?: Maybe<SettingYamlFilterInput>;
-  sort?: Maybe<SettingYamlSortInput>;
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
 };
@@ -3424,7 +3444,7 @@ export type AllMicrocmsPersonsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type AllMicrocmsPersonsQuery = { allMicrocmsPersons: { nodes: Array<(
-      Pick<MicrocmsPersons, 'id' | 'title' | 'slug' | 'publishedAt'>
+      Pick<MicrocmsPersons, 'id' | 'position' | 'name' | 'slug'>
       & { mainVisual?: Maybe<Pick<MicrocmsPersonsMainVisual, 'url'>> }
     )> } };
 
@@ -3444,7 +3464,7 @@ export type Unnamed_2_QueryVariables = Exact<{
 
 
 export type Unnamed_2_Query = { microcmsPersons?: Maybe<(
-    Pick<MicrocmsPersons, 'title' | 'body' | 'publishedAt'>
+    Pick<MicrocmsPersons, 'title' | 'position' | 'body' | 'publishedAt'>
     & { writer?: Maybe<Pick<MicrocmsPersonsWriter, 'name'>>, mainVisual?: Maybe<Pick<MicrocmsPersonsMainVisual, 'url'>> }
   )> };
 

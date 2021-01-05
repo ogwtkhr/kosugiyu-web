@@ -64,9 +64,9 @@ const PersonsPage: React.FC<PersonsPageProps> = ({ data }) => {
             }}
           />
         </MainVisualContainer>
-        <TitleContaier>
+        <TitleContainer>
           <Title>{title}</Title>
-          <MetaInfoCotainer>
+          <MetaInfoContainer>
             <SocialIcons>
               <TwitterIcon />
               <FacebookIcon />
@@ -75,8 +75,8 @@ const PersonsPage: React.FC<PersonsPageProps> = ({ data }) => {
               <PublishedDate>{publishedDate}</PublishedDate>
               <WriterName>{writerName}</WriterName>
             </MetaInfo>
-          </MetaInfoCotainer>
-        </TitleContaier>
+          </MetaInfoContainer>
+        </TitleContainer>
         <Article
           dangerouslySetInnerHTML={{
             __html: data.microcmsPersons?.body || '',
@@ -91,6 +91,7 @@ export const query = graphql`
   query($slug: String!) {
     microcmsPersons(slug: { eq: $slug }) {
       title
+      position
       body
       publishedAt
       writer {
@@ -107,7 +108,7 @@ const Container = styled.div`
   background-color: ${Colors.UI_PAPER};
 `;
 
-const TitleContaier = styled.div`
+const TitleContainer = styled.div`
   position: relative;
   z-index: ${Layer.BASE};
   max-width: ${ModuleWidth.ARTICLE}px;
@@ -134,7 +135,7 @@ const Title = styled.h2`
   `}
 `;
 
-const MetaInfoCotainer = styled.div`
+const MetaInfoContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;

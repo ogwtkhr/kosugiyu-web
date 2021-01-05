@@ -34,6 +34,10 @@ export const LineHeight = {
   THICK: 2,
 } as const;
 
+export const LetterSpacing = {
+  WIDE: 0.25,
+} as const;
+
 const Mixin = {
   BASE: css`
     color: ${Colors.UI_TEXT_MAIN};

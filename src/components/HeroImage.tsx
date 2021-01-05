@@ -8,7 +8,7 @@ export const HeroImage: React.FC = () => {
   return (
     <Container>
       <Picture relativePath={`photos/top/hero_1.jpg`} />
-
+      <BusinessInfo>平日 15:30-25:45 土日 8:00-25:45 木曜定休 入浴料金・大人470円</BusinessInfo>
       <ScrollLineContainer>
         <ScrollLineMessage>SCROLL</ScrollLineMessage>
         <ScrollLine />
@@ -24,6 +24,14 @@ const Container = styled.div`
   overflow: hidden;
   background-color: ${Colors.UI_OBJECT_PLACEHOLDER};
   ${StyleMixin.BACKGROUND_IMAGE}
+`;
+
+const BusinessInfo = styled.div`
+  position: absolute;
+  top: ${Spacing.NORMAL}px;
+  right: ${Spacing.NORMAL}px;
+  color: ${Colors.UI_TEXT_DARK_BACKGROUND};
+  font-size: ${TextSize.X_SMALL}rem;
 `;
 
 const ScrollLineContainer = styled.div`

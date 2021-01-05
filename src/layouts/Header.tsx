@@ -26,7 +26,7 @@ export const Header: React.FC<Props> = ({ usePersonsHeader }) => (
         )}
       </Heading>
     </Content>
-    <Spacer />
+    {/* <Spacer /> */}
   </>
 );
 
@@ -39,9 +39,9 @@ const spacingMixin = css`
 
 const Content = styled.header`
   display: flex;
-  position: fixed;
+  /* position: fixed;
   z-index: ${Layer.FIXED};
-  top: 0;
+  top: 0; */
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -50,16 +50,16 @@ const Content = styled.header`
   ${spacingMixin}
 `;
 
-const Spacer = styled.div`
-  ${spacingMixin};
-`;
+// const Spacer = styled.div`
+//   ${spacingMixin};
+// `;
 
 const Heading = styled.h1`
-  height: 32px;
+  height: 91px;
 
-  ${media.lessThan(ScreenType.MEDIUM)`
+  /* ${media.lessThan(ScreenType.MEDIUM)`
     height: 22px;
-  `}
+  `} */
 `;
 
 const StyledLink = styled(Link)`

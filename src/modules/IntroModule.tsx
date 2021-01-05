@@ -418,7 +418,6 @@ export const IntroModule: React.FC = () => {
           </EndingMessageContainer>
         )}
       </StickyArea>
-      <Indicator current={1} total={8} />
     </>
   );
 };

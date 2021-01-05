@@ -1,6 +1,7 @@
 export * from './Heading';
 export * from './Button';
 export * from './Logo';
+export * from './Icon';
 export * from './HeroImage';
 export * from './Sticky';
 export * from './Grid';
