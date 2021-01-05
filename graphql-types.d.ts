@@ -1634,6 +1634,7 @@ export type MicrocmsPersons = Node & {
   mainVisual?: Maybe<MicrocmsPersonsMainVisual>;
   body?: Maybe<Scalars['String']>;
   writer?: Maybe<MicrocmsPersonsWriter>;
+  credit?: Maybe<Scalars['String']>;
   personsId?: Maybe<Scalars['String']>;
 };
 
@@ -1798,6 +1799,7 @@ export type MicrocmsPersonsFieldsEnum =
   | 'writer___updatedAt'
   | 'writer___publishedAt'
   | 'writer___name'
+  | 'credit'
   | 'personsId';
 
 export type MicrocmsPersonsFilterInput = {
@@ -1816,6 +1818,7 @@ export type MicrocmsPersonsFilterInput = {
   mainVisual?: Maybe<MicrocmsPersonsMainVisualFilterInput>;
   body?: Maybe<StringQueryOperatorInput>;
   writer?: Maybe<MicrocmsPersonsWriterFilterInput>;
+  credit?: Maybe<StringQueryOperatorInput>;
   personsId?: Maybe<StringQueryOperatorInput>;
 };
 
@@ -2186,6 +2189,7 @@ export type QueryMicrocmsPersonsArgs = {
   mainVisual?: Maybe<MicrocmsPersonsMainVisualFilterInput>;
   body?: Maybe<StringQueryOperatorInput>;
   writer?: Maybe<MicrocmsPersonsWriterFilterInput>;
+  credit?: Maybe<StringQueryOperatorInput>;
   personsId?: Maybe<StringQueryOperatorInput>;
 };
 
@@ -3464,7 +3468,7 @@ export type Unnamed_2_QueryVariables = Exact<{
 
 
 export type Unnamed_2_Query = { microcmsPersons?: Maybe<(
-    Pick<MicrocmsPersons, 'title' | 'position' | 'name' | 'body' | 'publishedAt'>
+    Pick<MicrocmsPersons, 'title' | 'position' | 'name' | 'body' | 'credit' | 'publishedAt'>
     & { writer?: Maybe<Pick<MicrocmsPersonsWriter, 'name'>>, mainVisual?: Maybe<Pick<MicrocmsPersonsMainVisual, 'url'>> }
   )> };
 

@@ -15,6 +15,7 @@ import {
   Colors,
   Typography,
   TextSize,
+  LetterSpacing,
   ScreenType,
   LineHeight,
   ScreenValue,
@@ -39,6 +40,7 @@ const PersonsPage: React.FC<PersonsPageProps> = ({ data }) => {
   const mainVisual = data.microcmsPersons?.mainVisual?.url || '';
   const writerName = data.microcmsPersons?.writer?.name || '';
   const body = data.microcmsPersons?.body || '';
+  const credit = data.microcmsPersons?.credit || '';
 
   console.log(data.microcmsPersons);
 
@@ -83,6 +85,10 @@ const PersonsPage: React.FC<PersonsPageProps> = ({ data }) => {
           }}
         />
       </Container>
+      <Credit>
+        <CreditTitle>クレジット</CreditTitle>
+        <CreditBody>{credit}</CreditBody>
+      </Credit>
     </BaseLayout>
   );
 };
@@ -94,6 +100,7 @@ export const query = graphql`
       position
       name
       body
+      credit
       publishedAt
       writer {
         name
@@ -141,10 +148,13 @@ const Article = styled.article`
   & p {
     font-size: ${TextSize.NORMAL}rem;
     font-weight: ${TextWeight.NORMAL};
+    letter-spacing: ${LetterSpacing.SEMI_WIDE}em;
   }
 
   & strong {
+    font-size: ${TextSize.NORMAL}rem;
     font-weight: ${TextWeight.MEDIUM};
+    letter-spacing: ${LetterSpacing.WIDE}em;
   }
 
   & img {
@@ -158,6 +168,25 @@ const Article = styled.article`
       width: calc(100% + ${Spacing.LARGE * 2}px);
     `}
   }
+`;
+
+const Credit = styled.div`
+  max-width: ${ModuleWidth.ARTICLE}px;
+  margin: ${Spacing.LARGE}px auto;
+`;
+
+const CreditTitle = styled.div`
+  color: ${Colors.UI_TEXT_WEAKEN};
+  font-size: ${TextSize.NORMAL}rem;
+  font-weight: ${TextWeight.MEDIUM};
+`;
+
+const CreditBody = styled.div`
+  margin-top: ${Spacing.LARGE}px;
+  color: ${Colors.UI_TEXT_WEAKEN};
+  font-size: ${TextSize.SMALL}rem;
+  font-weight: ${TextWeight.MEDIUM};
+  white-space: pre-wrap;
 `;
 
 export default PersonsPage;

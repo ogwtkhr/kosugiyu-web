@@ -2,7 +2,7 @@ import { Link } from 'gatsby';
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { MainLogo } from '@/components';
-import { Colors, Spacing, ScreenType, Layer } from '@/constants';
+import { Colors, Spacing, BigSpacing, ScreenType, Layer } from '@/constants';
 import { Shadow } from '@/constants/shadow';
 import media from 'styled-media-query';
 
@@ -41,7 +41,7 @@ const Heading = styled.h1``;
 
 const SiteLogo = styled.h1`
   height: 90px;
-  margin: ${Spacing.X_LARGE}px;
+  margin: ${BigSpacing.X_SMALL}px;
 `;
 
 const StyledLink = styled(Link)`
