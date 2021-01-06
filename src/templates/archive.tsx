@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { graphql } from 'gatsby';
 import dayjs from 'dayjs';
-import { Twitter, FacebookCircle } from '@styled-icons/boxicons-logos';
+// import { Twitter, FacebookCircle } from '@styled-icons/boxicons-logos';
 
 import { Query } from '@/types';
 import { BaseLayout, Meta } from '@/layouts';
@@ -17,7 +17,6 @@ import {
   TextSize,
   ScreenType,
   LineHeight,
-  ScreenValue,
   Layer,
   DateFormat,
 } from '@/constants';

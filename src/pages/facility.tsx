@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BaseLayout, Meta } from '@/layouts';
 import { usePageInfo } from '@/hooks';
-import { Picture, GoogleMap, RippleCircle } from '@/components';
+import { Picture, GoogleMap, RippleCircle, CommonTitle } from '@/components';
 import styled from 'styled-components';
 import { ChevronUp, ChevronDown } from '@styled-icons/bootstrap';
 
@@ -228,6 +228,8 @@ const FacilityPage: React.FC = () => {
     <>
       <BaseLayout>
         <Meta title={pageTitle} description={pageDescription} />
+
+        <CommonTitle title="営業・施設案内" imagePath="photos/persons/persons_heading.jpg" />
         <FacilityModule>
           <FacilityView>
             <BigImageContainer
@@ -255,7 +257,7 @@ const FacilityPage: React.FC = () => {
               <DescriptionPhoto>
                 <Picture relativePath={'photos/facility/facility_photo_1.jpg'} />
               </DescriptionPhoto>
-              <FacilityInfoControls>
+              {/* <FacilityInfoControls>
                 <UpButton
                   color={Colors.ABSTRACT_WHITE}
                   onClick={() => {
@@ -271,7 +273,7 @@ const FacilityPage: React.FC = () => {
                     if (currentIndex < facilityInfos.length - 1) setCurrentIndex(currentIndex + 1);
                   }}
                 />
-              </FacilityInfoControls>
+              </FacilityInfoControls> */}
             </DescriptionContainer>
           </FacilityView>
         </FacilityModule>
@@ -302,18 +304,18 @@ const DescriptionContainer = styled.div`
   bottom: 5vw;
   width: 600px;
   background-color: ${Colors.ABSTRACT_WHITE};
-  box-shadow: ${Shadow.GRAY};
+  border: solid 2px ${Colors.UI_LINE_NORMAL};
   transition: 1s ease;
 `;
 
 const DescriptionTitle = styled.h3`
-  ${Typography.Mixin.EXTENDED};
-  font-weight: ${TextWeight.BOLD};
-  font-size: ${TextSize.X_LARGE}rem;
+  ${Typography.Mixin.DISPLAY};
+  /* font-weight: ${TextWeight.BOLD}; */
+  font-size: ${TextSize.LARGE}rem;
 `;
 
 const DescriptionBody = styled.p`
-  ${Typography.Mixin.EXTENDED};
+  ${Typography.Mixin.DISPLAY};
   font-size: ${TextSize.SMALL}rem;
 `;
 
@@ -323,7 +325,7 @@ const DescriptionPhoto = styled.div`
   position: absolute;
   width: 300px;
   background-color: gray;
-  /* box-shadow: ${Shadow.GRAY}; */
+  border: solid 2px ${Colors.UI_LINE_NORMAL};
 
   /* &::after {
     content: '';

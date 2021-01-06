@@ -6,6 +6,7 @@ import {
   Opacity,
   Layer,
   Spacing,
+  BigSpacing,
   StyleMixin,
   ScreenType,
   TextSize,
@@ -120,8 +121,8 @@ const Trigger = styled.button<TriggerProps>`
   ${StyleMixin.BUTTON_RESET};
   position: fixed;
   z-index: ${Layer.OVERLAY_CONTROL};
-  top: ${Spacing.XXX_LARGE}px;
-  left: ${Spacing.XXX_LARGE}px;
+  top: ${BigSpacing.NORMAL}px;
+  right: ${Spacing.XXX_LARGE}px;
   width: ${Spacing.XXX_LARGE}px;
   height: ${Spacing.XXX_LARGE}px;
   mix-blend-mode: difference;
@@ -139,7 +140,7 @@ const Trigger = styled.button<TriggerProps>`
     content: '';
     display: block;
     position: absolute;
-    left: 0;
+    right: 0;
     height: 1px;
     transition: ${TRANSITION_TIME}ms ease;
     background-color: white;

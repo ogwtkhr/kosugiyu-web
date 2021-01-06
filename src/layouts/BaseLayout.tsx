@@ -15,11 +15,13 @@ import Loading from './Loading';
 type BaseLayoutProps = {
   useHeader?: boolean;
   useFooter?: boolean;
+  showMenuFirstView?: boolean;
 };
 
 export const BaseLayout: React.FC<BaseLayoutProps> = ({
   useHeader = true,
   useFooter = true,
+  showMenuFirstView = true,
   children,
 }) => {
   const data = useStaticQuery<SiteTitleQuery>(graphql`
@@ -38,7 +40,8 @@ export const BaseLayout: React.FC<BaseLayoutProps> = ({
       <GlobalStyle />
       <Main>{children}</Main>
       {useFooter && <Footer />}
-      {/* <Menu /> */}
+      {/* TODO: hideMenuFirstView */}
+      {showMenuFirstView && <Menu />}
       <Loading />
     </>
   );
