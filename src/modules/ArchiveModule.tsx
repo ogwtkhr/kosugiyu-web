@@ -39,14 +39,23 @@ export const ArchiveModule: React.FC = () => {
     }
   `);
 
+  // TODO
   const baseArticles = data.allMicrocmsArchive.nodes;
   const articles = [...baseArticles, ...baseArticles, ...baseArticles, ...baseArticles];
+  const years = ['2021', '2020'];
 
   return (
     <Container>
       <CommonTitle title="できごと" imagePath="photos/persons/persons_heading.jpg" />
+      <YearNavigation>
+        <YearNavigationList>
+          {years.map((year) => (
+            <YearNavigationItem key={year}>{year}</YearNavigationItem>
+          ))}
+        </YearNavigationList>
+      </YearNavigation>
 
-      {['2021', '2020'].map((year) => (
+      {years.map((year) => (
         <ArticlesByYear key={year}>
           <ArticleYear>
             <ArticleYearText>{year}年のできごと</ArticleYearText>
@@ -110,6 +119,24 @@ const ArticleItem: React.FC<ArticleItemProps> = ({ slug, title, mainVisualUrl, p
   );
 };
 
+const YearNavigation = styled.nav`
+  position: fixed;
+  top: 50%;
+  left: ${Spacing.LARGE}px;
+`;
+
+const YearNavigationList = styled.ul``;
+
+const YearNavigationItem = styled.li`
+  font-size: ${TextSize.SMALL}rem;
+  ${Typography.Mixin.DISPLAY};
+  margin-bottom: ${Spacing.SMALL}px;
+
+  &:last-child {
+    margin-bottom: none;
+  }
+`;
+
 const ArticleLink = styled(Link)`
   display: block;
   text-decoration: none;
@@ -121,10 +148,18 @@ const ArticlesByYear = styled.div`
   margin: ${Spacing.XXX_LARGE}px auto;
 `;
 
-const ArticleYear = styled.div``;
+const ArticleYear = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+`;
 
 const ArticleYearText = styled.p`
   ${Typography.Mixin.DISPLAY};
+  display: inline-block;
+  padding-bottom: ${Spacing.NORMAL}px;
+  border-bottom: solid 1px ${Colors.UI_LINE_NORMAL};
   font-size: ${TextSize.LARGE}rem;
   text-align: center;
 `;
