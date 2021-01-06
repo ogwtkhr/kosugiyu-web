@@ -32,7 +32,7 @@ const TitleImage = styled.div`
 
 const TitleMain = styled.div`
   position: relative;
-  width: 30%;
+  width: 20%;
 `;
 
 const TitleText = styled.h2`
