@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Picture, UnderLineText } from '@/components';
-import { Spacing } from '@/constants';
+import { Spacing, ModuleWidth } from '@/constants';
 
 type CommonTitleProps = {
   title: string;
@@ -23,7 +23,11 @@ export const CommonTitle: React.FC<CommonTitleProps> = ({ title, imagePath }) =>
 
 const Container = styled.div`
   display: flex;
+
+  max-width: ${ModuleWidth.WIDE}px;
   height: 600px;
+
+  margin: 0 auto;
 `;
 
 const TitleImage = styled.div`

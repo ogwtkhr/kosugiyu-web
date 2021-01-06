@@ -64,7 +64,7 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({
             </PersonsHeadingBodyCopy>
           </PersonsHeadingMain>
           <PersonsHeadingImage>
-            <Picture relativePath="photos/persons/persons_heading.jpg" />
+            <Picture relativePath="photos/persons/hero.jpg" />
           </PersonsHeadingImage>
         </PersonsHeading>
       )}
@@ -117,7 +117,9 @@ const HeadingTitle: React.FC = () => (
 
 const PersonsHeading = styled.div`
   display: flex;
+  max-width: ${ModuleWidth.WIDE}px;
   height: 600px;
+  margin: 0 auto;
 `;
 
 const PersonsHeadingImage = styled.div`

@@ -134,6 +134,7 @@ const TopPersonContainer = styled.div`
   justify-content: space-around;
   align-items: center;
   max-width: ${ModuleWidth.SEMI_WIDE}px;
+  margin: 0 auto;
 `;
 
 const TopPersonThumbnail = styled.div`

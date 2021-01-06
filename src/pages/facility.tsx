@@ -229,7 +229,7 @@ const FacilityPage: React.FC = () => {
       <BaseLayout>
         <Meta title={pageTitle} description={pageDescription} />
 
-        <CommonTitle title="営業・施設案内" imagePath="photos/facility/heading.jpg" />
+        <CommonTitle title="営業・施設案内" imagePath="photos/facility/hero.jpg" />
         <UnderLineText>営業時間</UnderLineText>
         <UnderLineText>入浴料金</UnderLineText>
         <FacilityModule>
