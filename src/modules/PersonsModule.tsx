@@ -12,10 +12,8 @@ import {
   ModuleWidth,
   ScreenType,
 } from '@/constants';
-import { PersonItem, TopPersonItem } from '@/components';
+import { PersonItem, TopPersonItem, Picture } from '@/components';
 import media from 'styled-media-query';
-
-import headingImage from '@/images/photos/persons/persons_heading.jpg';
 
 type PersonsModuleProps = {
   useTitle?: boolean;
@@ -65,7 +63,9 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({
               親譲りの無鉄砲で小供の時から損ばかりして居る。小学校に居る時分学校の二階から飛び降りて一週間程腰を抜かした事がある。なぜそんな無闇(むやみ)をしたと聞く人があるかも知れぬ。別段深い理由でもない。
             </PersonsHeadingBodyCopy>
           </PersonsHeadingMain>
-          <PersonsHeadingImage src={headingImage} />
+          <PersonsHeadingImage>
+            <Picture relativePath="photos/persons/persons_heading.jpg" />
+          </PersonsHeadingImage>
         </PersonsHeading>
       )}
 
@@ -122,7 +122,6 @@ const PersonsHeading = styled.div`
 
 const PersonsHeadingImage = styled.div`
   flex: 1;
-  ${StyleMixin.BACKGROUND_IMAGE_WITH_SRC};
 `;
 
 const PersonsHeadingMain = styled.div`

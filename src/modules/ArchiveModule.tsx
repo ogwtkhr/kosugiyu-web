@@ -19,12 +19,11 @@ import {
 } from '@/constants';
 import dayjs from 'dayjs';
 import media from 'styled-media-query';
-import { ArchiveLogoVertical } from '@/components';
 
 import headingImage from '@/images/photos/archive/archive_heading.jpg';
 
-// TODO
-const tags = ['タグ1', 'タグ2'];
+import { PersonItem, TopPersonItem, CommonTitle } from '@/components';
+import { Picture } from '@/components';
 
 export const ArchiveModule: React.FC = () => {
   const data = useStaticQuery<AllMicrocmsArchiveQuery>(graphql`
@@ -45,13 +44,7 @@ export const ArchiveModule: React.FC = () => {
 
   return (
     <Container>
-      <ArchiveHeading src={headingImage}>
-        <ArchiveLogoContainer>
-          <ArchiveLogoInner>
-            <ArchiveLogoVertical />
-          </ArchiveLogoInner>
-        </ArchiveLogoContainer>
-      </ArchiveHeading>
+      <CommonTitle title="できごと" imagePath="photos/persons/persons_heading.jpg" />
 
       {['2021', '2020'].map((year) => (
         <ArticlesByYear key={year}>
@@ -97,22 +90,6 @@ const ArchiveHeading = styled.div`
   `}
 `;
 
-const ArchiveLogoContainer = styled.h2`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 140px;
-  height: 200px;
-  margin: 0 auto;
-  border: solid 1px ${Colors.ABSTRACT_NAVY};
-  background-color: ${Colors.ABSTRACT_WHITE};
-`;
-
-const ArchiveLogoInner = styled.div`
-  width: 32px;
-  height: 160px;
-`;
-
 const Container = styled.div`
   width: 100%;
   background-color: ${Colors.UI_PAPER};
@@ -140,9 +117,6 @@ const ArticleItem: React.FC<ArticleItemProps> = ({ slug, title, mainVisualUrl, p
         <ArticleTitleContainer>
           <PublishDate>{formattedPublishedAt}</PublishDate>
           <ArticleTitle>{title}</ArticleTitle>
-          {tags.map((tag) => (
-            <ArticleTag key={tag}>{tag}</ArticleTag>
-          ))}
         </ArticleTitleContainer>
       </ArticleLink>
     </ArticleItemContainer>
@@ -235,8 +209,6 @@ const ArticleTitleContainer = styled.div`
 `;
 
 const ArticleTitle = styled.h3`
-  ${Typography.Mixin.EXTENDED};
-  color: ${Colors.ABSTRACT_NAVY};
   font-size: ${TextSize.LARGE}rem;
   font-weight: ${TextWeight.BOLD};
   line-height: ${LineHeight.NORMAL};

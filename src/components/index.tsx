@@ -16,3 +16,4 @@ export * from './SineWave';
 export * from './Ripple';
 export * from './ScrollLine';
 export * from './PersonItem';
+export * from './CommonTitle';
