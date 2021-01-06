@@ -56,6 +56,19 @@ const ArchivePage: React.FC<ArchivePageProps> = ({ data }) => {
     <BaseLayout useHeader>
       <Meta title={title} description={strippedBody} ogImage={mainVisual} />
       <Container>
+        <TitleContainer>
+          <Title>{title}</Title>
+          <MetaInfoContainer>
+            {/* <SocialIcons>
+              <TwitterIcon />
+              <FacebookIcon />
+            </SocialIcons> */}
+            <MetaInfo>
+              <PublishedDate>{publishedDate}</PublishedDate>
+              {/* <WriterName>{writerName}</WriterName> */}
+            </MetaInfo>
+          </MetaInfoContainer>
+        </TitleContainer>
         <MainVisualContainer ref={mainVisualRef}>
           <MainVisual
             src={mainVisual}
@@ -64,19 +77,6 @@ const ArchivePage: React.FC<ArchivePageProps> = ({ data }) => {
             }}
           />
         </MainVisualContainer>
-        <TitleContaier>
-          <Title>{title}</Title>
-          <MetaInfoCotainer>
-            <SocialIcons>
-              <TwitterIcon />
-              <FacebookIcon />
-            </SocialIcons>
-            <MetaInfo>
-              <PublishedDate>{publishedDate}</PublishedDate>
-              {/* <WriterName>{writerName}</WriterName> */}
-            </MetaInfo>
-          </MetaInfoCotainer>
-        </TitleContaier>
         <Article
           dangerouslySetInnerHTML={{
             __html: data.microcmsArchive?.body || '',
@@ -126,7 +126,7 @@ const Container = styled.div`
   background-color: ${Colors.UI_PAPER};
 `;
 
-const TitleContaier = styled.div`
+const TitleContainer = styled.div`
   max-width: ${ModuleWidth.ARTICLE}px;
   margin: ${Spacing.XXX_LARGE}px auto;
   position: relative;
@@ -143,8 +143,7 @@ const TitleContaier = styled.div`
 `;
 
 const Title = styled.h2`
-  ${Typography.Mixin.EXTENDED};
-  color: ${Colors.ABSTRACT_NAVY};
+  ${Typography.Mixin.DISPLAY};
   font-size: ${TextSize.X_LARGE}rem;
   font-weight: ${TextWeight.BOLD};
   line-height: ${LineHeight.NORMAL};
@@ -154,7 +153,7 @@ const Title = styled.h2`
   `}
 `;
 
-const MetaInfoCotainer = styled.div`
+const MetaInfoContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -180,32 +179,32 @@ const iconMixin = css`
   color: ${Colors.ABSTRACT_NAVY};
 `;
 
-const TwitterIcon = styled(Twitter)`
-  ${iconMixin};
-`;
+// const TwitterIcon = styled(Twitter)`
+//   ${iconMixin};
+// `;
 
-const FacebookIcon = styled(FacebookCircle)`
-  ${iconMixin};
-  margin-left: ${Spacing.NORMAL}px;
-`;
+// const FacebookIcon = styled(FacebookCircle)`
+//   ${iconMixin};
+//   margin-left: ${Spacing.NORMAL}px;
+// `;
 
 const MetaInfo = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
-const PublishedDate = styled.p``;
-const WriterName = styled.p`
-  margin-left: ${Spacing.MIDDLE}px;
+const PublishedDate = styled.p`
+  ${Typography.Mixin.DISPLAY};
+  font-size: ${TextSize.SMALL}rem;
+  color: ${Colors.UI_TEXT_SUB};
 `;
 
 const MainVisualContainer = styled.div`
   width: 100%;
-  max-width: ${ScreenValue.LARGE}px;
+  max-width: ${ModuleWidth.WIDE}px;
   margin: 0 auto;
   overflow: hidden;
 
   ${media.greaterThan(ScreenType.LARGE)`
-    margin-top: ${Spacing.XX_LARGE}px;
   `}
 `;
 
