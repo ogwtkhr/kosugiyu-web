@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 // import Transition, { TransitionStatus } from 'react-transition-group/Transition';
-import { GridContainer, GridItem, GridImage, Tape, Picture } from '@/components';
+import { GridContainer, GridItem, GridImage, Picture } from '@/components';
 
 import {
   Typography,
@@ -10,8 +10,6 @@ import {
   ScreenType,
   TextSize,
   BigSpacing,
-  ScreenValue,
-  Transitions,
   Spacing,
   AspectRatio,
   ModuleWidth,
@@ -27,7 +25,7 @@ export const IntroModule: React.FC = () => {
       <IntroStoryUnitNormal>
         <IntroStoryUnitColumnMain>
           <IntroStoryNormalPhoto>
-            <Picture relativePath="photos/top/town_8.jpg" />
+            <Picture relativePath="photos/top/story_1.jpg" />
           </IntroStoryNormalPhoto>
         </IntroStoryUnitColumnMain>
         <IntroStoryUnitColumnSub>
@@ -242,14 +240,14 @@ export const IntroModule: React.FC = () => {
         </IntroStoryUnitColumnSub>
         <IntroStoryUnitColumnMain>
           <IntroStoryNormalPhoto>
-            <Picture relativePath="photos/top/town_8.jpg" />
+            <Picture relativePath="photos/top/story_9.jpg" />
           </IntroStoryNormalPhoto>
         </IntroStoryUnitColumnMain>
       </IntroStoryUnitNormal>
       <IntroStoryUnitNormal>
         <IntroStoryUnitColumnMain>
           <IntroStoryNormalPhoto>
-            <Picture relativePath="photos/top/town_8.jpg" />
+            <Picture relativePath="photos/top/story_10.jpg" />
           </IntroStoryNormalPhoto>
         </IntroStoryUnitColumnMain>
         <IntroStoryUnitColumnSub>
@@ -270,7 +268,7 @@ export const IntroModule: React.FC = () => {
         </IntroStoryFinalMessage>
 
         <IntroStoryFinalPhoto>
-          <Picture relativePath="photos/top/facility_7.jpg" />
+          <Picture relativePath="photos/top/story_11.jpg" />
         </IntroStoryFinalPhoto>
       </IntroStoryUnitFinal>
     </>

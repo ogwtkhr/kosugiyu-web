@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BaseLayout, Meta } from '@/layouts';
 import { usePageInfo } from '@/hooks';
-import { Picture, GoogleMap, RippleCircle, CommonTitle } from '@/components';
+import { Picture, GoogleMap, RippleCircle, CommonTitle, UnderLineText } from '@/components';
 import styled from 'styled-components';
 import { ChevronUp, ChevronDown } from '@styled-icons/bootstrap';
 
@@ -229,7 +229,9 @@ const FacilityPage: React.FC = () => {
       <BaseLayout>
         <Meta title={pageTitle} description={pageDescription} />
 
-        <CommonTitle title="営業・施設案内" imagePath="photos/persons/persons_heading.jpg" />
+        <CommonTitle title="営業・施設案内" imagePath="photos/facility/heading.jpg" />
+        <UnderLineText>営業時間</UnderLineText>
+        <UnderLineText>入浴料金</UnderLineText>
         <FacilityModule>
           <FacilityView>
             <BigImageContainer

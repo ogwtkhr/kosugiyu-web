@@ -11,7 +11,7 @@ export const UnderLineText: React.FC<UnderLineTextTypographyProps> = ({ textSize
 );
 
 const Container = styled.span<UnderLineTextTypographyProps>`
-  display: block;
+  display: inline-block;
   padding-bottom: 0.2em;
   ${Typography.Mixin.DISPLAY};
   border-bottom: solid 1px ${Colors.UI_LINE_NORMAL};

@@ -46,7 +46,7 @@ export const ArchiveModule: React.FC = () => {
 
   return (
     <Container>
-      <CommonTitle title="できごと" imagePath="photos/persons/persons_heading.jpg" />
+      <CommonTitle title="できごと" imagePath="photos/archive/heading.jpg" />
       <YearNavigation>
         <YearNavigationList>
           {years.map((year) => (
