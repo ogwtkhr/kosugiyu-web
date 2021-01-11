@@ -268,7 +268,12 @@ export const IntroModule: React.FC = () => {
         </IntroStoryFinalMessage>
 
         <IntroStoryFinalPhoto>
-          <Picture relativePath="photos/top/story_11.jpg" />
+          <Picture
+            relativePath="photos/top/story_11.jpg"
+            imgStyle={{
+              objectPosition: '50% 0',
+            }}
+          />
         </IntroStoryFinalPhoto>
       </IntroStoryUnitFinal>
     </>
@@ -315,6 +320,11 @@ const IntroStoryUnitFinal = styled.section`
     content: '';
     display: block;
     padding-bottom: ${AspectRatio.R_1_BY_1}%;
+
+    ${media.greaterThan(ScreenType.LARGE)`
+      padding-bottom: 0;
+      height: 800px;
+    `}
   }
 `;
 
