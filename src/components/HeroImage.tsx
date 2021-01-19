@@ -8,7 +8,11 @@ export const HeroImage: React.FC = () => {
   return (
     <Container>
       <Picture relativePath={`photos/top/hero_1.jpg`} />
-      <BusinessInfo>平日 15:30-25:45 土日 8:00-25:45 木曜定休 入浴料金・大人470円</BusinessInfo>
+      <BusinessInfo>
+        平日 15:30-25:45 土日 8:00-25:45 木曜定休
+        <br />
+        入浴料金・大人470円
+      </BusinessInfo>
       <ScrollLineContainer>
         <ScrollLineMessage>SCROLL</ScrollLineMessage>
         <ScrollLine />
@@ -32,8 +36,14 @@ const BusinessInfo = styled.div`
   right: ${Spacing.NORMAL}px;
   color: ${Colors.UI_TEXT_DARK_BACKGROUND};
   font-size: ${TextSize.X_SMALL}rem;
+  ${media.greaterThan(ScreenType.MEDIUM)`
+    & br {
+      display: none;
+    }
+  `};
   ${media.lessThan(ScreenType.MEDIUM)`
-    writing-mode: vertical-lr;
+    top: ${Spacing.NORMAL}px;
+    left: ${Spacing.NORMAL}px;
   `}
 `;
 
@@ -45,8 +55,7 @@ const ScrollLineContainer = styled.div`
   align-items: center;
 
   ${media.lessThan(ScreenType.MEDIUM)`
-    right: auto;
-    left: ${Spacing.XXX_LARGE}px;
+    right: ${Spacing.LARGE}px;
     flex-direction: row-reverse;
   `}
 `;
@@ -60,5 +69,6 @@ const ScrollLineMessage = styled.p`
   ${media.lessThan(ScreenType.MEDIUM)`
     margin-right: 0;
     margin-left: ${Spacing.X_LARGE}px;
+    font-size: ${TextSize.XX_SMALL}rem;
   `}
 `;
