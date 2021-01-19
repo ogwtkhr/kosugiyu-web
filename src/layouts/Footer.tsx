@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Spacing, BigSpacing, TextSize } from '@/constants';
+import { Spacing, BigSpacing, TextSize, ScreenType } from '@/constants';
 import { CombinationLogo } from '@/components';
+import media from 'styled-media-query';
 import { Link } from 'gatsby';
 
 export const Footer: React.FC = () => (
@@ -24,6 +25,10 @@ const Container = styled.footer`
 
 const FooterLogo = styled.div`
   width: ${BigSpacing.NORMAL}px;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    width: ${BigSpacing.SMALL}px;
+  `}
 `;
 
 const FooterText = styled.p`

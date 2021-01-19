@@ -70,9 +70,7 @@ export const IntroModule: React.FC = () => {
               rowStart: 3,
               rowEnd: 6,
             }}
-            box={{
-              marginRight: -4,
-            }}
+            box={{}}
           >
             <GridImage src="photos/top/town_2.jpg" parallaxSpeed={0.06} />
           </GridItem>
@@ -89,9 +87,7 @@ export const IntroModule: React.FC = () => {
               rowStart: 5,
               rowEnd: 11,
             }}
-            box={{
-              margin: 2,
-            }}
+            box={{}}
             centering
           >
             <MessageTypography>
@@ -111,9 +107,7 @@ export const IntroModule: React.FC = () => {
               rowStart: 11,
               rowEnd: 14,
             }}
-            box={{
-              marginRight: 2,
-            }}
+            box={{}}
           >
             <GridImage src="photos/top/town_6.jpg" parallaxSpeed={0.07} />
           </GridItem>
@@ -148,13 +142,8 @@ export const IntroModule: React.FC = () => {
               rowStart: 3,
               rowEnd: 5,
             }}
-            box={{
-              marginRight: -2,
-              marginBottom: -2,
-            }}
-            boxSmall={{
-              marginRight: 0,
-            }}
+            box={{}}
+            boxSmall={{}}
           >
             <GridImage src="photos/top/town_5.jpg" parallaxSpeed={0.08} />
           </GridItem>
@@ -205,9 +194,7 @@ export const IntroModule: React.FC = () => {
               rowStart: 9,
               rowEnd: 11,
             }}
-            box={{
-              marginLeft: 2,
-            }}
+            box={{}}
           >
             <GridImage src="photos/top/town_7.jpg" parallaxSpeed={0.03} />
           </GridItem>
@@ -224,10 +211,7 @@ export const IntroModule: React.FC = () => {
               rowStart: 9,
               rowEnd: 11,
             }}
-            box={{
-              marginTop: 2,
-              marginLeft: 2,
-            }}
+            box={{}}
           >
             <GridImage src="photos/top/town_8.jpg" parallaxSpeed={0.04} />
           </GridItem>
@@ -242,16 +226,20 @@ export const IntroModule: React.FC = () => {
           </MessageTypography>
         </IntroStoryUnitColumnSub>
         <IntroStoryUnitColumnMain>
-          <IntroStoryNormalPhoto>
-            <Picture relativePath="photos/top/story_9.jpg" />
-          </IntroStoryNormalPhoto>
+          <IntersectionFadeIn>
+            <IntroStoryNormalPhoto>
+              <Picture relativePath="photos/top/story_9.jpg" />
+            </IntroStoryNormalPhoto>
+          </IntersectionFadeIn>
         </IntroStoryUnitColumnMain>
       </IntroStoryUnitNormal>
       <IntroStoryUnitNormal>
         <IntroStoryUnitColumnMain>
-          <IntroStoryNormalPhoto>
-            <Picture relativePath="photos/top/story_10.jpg" />
-          </IntroStoryNormalPhoto>
+          <IntersectionFadeIn>
+            <IntroStoryNormalPhoto>
+              <Picture relativePath="photos/top/story_10.jpg" />
+            </IntroStoryNormalPhoto>
+          </IntersectionFadeIn>
         </IntroStoryUnitColumnMain>
         <IntroStoryUnitColumnSub>
           <MessageTypography>

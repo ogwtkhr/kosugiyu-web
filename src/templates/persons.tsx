@@ -143,18 +143,30 @@ const Article = styled.article`
     ${Typography.Mixin.DISPLAY};
     margin-top: ${Spacing.XXX_LARGE}px;
     font-size: ${TextSize.LARGE}rem;
+
+    ${media.lessThan(ScreenType.MEDIUM)`
+      font-size: ${TextSize.NORMAL}rem;
+    `}
   }
 
   & p {
     font-size: ${TextSize.NORMAL}rem;
     font-weight: ${TextWeight.NORMAL};
     letter-spacing: ${LetterSpacing.SEMI_WIDE}em;
+
+    ${media.lessThan(ScreenType.MEDIUM)`
+      font-size: ${TextSize.SMALL}rem;
+    `}
   }
 
   & strong {
-    font-size: ${TextSize.NORMAL}rem;
+    /* font-size: ${TextSize.NORMAL}rem; */
     font-weight: ${TextWeight.MEDIUM};
     letter-spacing: ${LetterSpacing.WIDE}em;
+
+    ${media.lessThan(ScreenType.MEDIUM)`
+      /* font-size: ${TextSize.NORMAL}rem; */
+    `}
   }
 
   & img {
@@ -173,6 +185,9 @@ const Article = styled.article`
 const Credit = styled.div`
   max-width: ${ModuleWidth.ARTICLE}px;
   margin: ${Spacing.LARGE}px auto;
+  ${media.lessThan(ScreenType.MEDIUM)`
+    margin: ${Spacing.LARGE}px;
+  `};
 `;
 
 const CreditTitle = styled.div`

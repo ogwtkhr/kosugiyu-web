@@ -8,10 +8,10 @@ type IntersectionFadeInProps = {
 };
 
 export const IntersectionFadeIn: React.FC<IntersectionFadeInProps> = ({ children }) => {
-  const [ref, isIntersecting, hasIntersected] = useIntersectionObserver<HTMLDivElement>();
+  const [ref, isIntersecting] = useIntersectionObserver<HTMLDivElement>();
 
   return (
-    <Container ref={ref} isAnimate={hasIntersected}>
+    <Container ref={ref} isAnimate={isIntersecting}>
       {children}
     </Container>
   );

@@ -35,6 +35,10 @@ export const ModuleWidth = {
   WIDE: 1400,
 } as const;
 
+export const ModuleHeight = {
+  HERO_NORMAL_SCREEN: 600,
+} as const;
+
 export const ModuleWidthWithUnit: Record<string, string> = {};
 Object.keys(ModuleWidth).map((key) => {
   ModuleWidthWithUnit[key] = `${ModuleWidth[key as keyof typeof ModuleWidth]}px`;

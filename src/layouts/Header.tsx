@@ -41,9 +41,9 @@ const Heading = styled.h1``;
 
 const SiteLogo = styled.h1`
   height: 80px;
-  margin: ${Spacing.LARGE}px;
+  margin: ${Spacing.XXX_LARGE}px;
 
-  ${media.greaterThan(ScreenType.LARGE)`
+  ${media.greaterThan(ScreenType.HUGE)`
     height: 90px;
     margin: ${BigSpacing.X_SMALL}px;
   `}

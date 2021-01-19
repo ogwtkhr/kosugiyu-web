@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Picture, UnderLineText } from '@/components';
-import { Spacing, ModuleWidth, ScreenType, SizeType } from '@/constants';
+import { Spacing, ModuleWidth, ScreenType, SizeType, ModuleHeight } from '@/constants';
 import media from 'styled-media-query';
 
 type CommonTitleProps = {
@@ -25,7 +25,7 @@ export const CommonTitle: React.FC<CommonTitleProps> = ({ title, imagePath }) =>
 const Container = styled.div`
   display: flex;
   max-width: ${ModuleWidth.WIDE}px;
-  height: 600px;
+  height: ${ModuleHeight.HERO_NORMAL_SCREEN}px;
   margin: 0 auto;
 
   ${media.lessThan(ScreenType.MEDIUM)`

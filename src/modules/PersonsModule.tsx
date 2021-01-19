@@ -11,6 +11,7 @@ import {
   BigSpacing,
   ModuleWidth,
   ScreenType,
+  ModuleHeight,
 } from '@/constants';
 import { PersonItem, TopPersonItem, Picture } from '@/components';
 import media from 'styled-media-query';
@@ -56,17 +57,22 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({
   return (
     <Container>
       {useTitle && (
-        <PersonsHeading>
-          <PersonsHeadingMain>
-            <HeadingTitle />
-            <PersonsHeadingBodyCopy>
-              親譲りの無鉄砲で小供の時から損ばかりして居る。小学校に居る時分学校の二階から飛び降りて一週間程腰を抜かした事がある。なぜそんな無闇(むやみ)をしたと聞く人があるかも知れぬ。別段深い理由でもない。
-            </PersonsHeadingBodyCopy>
-          </PersonsHeadingMain>
-          <PersonsHeadingImage>
-            <Picture relativePath="photos/persons/hero.jpg" />
-          </PersonsHeadingImage>
-        </PersonsHeading>
+        <PersonsHeadingContainer>
+          <PersonsHeadingInner>
+            <PersonsHeadingMain>
+              <HeadingTitle />
+              <PersonsHeadingBodyCopyLargeScreen>
+                親譲りの無鉄砲で小供の時から損ばかりして居る。小学校に居る時分学校の二階から飛び降りて一週間程腰を抜かした事がある。なぜそんな無闇(むやみ)をしたと聞く人があるかも知れぬ。別段深い理由でもない。
+              </PersonsHeadingBodyCopyLargeScreen>
+            </PersonsHeadingMain>
+            <PersonsHeadingImage>
+              <Picture relativePath="photos/persons/hero.jpg" />
+            </PersonsHeadingImage>
+          </PersonsHeadingInner>
+          <PersonsHeadingBodyCopySmallScreen>
+            親譲りの無鉄砲で小供の時から損ばかりして居る。小学校に居る時分学校の二階から飛び降りて一週間程腰を抜かした事がある。なぜそんな無闇(むやみ)をしたと聞く人があるかも知れぬ。別段深い理由でもない。
+          </PersonsHeadingBodyCopySmallScreen>
+        </PersonsHeadingContainer>
       )}
 
       {enableTopEmphasis && (
@@ -115,11 +121,16 @@ const HeadingTitle: React.FC = () => (
   </PersonsHeadingTitle>
 );
 
-const PersonsHeading = styled.div`
+const PersonsHeadingContainer = styled.div``;
+
+const PersonsHeadingInner = styled.div`
   display: flex;
   max-width: ${ModuleWidth.WIDE}px;
-  height: 600px;
+  height: ${ModuleHeight.HERO_NORMAL_SCREEN}px;
   margin: 0 auto;
+  ${media.lessThan(ScreenType.MEDIUM)`
+    height: 300px;
+  `}
 `;
 
 const PersonsHeadingImage = styled.div`
@@ -132,6 +143,9 @@ const PersonsHeadingMain = styled.div`
   justify-content: space-between;
   width: 30%;
   padding: 0 ${Spacing.XX_LARGE}px;
+  ${media.lessThan(ScreenType.MEDIUM)`
+    padding: 0;
+  `}
 `;
 
 const PersonsHeadingSubTitle = styled.div`
@@ -140,6 +154,9 @@ const PersonsHeadingSubTitle = styled.div`
 
 const PersonsHeadingTitle = styled.div`
   display: flex;
+  ${media.lessThan(ScreenType.MEDIUM)`
+    margin: 0 auto;
+  `}
 `;
 
 const PersonsHeadingTitleMain = styled.h1`
@@ -155,9 +172,21 @@ const PersonsHeadingTitleSub = styled.p`
   font-size: ${TextSize.X_SMALL}rem;
 `;
 
-const PersonsHeadingBodyCopy = styled.p`
+const PersonsHeadingBodyCopyLargeScreen = styled.p`
   ${Typography.Mixin.DISPLAY};
   font-size: ${TextSize.SMALL}rem;
+  ${media.lessThan(ScreenType.MEDIUM)`
+    display: none;
+  `}
+`;
+
+const PersonsHeadingBodyCopySmallScreen = styled.p`
+  margin: ${Spacing.LARGE}px;
+  ${Typography.Mixin.DISPLAY};
+  font-size: ${TextSize.X_SMALL}rem;
+  ${media.greaterThan(ScreenType.MEDIUM)`
+    display: none;
+  `}
 `;
 
 const Container = styled.div`
@@ -173,12 +202,19 @@ const PersonLink = styled(Link)`
 
 const TopPersonContainer = styled.div`
   margin: ${BigSpacing.LARGE}px auto;
+  ${media.lessThan(ScreenType.MEDIUM)`
+    margin: ${Spacing.XX_LARGE}px 0;
+  `}
 `;
 
 const PersonListContainer = styled.div`
   display: flex;
   max-width: ${ModuleWidth.MIDDLE}px;
   margin: ${BigSpacing.LARGE}px auto;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    margin: ${Spacing.XX_LARGE}px auto;
+  `}
 `;
 
 const PersonList = styled.ul`
@@ -190,7 +226,10 @@ const PersonList = styled.ul`
   overflow: hidden;
 
   ${media.lessThan(ScreenType.MEDIUM)`
-    /* grid-template-columns: repeat(2, 1fr); */
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: ${Spacing.LARGE}px ${Spacing.XX_LARGE}px;
+    margin-left: ${Spacing.LARGE}px;
+    margin-right: ${Spacing.LARGE}px;
   `}
 `;
 

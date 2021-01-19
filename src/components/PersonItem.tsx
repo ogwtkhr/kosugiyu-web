@@ -16,6 +16,7 @@ import {
 } from '@/constants';
 
 import { ArrowIcon } from '@/components';
+import { IntersectionFadeIn } from '@/animations';
 
 type PersonItemProps = {
   position: string;
@@ -36,20 +37,22 @@ export const PersonItem: React.FC<PersonItemProps> = ({
   // );
 
   return (
-    <PersonThumbnailContainer>
-      <PersonThumbnail src={mainVisualUrl} />
-      <PersonInfo>
-        <PersonPosition>{position}</PersonPosition>
-        <PersonNameContainer>
-          <PersonName>{name}</PersonName>
-          {showArrowIcon && (
-            <PersonIconContainer>
-              <ArrowIcon />
-            </PersonIconContainer>
-          )}
-        </PersonNameContainer>
-      </PersonInfo>
-    </PersonThumbnailContainer>
+    <IntersectionFadeIn>
+      <PersonThumbnailContainer>
+        <PersonThumbnail src={mainVisualUrl} />
+        <PersonInfo>
+          <PersonPosition>{position}</PersonPosition>
+          <PersonNameContainer>
+            <PersonName>{name}</PersonName>
+            {showArrowIcon && (
+              <PersonIconContainer>
+                <ArrowIcon />
+              </PersonIconContainer>
+            )}
+          </PersonNameContainer>
+        </PersonInfo>
+      </PersonThumbnailContainer>
+    </IntersectionFadeIn>
   );
 };
 const PersonInfo = styled.div`
@@ -74,13 +77,16 @@ const PersonName = styled.h3`
   text-decoration: none;
   ${Typography.Mixin.DISPLAY};
 
-  /* ${media.lessThan(ScreenType.MEDIUM)`
+  ${media.lessThan(ScreenType.MEDIUM)`
     font-size: ${TextSize.NORMAL}rem;
-  `} */
+  `};
 `;
 
 const PersonIconContainer = styled.div`
   width: ${Spacing.XX_LARGE}px;
+  ${media.lessThan(ScreenType.MEDIUM)`
+    font-size: ${TextSize.SMALL}rem;
+  `};
 `;
 
 const PersonThumbnailContainer = styled.div``;
@@ -113,19 +119,21 @@ export const TopPersonItem: React.FC<TopPersonItemProps> = ({
   showArrowIcon = true,
 }) => {
   return (
-    <TopPersonContainer>
-      <TopPersonThumbnail src={mainVisualUrl} />
-      <TopPersonInfo>
-        <TopPersonPosition>{position}</TopPersonPosition>
-        <TopPersonName>{name}</TopPersonName>
-        <TopPersonTitle>{title}</TopPersonTitle>
-        {showArrowIcon && (
-          <TopPersonIconContainer>
-            <ArrowIcon />
-          </TopPersonIconContainer>
-        )}
-      </TopPersonInfo>
-    </TopPersonContainer>
+    <IntersectionFadeIn>
+      <TopPersonContainer>
+        <TopPersonThumbnail src={mainVisualUrl} />
+        <TopPersonInfo>
+          <TopPersonPosition>{position}</TopPersonPosition>
+          <TopPersonName>{name}</TopPersonName>
+          <TopPersonTitle>{title}</TopPersonTitle>
+          {showArrowIcon && (
+            <TopPersonIconContainer>
+              <ArrowIcon />
+            </TopPersonIconContainer>
+          )}
+        </TopPersonInfo>
+      </TopPersonContainer>
+    </IntersectionFadeIn>
   );
 };
 
@@ -135,11 +143,21 @@ const TopPersonContainer = styled.div`
   align-items: center;
   max-width: ${ModuleWidth.SEMI_WIDE}px;
   margin: 0 auto;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    display: block;
+    margin: ${Spacing.LARGE}px;
+  `}
 `;
 
 const TopPersonThumbnail = styled.div`
   width: 40%;
   ${StyleMixin.BACKGROUND_IMAGE_WITH_SRC};
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    margin: 0 auto;
+    width: 80%;
+  `}
 
   &::after {
     content: '';
@@ -150,17 +168,31 @@ const TopPersonThumbnail = styled.div`
 
 const TopPersonInfo = styled.div`
   width: 40%;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    margin-top: ${Spacing.LARGE}px;
+    width: auto;
+  `}
 `;
 
 const TopPersonPosition = styled.p`
   font-size: ${TextSize.SMALL}rem;
   ${Typography.Mixin.DISPLAY};
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    text-align: center;
+  `}
 `;
 
 const TopPersonName = styled.h3`
+  ${Typography.Mixin.DISPLAY};
   margin-top: ${Spacing.NORMAL}px;
   font-size: ${TextSize.XXX_LARGE}rem;
-  ${Typography.Mixin.DISPLAY};
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    font-size: ${TextSize.X_LARGE}rem;
+    text-align: center;
+  `}
 `;
 
 const TopPersonTitle = styled.p`

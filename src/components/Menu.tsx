@@ -130,7 +130,7 @@ const Trigger = styled.button<TriggerProps>`
   ${media.lessThan(ScreenType.MEDIUM)`
     left: auto;
     right: ${Spacing.X_LARGE}px;
-    top: ${Spacing.X_LARGE}px;
+    top: ${Spacing.XXX_LARGE}px;
     width: ${Spacing.X_LARGE}px;
     height: ${Spacing.X_LARGE}px;
   `}
