@@ -9,6 +9,10 @@ import { getTextBreakFragment } from '@/util/jsx';
 import {
   AspectRatio,
   Colors,
+  LineHeight,
+  LetterSpacing,
+  ModuleWidth,
+  ModuleWidthWithUnit,
   ScreenType,
   Spacing,
   TextSize,
@@ -194,125 +198,135 @@ const facilityInfos: FacilityInfo[] = [
   },
 ];
 
-const businessInfo: BusinessInfo[] = [
-  {
-    title: '無料サービス',
-    description:
-      'シャンプー、ボディーソープ、コンディショナー、洗顔、クレンジング、化粧水、乳液、ボディクリームなどアメニティ完備',
-  },
-  {
-    title: 'レンタル',
-    description: 'タオル: 無料（2枚目〜30円）\\n今治タオル: 50円（IKEUCHI ORGANIC）',
-  },
-  {
-    title: 'その他',
-    description: 'ドライヤー: 3分20円\\nマッサージ機: 10分100円\\nWi-Fi: FREE\\nランナー大歓迎',
-  },
-  {
-    title: '営業時間',
-    description:
-      '平日: 15:30〜深夜1:45（最終受付 1:30）\\n土・日曜: 8:00〜深夜1:45（最終受付 1:30）\\n定休日: 木曜日',
-  },
-  {
-    title: '入浴料金',
-    description:
-      '大人: 470円\\n中人: 180円（小学生）\\n小人: 80円（0〜5歳）\\n共通入浴券: 4400円（10枚。1回につき30円お得）',
-  },
-];
+// const businessInfo: BusinessInfo[] = [
+//   {
+//     title: '無料サービス',
+//     description:
+//       'シャンプー、ボディーソープ、コンディショナー、洗顔、クレンジング、化粧水、乳液、ボディクリームなどアメニティ完備',
+//   },
+//   {
+//     title: 'レンタル',
+//     description: 'タオル: 無料（2枚目〜30円）\\n今治タオル: 50円（IKEUCHI ORGANIC）',
+//   },
+//   {
+//     title: 'その他',
+//     description: 'ドライヤー: 3分20円\\nマッサージ機: 10分100円\\nWi-Fi: FREE\\nランナー大歓迎',
+//   },
+//   {
+//     title: '営業時間',
+//     description:
+//       '平日: 15:30〜深夜1:45（最終受付 1:30）\\n土・日曜: 8:00〜深夜1:45（最終受付 1:30）\\n定休日: 木曜日',
+//   },
+//   {
+//     title: '入浴料金',
+//     description:
+//       '大人: 470円\\n中人: 180円（小学生）\\n小人: 80円（0〜5歳）\\n共通入浴券: 4400円（10枚。1回につき30円お得）',
+//   },
+// ];
 
-const FacilityPage: React.FC = () => {
-  const { title: pageTitle, description: pageDescription } = usePageInfo({ id: 'facility' });
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const { title, description, position, hide, zoom = 1 } = facilityInfos[currentIndex];
-  return (
-    <>
-      <BaseLayout>
-        <Meta title={pageTitle} description={pageDescription} />
+const InformationRow = styled.div`
+  display: flex;
+  max-width: ${ModuleWidth.SEMI_WIDE}px;
+  margin: ${Spacing.XXX_LARGE}px auto;
+  ${media.lessThan(ModuleWidthWithUnit.SEMI_WIDE)`
+    margin-left: ${Spacing.X_LARGE}px;
+    margin-right: ${Spacing.X_LARGE}px;
+  `}
+`;
 
-        <CommonTitle title="営業・施設案内" imagePath="photos/facility/hero.jpg" />
-        <UnderLineText>営業時間</UnderLineText>
-        <UnderLineText>入浴料金</UnderLineText>
-        <FacilityModule>
-          <FacilityView>
-            <BigImageContainer
-              style={{
-                top: `${position.y}vw`,
-                left: `${position.x}vw`,
-                transform: `scale(${zoom})`,
-                visibility: hide ? 'hidden' : 'visible',
-              }}
-            >
-              <Picture relativePath="illustrations/facility/all_facilities.jpg" />
-            </BigImageContainer>
+const InformationUnit = styled.section`
+  flex: 1;
+`;
 
-            {currentIndex === 2 && (
-              <RippleCircle
-                style={{
-                  top: '33vw',
-                  left: '40vw',
-                }}
-              />
-            )}
-            <DescriptionContainer>
-              <DescriptionTitle>{title}</DescriptionTitle>
-              <DescriptionBody>{description}</DescriptionBody>
-              <DescriptionPhoto>
-                <Picture relativePath={'photos/facility/facility_photo_1.jpg'} />
-              </DescriptionPhoto>
-              {/* <FacilityInfoControls>
-                <UpButton
-                  color={Colors.ABSTRACT_WHITE}
-                  onClick={() => {
-                    if (currentIndex > 0) setCurrentIndex(currentIndex - 1);
-                  }}
-                />
-                <Indicator>
-                  <IndicatorCurrent>{currentIndex + 1}</IndicatorCurrent>/{facilityInfos.length}
-                </Indicator>
-                <DownButton
-                  color={Colors.ABSTRACT_WHITE}
-                  onClick={() => {
-                    if (currentIndex < facilityInfos.length - 1) setCurrentIndex(currentIndex + 1);
-                  }}
-                />
-              </FacilityInfoControls> */}
-            </DescriptionContainer>
-          </FacilityView>
-        </FacilityModule>
-        <BusinessModule>
-          <BusinessContents>
-            {businessInfo.map(({ title, description }) => {
-              return (
-                <BusinessContent key={title}>
-                  <BusinessTitle>{title}</BusinessTitle>
-                  <p>{getTextBreakFragment(description)}</p>
-                </BusinessContent>
-              );
-            })}
-          </BusinessContents>
-          <GoogleMap />
-        </BusinessModule>
-        <OverWindow></OverWindow>
-      </BaseLayout>
-    </>
-  );
-};
+const InformationHeading = styled.h3``;
+
+const InformationContainerRow = styled.div`
+  display: flex;
+`;
+
+const InformationContainer = styled.div`
+  margin: ${Spacing.XX_LARGE}px 0;
+  flex: 1;
+`;
+
+const InformationContentRow = styled.div`
+  display: flex;
+  max-width: ${({ fix = true }: { fix?: boolean }) => (fix ? '400px' : '')};
+  align-items: center;
+  & + & {
+    margin-top: ${Spacing.XX_LARGE}px;
+  }
+`;
+
+const InformationContent = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+  flex: ${({ flex }: { flex?: number }) => (flex ? flex : '')};
+`;
+
+const InformationContentHeading = styled.h4`
+  ${Typography.Mixin.DISPLAY};
+  width: 140px;
+  font-size: ${TextSize.LARGE}rem;
+`;
+
+const InformationDescriptionList = styled.dl``;
+
+const InformationDescriptionTerm = styled.dt`
+  ${Typography.Mixin.DISPLAY};
+  line-height: ${LineHeight.MONOLITHIC};
+  color: ${Colors.UI_TEXT_SUB};
+  margin-bottom: ${Spacing.NORMAL}px;
+  font-size: ${TextSize.XX_SMALL}rem;
+`;
+
+const InformationDescriptionDetail = styled.dd`
+  ${Typography.Mixin.DISPLAY};
+  font-size: ${TextSize.XX_LARGE}rem;
+  line-height: ${LineHeight.MONOLITHIC};
+`;
+
+const InformationDescriptionSupple = styled.p`
+  margin-top: ${Spacing.NORMAL}px;
+  font-size: ${({ size }: { size?: TextSize }) => size || TextSize.SMALL}rem;
+  letter-spacing: ${LetterSpacing.SEMI_WIDE}em;
+`;
+
+const InformationDescriptionDetailSupple = styled.small`
+  font-size: ${TextSize.SMALL}rem;
+`;
+
+const InformationContentDashLine = styled.hr`
+  display: block;
+  margin: 0 ${Spacing.LARGE}px;
+  width: ${Spacing.X_LARGE}px;
+  height: 1px;
+  background-color: ${Colors.UI_LINE_NORMAL};
+`;
+
+const InformationNormalText = styled.p`
+  ${Typography.Mixin.DISPLAY};
+  font-size: ${TextSize.NORMAL}rem;
+  letter-spacing: ${LetterSpacing.SEMI_WIDE}em;
+`;
+
 const FacilityModule = styled.section``;
 
 const DescriptionContainer = styled.div`
-  padding: ${Spacing.X_LARGE}px ${Spacing.XXX_LARGE}px;
   position: absolute;
   right: 5vw;
   bottom: 5vw;
   width: 600px;
-  background-color: ${Colors.ABSTRACT_WHITE};
-  border: solid 2px ${Colors.UI_LINE_NORMAL};
+  padding: ${Spacing.X_LARGE}px ${Spacing.XXX_LARGE}px;
   transition: 1s ease;
+  border: solid 2px ${Colors.UI_LINE_NORMAL};
+  background-color: ${Colors.ABSTRACT_WHITE};
 `;
 
 const DescriptionTitle = styled.h3`
   ${Typography.Mixin.DISPLAY};
-  /* font-weight: ${TextWeight.BOLD}; */
   font-size: ${TextSize.LARGE}rem;
 `;
 
@@ -362,15 +376,6 @@ const BigImageContainer = styled.div`
   transition: 1s ease;
 `;
 
-// const ModuleHeading = styled.div`
-//   width: 60px;
-//   height: 200px;
-//   position: absolute;
-//   top: ${Spacing.XX_LARGE}px;
-//   left: ${Spacing.XX_LARGE}px;
-//   /* mix-blend-mode: difference; */
-// `;
-
 const FacilityInfoControls = styled.div`
   display: flex;
   flex-direction: column;
@@ -395,13 +400,12 @@ const IndicatorCurrent = styled.span`
 
 const UpButton = styled(ChevronUp)`
   cursor: pointer;
-
-  filter: drop-shadow(${`0 ${Spacing.SMALL}px 2px ${rgba(Colors.ABSTRACT_BLACK, 0.6)}`});
+  /* filter: drop-shadow(${`0 ${Spacing.SMALL}px 2px ${rgba(Colors.ABSTRACT_BLACK, 0.6)}`}); */
 `;
+
 const DownButton = styled(ChevronDown)`
   cursor: pointer;
-
-  filter: drop-shadow(${`0 ${Spacing.SMALL}px 2px ${rgba(Colors.ABSTRACT_BLACK, 0.6)}`});
+  // filter: drop-shadow(${`0 ${Spacing.SMALL}px 2px ${rgba(Colors.ABSTRACT_BLACK, 0.6)}`});
 `;
 
 const OverWindow = styled.div``;
@@ -410,32 +414,289 @@ const BusinessModule = styled.section`
   position: relative;
 `;
 
-const BusinessContents = styled.ul`
-  max-width: 800px;
-  margin: 0 auto;
-`;
-
-const BusinessContent = styled.li`
-  margin: ${Spacing.XX_LARGE}px;
-  padding-bottom: ${Spacing.XXX_LARGE}px;
-  border-bottom: 1px solid black;
-
-  &:last-child {
-    border-bottom: none;
-  }
-`;
-
-const BusinessTitle = styled.h3`
-  ${Typography.Mixin.EXTENDED};
-  font-weight: ${TextWeight.BOLD};
-  font-size: ${TextSize.X_LARGE}rem;
-`;
-
 const WindowContainer = styled.div`
   position: fixed;
   width: 800px;
   top: 100px;
   left: 100px;
 `;
+
+const FacilityPage: React.FC = () => {
+  const { title: pageTitle, description: pageDescription } = usePageInfo({ id: 'facility' });
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const { title, description, position, hide, zoom = 1 } = facilityInfos[currentIndex];
+  return (
+    <>
+      <BaseLayout>
+        <Meta title={pageTitle} description={pageDescription} />
+
+        <CommonTitle title="営業・施設案内" imagePath="photos/facility/hero.jpg" />
+        <InformationRow>
+          <InformationUnit>
+            <InformationHeading>
+              <UnderLineText textSize={TextSize.X_LARGE}>営業時間</UnderLineText>
+            </InformationHeading>
+            <InformationContainer>
+              <InformationContentRow>
+                <InformationContent>
+                  <InformationContentHeading>平日</InformationContentHeading>
+                </InformationContent>
+                <InformationContent flex={1}>
+                  <InformationDescriptionList>
+                    <InformationDescriptionTerm>午後</InformationDescriptionTerm>
+                    <InformationDescriptionDetail>15:30</InformationDescriptionDetail>
+                  </InformationDescriptionList>
+                  <InformationContentDashLine />
+                  <InformationDescriptionList>
+                    <InformationDescriptionTerm>深夜</InformationDescriptionTerm>
+                    <InformationDescriptionDetail>1:45</InformationDescriptionDetail>
+                  </InformationDescriptionList>
+                </InformationContent>
+              </InformationContentRow>
+              <InformationContentRow>
+                <InformationContent>
+                  <InformationContentHeading>土・日曜</InformationContentHeading>
+                </InformationContent>
+                <InformationContent flex={1}>
+                  <InformationDescriptionList>
+                    <InformationDescriptionTerm>午前</InformationDescriptionTerm>
+                    <InformationDescriptionDetail>8:00</InformationDescriptionDetail>
+                  </InformationDescriptionList>
+                  <InformationContentDashLine />
+                  <InformationDescriptionList>
+                    <InformationDescriptionTerm>深夜</InformationDescriptionTerm>
+                    <InformationDescriptionDetail>1:45</InformationDescriptionDetail>
+                  </InformationDescriptionList>
+                </InformationContent>
+              </InformationContentRow>
+              <InformationContentRow>
+                <InformationNormalText>最終受付1:30、木曜定休</InformationNormalText>
+              </InformationContentRow>
+            </InformationContainer>
+          </InformationUnit>
+
+          <InformationUnit>
+            <InformationHeading>
+              <UnderLineText textSize={TextSize.X_LARGE}>入浴料金</UnderLineText>
+            </InformationHeading>
+            <InformationContainer>
+              <InformationContentRow>
+                <InformationContent flex={1}>
+                  <InformationDescriptionList>
+                    <InformationDescriptionTerm>大人</InformationDescriptionTerm>
+                    <InformationDescriptionDetail>
+                      470<InformationDescriptionDetailSupple>円</InformationDescriptionDetailSupple>
+                    </InformationDescriptionDetail>
+                  </InformationDescriptionList>
+                  <InformationDescriptionList>
+                    <InformationDescriptionTerm>中人（小学生）</InformationDescriptionTerm>
+                    <InformationDescriptionDetail>
+                      180<InformationDescriptionDetailSupple>円</InformationDescriptionDetailSupple>
+                    </InformationDescriptionDetail>
+                  </InformationDescriptionList>
+                  <InformationDescriptionList>
+                    <InformationDescriptionTerm>小人（0〜5歳）</InformationDescriptionTerm>
+                    <InformationDescriptionDetail>
+                      80<InformationDescriptionDetailSupple>円</InformationDescriptionDetailSupple>
+                    </InformationDescriptionDetail>
+                  </InformationDescriptionList>
+                </InformationContent>
+              </InformationContentRow>
+              <InformationContentRow>
+                <InformationContent flex={1}>
+                  <InformationDescriptionList>
+                    <InformationDescriptionTerm>共通入浴券（10枚）</InformationDescriptionTerm>
+                    <InformationDescriptionDetail>
+                      <div>
+                        4,400
+                        <InformationDescriptionDetailSupple>円</InformationDescriptionDetailSupple>
+                      </div>
+                      <InformationDescriptionSupple>1回につき30円お得</InformationDescriptionSupple>
+                    </InformationDescriptionDetail>
+                  </InformationDescriptionList>
+                </InformationContent>
+              </InformationContentRow>
+            </InformationContainer>
+          </InformationUnit>
+        </InformationRow>
+
+        <InformationRow>
+          <InformationUnit>
+            <FacilityModule>
+              <FacilityView>
+                <BigImageContainer
+                  style={{
+                    top: `${position.y}vw`,
+                    left: `${position.x}vw`,
+                    transform: `scale(${zoom})`,
+                    visibility: hide ? 'hidden' : 'visible',
+                  }}
+                >
+                  <Picture relativePath="illustrations/facility/all_facilities.jpg" />
+                </BigImageContainer>
+
+                {currentIndex === 2 && (
+                  <RippleCircle
+                    style={{
+                      top: '33vw',
+                      left: '40vw',
+                    }}
+                  />
+                )}
+                <DescriptionContainer>
+                  <DescriptionTitle>{title}</DescriptionTitle>
+                  <DescriptionBody>{description}</DescriptionBody>
+                  <DescriptionPhoto>
+                    <Picture relativePath={'photos/facility/facility_photo_1.jpg'} />
+                  </DescriptionPhoto>
+                  {/* <FacilityInfoControls>
+                <UpButton
+                  color={Colors.ABSTRACT_WHITE}
+                  onClick={() => {
+                    if (currentIndex > 0) setCurrentIndex(currentIndex - 1);
+                  }}
+                />
+                <Indicator>
+                  <IndicatorCurrent>{currentIndex + 1}</IndicatorCurrent>/{facilityInfos.length}
+                </Indicator>
+                <DownButton
+                  color={Colors.ABSTRACT_WHITE}
+                  onClick={() => {
+                    if (currentIndex < facilityInfos.length - 1) setCurrentIndex(currentIndex + 1);
+                  }}
+                />
+              </FacilityInfoControls> */}
+                </DescriptionContainer>
+              </FacilityView>
+            </FacilityModule>
+          </InformationUnit>
+        </InformationRow>
+
+        <InformationRow>
+          <InformationUnit>
+            <InformationHeading>
+              <UnderLineText textSize={TextSize.X_LARGE}>サービス</UnderLineText>
+            </InformationHeading>
+            <InformationContainerRow>
+              <InformationContainer>
+                <InformationContentRow>
+                  <InformationContent>
+                    <InformationContentHeading>貸出タオル</InformationContentHeading>
+                  </InformationContent>
+                </InformationContentRow>
+                <InformationContentRow>
+                  <InformationContent flex={1}>
+                    <InformationDescriptionList>
+                      <InformationDescriptionTerm>フェイスタオル</InformationDescriptionTerm>
+                      <InformationDescriptionDetail>
+                        <div>無料</div>
+                        <InformationDescriptionSupple>（2枚目〜50円）</InformationDescriptionSupple>
+                      </InformationDescriptionDetail>
+                    </InformationDescriptionList>
+                    <InformationDescriptionList>
+                      <InformationDescriptionTerm>バスタオル</InformationDescriptionTerm>
+                      <InformationDescriptionDetail>
+                        <div>
+                          180
+                          <InformationDescriptionDetailSupple>
+                            円
+                          </InformationDescriptionDetailSupple>
+                        </div>
+                        <InformationDescriptionSupple>
+                          （IKEUCHI ORGANIC）
+                        </InformationDescriptionSupple>
+                      </InformationDescriptionDetail>
+                    </InformationDescriptionList>
+                  </InformationContent>
+                </InformationContentRow>
+              </InformationContainer>
+
+              <InformationContainer>
+                <InformationContentRow>
+                  <InformationContent>
+                    <InformationContentHeading>その他設備</InformationContentHeading>
+                  </InformationContent>
+                </InformationContentRow>
+                <InformationContentRow>
+                  <InformationContent flex={1}>
+                    <InformationDescriptionList>
+                      <InformationDescriptionTerm>ドライヤー</InformationDescriptionTerm>
+                      <InformationDescriptionDetail>
+                        <div>
+                          20
+                          <InformationDescriptionDetailSupple>
+                            円
+                          </InformationDescriptionDetailSupple>
+                        </div>
+                        <InformationDescriptionSupple>（3分）</InformationDescriptionSupple>
+                      </InformationDescriptionDetail>
+                    </InformationDescriptionList>
+                    <InformationDescriptionList>
+                      <InformationDescriptionTerm>マッサージ機</InformationDescriptionTerm>
+                      <InformationDescriptionDetail>
+                        <div>
+                          100
+                          <InformationDescriptionDetailSupple>
+                            円
+                          </InformationDescriptionDetailSupple>
+                        </div>
+                        <InformationDescriptionSupple>（10分）</InformationDescriptionSupple>
+                      </InformationDescriptionDetail>
+                    </InformationDescriptionList>
+                    <InformationDescriptionList>
+                      <InformationDescriptionTerm>Wi-Fi</InformationDescriptionTerm>
+                      <InformationDescriptionDetail>
+                        <div>無料</div>
+                      </InformationDescriptionDetail>
+                    </InformationDescriptionList>
+                  </InformationContent>
+                </InformationContentRow>
+              </InformationContainer>
+            </InformationContainerRow>
+
+            <InformationContainerRow>
+              <InformationContainer>
+                <InformationContentRow>
+                  <InformationContent>
+                    <InformationContentHeading>アメニティ</InformationContentHeading>
+                  </InformationContent>
+                </InformationContentRow>
+                <InformationContentRow fix={false}>
+                  <InformationNormalText>
+                    シャンプー、ボディーソープ、コンディショナー、洗顔、クレンジング、化粧水、乳液、ボディクリームなど完備
+                  </InformationNormalText>
+                </InformationContentRow>
+              </InformationContainer>
+            </InformationContainerRow>
+          </InformationUnit>
+        </InformationRow>
+
+        <InformationRow>
+          <InformationUnit>
+            <InformationHeading>
+              <UnderLineText textSize={TextSize.X_LARGE}>アクセス</UnderLineText>
+            </InformationHeading>
+            <InformationContainerRow>
+              <InformationContainer>
+                <InformationContentRow fix={false}>
+                  <InformationNormalText>
+                    高円寺駅北口から純情商店街・更新通り商店街を経由し徒歩5分
+                    <br />
+                    〒166-0002 杉並区高円寺北3-32-2 / 03-3337-6198
+                  </InformationNormalText>
+                </InformationContentRow>
+              </InformationContainer>
+            </InformationContainerRow>
+          </InformationUnit>
+        </InformationRow>
+
+        <BusinessModule>
+          <GoogleMap />
+        </BusinessModule>
+        <OverWindow></OverWindow>
+      </BaseLayout>
+    </>
+  );
+};
 
 export default FacilityPage;

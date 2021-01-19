@@ -1,6 +1,8 @@
 import { css } from 'styled-components';
 import { Colors } from './colors';
 
+import { ValueOf } from '@/types';
+
 export const TextSize = {
   XXX_SMALL: 1,
   XX_SMALL: 1.1,
@@ -8,9 +10,13 @@ export const TextSize = {
   SMALL: 1.4,
   NORMAL: 1.6,
   LARGE: 2,
-  X_LARGE: 3.2,
-  XX_LARGE: 4.8,
+  X_LARGE: 2.4,
+  XX_LARGE: 2.8,
+  XXX_LARGE: 3.2,
+  XXXX_LARGE: 4.8,
 } as const;
+
+export type TextSize = ValueOf<typeof TextSize>;
 
 export const TypeFace = {
   BASE: `'Noto Sans JP', sans-serif`,
@@ -54,7 +60,7 @@ const Mixin = {
     color: ${Colors.UI_TEXT_MAIN};
     font-family: ${TypeFace.BASE};
     font-feature-settings: 'palt';
-    /* font-size: ${TextSize.X_LARGE}rem; */
+    /* font-size: ${TextSize.XXX_LARGE}rem; */
     font-weight: ${TextWeight.MEDIUM};
     line-height: ${LineHeight.NORMAL};
     letter-spacing: ${LetterSpacing.WIDE}em;

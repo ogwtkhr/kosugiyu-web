@@ -1347,6 +1347,7 @@ export type MicrocmsArchive = Node & {
   createdAt?: Maybe<Scalars['Date']>;
   updatedAt?: Maybe<Scalars['Date']>;
   publishedAt?: Maybe<Scalars['Date']>;
+  revisedAt?: Maybe<Scalars['Date']>;
   slug?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   mainVisual?: Maybe<MicrocmsArchiveMainVisual>;
@@ -1354,7 +1355,6 @@ export type MicrocmsArchive = Node & {
   info?: Maybe<Array<Maybe<MicrocmsArchiveInfo>>>;
   writer?: Maybe<MicrocmsArchiveWriter>;
   archiveId?: Maybe<Scalars['String']>;
-  revisedAt?: Maybe<Scalars['Date']>;
 };
 
 
@@ -1506,6 +1506,7 @@ export type MicrocmsArchiveFieldsEnum =
   | 'createdAt'
   | 'updatedAt'
   | 'publishedAt'
+  | 'revisedAt'
   | 'slug'
   | 'title'
   | 'mainVisual___url'
@@ -1519,8 +1520,7 @@ export type MicrocmsArchiveFieldsEnum =
   | 'writer___updatedAt'
   | 'writer___publishedAt'
   | 'writer___name'
-  | 'archiveId'
-  | 'revisedAt';
+  | 'archiveId';
 
 export type MicrocmsArchiveFilterInput = {
   id?: Maybe<StringQueryOperatorInput>;
@@ -1530,6 +1530,7 @@ export type MicrocmsArchiveFilterInput = {
   createdAt?: Maybe<DateQueryOperatorInput>;
   updatedAt?: Maybe<DateQueryOperatorInput>;
   publishedAt?: Maybe<DateQueryOperatorInput>;
+  revisedAt?: Maybe<DateQueryOperatorInput>;
   slug?: Maybe<StringQueryOperatorInput>;
   title?: Maybe<StringQueryOperatorInput>;
   mainVisual?: Maybe<MicrocmsArchiveMainVisualFilterInput>;
@@ -1537,7 +1538,6 @@ export type MicrocmsArchiveFilterInput = {
   info?: Maybe<MicrocmsArchiveInfoFilterListInput>;
   writer?: Maybe<MicrocmsArchiveWriterFilterInput>;
   archiveId?: Maybe<StringQueryOperatorInput>;
-  revisedAt?: Maybe<DateQueryOperatorInput>;
 };
 
 export type MicrocmsArchiveGroupConnection = {
@@ -1944,12 +1944,12 @@ export type Query = {
   allSitePage: SitePageConnection;
   imageSharp?: Maybe<ImageSharp>;
   allImageSharp: ImageSharpConnection;
-  settingYaml?: Maybe<SettingYaml>;
-  allSettingYaml: SettingYamlConnection;
   microcmsArchive?: Maybe<MicrocmsArchive>;
   allMicrocmsArchive: MicrocmsArchiveConnection;
   microcmsPersons?: Maybe<MicrocmsPersons>;
   allMicrocmsPersons: MicrocmsPersonsConnection;
+  settingYaml?: Maybe<SettingYaml>;
+  allSettingYaml: SettingYamlConnection;
   siteBuildMetadata?: Maybe<SiteBuildMetadata>;
   allSiteBuildMetadata: SiteBuildMetadataConnection;
   sitePlugin?: Maybe<SitePlugin>;
@@ -2128,24 +2128,6 @@ export type QueryAllImageSharpArgs = {
 };
 
 
-export type QuerySettingYamlArgs = {
-  id?: Maybe<StringQueryOperatorInput>;
-  parent?: Maybe<NodeFilterInput>;
-  children?: Maybe<NodeFilterListInput>;
-  internal?: Maybe<InternalFilterInput>;
-  meta?: Maybe<SettingYamlMetaFilterInput>;
-  pages?: Maybe<SettingYamlPagesFilterListInput>;
-};
-
-
-export type QueryAllSettingYamlArgs = {
-  filter?: Maybe<SettingYamlFilterInput>;
-  sort?: Maybe<SettingYamlSortInput>;
-  skip?: Maybe<Scalars['Int']>;
-  limit?: Maybe<Scalars['Int']>;
-};
-
-
 export type QueryMicrocmsArchiveArgs = {
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
@@ -2154,6 +2136,7 @@ export type QueryMicrocmsArchiveArgs = {
   createdAt?: Maybe<DateQueryOperatorInput>;
   updatedAt?: Maybe<DateQueryOperatorInput>;
   publishedAt?: Maybe<DateQueryOperatorInput>;
+  revisedAt?: Maybe<DateQueryOperatorInput>;
   slug?: Maybe<StringQueryOperatorInput>;
   title?: Maybe<StringQueryOperatorInput>;
   mainVisual?: Maybe<MicrocmsArchiveMainVisualFilterInput>;
@@ -2161,7 +2144,6 @@ export type QueryMicrocmsArchiveArgs = {
   info?: Maybe<MicrocmsArchiveInfoFilterListInput>;
   writer?: Maybe<MicrocmsArchiveWriterFilterInput>;
   archiveId?: Maybe<StringQueryOperatorInput>;
-  revisedAt?: Maybe<DateQueryOperatorInput>;
 };
 
 
@@ -2197,6 +2179,24 @@ export type QueryMicrocmsPersonsArgs = {
 export type QueryAllMicrocmsPersonsArgs = {
   filter?: Maybe<MicrocmsPersonsFilterInput>;
   sort?: Maybe<MicrocmsPersonsSortInput>;
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+};
+
+
+export type QuerySettingYamlArgs = {
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+  meta?: Maybe<SettingYamlMetaFilterInput>;
+  pages?: Maybe<SettingYamlPagesFilterListInput>;
+};
+
+
+export type QueryAllSettingYamlArgs = {
+  filter?: Maybe<SettingYamlFilterInput>;
+  sort?: Maybe<SettingYamlSortInput>;
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
 };

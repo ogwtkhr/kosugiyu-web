@@ -143,7 +143,7 @@ const TitleContainer = styled.div`
 
 const Title = styled.h2`
   ${Typography.Mixin.DISPLAY};
-  font-size: ${TextSize.X_LARGE}rem;
+  font-size: ${TextSize.XXX_LARGE}rem;
   font-weight: ${TextWeight.BOLD};
   line-height: ${LineHeight.NORMAL};
 

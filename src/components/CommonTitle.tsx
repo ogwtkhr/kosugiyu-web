@@ -23,10 +23,8 @@ export const CommonTitle: React.FC<CommonTitleProps> = ({ title, imagePath }) =>
 
 const Container = styled.div`
   display: flex;
-
   max-width: ${ModuleWidth.WIDE}px;
   height: 600px;
-
   margin: 0 auto;
 `;
 
@@ -44,6 +42,6 @@ const TitleText = styled.h2`
   z-index: 1;
   top: 50%;
   right: -${Spacing.X_LARGE}px;
-  /* right: -10%; */
+  padding-left: ${Spacing.LARGE}px;
   transform: translateY(-50%);
 `;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { TextSize, Typography, Colors } from '@/constants';
 
 type UnderLineTextTypographyProps = {
-  textSize?: number;
+  textSize?: TextSize;
 };
 
 export const UnderLineText: React.FC<UnderLineTextTypographyProps> = ({ textSize, children }) => (
@@ -15,5 +15,5 @@ const Container = styled.span<UnderLineTextTypographyProps>`
   padding-bottom: 0.2em;
   ${Typography.Mixin.DISPLAY};
   border-bottom: solid 1px ${Colors.UI_LINE_NORMAL};
-  font-size: ${({ textSize }) => textSize || TextSize.X_LARGE}rem;
+  font-size: ${({ textSize }) => textSize || TextSize.XXX_LARGE}rem;
 `;

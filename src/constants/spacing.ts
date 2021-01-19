@@ -33,3 +33,8 @@ export const ModuleWidth = {
   SEMI_WIDE: 1200,
   WIDE: 1400,
 } as const;
+
+export const ModuleWidthWithUnit: Record<string, string> = {};
+Object.keys(ModuleWidth).map((key) => {
+  ModuleWidthWithUnit[key] = `${ModuleWidth[key as keyof typeof ModuleWidth]}px`;
+});

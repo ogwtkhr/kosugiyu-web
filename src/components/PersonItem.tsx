@@ -159,7 +159,7 @@ const TopPersonPosition = styled.p`
 
 const TopPersonName = styled.h3`
   margin-top: ${Spacing.NORMAL}px;
-  font-size: ${TextSize.X_LARGE}rem;
+  font-size: ${TextSize.XXX_LARGE}rem;
   ${Typography.Mixin.DISPLAY};
 `;
 

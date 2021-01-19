@@ -145,7 +145,7 @@ const PersonsHeadingTitle = styled.div`
 const PersonsHeadingTitleMain = styled.h1`
   ${Typography.Mixin.DISPLAY};
   ${Typography.Mixin.VERTICAL_WRITING};
-  font-size: ${TextSize.X_LARGE}rem;
+  font-size: ${TextSize.XXX_LARGE}rem;
 `;
 
 const PersonsHeadingTitleSub = styled.p`
