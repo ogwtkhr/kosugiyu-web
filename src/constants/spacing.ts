@@ -29,8 +29,9 @@ export const BigSpacing = {
 
 export const ModuleWidth = {
   ARTICLE: 680,
-  MIDDLE: 900,
-  SEMI_WIDE: 1200,
+  SEMI_NARROW: 960,
+  MIDDLE: 1024,
+  SEMI_WIDE: 1240,
   WIDE: 1400,
 } as const;
 

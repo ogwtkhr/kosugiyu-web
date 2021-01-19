@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Picture, UnderLineText } from '@/components';
-import { Spacing, ModuleWidth } from '@/constants';
+import { Spacing, ModuleWidth, ScreenType, SizeType } from '@/constants';
+import media from 'styled-media-query';
 
 type CommonTitleProps = {
   title: string;
@@ -12,7 +13,7 @@ export const CommonTitle: React.FC<CommonTitleProps> = ({ title, imagePath }) =>
   <Container>
     <TitleMain>
       <TitleText>
-        <UnderLineText>{title}</UnderLineText>
+        <UnderLineText size={SizeType.LARGE}>{title}</UnderLineText>
       </TitleText>
     </TitleMain>
     <TitleImage>
@@ -26,6 +27,10 @@ const Container = styled.div`
   max-width: ${ModuleWidth.WIDE}px;
   height: 600px;
   margin: 0 auto;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    height: 240px;
+  `}
 `;
 
 const TitleImage = styled.div`
@@ -35,6 +40,10 @@ const TitleImage = styled.div`
 const TitleMain = styled.div`
   position: relative;
   width: 20%;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    width: 50%;
+  `}
 `;
 
 const TitleText = styled.h2`

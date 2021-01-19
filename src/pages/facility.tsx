@@ -17,11 +17,13 @@ import {
   Spacing,
   TextSize,
   TextWeight,
+  SizeType,
   Typography,
 } from '@/constants';
 import media from 'styled-media-query';
 import { Shadow } from '@/constants/shadow';
 import { rgba } from 'polished';
+import { calcResponsivePoint } from '@/util/style';
 
 type FacilityInfo = {
   title: string;
@@ -198,39 +200,18 @@ const facilityInfos: FacilityInfo[] = [
   },
 ];
 
-// const businessInfo: BusinessInfo[] = [
-//   {
-//     title: '無料サービス',
-//     description:
-//       'シャンプー、ボディーソープ、コンディショナー、洗顔、クレンジング、化粧水、乳液、ボディクリームなどアメニティ完備',
-//   },
-//   {
-//     title: 'レンタル',
-//     description: 'タオル: 無料（2枚目〜30円）\\n今治タオル: 50円（IKEUCHI ORGANIC）',
-//   },
-//   {
-//     title: 'その他',
-//     description: 'ドライヤー: 3分20円\\nマッサージ機: 10分100円\\nWi-Fi: FREE\\nランナー大歓迎',
-//   },
-//   {
-//     title: '営業時間',
-//     description:
-//       '平日: 15:30〜深夜1:45（最終受付 1:30）\\n土・日曜: 8:00〜深夜1:45（最終受付 1:30）\\n定休日: 木曜日',
-//   },
-//   {
-//     title: '入浴料金',
-//     description:
-//       '大人: 470円\\n中人: 180円（小学生）\\n小人: 80円（0〜5歳）\\n共通入浴券: 4400円（10枚。1回につき30円お得）',
-//   },
-// ];
-
 const InformationRow = styled.div`
   display: flex;
   max-width: ${ModuleWidth.SEMI_WIDE}px;
   margin: ${Spacing.XXX_LARGE}px auto;
-  ${media.lessThan(ModuleWidthWithUnit.SEMI_WIDE)`
-    margin-left: ${Spacing.X_LARGE}px;
-    margin-right: ${Spacing.X_LARGE}px;
+  ${media.lessThan(calcResponsivePoint(ModuleWidth.SEMI_WIDE, Spacing.XXX_LARGE))`
+    margin-left: ${Spacing.XXX_LARGE}px;
+    margin-right: ${Spacing.XXX_LARGE}px;
+  `}
+  ${media.lessThan(ScreenType.MEDIUM)`
+    display: block;
+    margin-left: ${Spacing.LARGE}px;
+    margin-right: ${Spacing.LARGE}px;
   `}
 `;
 
@@ -242,6 +223,9 @@ const InformationHeading = styled.h3``;
 
 const InformationContainerRow = styled.div`
   display: flex;
+  ${media.lessThan(ScreenType.MEDIUM)`
+    display: block;
+  `}
 `;
 
 const InformationContainer = styled.div`
@@ -249,30 +233,54 @@ const InformationContainer = styled.div`
   flex: 1;
 `;
 
-const InformationContentRow = styled.div`
+type InformationContentRowProps = { fix?: boolean };
+
+const InformationContentRow = styled.div<InformationContentRowProps>`
   display: flex;
-  max-width: ${({ fix = true }: { fix?: boolean }) => (fix ? '400px' : '')};
+  max-width: ${({ fix = true }) => (fix ? '400px' : '')};
   align-items: center;
+
   & + & {
     margin-top: ${Spacing.XX_LARGE}px;
   }
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    display: block;
+    & + & {
+      margin-top: ${Spacing.X_LARGE}px;
+    }
+  `}
 `;
 
 const InformationContent = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
-  justify-content: space-between;
+  align-items: top;
+  justify-content: flex-start;
   flex: ${({ flex }: { flex?: number }) => (flex ? flex : '')};
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    & + & {
+      margin-top: ${Spacing.NORMAL}px;
+    };
+  `};
 `;
 
 const InformationContentHeading = styled.h4`
   ${Typography.Mixin.DISPLAY};
   width: 140px;
   font-size: ${TextSize.LARGE}rem;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    font-size: ${TextSize.NORMAL}rem;
+  `};
 `;
 
-const InformationDescriptionList = styled.dl``;
+const InformationDescriptionList = styled.dl`
+  & + & {
+    margin-left: ${Spacing.X_LARGE}px;
+  }
+`;
 
 const InformationDescriptionTerm = styled.dt`
   ${Typography.Mixin.DISPLAY};
@@ -310,6 +318,10 @@ const InformationNormalText = styled.p`
   ${Typography.Mixin.DISPLAY};
   font-size: ${TextSize.NORMAL}rem;
   letter-spacing: ${LetterSpacing.SEMI_WIDE}em;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+  font-size: ${TextSize.SMALL}rem;
+  `}
 `;
 
 const FacilityModule = styled.section``;
@@ -362,7 +374,6 @@ const FacilityView = styled.div`
 
     ${media.lessThan(ScreenType.MEDIUM)`
       padding-bottom: 80vh;
-
     `}
   }
 `;
@@ -434,7 +445,7 @@ const FacilityPage: React.FC = () => {
         <InformationRow>
           <InformationUnit>
             <InformationHeading>
-              <UnderLineText textSize={TextSize.X_LARGE}>営業時間</UnderLineText>
+              <UnderLineText>営業時間</UnderLineText>
             </InformationHeading>
             <InformationContainer>
               <InformationContentRow>
@@ -477,7 +488,7 @@ const FacilityPage: React.FC = () => {
 
           <InformationUnit>
             <InformationHeading>
-              <UnderLineText textSize={TextSize.X_LARGE}>入浴料金</UnderLineText>
+              <UnderLineText>入浴料金</UnderLineText>
             </InformationHeading>
             <InformationContainer>
               <InformationContentRow>
@@ -522,6 +533,9 @@ const FacilityPage: React.FC = () => {
 
         <InformationRow>
           <InformationUnit>
+            <InformationHeading>
+              <UnderLineText>施設紹介</UnderLineText>
+            </InformationHeading>
             <FacilityModule>
               <FacilityView>
                 <BigImageContainer
@@ -575,7 +589,7 @@ const FacilityPage: React.FC = () => {
         <InformationRow>
           <InformationUnit>
             <InformationHeading>
-              <UnderLineText textSize={TextSize.X_LARGE}>サービス</UnderLineText>
+              <UnderLineText>サービス</UnderLineText>
             </InformationHeading>
             <InformationContainerRow>
               <InformationContainer>
@@ -674,7 +688,7 @@ const FacilityPage: React.FC = () => {
         <InformationRow>
           <InformationUnit>
             <InformationHeading>
-              <UnderLineText textSize={TextSize.X_LARGE}>アクセス</UnderLineText>
+              <UnderLineText>アクセス</UnderLineText>
             </InformationHeading>
             <InformationContainerRow>
               <InformationContainer>
@@ -690,9 +704,7 @@ const FacilityPage: React.FC = () => {
           </InformationUnit>
         </InformationRow>
 
-        <BusinessModule>
-          <GoogleMap />
-        </BusinessModule>
+        <GoogleMap />
         <OverWindow></OverWindow>
       </BaseLayout>
     </>

@@ -1,6 +1,7 @@
 // import React from 'react';
 import styled from 'styled-components';
-import { Spacing, Typography } from '@/constants';
+import { Spacing, Typography, ScreenType } from '@/constants';
+import media from 'styled-media-query';
 
 type HeadingProps = {
   children: string;

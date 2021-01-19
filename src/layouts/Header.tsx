@@ -40,8 +40,18 @@ const Content = styled.header`
 const Heading = styled.h1``;
 
 const SiteLogo = styled.h1`
-  height: 90px;
-  margin: ${BigSpacing.X_SMALL}px;
+  height: 80px;
+  margin: ${Spacing.LARGE}px;
+
+  ${media.greaterThan(ScreenType.LARGE)`
+    height: 90px;
+    margin: ${BigSpacing.X_SMALL}px;
+  `}
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    height: 60px;
+    margin: ${Spacing.X_LARGE}px;
+  `}
 `;
 
 const StyledLink = styled(Link)`
