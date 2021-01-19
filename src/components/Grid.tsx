@@ -5,7 +5,7 @@ import { useIntersectionObserver, useParallax } from '@/hooks';
 import { BoxProps, boxMixin, getBoxExpression } from './Box';
 import Picture from './Picture';
 import { Colors, ScreenType, ScreenValue } from '@/constants';
-import { getCurtainAnimationMixin, AnimationMixinProps, getFadeinMixin } from '@/util/animation';
+import { getCurtainAnimationMixin, AnimationMixinProps, getFadeInMixin } from '@/util/animation';
 import { Shadow } from '@/constants/shadow';
 
 export type GridContainerProps = {
@@ -125,5 +125,5 @@ const GridImageContainer = styled.div`
 const GridImageInner = styled.div<AnimationMixinProps>`
   width: 100%;
   height: 100%;
-  ${getFadeinMixin()}
+  ${getFadeInMixin()}
 `;

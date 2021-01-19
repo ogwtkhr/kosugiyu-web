@@ -97,7 +97,7 @@ export const getCurtainAnimationMixin = ({
   `;
 };
 
-export const getFadeinMixin = ({
+export const getFadeInMixin = ({
   duration = 1000,
   easing = Transitions.BASE_TRANSITION,
 }: {

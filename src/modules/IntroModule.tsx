@@ -18,6 +18,7 @@ import {
 } from '@/constants';
 import { isString } from '@/util/type';
 import { floorInRange0to1 } from '@/util/number';
+import { IntersectionFadeIn } from '@/animations';
 
 export const IntroModule: React.FC = () => {
   return (
@@ -25,7 +26,9 @@ export const IntroModule: React.FC = () => {
       <IntroStoryUnitNormal>
         <IntroStoryUnitColumnMain>
           <IntroStoryNormalPhoto>
-            <Picture relativePath="photos/top/story_1.jpg" />
+            <IntersectionFadeIn>
+              <Picture relativePath="photos/top/story_1.jpg" />
+            </IntersectionFadeIn>
           </IntroStoryNormalPhoto>
         </IntroStoryUnitColumnMain>
         <IntroStoryUnitColumnSub>

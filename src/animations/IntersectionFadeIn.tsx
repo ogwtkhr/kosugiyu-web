@@ -1,63 +1,24 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { motion, useAnimation } from 'framer-motion';
-// import styled from 'styled-components';
-// import { Spacing, Typography } from '@/constants';
+import React from 'react';
+import { useIntersectionObserver } from '@/hooks';
+import styled from 'styled-components';
+import { getFadeInMixin, AnimationMixinProps } from '@/util/animation';
 
 type IntersectionFadeInProps = {
-  // children: string;
+  //
 };
 
 export const IntersectionFadeIn: React.FC<IntersectionFadeInProps> = ({ children }) => {
-  const [isExec, setIsExec] = useState(false);
-  const controls = useAnimation();
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const { isIntersecting } = entries[0];
-        if (isIntersecting && !isExec) {
-          setIsExec(true);
-          controls.start({
-            y: 0,
-            opacity: 1,
+  const [ref, isIntersecting, hasIntersected] = useIntersectionObserver<HTMLDivElement>();
 
-            transition: {
-              duration: 0.9,
-              ease: 'backOut',
-            },
-          });
-        }
-      },
-      {
-        threshold: [0.2],
-      },
-    );
-
-    observer.observe(ref.current as HTMLDivElement);
-  }, []);
   return (
-    <motion.div
-      animate={controls}
-      initial={{
-        y: '50px',
-        opacity: 0,
-      }}
-      ref={ref}
-    >
+    <Container ref={ref} isAnimate={hasIntersected}>
       {children}
-    </motion.div>
+    </Container>
   );
 };
 
-// export const IntersectionFadeIn = styled.h2<IntersectionFadeInProps>`
-//   ${Typography.Mixin.DISPLAY}
-//   font-size: 3rem;
-// `;
-
-// export const IntersectionFadeInContainer = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   padding: ${Spacing.XXX_LARGE}px 0;
-// `;
+const Container = styled.div<AnimationMixinProps>`
+  ${getFadeInMixin()}
+`;
 
 export default IntersectionFadeIn;

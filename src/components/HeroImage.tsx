@@ -32,6 +32,9 @@ const BusinessInfo = styled.div`
   right: ${Spacing.NORMAL}px;
   color: ${Colors.UI_TEXT_DARK_BACKGROUND};
   font-size: ${TextSize.X_SMALL}rem;
+  ${media.lessThan(ScreenType.MEDIUM)`
+    writing-mode: vertical-lr;
+  `}
 `;
 
 const ScrollLineContainer = styled.div`

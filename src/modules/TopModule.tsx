@@ -65,10 +65,6 @@ const Container = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: ${Colors.UI_PAPER};
-
-  ${media.lessThan(ScreenType.MEDIUM)`
-    flex-direction: column;
-  `}
 `;
 
 const SideColumn = styled.div`
@@ -79,8 +75,8 @@ const SideColumn = styled.div`
   padding: ${Spacing.XXX_LARGE}px;
 
   ${media.lessThan(ScreenType.MEDIUM)`
-    width: auto;
-    padding: ${Spacing.XXX_LARGE}px ${Spacing.XX_LARGE}px;
+    width: 90px;
+    /* padding: ${Spacing.XXX_LARGE}px ${Spacing.XX_LARGE}px; */
   `}
 `;
 
@@ -96,6 +92,10 @@ const LogoContainer = styled.div`
 
 const Logo = styled.h1`
   width: 43px;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    width: 32px;
+  `}
 `;
 
 const LogoCopy = styled.p`
@@ -111,9 +111,21 @@ const LogoCopy = styled.p`
 
 const MenuList = styled.ul`
   position: absolute;
-  top: 10px; // TODO
+  top: 10px;
   right: ${Spacing.XXX_LARGE}px;
   /* cursor: pointer; */
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    /* display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    top: auto;
+    bottom: ${Spacing.LARGE}px;
+    right: auto;
+    left: ${Spacing.LARGE}px;
+    writing-mode: vertical-rl */
+    right: ${Spacing.LARGE}px;
+    text-align: right;
+  `}
 `;
 
 const MenuItem = styled.li`
@@ -135,6 +147,10 @@ const MenuItem = styled.li`
       display: inline-block;
       margin-left: ${Spacing.SMALL}px;
       ${Typography.Mixin.EXTENDED};
+
+      ${media.lessThan(ScreenType.MEDIUM)`
+  
+      `}
     }
 
     &:last-child {
@@ -164,8 +180,8 @@ const HeroArea = styled.div`
   margin-right: ${Spacing.XXX_LARGE}px;
 
   ${media.lessThan(ScreenType.MEDIUM)`
-    margin: 0;
-    height: 100%;
+    margin-top: 60px;
+    margin-right: ${Spacing.LARGE}px;
   `}
 `;
 
