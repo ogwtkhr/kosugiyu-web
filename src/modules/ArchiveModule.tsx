@@ -144,8 +144,9 @@ const ArticleLink = styled(Link)`
 `;
 
 const ArticlesByYear = styled.div`
-  max-width: ${ModuleWidth.SEMI_WIDE}px;
-  margin: ${Spacing.XXX_LARGE}px auto;
+  margin-top: ${Spacing.XXX_LARGE}px;
+  margin-bottom: ${Spacing.XXX_LARGE}px;
+  ${StyleMixin.RESPONSIVE_OFFSET};
 `;
 
 const ArticleYear = styled.div`

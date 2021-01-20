@@ -20,6 +20,7 @@ import {
   SizeType,
   Typography,
   BigSpacing,
+  StyleMixin,
 } from '@/constants';
 import media from 'styled-media-query';
 import { Shadow } from '@/constants/shadow';
@@ -203,12 +204,10 @@ const facilityInfos: FacilityInfo[] = [
 
 const InformationRow = styled.div`
   display: flex;
-  max-width: ${ModuleWidth.SEMI_WIDE}px;
-  margin: ${BigSpacing.NORMAL}px auto;
-  ${media.lessThan(calcResponsivePoint(ModuleWidth.SEMI_WIDE, Spacing.XXX_LARGE))`
-    margin-left: ${Spacing.XXX_LARGE}px;
-    margin-right: ${Spacing.XXX_LARGE}px;
-  `}
+  margin-top: ${BigSpacing.NORMAL}px;
+  margin-bottom: ${BigSpacing.NORMAL}px;
+  ${StyleMixin.RESPONSIVE_OFFSET}
+
   ${media.lessThan(ScreenType.MEDIUM)`
     display: block;
     margin-left: ${Spacing.LARGE}px;

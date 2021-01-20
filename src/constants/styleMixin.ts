@@ -1,6 +1,27 @@
 import { css } from 'styled-components';
 import Opacity from './opacity';
 import Transitions from './transitions';
+import { calcResponsivePoint } from '@/util/style';
+import media from 'styled-media-query';
+import { ModuleWidth, Spacing } from './spacing';
+
+export const getResponsiveOffsetMixin = ({
+  maxWidth,
+  margin,
+}: {
+  maxWidth?: number;
+  margin?: number;
+} = {}): any => {
+  return css`
+    max-width: ${maxWidth}px;
+    margin-left: auto;
+    margin-right: auto;
+    ${media.lessThan(calcResponsivePoint(maxWidth, margin))`
+      margin-left: ${margin}px;
+      margin-right: ${margin}px;
+  `}
+  `;
+};
 
 const BASE_BACKGROUND_IMAGE = css`
   background-repeat: no-repeat;
@@ -40,6 +61,12 @@ export const StyleMixin = {
       }
     `,
   },
+  RESPONSIVE_OFFSET: css`
+    ${getResponsiveOffsetMixin({
+      maxWidth: ModuleWidth.SEMI_WIDE,
+      margin: Spacing.XXX_LARGE,
+    })}
+  `,
 } as const;
 
 export default StyleMixin;
