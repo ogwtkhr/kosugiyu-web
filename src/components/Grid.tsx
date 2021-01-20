@@ -26,8 +26,8 @@ export const GridContainer = styled.div<GridContainerProps>`
   grid-column-gap: ${({ columnGap = '' }) => withUnit(columnGap)};
   grid-row-gap: ${({ rowGap = '' }) => withUnit(rowGap)};
   grid-template-columns: repeat(12, 1fr);
-  grid-auto-rows: 5vw;
-  grid-template-rows: 5vw;
+  grid-auto-rows: 3.5vw;
+  grid-template-rows: 3.5vw;
   ${media.greaterThan<GridContainerProps>(ScreenType.LARGE)`
     width: ${ScreenValue.LARGE}px;
     margin: 0 auto;

@@ -163,9 +163,9 @@ export const IntroModule: React.FC = () => {
 
       <IntroStoryUnitFinal>
         <IntroStoryFinalMessage>
-          <MessageTypography>
+          <MessageTypographyStyle>
             その長い歴史の中で、さまざまな人たちが小杉湯に集まり、さまざまな物語が生まれてきました。
-          </MessageTypography>
+          </MessageTypographyStyle>
         </IntroStoryFinalMessage>
 
         <IntroStoryFinalPhoto>
@@ -181,11 +181,22 @@ export const IntroModule: React.FC = () => {
   );
 };
 
-const MessageTypography = styled.p`
+const MessageTypography: React.FC = ({ children }) => (
+  <IntersectionFadeIn>
+    <MessageTypographyLayout>
+      <MessageTypographyStyle>{children}</MessageTypographyStyle>
+    </MessageTypographyLayout>
+  </IntersectionFadeIn>
+);
+
+const MessageTypographyStyle = styled.span`
   ${Typography.Mixin.DISPLAY};
   ${Typography.Mixin.VERTICAL_WRITING};
-  height: 400px;
   font-size: ${TextSize.NORMAL}rem;
+`;
+
+const MessageTypographyLayout = styled.p`
+  height: 400px;
 `;
 
 const IntroStoryUnitNormal = styled.section`
@@ -245,7 +256,7 @@ const IntroStoryFinalMessage = styled.div`
   left: 0;
   justify-content: center;
   width: 100%;
-  height: 400px;
+  height: 300px;
   z-index: 1;
 `;
 

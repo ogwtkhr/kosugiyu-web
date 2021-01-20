@@ -11,6 +11,7 @@ export const HeroImage: React.FC = () => {
       <BusinessInfo>
         平日 15:30-25:45 土日 8:00-25:45 木曜定休
         <br />
+        <span> </span>
         入浴料金・大人470円
       </BusinessInfo>
       <ScrollLineContainer>
@@ -44,6 +45,9 @@ const BusinessInfo = styled.div`
   ${media.lessThan(ScreenType.MEDIUM)`
     top: ${Spacing.NORMAL}px;
     left: ${Spacing.NORMAL}px;
+    & span {
+      display: none;
+    }
   `}
 `;
 
