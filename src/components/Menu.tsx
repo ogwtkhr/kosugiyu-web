@@ -121,14 +121,14 @@ const Trigger = styled.button<TriggerProps>`
   ${StyleMixin.BUTTON_RESET};
   position: fixed;
   z-index: ${Layer.OVERLAY_CONTROL};
-  top: ${BigSpacing.NORMAL}px;
+  top: 68px;
   right: ${Spacing.XXX_LARGE}px;
   width: ${Spacing.XXX_LARGE}px;
   height: ${Spacing.XXX_LARGE}px;
   mix-blend-mode: difference;
 
   ${media.greaterThan(ScreenType.LARGE)`
-    top: 70px;
+    top: 72px;
   `}
 
   ${media.lessThan(ScreenType.MEDIUM)`

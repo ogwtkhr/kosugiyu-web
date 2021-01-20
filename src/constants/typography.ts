@@ -76,6 +76,9 @@ const Mixin = {
   VERTICAL_WRITING: css`
     writing-mode: vertical-rl;
   `,
+  HORIZONTAL_WRITING: css`
+    writing-mode: initial;
+  `,
 } as const;
 
 export const Typography = {

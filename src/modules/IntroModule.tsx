@@ -26,7 +26,7 @@ export const IntroModule: React.FC = () => {
       <IntroStoryUnitNormal>
         <IntroStoryUnitColumnMain>
           <IntroStoryNormalPhoto>
-            <IntersectionFadeIn>
+            <IntersectionFadeIn fill>
               <Picture relativePath="photos/top/story_1.jpg" />
             </IntersectionFadeIn>
           </IntroStoryNormalPhoto>
@@ -120,7 +120,7 @@ export const IntroModule: React.FC = () => {
           </GridItem>
         </GridContainer>
         <MessageInGrid>
-          <IntersectionFadeIn>
+          <IntersectionFadeIn fill>
             <MessageTypography>
               関東大震災後、東京の中心部からやってきたファミリー層や高齢者世帯によって、新興住宅街がつくられたこのエリア。戦後になると、作家やアーティストをはじめ若者も多く移り住むようになり、多種多様な人びとが、ときに“中央線文化”とも呼ばれる独自のカルチャーを形作ってきました。
             </MessageTypography>
@@ -136,7 +136,7 @@ export const IntroModule: React.FC = () => {
           </MessageTypography>
         </IntroStoryUnitColumnSub>
         <IntroStoryUnitColumnMain>
-          <IntersectionFadeIn>
+          <IntersectionFadeIn fill>
             <IntroStoryNormalPhoto>
               <Picture relativePath="photos/top/story_9.jpg" />
             </IntroStoryNormalPhoto>
@@ -145,7 +145,7 @@ export const IntroModule: React.FC = () => {
       </IntroStoryUnitNormal>
       <IntroStoryUnitNormal>
         <IntroStoryUnitColumnMain>
-          <IntersectionFadeIn>
+          <IntersectionFadeIn fill>
             <IntroStoryNormalPhoto>
               <Picture relativePath="photos/top/story_10.jpg" />
             </IntroStoryNormalPhoto>
@@ -193,16 +193,27 @@ const MessageTypographyStyle = styled.span`
   ${Typography.Mixin.DISPLAY};
   ${Typography.Mixin.VERTICAL_WRITING};
   font-size: ${TextSize.NORMAL}rem;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    font-size: ${TextSize.SMALL}rem;
+  `}
 `;
 
 const MessageTypographyLayout = styled.p`
   height: 400px;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    height: 380px;
+  `}
 `;
 
 const IntroStoryUnitNormal = styled.section`
   display: flex;
   max-width: ${ModuleWidth.WIDE}px;
   margin: ${BigSpacing.NORMAL}px auto;
+  ${media.lessThan(ScreenType.MEDIUM)`
+    height: 440px;
+  `}
 `;
 
 const IntroStoryUnitColumnSub = styled.div`
@@ -210,11 +221,15 @@ const IntroStoryUnitColumnSub = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  width: 20%;
+  flex: 1;
 `;
 
 const IntroStoryUnitColumnMain = styled.div`
   width: 80%;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    width: 60%;
+  `}
 `;
 
 const IntroStoryNormalPhoto = styled.div`
@@ -223,6 +238,12 @@ const IntroStoryNormalPhoto = styled.div`
     display: block;
     padding-bottom: ${AspectRatio.GOLDEN_VERTICAL};
   }
+  ${media.lessThan(ScreenType.MEDIUM)`
+    height: 100%;
+    &::after {
+      display: none;
+    }
+  `}
 `;
 
 const IntroStoryUnitFinal = styled.section`

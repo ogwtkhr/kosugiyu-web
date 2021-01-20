@@ -213,6 +213,7 @@ const PersonListContainer = styled.div`
   margin: ${BigSpacing.LARGE}px auto;
 
   ${media.lessThan(ScreenType.MEDIUM)`
+    display: block;
     margin: ${Spacing.XX_LARGE}px auto;
   `}
 `;

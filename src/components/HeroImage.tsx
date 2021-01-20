@@ -28,7 +28,6 @@ const Container = styled.div`
   height: 100%;
   overflow: hidden;
   background-color: ${Colors.UI_OBJECT_PLACEHOLDER};
-  ${StyleMixin.BACKGROUND_IMAGE}
 `;
 
 const BusinessInfo = styled.div`
