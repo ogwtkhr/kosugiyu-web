@@ -45,177 +45,87 @@ export const IntroModule: React.FC = () => {
         <GridContainer>
           <GridItem
             grid={{
-              columnStart: 2,
-              columnEnd: 5,
-              rowEnd: 4,
-            }}
-            gridSmall={{
               columnStart: 1,
-              columnEnd: 5,
-              rowEnd: 5,
-            }}
-          >
-            <GridImage src="photos/top/town_1.jpg" parallaxSpeed={0.09} />
-          </GridItem>
-          <GridItem
-            grid={{
-              columnStart: 0,
-              columnEnd: 2,
-              rowStart: 2,
-              rowEnd: 5,
-            }}
-            gridSmall={{
-              columnStart: 0,
-              columnEnd: 2,
-              rowStart: 3,
-              rowEnd: 6,
-            }}
-            box={{}}
-          >
-            <GridImage src="photos/top/town_2.jpg" parallaxSpeed={0.06} />
-          </GridItem>
-          <GridItem
-            grid={{
-              columnStart: 2,
-              columnEnd: 5,
-              rowStart: 4,
-              rowEnd: 6,
-            }}
-            gridSmall={{
-              columnStart: 1,
-              columnEnd: 6,
-              rowStart: 5,
+              columnEnd: 7,
+              rowStart: 1,
               rowEnd: 11,
             }}
-            box={{}}
-            centering
           >
+            <GridImage src="photos/top/story_2.jpg" parallaxSpeed={0.09} />
+          </GridItem>
+          <GridItem
+            grid={{
+              columnStart: 9,
+              columnEnd: 13,
+              rowStart: 4,
+              rowEnd: 11,
+            }}
+          >
+            <GridImage src="photos/top/story_3.jpg" parallaxSpeed={0.06} />
+          </GridItem>
+          {/* 2段目左*/}
+          <GridItem
+            grid={{
+              columnStart: 1,
+              columnEnd: 5,
+              rowStart: 12,
+              rowEnd: 19,
+            }}
+          >
+            <GridImage src="photos/top/story_4.jpg" parallaxSpeed={0.07} />
+          </GridItem>
+          {/* 2段目右 */}
+          <GridItem
+            grid={{
+              columnStart: 9,
+              columnEnd: 13,
+              rowStart: 12,
+              rowEnd: 19,
+            }}
+          >
+            <GridImage src="photos/top/story_5.jpg" parallaxSpeed={0.07} />
+          </GridItem>
+          {/* 3段目左 */}
+          <GridItem
+            grid={{
+              columnStart: 1,
+              columnEnd: 5,
+              rowStart: 20,
+              rowEnd: 27,
+            }}
+          >
+            <GridImage src="photos/top/story_6.jpg" parallaxSpeed={0.07} />
+          </GridItem>
+          {/* 4段目左 */}
+          <GridItem
+            grid={{
+              columnStart: 1,
+              columnEnd: 5,
+              rowStart: 28,
+              rowEnd: 35,
+            }}
+          >
+            <GridImage src="photos/top/story_7.jpg" parallaxSpeed={0.07} />
+          </GridItem>
+          {/* 3段目右 */}
+          <GridItem
+            grid={{
+              columnStart: 7,
+              columnEnd: 13,
+              rowStart: 24,
+              rowEnd: 35,
+            }}
+          >
+            <GridImage src="photos/top/story_8.jpg" parallaxSpeed={0.07} />
+          </GridItem>
+        </GridContainer>
+        <MessageInGrid>
+          <IntersectionFadeIn>
             <MessageTypography>
               関東大震災後、東京の中心部からやってきたファミリー層や高齢者世帯によって、新興住宅街がつくられたこのエリア。戦後になると、作家やアーティストをはじめ若者も多く移り住むようになり、多種多様な人びとが、ときに“中央線文化”とも呼ばれる独自のカルチャーを形作ってきました。
             </MessageTypography>
-          </GridItem>
-          <GridItem
-            grid={{
-              columnStart: 2,
-              columnEnd: 5,
-              rowStart: 6,
-              rowEnd: 9,
-            }}
-            gridSmall={{
-              columnStart: 2,
-              columnEnd: 5,
-              rowStart: 11,
-              rowEnd: 14,
-            }}
-            box={{}}
-          >
-            <GridImage src="photos/top/town_6.jpg" parallaxSpeed={0.07} />
-          </GridItem>
-        </GridContainer>
-      </GridOuter>
-      <GridOuter>
-        <GridContainer>
-          <GridItem
-            grid={{
-              columnStart: 2,
-              columnEnd: 5,
-              rowEnd: 4,
-            }}
-            gridSmall={{
-              columnStart: 0,
-              columnEnd: 4,
-              rowEnd: 5,
-            }}
-          >
-            <GridImage src="photos/top/town_3.jpg" parallaxSpeed={0.02} />
-          </GridItem>
-          <GridItem
-            grid={{
-              columnStart: 0,
-              columnEnd: 2,
-              rowStart: 2,
-              rowEnd: 4,
-            }}
-            gridSmall={{
-              columnStart: 3,
-              columnEnd: 5,
-              rowStart: 3,
-              rowEnd: 5,
-            }}
-            box={{}}
-            boxSmall={{}}
-          >
-            <GridImage src="photos/top/town_5.jpg" parallaxSpeed={0.08} />
-          </GridItem>
-          <GridItem
-            grid={{
-              columnStart: 1,
-              columnEnd: 4,
-              rowStart: 4,
-              rowEnd: 6,
-            }}
-            gridSmall={{
-              columnStart: 0,
-              columnEnd: 4,
-              rowStart: 5,
-              rowEnd: 9,
-            }}
-            boxSmall={{
-              marginLeft: 4,
-            }}
-            centering
-          ></GridItem>
-          <GridItem
-            grid={{
-              columnStart: 0,
-              columnEnd: 1,
-              rowStart: 6,
-              rowEnd: 8,
-            }}
-            gridSmall={{
-              columnStart: 0,
-              columnEnd: 1,
-              rowStart: 9,
-              rowEnd: 11,
-            }}
-          >
-            <GridImage src="photos/top/town_4.jpg" parallaxSpeed={0.02} />
-          </GridItem>
-          <GridItem
-            grid={{
-              columnStart: 1,
-              columnEnd: 3,
-              rowStart: 6,
-              rowEnd: 8,
-            }}
-            gridSmall={{
-              columnStart: 1,
-              columnEnd: 3,
-              rowStart: 9,
-              rowEnd: 11,
-            }}
-            box={{}}
-          >
-            <GridImage src="photos/top/town_7.jpg" parallaxSpeed={0.03} />
-          </GridItem>
-          <GridItem
-            grid={{
-              columnStart: 3,
-              columnEnd: 5,
-              rowStart: 6,
-              rowEnd: 8,
-            }}
-            gridSmall={{
-              columnStart: 3,
-              columnEnd: 5,
-              rowStart: 9,
-              rowEnd: 11,
-            }}
-            box={{}}
-          >
-            <GridImage src="photos/top/town_8.jpg" parallaxSpeed={0.04} />
-          </GridItem>
-        </GridContainer>
+          </IntersectionFadeIn>
+        </MessageInGrid>
       </GridOuter>
       <IntroStoryUnitNormal>
         <IntroStoryUnitColumnSub>
@@ -340,12 +250,20 @@ const IntroStoryFinalMessage = styled.div`
 `;
 
 const GridOuter = styled.div`
+  position: relative;
   margin: ${Spacing.XX_LARGE}px 0;
   background-color: ${Colors.UI_PAPER};
 
   ${media.lessThan(ScreenType.MEDIUM)`
     margin: ${Spacing.X_LARGE}px 0;
   `}
+`;
+
+const MessageInGrid = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
 
 export default IntroModule;

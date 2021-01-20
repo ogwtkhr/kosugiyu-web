@@ -9,6 +9,7 @@ import 'reset.css';
 
 import { SiteTitleQuery } from '@/types';
 import { Menu } from '@/components';
+import { Colors } from '@/constants';
 import Header from './Header';
 import Loading from './Loading';
 
@@ -47,6 +48,8 @@ export const BaseLayout: React.FC<BaseLayoutProps> = ({
   );
 };
 
-const Main = styled.main``;
+const Main = styled.main`
+  background-color: ${Colors.UI_PAPER};
+`;
 
 export default BaseLayout;

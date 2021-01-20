@@ -7,31 +7,44 @@ import Picture from './Picture';
 import { Colors, ScreenType, ScreenValue } from '@/constants';
 import { getCurtainAnimationMixin, AnimationMixinProps, getFadeInMixin } from '@/util/animation';
 import { Shadow } from '@/constants/shadow';
+import { isNumber } from 'lodash';
+
+type NumberOrString = number | string;
 
 export type GridContainerProps = {
   columns?: number;
-  gap?: number | string;
+  rowGap?: NumberOrString;
+  rowGapSmall?: NumberOrString;
+  columnGap?: NumberOrString;
+  columnGapSmall?: NumberOrString;
 };
+
+const withUnit = (value: NumberOrString): string => (isNumber(value) ? `${value}px` : value);
 
 export const GridContainer = styled.div<GridContainerProps>`
   display: grid;
-  grid-auto-rows: 14vw;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: 14vw;
-
-  ${media.greaterThan(ScreenType.LARGE)`
+  grid-column-gap: ${({ columnGap = '' }) => withUnit(columnGap)};
+  grid-row-gap: ${({ rowGap = '' }) => withUnit(rowGap)};
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: 5vw;
+  grid-template-rows: 5vw;
+  ${media.greaterThan<GridContainerProps>(ScreenType.LARGE)`
     width: ${ScreenValue.LARGE}px;
     margin: 0 auto;
-    grid-auto-rows: 150px;
-    grid-template-rows: 150px;
-  `}
+    grid-column-gap: ${({ columnGapSmall = '' }) => withUnit(columnGapSmall)};
+    grid-row-gap: ${({ rowGapSmall = '' }) => withUnit(rowGapSmall)};
+    grid-auto-rows: 40px;
+    grid-template-rows: 40px;
+  `};
 `;
+
+type GridColumnRange = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13;
 
 export type GridOption = {
   rowStart?: number;
   rowEnd?: number;
-  columnStart?: number;
-  columnEnd?: number;
+  columnStart?: GridColumnRange;
+  columnEnd?: GridColumnRange;
 };
 
 export type GridItemProps = {
@@ -46,22 +59,21 @@ export const GridItem = styled.div<GridItemProps>`
   display: block;
   ${({ grid }) => {
     if (!grid) return '';
-    const { rowStart = 1, rowEnd = 6, columnStart = 1, columnEnd = 6 } = grid;
-    const OFFSET = 1;
+    const { rowStart = 1, rowEnd = 12, columnStart = 1, columnEnd = 13 } = grid;
     return `
       grid-row: ${rowStart} / ${rowEnd};
-      grid-column: ${columnStart + OFFSET} / ${columnEnd + OFFSET};
+      grid-column: ${columnStart} / ${columnEnd};
     `;
   }}
 
   ${({ gridSmall }) => {
     if (!gridSmall) return '';
-    const { rowStart = 1, rowEnd = 6, columnStart = 1, columnEnd = 6 } = gridSmall;
-    const OFFSET = 1;
+    const { rowStart = 1, rowEnd = 12, columnStart = 1, columnEnd = 13 } = gridSmall;
+
     return `
       @media(max-width: ${ScreenValue.SMALL}px) {
         grid-row: ${rowStart} / ${rowEnd};
-        grid-column: ${columnStart + OFFSET} / ${columnEnd + OFFSET};
+        grid-column: ${columnStart} / ${columnEnd};
       }
     `;
   }}
@@ -105,9 +117,11 @@ export const GridImage: React.FC<GridImageProps> = ({ src, parallaxSpeed = 0.2 }
   return (
     <GridImageContainer
       ref={parallaxRef}
-      style={{
-        transform,
-      }}
+      style={
+        {
+          // transform,
+        }
+      }
     >
       <GridImageInner ref={intersectionRef} isAnimate={isIntersecting}>
         <Picture relativePath={src} />

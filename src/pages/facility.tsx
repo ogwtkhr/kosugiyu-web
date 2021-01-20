@@ -19,6 +19,7 @@ import {
   TextWeight,
   SizeType,
   Typography,
+  BigSpacing,
 } from '@/constants';
 import media from 'styled-media-query';
 import { Shadow } from '@/constants/shadow';
@@ -203,7 +204,7 @@ const facilityInfos: FacilityInfo[] = [
 const InformationRow = styled.div`
   display: flex;
   max-width: ${ModuleWidth.SEMI_WIDE}px;
-  margin: ${Spacing.XXX_LARGE}px auto;
+  margin: ${BigSpacing.NORMAL}px auto;
   ${media.lessThan(calcResponsivePoint(ModuleWidth.SEMI_WIDE, Spacing.XXX_LARGE))`
     margin-left: ${Spacing.XXX_LARGE}px;
     margin-right: ${Spacing.XXX_LARGE}px;
