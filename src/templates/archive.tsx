@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { graphql } from 'gatsby';
 import dayjs from 'dayjs';
-// import { Twitter, FacebookCircle } from '@styled-icons/boxicons-logos';
+import { Twitter, FacebookCircle } from '@styled-icons/boxicons-logos';
 
 import { Query } from '@/types';
 import { BaseLayout, Meta } from '@/layouts';
@@ -58,10 +58,8 @@ const ArchivePage: React.FC<ArchivePageProps> = ({ data }) => {
         <TitleContainer>
           <Title>{title}</Title>
           <MetaInfoContainer>
-            {/* <SocialIcons>
-              <TwitterIcon />
-              <FacebookIcon />
-            </SocialIcons> */}
+            <SocialIcons>{/* <TwitterIcon />
+              <FacebookIcon /> */}</SocialIcons>
             <MetaInfo>
               <PublishedDate>{publishedDate}</PublishedDate>
               {/* <WriterName>{writerName}</WriterName> */}
@@ -131,9 +129,6 @@ const TitleContainer = styled.div`
   position: relative;
   z-index: ${Layer.BASE};
   max-width: ${ModuleWidth.ARTICLE}px;
-  /* margin: -${Spacing.XX_LARGE * 4}px auto ${Spacing.XX_LARGE}px; */
-  /* padding: ${Spacing.XX_LARGE}px; */
-  /* background-color: ${Colors.ABSTRACT_WHITE}; */
 
   ${media.lessThan(ScreenType.MEDIUM)`
     margin: 0;
@@ -143,12 +138,12 @@ const TitleContainer = styled.div`
 
 const Title = styled.h2`
   ${Typography.Mixin.DISPLAY};
-  font-size: ${TextSize.XXX_LARGE}rem;
+  font-size: ${TextSize.X_LARGE}rem;
   font-weight: ${TextWeight.BOLD};
   line-height: ${LineHeight.NORMAL};
 
   ${media.lessThan(ScreenType.MEDIUM)`
-    font-size: 2.4rem;
+    font-size: ${TextSize.LARGE}rem;
   `}
 `;
 
@@ -178,19 +173,20 @@ const iconMixin = css`
   color: ${Colors.ABSTRACT_NAVY};
 `;
 
-// const TwitterIcon = styled(Twitter)`
-//   ${iconMixin};
-// `;
+const TwitterIcon = styled(Twitter)`
+  ${iconMixin};
+`;
 
-// const FacebookIcon = styled(FacebookCircle)`
-//   ${iconMixin};
-//   margin-left: ${Spacing.NORMAL}px;
-// `;
+const FacebookIcon = styled(FacebookCircle)`
+  ${iconMixin};
+  margin-left: ${Spacing.NORMAL}px;
+`;
 
 const MetaInfo = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
+
 const PublishedDate = styled.p`
   ${Typography.Mixin.DISPLAY};
   font-size: ${TextSize.SMALL}rem;
@@ -199,7 +195,7 @@ const PublishedDate = styled.p`
 
 const MainVisualContainer = styled.div`
   width: 100%;
-  max-width: ${ModuleWidth.WIDE}px;
+  max-width: ${ModuleWidth.MIDDLE}px;
   margin: 0 auto;
   overflow: hidden;
 
@@ -216,7 +212,7 @@ const MainVisual = styled.div`
     content: '';
     display: block;
     /* padding-bottom: ${AspectRatio.R_16_BY_9}%; */
-    padding-bottom: 30%;
+    padding-bottom: ${AspectRatio.PLATINUM_HORIZONTAL}%;
   }
 
   ${media.lessThan(ScreenType.MEDIUM)`
@@ -229,32 +225,8 @@ const MainVisual = styled.div`
 
 const Article = styled.article`
   max-width: ${ModuleWidth.ARTICLE}px;
-  margin: 0 auto;
 
-  ${media.lessThan(ScreenType.MEDIUM)`
-    margin: 0 ${Spacing.LARGE}px;
-  `}
-
-  & p {
-    font-weight: ${TextWeight.NORMAL};
-  }
-
-  & strong {
-    color: ${Colors.ABSTRACT_NAVY};
-    font-weight: ${TextWeight.BOLD};
-  }
-
-  & img {
-    display: block;
-    width: 100%;
-    margin-top: ${Spacing.X_LARGE}px;
-
-    ${media.lessThan(ScreenType.MEDIUM)`
-      margin-left: -${Spacing.LARGE}px;
-      margin-right: -${Spacing.LARGE}px;
-      width: calc(100% + ${Spacing.LARGE * 2}px);
-    `}
-  }
+  ${StyleMixin.ARTICLE_BODY};
 `;
 
 const InfoList = styled.ul`

@@ -5,7 +5,7 @@ const ABSTRACT_STRONG_GRAY = '#333333';
 const ABSTRACT_GRAY = '#999999';
 const ABSTRACT_WHITE = '#ffffff';
 const ABSTRACT_NAVY = '#114086';
-const ABSTRACT_PALE_GRAY = rgba(ABSTRACT_BLACK, 0.4);
+const ABSTRACT_PALE_GRAY = rgba(ABSTRACT_BLACK, 0.5);
 
 export const Colors = {
   UI_BASE: ABSTRACT_BLACK,

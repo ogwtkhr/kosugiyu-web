@@ -103,10 +103,9 @@ const Item = styled.li`
 
 const Type = styled.span`
   display: inline-block;
-  font-size: ${TextSize.XXXX_LARGE}rem;
+  font-size: ${TextSize.XX_LARGE}rem;
   font-weight: ${TextWeight.BOLD};
   letter-spacing: 0.2em;
-  ${Typography.Mixin.EXTENDED};
 
   ${media.lessThan(ScreenType.MEDIUM)`
     font-size: ${TextSize.XXX_LARGE}rem;

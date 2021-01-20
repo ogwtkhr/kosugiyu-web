@@ -14,7 +14,13 @@ type Props = {
   meta?: MetaItem[];
 };
 
-export const Meta: React.FC<Props> = ({ title, description, ogImage, lang = 'en', meta = [] }) => {
+export const Meta: React.FC<Props> = ({
+  title: propsTitle,
+  description,
+  ogImage,
+  lang = 'en',
+  meta = [],
+}) => {
   const data = useStaticQuery<SiteMetaDataQuery>(graphql`
     query SiteMetaData {
       settingYaml {
@@ -34,6 +40,7 @@ export const Meta: React.FC<Props> = ({ title, description, ogImage, lang = 'en'
   const twitterAccount = `@${baseMeta?.twitter || ''}`;
   const image = ogImage || baseMeta?.ogImage || '';
   const defaultTitle = baseMeta?.title;
+  const title = propsTitle || defaultTitle || '';
 
   return (
     <Helmet
@@ -42,7 +49,7 @@ export const Meta: React.FC<Props> = ({ title, description, ogImage, lang = 'en'
       }}
       title={title}
       titleTemplate={`%s | ${defaultTitle}`}
-      defaultTitle={defaultTitle || ''}
+      defaultTitle={defaultTitle}
       meta={[
         {
           name: 'description',
@@ -85,7 +92,7 @@ export const Meta: React.FC<Props> = ({ title, description, ogImage, lang = 'en'
       link={[
         {
           href:
-            'https://fonts.googleapis.com/css?family=Noto+Sans+JP:300,500|Roboto+Condensed&display=swap',
+            'https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,500|Roboto+Condensed&display=swap',
           rel: 'stylesheet',
           type: 'text/css',
         },
