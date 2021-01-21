@@ -127,8 +127,8 @@ const Trigger = styled.button<TriggerProps>`
   height: ${Spacing.XXX_LARGE}px;
   mix-blend-mode: difference;
 
-  ${media.greaterThan(ScreenType.LARGE)`
-    top: 72px;
+  ${media.greaterThan(ScreenType.HUGE)`
+    top: 88px;
   `}
 
   ${media.lessThan(ScreenType.MEDIUM)`
