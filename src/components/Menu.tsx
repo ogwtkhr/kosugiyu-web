@@ -90,6 +90,7 @@ const Item = styled.li`
   margin-top: ${Spacing.X_LARGE}px;
   list-style-type: none;
   text-align: center;
+  cursor: pointer;
 
   &:first-child {
     margin-top: 0;

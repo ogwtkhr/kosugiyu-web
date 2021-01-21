@@ -183,6 +183,7 @@ const MenuItem = styled.li`
   margin-left: ${Spacing.MIDDLE}px;
   line-height: ${LineHeight.MONOLITHIC};
   font-size: ${TextSize.SMALL}rem;
+  cursor: pointer;
 
   & a {
     color: black;

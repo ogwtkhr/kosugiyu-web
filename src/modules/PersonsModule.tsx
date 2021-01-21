@@ -13,19 +13,21 @@ import {
   ScreenType,
   ModuleHeight,
 } from '@/constants';
-import { PersonItem, TopPersonItem, Picture } from '@/components';
+import { PersonItem, TopPersonItem, Picture, Button, ButtonContainer } from '@/components';
 import media from 'styled-media-query';
 
 type PersonsModuleProps = {
   useTitle?: boolean;
-  useSideTitle?: boolean;
+  summaryMode?: boolean;
   enableTopEmphasis?: boolean;
+  withVerticalMargin?: boolean;
 };
 
 export const PersonsModule: React.FC<PersonsModuleProps> = ({
   useTitle,
-  useSideTitle,
+  summaryMode,
   enableTopEmphasis = true,
+  withVerticalMargin,
 }) => {
   const data = useStaticQuery<AllMicrocmsPersonsQuery>(graphql`
     query allMicrocmsPersons {
@@ -55,7 +57,7 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({
   const topPersonMainVisualUrl = topPerson?.mainVisual?.url || '';
 
   return (
-    <Container>
+    <Container withVerticalMargin={withVerticalMargin}>
       {useTitle && (
         <PersonsHeadingContainer>
           <PersonsHeadingInner>
@@ -89,7 +91,7 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({
       )}
 
       <PersonListContainer>
-        {useSideTitle && (
+        {summaryMode && (
           <PersonsHeadingSubTitle>
             <HeadingTitle />
           </PersonsHeadingSubTitle>
@@ -110,6 +112,9 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({
           })}
         </PersonList>
       </PersonListContainer>
+      <ButtonContainer>
+        <Button to="/persons">さらに読む</Button>
+      </ButtonContainer>
     </Container>
   );
 };
@@ -189,9 +194,9 @@ const PersonsHeadingBodyCopySmallScreen = styled.p`
   `}
 `;
 
-const Container = styled.div`
-  width: 100%;
-  background-color: ${Colors.UI_PAPER};
+const Container = styled.div<Pick<PersonsModuleProps, 'withVerticalMargin'>>`
+  max-width: ${ModuleWidth.MIDDLE}px;
+  margin: ${({ withVerticalMargin }) => `${withVerticalMargin ? BigSpacing.LARGE : 0}px auto`};
 `;
 
 const PersonLink = styled(Link)`
@@ -209,8 +214,6 @@ const TopPersonContainer = styled.div`
 
 const PersonListContainer = styled.div`
   display: flex;
-  max-width: ${ModuleWidth.MIDDLE}px;
-  margin: ${BigSpacing.LARGE}px auto;
 
   ${media.lessThan(ScreenType.MEDIUM)`
     display: block;

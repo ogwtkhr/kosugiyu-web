@@ -21,6 +21,7 @@ import {
   Typography,
   BigSpacing,
   StyleMixin,
+  getResponsiveOffsetMixin,
 } from '@/constants';
 import media from 'styled-media-query';
 import { Shadow } from '@/constants/shadow';
@@ -206,7 +207,10 @@ const InformationRow = styled.div`
   display: flex;
   margin-top: ${BigSpacing.NORMAL}px;
   margin-bottom: ${BigSpacing.NORMAL}px;
-  ${StyleMixin.RESPONSIVE_OFFSET}
+  ${getResponsiveOffsetMixin({
+    maxWidth: ModuleWidth.MIDDLE,
+    margin: Spacing.XXX_LARGE,
+  })};
 
   ${media.lessThan(ScreenType.MEDIUM)`
     display: block;

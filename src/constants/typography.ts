@@ -61,7 +61,7 @@ const Mixin = {
     font-family: ${TypeFace.BASE};
     font-feature-settings: 'palt';
     /* font-size: ${TextSize.XXX_LARGE}rem; */
-    font-weight: ${TextWeight.MEDIUM};
+    font-weight: ${TextWeight.BOLD};
     line-height: ${LineHeight.NORMAL};
     letter-spacing: ${LetterSpacing.WIDE}em;
   `,

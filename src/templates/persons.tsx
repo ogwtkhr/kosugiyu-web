@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 import { graphql } from 'gatsby';
 import dayjs from 'dayjs';
-import { Twitter, FacebookCircle } from '@styled-icons/boxicons-logos';
 
 import { Query } from '@/types';
 import { BaseLayout, Meta } from '@/layouts';
@@ -11,17 +10,10 @@ import {
   TextWeight,
   Spacing,
   StyleMixin,
-  AspectRatio,
   Colors,
-  Typography,
   TextSize,
-  LetterSpacing,
   ScreenType,
-  LineHeight,
-  ScreenValue,
-  Layer,
   DateFormat,
-  BigSpacing,
 } from '@/constants';
 import media from 'styled-media-query';
 import { useParallax } from '@/hooks';

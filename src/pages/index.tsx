@@ -9,7 +9,7 @@ const IndexPage: React.FC = () => {
         <Meta />
         <TopModule />
         <IntroModule />
-        <PersonsModule useSideTitle enableTopEmphasis={false} />
+        <PersonsModule summaryMode withVerticalMargin enableTopEmphasis={false} />
       </BaseLayout>
     </>
   );
