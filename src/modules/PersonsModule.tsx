@@ -57,7 +57,7 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({
   const topPersonMainVisualUrl = topPerson?.mainVisual?.url || '';
 
   return (
-    <Container withVerticalMargin={withVerticalMargin}>
+    <>
       {useTitle && (
         <PersonsHeadingContainer>
           <PersonsHeadingInner>
@@ -76,46 +76,47 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({
           </PersonsHeadingBodyCopySmallScreen>
         </PersonsHeadingContainer>
       )}
-
-      {enableTopEmphasis && (
-        <TopPersonContainer>
-          <PersonLink to={`/persons/${topPersonSlug}`}>
-            <TopPersonItem
-              position={topPersonPosition}
-              name={topPersonName}
-              title={topPersonTitle}
-              mainVisualUrl={topPersonMainVisualUrl}
-            />
-          </PersonLink>
-        </TopPersonContainer>
-      )}
-
-      <PersonListContainer>
-        {summaryMode && (
-          <PersonsHeadingSubTitle>
-            <HeadingTitle />
-          </PersonsHeadingSubTitle>
+      <Container withVerticalMargin={withVerticalMargin}>
+        {enableTopEmphasis && (
+          <TopPersonContainer>
+            <PersonLink to={`/persons/${topPersonSlug}`}>
+              <TopPersonItem
+                position={topPersonPosition}
+                name={topPersonName}
+                title={topPersonTitle}
+                mainVisualUrl={topPersonMainVisualUrl}
+              />
+            </PersonLink>
+          </TopPersonContainer>
         )}
-        <PersonList>
-          {persons.map((person) => {
-            const slug = person.slug || '';
-            const position = person.position || '';
-            const name = person.name || '';
-            const mainVisualUrl = person?.mainVisual?.url || '';
-            return (
-              <PersonListItem key={person.slug}>
-                <PersonLink to={`/persons/${slug}`}>
-                  <PersonItem position={position} name={name} mainVisualUrl={mainVisualUrl} />
-                </PersonLink>
-              </PersonListItem>
-            );
-          })}
-        </PersonList>
-      </PersonListContainer>
-      <ButtonContainer>
-        <Button to="/persons">さらに読む</Button>
-      </ButtonContainer>
-    </Container>
+
+        <PersonListContainer>
+          {summaryMode && (
+            <PersonsHeadingSubTitle>
+              <HeadingTitle />
+            </PersonsHeadingSubTitle>
+          )}
+          <PersonList>
+            {persons.map((person) => {
+              const slug = person.slug || '';
+              const position = person.position || '';
+              const name = person.name || '';
+              const mainVisualUrl = person?.mainVisual?.url || '';
+              return (
+                <PersonListItem key={person.slug}>
+                  <PersonLink to={`/persons/${slug}`}>
+                    <PersonItem position={position} name={name} mainVisualUrl={mainVisualUrl} />
+                  </PersonLink>
+                </PersonListItem>
+              );
+            })}
+          </PersonList>
+        </PersonListContainer>
+        <ButtonContainer>
+          <Button to="/persons">さらに読む</Button>
+        </ButtonContainer>
+      </Container>
+    </>
   );
 };
 
@@ -125,6 +126,11 @@ const HeadingTitle: React.FC = () => (
     <PersonsHeadingTitleMain>ケノ日のハレ</PersonsHeadingTitleMain>
   </PersonsHeadingTitle>
 );
+
+const Container = styled.div<Pick<PersonsModuleProps, 'withVerticalMargin'>>`
+  max-width: ${ModuleWidth.MIDDLE}px;
+  margin: ${({ withVerticalMargin }) => `${withVerticalMargin ? BigSpacing.LARGE : 0}px auto`};
+`;
 
 const PersonsHeadingContainer = styled.div``;
 
@@ -192,11 +198,6 @@ const PersonsHeadingBodyCopySmallScreen = styled.p`
   ${media.greaterThan(ScreenType.MEDIUM)`
     display: none;
   `}
-`;
-
-const Container = styled.div<Pick<PersonsModuleProps, 'withVerticalMargin'>>`
-  max-width: ${ModuleWidth.MIDDLE}px;
-  margin: ${({ withVerticalMargin }) => `${withVerticalMargin ? BigSpacing.LARGE : 0}px auto`};
 `;
 
 const PersonLink = styled(Link)`
