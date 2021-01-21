@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 import { graphql } from 'gatsby';
 import dayjs from 'dayjs';
-import { Twitter, FacebookCircle } from '@styled-icons/boxicons-logos';
 
 import { Query } from '@/types';
 import { BaseLayout, Meta } from '@/layouts';
@@ -23,6 +22,7 @@ import {
 import media from 'styled-media-query';
 import { useParallax } from '@/hooks';
 import { stripTag } from '@/util/string';
+import { Article, ArticleInfo, TwitterIcon, FacebookIcon } from '@/components';
 
 type ArchivePageProps = {
   data: Pick<Query, 'microcmsArchive'>;
@@ -56,15 +56,22 @@ const ArchivePage: React.FC<ArchivePageProps> = ({ data }) => {
       <Meta title={title} description={strippedBody} ogImage={mainVisual} />
       <Container>
         <TitleContainer>
-          <Title>{title}</Title>
-          <MetaInfoContainer>
-            <SocialIcons>{/* <TwitterIcon />
-              <FacebookIcon /> */}</SocialIcons>
-            <MetaInfo>
-              <PublishedDate>{publishedDate}</PublishedDate>
-              {/* <WriterName>{writerName}</WriterName> */}
-            </MetaInfo>
-          </MetaInfoContainer>
+          <TitleInner>
+            <Title>{title}</Title>
+            <MetaInfoContainer>
+              <MetaInfo>
+                <PublishedDate>{publishedDate}</PublishedDate>
+              </MetaInfo>
+            </MetaInfoContainer>
+          </TitleInner>
+          <SocialIcons>
+            <SocialIcon>
+              <TwitterIcon />
+            </SocialIcon>
+            <SocialIcon>
+              <FacebookIcon />
+            </SocialIcon>
+          </SocialIcons>
         </TitleContainer>
         <MainVisualContainer ref={mainVisualRef}>
           <MainVisual
@@ -74,21 +81,14 @@ const ArchivePage: React.FC<ArchivePageProps> = ({ data }) => {
             }}
           />
         </MainVisualContainer>
-        <Article
-          dangerouslySetInnerHTML={{
-            __html: data.microcmsArchive?.body || '',
-          }}
-        />
+        <Article body={data.microcmsArchive?.body || ''} />
         <InfoList>
           {data.microcmsArchive?.info?.map(
             (item) =>
               item?.head &&
               item?.body && (
                 <InfoListItem>
-                  <InfoItem>
-                    <InfoItemHead>{item.head}</InfoItemHead>
-                    <InfoItemBody>{item.body}</InfoItemBody>
-                  </InfoItem>
+                  <ArticleInfo title={item.head} body={item.body}></ArticleInfo>
                 </InfoListItem>
               ),
           )}
@@ -124,17 +124,21 @@ const Container = styled.div`
 `;
 
 const TitleContainer = styled.div`
-  max-width: ${ModuleWidth.ARTICLE}px;
+  display: flex;
   margin: ${Spacing.XXX_LARGE}px auto;
+  justify-content: space-between;
   position: relative;
   z-index: ${Layer.BASE};
-  max-width: ${ModuleWidth.ARTICLE}px;
+  max-width: ${ModuleWidth.MIDDLE}px;
 
   ${media.lessThan(ScreenType.MEDIUM)`
+    display: block;
     margin: 0;
-    padding: ${Spacing.LARGE}px;
+    padding: 0 ${Spacing.LARGE}px ${Spacing.LARGE}px;
   `}
 `;
+
+const TitleInner = styled.div``;
 
 const Title = styled.h2`
   ${Typography.Mixin.DISPLAY};
@@ -167,25 +171,14 @@ const SocialIcons = styled.div`
   `}
 `;
 
-const iconMixin = css`
-  width: ${Spacing.X_LARGE}px;
-  height: ${Spacing.X_LARGE}px;
-  color: ${Colors.ABSTRACT_NAVY};
+const SocialIcon = styled.div`
+  width: 28px;
+  & + & {
+    margin-left: ${Spacing.NORMAL}px;
+  }
 `;
 
-const TwitterIcon = styled(Twitter)`
-  ${iconMixin};
-`;
-
-const FacebookIcon = styled(FacebookCircle)`
-  ${iconMixin};
-  margin-left: ${Spacing.NORMAL}px;
-`;
-
-const MetaInfo = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`;
+const MetaInfo = styled.div``;
 
 const PublishedDate = styled.p`
   ${Typography.Mixin.DISPLAY};
@@ -223,39 +216,12 @@ const MainVisual = styled.div`
   `}
 `;
 
-const Article = styled.article`
-  max-width: ${ModuleWidth.ARTICLE}px;
-
-  ${StyleMixin.ARTICLE_BODY};
-`;
-
-const InfoList = styled.ul`
-  margin: ${Spacing.LARGE}px auto 0;
-  max-width: ${ModuleWidth.ARTICLE}px;
-
-  ${media.lessThan(ScreenType.MEDIUM)`
-    margin: 0;
-    padding: ${Spacing.LARGE}px;
-  `}
-`;
+const InfoList = styled.ul``;
 
 const InfoListItem = styled.li`
   &:not(:first-child) {
     margin-top: ${Spacing.NORMAL}px;
   }
-`;
-
-const InfoItem = styled.dl``;
-
-const InfoItemHead = styled.dt`
-  display: inline-block;
-  border-bottom: solid 1px ${Colors.ABSTRACT_GRAY};
-  color: ${Colors.ABSTRACT_GRAY};
-  font-size: ${TextSize.SMALL}rem;
-`;
-
-const InfoItemBody = styled.dd`
-  color: ${Colors.ABSTRACT_STRONG_GRAY};
 `;
 
 export default ArchivePage;

@@ -1,9 +1,8 @@
 import { Link } from 'gatsby';
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { MainLogo } from '@/components';
-import { Colors, Spacing, BigSpacing, ScreenType, Layer } from '@/constants';
-import { Shadow } from '@/constants/shadow';
+import { Colors, Spacing, BigSpacing, ScreenType } from '@/constants';
 import media from 'styled-media-query';
 
 type Props = {
@@ -21,7 +20,6 @@ export const Header: React.FC<Props> = () => (
         </StyledLink>
       </Heading>
     </Content>
-    {/* <Spacer /> */}
   </>
 );
 
@@ -32,10 +30,6 @@ const Content = styled.header`
   width: 100%;
   background-color: ${Colors.UI_PAPER};
 `;
-
-// const Spacer = styled.div`
-//   ${spacingMixin};
-// `;
 
 const Heading = styled.h1``;
 
