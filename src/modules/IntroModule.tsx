@@ -16,8 +16,6 @@ import {
   TextWeight,
   TypeStyle,
 } from '@/constants';
-import { isString } from '@/util/type';
-import { floorInRange0to1 } from '@/util/number';
 import { IntersectionFadeIn } from '@/animations';
 
 export const IntroModule: React.FC = () => {
@@ -35,8 +33,7 @@ export const IntroModule: React.FC = () => {
           <MessageTypography>
             東京の一大ターミナル、新宿駅から10分。
             <br />
-            昔懐かしい商店街、古着屋、カフェ。 演劇にアート、阿波踊り……。
-            あらゆる文化が混ざり合い、老若男女が集う街、高円寺。
+            昔なつかしい商店街、古着屋、カフェ。演劇にアート、阿波踊り……。あらゆる文化が混ざり合い、老若男女が集う街、高円寺。
           </MessageTypography>
         </IntroStoryUnitColumnSub>
       </IntroStoryUnitNormal>
@@ -129,11 +126,7 @@ export const IntroModule: React.FC = () => {
       </GridOuter>
       <IntroStoryUnitNormal>
         <IntroStoryUnitColumnSub>
-          <MessageTypography>
-            車通りが少なく子どもや年配の方が安心して過ごせる、
-            子育てにも良い、働く人・サラリーマンもいっぱい住んでる。
-            まさに“混沌”ということばで形容するにふさわしい場所です。
-          </MessageTypography>
+          <MessageTypography>小杉湯は昭和8年（1933年）にこの街で生まれました。</MessageTypography>
         </IntroStoryUnitColumnSub>
         <IntroStoryUnitColumnMain>
           <IntersectionFadeIn fill>
@@ -153,10 +146,8 @@ export const IntroModule: React.FC = () => {
         </IntroStoryUnitColumnMain>
         <IntroStoryUnitColumnSub>
           <MessageTypography>
-            小杉湯は昭和8年（1933年）にこの街で生まれました。
             高円寺らしい“ごちゃ混ぜ感”をぎゅっと凝縮したような、街の銭湯。
-            創業当時の建物を守りつつ、時代に合わせて中身を変え続け
-            高円寺の人々とともにあり続けてきました。
+            創業当時の建物を守りつつ、時代に合わせて中身を変え続け、高円寺の人々とともにあり続けてきました。
           </MessageTypography>
         </IntroStoryUnitColumnSub>
       </IntroStoryUnitNormal>
