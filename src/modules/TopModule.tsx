@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useCallback, useRef } from 'react';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 import { Link } from 'gatsby';
@@ -12,21 +12,30 @@ import {
   LineHeight,
 } from '@/constants';
 import { HeroImage, MainLogo } from '@/components';
-import { useMenu } from '@/hooks';
+import { useMenu, useIntersectionObserver } from '@/hooks';
 
-export const TopModule: React.FC = () => {
+type TopModuleProps = {
+  onViewInStatusChange: (viewInStatus: boolean) => void;
+};
+
+export const TopModule: React.FC<TopModuleProps> = ({ onViewInStatusChange }) => {
   const menuList = useMenu({ ignoreTopData: true });
   const sentinelRef = useRef<HTMLDivElement>(null);
-  const scroll = () => {
+  const [containerRef, isContainerIntersecting] = useIntersectionObserver<HTMLDivElement>();
+  const scroll = useCallback(() => {
     sentinelRef.current?.scrollIntoView({
       behavior: 'smooth',
       block: 'start',
     });
-  };
+  }, []);
+
+  useEffect(() => {
+    onViewInStatusChange(isContainerIntersecting);
+  }, [isContainerIntersecting, onViewInStatusChange]);
 
   return (
     <>
-      <Container>
+      <Container ref={containerRef}>
         <SideColumn>
           <LogoContainer>
             <Logo>

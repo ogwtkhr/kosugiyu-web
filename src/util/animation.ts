@@ -1,3 +1,4 @@
+import { TransitionStatus } from 'react-transition-group/Transition';
 import { Colors, Transitions } from '@/constants';
 import { css, keyframes, FlattenInterpolation, ThemedStyledProps } from 'styled-components';
 import { isBoolean } from './type';
@@ -110,3 +111,21 @@ export const getFadeInMixin = ({
     opacity: ${({ isAnimate }) => (isAnimate ? 1 : 0)};
   `;
 };
+
+// type GetFadeInRTGMixinParameters = {
+//   status: TransitionStatus;
+// };
+
+// export const getFadeInRTGMixin = ({
+//   duration = 1000,
+//   easing = Transitions.BASE_TRANSITION,
+// }: {
+//   duration?: number;
+//   easing?: string;
+// } = {}): any => {
+//   return css<GetFadeInRTGMixinParameters>`
+//     position: relative;
+//     transition: opacity ${duration}ms ease;
+//     opacity: ${({ status }) => (status === 'entered' ? 1 : 0)};
+//   `;
+// };

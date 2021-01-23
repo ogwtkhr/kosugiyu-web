@@ -26,13 +26,13 @@ const transitionTimeout = {
 };
 
 // enteringをフックにすると、マウントと同時に的にopacityが1になりアニメーションが適用されない
-// entering -> enteredを10msecにして、即enterednに移行させる
+// entering -> enteredを10msecにして、即enteredに移行させる
 
 type MenuProps = {
-  firstViewVisible?: boolean;
+  isTriggerShow: boolean;
 };
 
-export const Menu: React.FC<MenuProps> = ({ firstViewVisible = true }) => {
+export const Menu: React.FC<MenuProps> = ({ isTriggerShow }) => {
   const [isOpen, setIsOpen] = useState(false);
   const menuList = useMenu();
 
@@ -40,13 +40,18 @@ export const Menu: React.FC<MenuProps> = ({ firstViewVisible = true }) => {
 
   return (
     <>
-      <Trigger
-        isOpen={isOpen}
-        onClick={(e) => {
-          e.preventDefault();
-          setIsOpen(!isOpen);
-        }}
-      />
+      <Transition in={isTriggerShow} timeout={transitionTimeout} unmountOnExit>
+        {(state) => (
+          <Trigger
+            isOpen={isOpen}
+            state={state}
+            onClick={(e) => {
+              e.preventDefault();
+              setIsOpen(!isOpen);
+            }}
+          />
+        )}
+      </Transition>
       <Transition in={isOpen} timeout={transitionTimeout} unmountOnExit>
         {(state) => {
           return (
@@ -66,11 +71,11 @@ export const Menu: React.FC<MenuProps> = ({ firstViewVisible = true }) => {
   );
 };
 
-type ContentProps = {
+type PropsWithTransition = {
   state: TransitionStatus;
 };
 
-const Content = styled.div<ContentProps>`
+const Content = styled.div<PropsWithTransition>`
   display: flex;
   position: fixed;
   z-index: ${Layer.OVERLAY};
@@ -115,7 +120,7 @@ const Type = styled.span`
 
 type TriggerProps = {
   isOpen: boolean;
-};
+} & PropsWithTransition;
 
 const Trigger = styled.button<TriggerProps>`
   ${StyleMixin.BUTTON_RESET};
@@ -126,7 +131,8 @@ const Trigger = styled.button<TriggerProps>`
   width: ${Spacing.XXX_LARGE}px;
   height: ${Spacing.XXX_LARGE}px;
   mix-blend-mode: difference;
-
+  transition: opacity ${TRANSITION_TIME}ms ease;
+  opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
   ${media.greaterThan(ScreenType.HUGE)`
     top: 88px;
   `}
