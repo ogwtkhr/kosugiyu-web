@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import {
   Colors,
-  Typography,
   Opacity,
   Layer,
   Spacing,
-  BigSpacing,
   StyleMixin,
   ScreenType,
   TextSize,

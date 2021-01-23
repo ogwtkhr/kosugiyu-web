@@ -1,8 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import { useStaticQuery, graphql } from 'gatsby';
-
-import { SiteMetaDataQuery } from '@/types';
+import { useBaseMetaInfo } from '@/hooks';
 
 type MetaItem = JSX.IntrinsicElements['meta'];
 
@@ -21,25 +19,16 @@ export const Meta: React.FC<Props> = ({
   lang = 'en',
   meta = [],
 }) => {
-  const data = useStaticQuery<SiteMetaDataQuery>(graphql`
-    query SiteMetaData {
-      settingYaml {
-        meta {
-          title
-          twitter
-          description
-          ogImage
-        }
-      }
-    }
-  `);
+  const {
+    title: defaultTitle,
+    description: defaultDescription,
+    twitter,
+    ogImage: baseOgImage,
+  } = useBaseMetaInfo();
 
-  const baseMeta = data.settingYaml?.meta;
-
-  const metaDescription = description || baseMeta?.description || '';
-  const twitterAccount = `@${baseMeta?.twitter || ''}`;
-  const image = ogImage || baseMeta?.ogImage || '';
-  const defaultTitle = baseMeta?.title;
+  const metaDescription = description || defaultDescription;
+  const twitterAccount = `@${twitter}`;
+  const image = ogImage || baseOgImage;
   const title = propsTitle || defaultTitle || '';
 
   return (
@@ -97,12 +86,6 @@ export const Meta: React.FC<Props> = ({
           type: 'text/css',
         },
       ]}
-      // script={[
-      //   {
-      //     type: 'text/javascript',
-      //     src: `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_MAPS_API_KEY}`,
-      //   },
-      // ]}
     />
   );
 };

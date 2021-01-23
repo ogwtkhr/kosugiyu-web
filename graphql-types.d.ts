@@ -734,6 +734,7 @@ export type FileFieldsEnum =
   | 'childSettingYaml___meta___description'
   | 'childSettingYaml___meta___url'
   | 'childSettingYaml___meta___twitter'
+  | 'childSettingYaml___meta___facebook'
   | 'childSettingYaml___meta___ogImage'
   | 'childSettingYaml___pages'
   | 'childSettingYaml___pages___id'
@@ -1510,6 +1511,8 @@ export type MicrocmsArchiveFieldsEnum =
   | 'slug'
   | 'title'
   | 'mainVisual___url'
+  | 'mainVisual___height'
+  | 'mainVisual___width'
   | 'body'
   | 'info'
   | 'info___fieldId'
@@ -1567,10 +1570,14 @@ export type MicrocmsArchiveInfoFilterListInput = {
 
 export type MicrocmsArchiveMainVisual = {
   url?: Maybe<Scalars['String']>;
+  height?: Maybe<Scalars['Int']>;
+  width?: Maybe<Scalars['Int']>;
 };
 
 export type MicrocmsArchiveMainVisualFilterInput = {
   url?: Maybe<StringQueryOperatorInput>;
+  height?: Maybe<IntQueryOperatorInput>;
+  width?: Maybe<IntQueryOperatorInput>;
 };
 
 export type MicrocmsArchiveSortInput = {
@@ -1793,6 +1800,8 @@ export type MicrocmsPersonsFieldsEnum =
   | 'name'
   | 'title'
   | 'mainVisual___url'
+  | 'mainVisual___height'
+  | 'mainVisual___width'
   | 'body'
   | 'writer___id'
   | 'writer___createdAt'
@@ -1833,10 +1842,14 @@ export type MicrocmsPersonsGroupConnection = {
 
 export type MicrocmsPersonsMainVisual = {
   url?: Maybe<Scalars['String']>;
+  height?: Maybe<Scalars['Int']>;
+  width?: Maybe<Scalars['Int']>;
 };
 
 export type MicrocmsPersonsMainVisualFilterInput = {
   url?: Maybe<StringQueryOperatorInput>;
+  height?: Maybe<IntQueryOperatorInput>;
+  width?: Maybe<IntQueryOperatorInput>;
 };
 
 export type MicrocmsPersonsSortInput = {
@@ -1944,12 +1957,12 @@ export type Query = {
   allSitePage: SitePageConnection;
   imageSharp?: Maybe<ImageSharp>;
   allImageSharp: ImageSharpConnection;
+  settingYaml?: Maybe<SettingYaml>;
+  allSettingYaml: SettingYamlConnection;
   microcmsArchive?: Maybe<MicrocmsArchive>;
   allMicrocmsArchive: MicrocmsArchiveConnection;
   microcmsPersons?: Maybe<MicrocmsPersons>;
   allMicrocmsPersons: MicrocmsPersonsConnection;
-  settingYaml?: Maybe<SettingYaml>;
-  allSettingYaml: SettingYamlConnection;
   siteBuildMetadata?: Maybe<SiteBuildMetadata>;
   allSiteBuildMetadata: SiteBuildMetadataConnection;
   sitePlugin?: Maybe<SitePlugin>;
@@ -2128,6 +2141,24 @@ export type QueryAllImageSharpArgs = {
 };
 
 
+export type QuerySettingYamlArgs = {
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+  meta?: Maybe<SettingYamlMetaFilterInput>;
+  pages?: Maybe<SettingYamlPagesFilterListInput>;
+};
+
+
+export type QueryAllSettingYamlArgs = {
+  filter?: Maybe<SettingYamlFilterInput>;
+  sort?: Maybe<SettingYamlSortInput>;
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+};
+
+
 export type QueryMicrocmsArchiveArgs = {
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
@@ -2179,24 +2210,6 @@ export type QueryMicrocmsPersonsArgs = {
 export type QueryAllMicrocmsPersonsArgs = {
   filter?: Maybe<MicrocmsPersonsFilterInput>;
   sort?: Maybe<MicrocmsPersonsSortInput>;
-  skip?: Maybe<Scalars['Int']>;
-  limit?: Maybe<Scalars['Int']>;
-};
-
-
-export type QuerySettingYamlArgs = {
-  id?: Maybe<StringQueryOperatorInput>;
-  parent?: Maybe<NodeFilterInput>;
-  children?: Maybe<NodeFilterListInput>;
-  internal?: Maybe<InternalFilterInput>;
-  meta?: Maybe<SettingYamlMetaFilterInput>;
-  pages?: Maybe<SettingYamlPagesFilterListInput>;
-};
-
-
-export type QueryAllSettingYamlArgs = {
-  filter?: Maybe<SettingYamlFilterInput>;
-  sort?: Maybe<SettingYamlSortInput>;
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
 };
@@ -2370,6 +2383,7 @@ export type SettingYamlFieldsEnum =
   | 'meta___description'
   | 'meta___url'
   | 'meta___twitter'
+  | 'meta___facebook'
   | 'meta___ogImage'
   | 'pages'
   | 'pages___id'
@@ -2399,6 +2413,7 @@ export type SettingYamlMeta = {
   description?: Maybe<Scalars['String']>;
   url?: Maybe<Scalars['String']>;
   twitter?: Maybe<Scalars['String']>;
+  facebook?: Maybe<Scalars['String']>;
   ogImage?: Maybe<Scalars['String']>;
 };
 
@@ -2407,6 +2422,7 @@ export type SettingYamlMetaFilterInput = {
   description?: Maybe<StringQueryOperatorInput>;
   url?: Maybe<StringQueryOperatorInput>;
   twitter?: Maybe<StringQueryOperatorInput>;
+  facebook?: Maybe<StringQueryOperatorInput>;
   ogImage?: Maybe<StringQueryOperatorInput>;
 };
 
@@ -3411,6 +3427,11 @@ export type AllImageFileQuery = { desktopImages: { edges: Array<{ node: (
         & { childImageSharp?: Maybe<{ fluid?: Maybe<GatsbyImageSharpFluid_WithWebp_NoBase64Fragment> }> }
       ) }> } };
 
+export type SiteMetaDataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SiteMetaDataQuery = { settingYaml?: Maybe<{ meta?: Maybe<Pick<SettingYamlMeta, 'title' | 'description' | 'url' | 'twitter' | 'facebook' | 'ogImage'>> }> };
+
 export type GoogleApiKeyQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -3425,16 +3446,6 @@ export type PageInfoQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type PageInfoQuery = { settingYaml?: Maybe<{ pages?: Maybe<Array<Maybe<Pick<SettingYamlPages, 'id' | 'title' | 'description'>>>> }> };
-
-export type SiteTitleQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type SiteTitleQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'title'>> }> };
-
-export type SiteMetaDataQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type SiteMetaDataQuery = { settingYaml?: Maybe<{ meta?: Maybe<Pick<SettingYamlMeta, 'title' | 'twitter' | 'description' | 'ogImage'>> }> };
 
 export type AllMicrocmsArchiveQueryVariables = Exact<{ [key: string]: never; }>;
 

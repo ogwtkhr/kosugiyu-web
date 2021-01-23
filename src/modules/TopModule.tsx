@@ -12,7 +12,8 @@ import {
   LineHeight,
 } from '@/constants';
 import { HeroImage, MainLogo } from '@/components';
-import { useMenu, useIntersectionObserver } from '@/hooks';
+import { useMenu, useBaseMetaInfo, useIntersectionObserver } from '@/hooks';
+import { FacebookAccountButton, TwitterAccountButton } from '@/components/SocialButton';
 
 type TopModuleProps = {
   onViewInStatusChange: (viewInStatus: boolean) => void;
@@ -20,6 +21,7 @@ type TopModuleProps = {
 
 export const TopModule: React.FC<TopModuleProps> = ({ onViewInStatusChange }) => {
   const menuList = useMenu({ ignoreTopData: true });
+  const { twitter, facebook } = useBaseMetaInfo();
   const sentinelRef = useRef<HTMLDivElement>(null);
   const [containerRef, isContainerIntersecting] = useIntersectionObserver<HTMLDivElement>();
   const scroll = useCallback(() => {
@@ -46,6 +48,14 @@ export const TopModule: React.FC<TopModuleProps> = ({ onViewInStatusChange }) =>
           <MenuListSmallScreen>
             <MenuList list={menuList} onIntroClick={scroll} />
           </MenuListSmallScreen>
+          <SocialAccountContainer>
+            <SocialAccountButton>
+              <TwitterAccountButton id={twitter} />
+            </SocialAccountButton>
+            <SocialAccountButton>
+              <FacebookAccountButton id={facebook} />
+            </SocialAccountButton>
+          </SocialAccountContainer>
         </SideColumn>
         <MainColumn>
           <HeroArea>
@@ -98,6 +108,7 @@ const SideColumn = styled.div`
   position: relative;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
   width: 130px;
   padding: ${Spacing.XXX_LARGE}px;
 
@@ -148,6 +159,22 @@ const LogoCopy = styled.p`
     font-size: ${TextSize.X_SMALL}rem;
     margin-top: 0;
     margin-left: ${Spacing.X_SMALL}px;
+  `}
+`;
+
+const SocialAccountContainer = styled.div`
+  display: flex;
+  width: ${Spacing.XX_LARGE}px;
+  flex-direction: column;
+  justify-content: space-between; ;
+`;
+
+const SocialAccountButton = styled.div`
+  & + & {
+    margin-top: ${Spacing.NORMAL}px;
+  }
+  ${media.lessThan(ScreenType.MEDIUM)`
+    display: none;
   `}
 `;
 

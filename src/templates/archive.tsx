@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 
 import { Query } from '@/types';
 import { BaseLayout, Meta } from '@/layouts';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import {
   ModuleWidth,
   TextWeight,
@@ -22,7 +22,8 @@ import {
 import media from 'styled-media-query';
 import { useParallax } from '@/hooks';
 import { stripTag } from '@/util/string';
-import { Article, ArticleInfo, TwitterIcon, FacebookIcon } from '@/components';
+import { Article, ArticleInfo } from '@/components';
+import { TwitterTweetButton, FacebookShareButton } from '@/components/SocialButton';
 
 type ArchivePageProps = {
   data: Pick<Query, 'microcmsArchive'>;
@@ -66,10 +67,10 @@ const ArchivePage: React.FC<ArchivePageProps> = ({ data }) => {
           </TitleInner>
           <SocialIcons>
             <SocialIcon>
-              <TwitterIcon />
+              <TwitterTweetButton />
             </SocialIcon>
             <SocialIcon>
-              <FacebookIcon />
+              <FacebookShareButton />
             </SocialIcon>
           </SocialIcons>
         </TitleContainer>
