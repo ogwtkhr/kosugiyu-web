@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import {
   Colors,
   Opacity,
@@ -116,18 +116,31 @@ const Type = styled.span`
   `}
 `;
 
-type TriggerProps = {
+type TriggerCoreProps = {
   isOpen: boolean;
-} & PropsWithTransition;
+};
 
-const Trigger = styled.button<TriggerProps>`
+type TriggerProps = {
+  onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+} & TriggerCoreProps &
+  PropsWithTransition;
+
+const Trigger: React.FC<TriggerProps> = ({ onClick, state, isOpen }) => (
+  <TriggerContainer onClick={onClick} state={state}>
+    <TriggerLine isOpen={isOpen} index={0} />
+    <TriggerLine isOpen={isOpen} index={1} />
+    <TriggerLine isOpen={isOpen} index={2} />
+  </TriggerContainer>
+);
+
+const TriggerContainer = styled.button<PropsWithTransition>`
   ${StyleMixin.BUTTON_RESET};
   position: fixed;
   z-index: ${Layer.OVERLAY_CONTROL};
   top: 68px;
   right: ${Spacing.XXX_LARGE}px;
   width: ${Spacing.XXX_LARGE}px;
-  height: ${Spacing.XXX_LARGE}px;
+  height: ${Spacing.X_LARGE}px;
   mix-blend-mode: difference;
   transition: opacity ${TRANSITION_TIME}ms ease;
   opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
@@ -142,31 +155,45 @@ const Trigger = styled.button<TriggerProps>`
     width: ${Spacing.X_LARGE}px;
     height: ${Spacing.X_LARGE}px;
   `}
+`;
 
-  &::before,
-  &::after {
-    content: '';
-    display: block;
-    position: absolute;
-    right: 0;
-    height: 1px;
-    transition: ${TRANSITION_TIME}ms ease;
-    background-color: white;
-  }
+type TriggerLineProps = {
+  index: 0 | 1 | 2;
+} & TriggerCoreProps;
 
-  &::before {
-    top: 0;
-    width: 100%;
-    transform: ${({ isOpen }) => (isOpen ? ' translateY(5px) rotate(-135deg)' : '')};
-  }
+const TriggerLine = styled.span<TriggerLineProps>`
+  display: block;
+  position: absolute;
+  right: 0;
+  width: 100%;
+  height: 1px;
+  transition: ${TRANSITION_TIME}ms ease;
+  background-color: white;
 
-  &::after {
-    top: ${({ isOpen }) => (isOpen ? '0' : '40%')};
-    ${media.lessThan(ScreenType.MEDIUM)`
-      left: auto;
-      right: 0;
-    `}
-    width: ${({ isOpen }) => (isOpen ? '100%' : '80%')};
-    transform: ${({ isOpen }) => (isOpen ? 'translateY(5px) rotate(135deg)' : '')};
-  }
+  ${({ index }) => {
+    switch (index) {
+      case 0:
+        return css<TriggerCoreProps>`
+          top: 0;
+          transform: ${({ isOpen }) => (isOpen ? ' translateY(10px) rotate(-135deg)' : '')};
+        `;
+      case 1:
+        return css<TriggerCoreProps>`
+          top: 50%;
+          transition: opacity ${TRANSITION_TIME} ease;
+          opacity: ${({ isOpen }) => (isOpen ? 0 : 1)};
+        `;
+      case 2:
+      default:
+        return css<TriggerCoreProps>`
+          top: ${({ isOpen }) => (isOpen ? '0' : '100%')};
+          ${media.lessThan(ScreenType.MEDIUM)`
+            left: auto;
+            right: 0;
+          `}
+          width: ${({ isOpen }) => (isOpen ? '100%' : '72%')};
+          transform: ${({ isOpen }) => (isOpen ? 'translateY(10px) rotate(135deg)' : '')};
+        `;
+    }
+  }}
 `;
