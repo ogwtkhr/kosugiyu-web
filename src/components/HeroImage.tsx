@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import { Picture, ScrollLine } from '@/components';
 import { Colors, ScreenType, Spacing, StyleMixin, TextSize, TypeFace } from '@/constants';
 import media from 'styled-media-query';
-import { ReverseParallax } from '@/effects';
+import { ReverseParallax, ParallaxBasePosition } from '@/effects';
 
 export const HeroImage: React.FC = () => {
   return (
     <Container>
-      <ReverseParallax zoom={1.1}>
+      <ReverseParallax zoom={1.1} basePosition={ParallaxBasePosition.TOP}>
         <Picture relativePath={`photos/top/hero_1.jpg`} />
       </ReverseParallax>
       <BusinessInfo>

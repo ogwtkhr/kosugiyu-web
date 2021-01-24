@@ -23,7 +23,7 @@ import media from 'styled-media-query';
 import { stripTag } from '@/util/string';
 import { Article, ArticleInfo } from '@/components';
 import { TwitterTweetButton, FacebookShareButton } from '@/components/SocialButton';
-import { ReverseParallax } from '@/effects';
+import { ReverseParallax, ParallaxBasePosition } from '@/effects';
 
 type ArchivePageProps = {
   data: Pick<Query, 'microcmsArchive'>;
@@ -66,7 +66,7 @@ const ArchivePage: React.FC<ArchivePageProps> = ({ data }) => {
           </SocialIcons>
         </TitleContainer>
         <MainVisualContainer>
-          <ReverseParallax basePosition="top" zoom={1.1} min={0} max={1000}>
+          <ReverseParallax basePosition={ParallaxBasePosition.TOP} zoom={1.1} min={0} max={1000}>
             <MainVisual src={mainVisual} />
           </ReverseParallax>
         </MainVisualContainer>

@@ -15,7 +15,7 @@ import {
 } from '@/constants';
 import { PersonItem, TopPersonItem, Picture, Button, ButtonContainer } from '@/components';
 import media from 'styled-media-query';
-import { ReverseParallax } from '@/effects';
+import { ReverseParallax, ParallaxBasePosition } from '@/effects';
 
 type PersonsModuleProps = {
   useTitle?: boolean;
@@ -69,7 +69,7 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({
               </PersonsHeadingBodyCopyLargeScreen>
             </PersonsHeadingMain>
             <PersonsHeadingImage>
-              <ReverseParallax zoom={1.2} zoomSmall={1.7} basePosition="top">
+              <ReverseParallax zoom={1.2} zoomSmall={1.7} basePosition={ParallaxBasePosition.TOP}>
                 <Picture relativePath="photos/persons/hero.jpg" />
               </ReverseParallax>
             </PersonsHeadingImage>
