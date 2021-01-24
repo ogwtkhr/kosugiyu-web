@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { graphql, useStaticQuery, Link } from 'gatsby';
-import { AllMicrocmsArchiveQuery } from '@/types';
+import { AllMicrocmsArchiveQuery, ValueOf } from '@/types';
 import styled from 'styled-components';
 import {
   StyleMixin,
@@ -22,7 +22,6 @@ import dayjs from 'dayjs';
 import media from 'styled-media-query';
 import { CommonTitle } from '@/components';
 import { groupByIndex } from '@/util/array';
-import { ValueOf } from '@/types';
 
 export const ArchiveModule: React.FC = () => {
   const data = useStaticQuery<AllMicrocmsArchiveQuery>(graphql`
@@ -157,7 +156,7 @@ type ArticleItemProps = {
   title: string;
   mainVisualUrl: string;
   publishedAt: string;
-  // type: 
+  // type:
 };
 
 const ArticleItem: React.FC<ArticleItemProps> = ({ slug, title, mainVisualUrl, publishedAt }) => {

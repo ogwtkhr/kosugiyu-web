@@ -1,5 +1,7 @@
 export type Maybe<T> = T | undefined;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -25,6 +27,22 @@ export type Scalars = {
 
 
 
+
+export type AvifOptions = {
+  quality?: Maybe<Scalars['Int']>;
+  lossless?: Maybe<Scalars['Boolean']>;
+  speed?: Maybe<Scalars['Int']>;
+};
+
+export type BlurredOptions = {
+  /** Width of the generated low-res preview. Default is 20px */
+  width?: Maybe<Scalars['Int']>;
+  /**
+   * Force the output format for the low-res preview. Default is to use the same
+   * format as the input. You should rarely need to change this
+   */
+  toFormat?: Maybe<ImageFormat>;
+};
 
 export type BooleanQueryOperatorInput = {
   eq?: Maybe<Scalars['Boolean']>;
@@ -389,12 +407,18 @@ export type File = Node & {
   blocks?: Maybe<Scalars['Int']>;
   /** Copy file to static directory and return public url to it */
   publicURL?: Maybe<Scalars['String']>;
+  /** Returns all children nodes filtered by type ImageSharp */
+  childrenImageSharp?: Maybe<Array<Maybe<ImageSharp>>>;
+  /** Returns the first child node of type ImageSharp or null if there are no children of given type on this node */
   childImageSharp?: Maybe<ImageSharp>;
+  /** Returns all children nodes filtered by type SettingYaml */
+  childrenSettingYaml?: Maybe<Array<Maybe<SettingYaml>>>;
+  /** Returns the first child node of type SettingYaml or null if there are no children of given type on this node */
+  childSettingYaml?: Maybe<SettingYaml>;
   id: Scalars['ID'];
   parent?: Maybe<Node>;
   children: Array<Node>;
   internal: Internal;
-  childSettingYaml?: Maybe<SettingYaml>;
 };
 
 
@@ -515,6 +539,99 @@ export type FileFieldsEnum =
   | 'blksize'
   | 'blocks'
   | 'publicURL'
+  | 'childrenImageSharp'
+  | 'childrenImageSharp___fixed___base64'
+  | 'childrenImageSharp___fixed___tracedSVG'
+  | 'childrenImageSharp___fixed___aspectRatio'
+  | 'childrenImageSharp___fixed___width'
+  | 'childrenImageSharp___fixed___height'
+  | 'childrenImageSharp___fixed___src'
+  | 'childrenImageSharp___fixed___srcSet'
+  | 'childrenImageSharp___fixed___srcWebp'
+  | 'childrenImageSharp___fixed___srcSetWebp'
+  | 'childrenImageSharp___fixed___originalName'
+  | 'childrenImageSharp___resolutions___base64'
+  | 'childrenImageSharp___resolutions___tracedSVG'
+  | 'childrenImageSharp___resolutions___aspectRatio'
+  | 'childrenImageSharp___resolutions___width'
+  | 'childrenImageSharp___resolutions___height'
+  | 'childrenImageSharp___resolutions___src'
+  | 'childrenImageSharp___resolutions___srcSet'
+  | 'childrenImageSharp___resolutions___srcWebp'
+  | 'childrenImageSharp___resolutions___srcSetWebp'
+  | 'childrenImageSharp___resolutions___originalName'
+  | 'childrenImageSharp___fluid___base64'
+  | 'childrenImageSharp___fluid___tracedSVG'
+  | 'childrenImageSharp___fluid___aspectRatio'
+  | 'childrenImageSharp___fluid___src'
+  | 'childrenImageSharp___fluid___srcSet'
+  | 'childrenImageSharp___fluid___srcWebp'
+  | 'childrenImageSharp___fluid___srcSetWebp'
+  | 'childrenImageSharp___fluid___sizes'
+  | 'childrenImageSharp___fluid___originalImg'
+  | 'childrenImageSharp___fluid___originalName'
+  | 'childrenImageSharp___fluid___presentationWidth'
+  | 'childrenImageSharp___fluid___presentationHeight'
+  | 'childrenImageSharp___sizes___base64'
+  | 'childrenImageSharp___sizes___tracedSVG'
+  | 'childrenImageSharp___sizes___aspectRatio'
+  | 'childrenImageSharp___sizes___src'
+  | 'childrenImageSharp___sizes___srcSet'
+  | 'childrenImageSharp___sizes___srcWebp'
+  | 'childrenImageSharp___sizes___srcSetWebp'
+  | 'childrenImageSharp___sizes___sizes'
+  | 'childrenImageSharp___sizes___originalImg'
+  | 'childrenImageSharp___sizes___originalName'
+  | 'childrenImageSharp___sizes___presentationWidth'
+  | 'childrenImageSharp___sizes___presentationHeight'
+  | 'childrenImageSharp___gatsbyImageData'
+  | 'childrenImageSharp___original___width'
+  | 'childrenImageSharp___original___height'
+  | 'childrenImageSharp___original___src'
+  | 'childrenImageSharp___resize___src'
+  | 'childrenImageSharp___resize___tracedSVG'
+  | 'childrenImageSharp___resize___width'
+  | 'childrenImageSharp___resize___height'
+  | 'childrenImageSharp___resize___aspectRatio'
+  | 'childrenImageSharp___resize___originalName'
+  | 'childrenImageSharp___id'
+  | 'childrenImageSharp___parent___id'
+  | 'childrenImageSharp___parent___parent___id'
+  | 'childrenImageSharp___parent___parent___children'
+  | 'childrenImageSharp___parent___children'
+  | 'childrenImageSharp___parent___children___id'
+  | 'childrenImageSharp___parent___children___children'
+  | 'childrenImageSharp___parent___internal___content'
+  | 'childrenImageSharp___parent___internal___contentDigest'
+  | 'childrenImageSharp___parent___internal___description'
+  | 'childrenImageSharp___parent___internal___fieldOwners'
+  | 'childrenImageSharp___parent___internal___ignoreType'
+  | 'childrenImageSharp___parent___internal___mediaType'
+  | 'childrenImageSharp___parent___internal___owner'
+  | 'childrenImageSharp___parent___internal___type'
+  | 'childrenImageSharp___children'
+  | 'childrenImageSharp___children___id'
+  | 'childrenImageSharp___children___parent___id'
+  | 'childrenImageSharp___children___parent___children'
+  | 'childrenImageSharp___children___children'
+  | 'childrenImageSharp___children___children___id'
+  | 'childrenImageSharp___children___children___children'
+  | 'childrenImageSharp___children___internal___content'
+  | 'childrenImageSharp___children___internal___contentDigest'
+  | 'childrenImageSharp___children___internal___description'
+  | 'childrenImageSharp___children___internal___fieldOwners'
+  | 'childrenImageSharp___children___internal___ignoreType'
+  | 'childrenImageSharp___children___internal___mediaType'
+  | 'childrenImageSharp___children___internal___owner'
+  | 'childrenImageSharp___children___internal___type'
+  | 'childrenImageSharp___internal___content'
+  | 'childrenImageSharp___internal___contentDigest'
+  | 'childrenImageSharp___internal___description'
+  | 'childrenImageSharp___internal___fieldOwners'
+  | 'childrenImageSharp___internal___ignoreType'
+  | 'childrenImageSharp___internal___mediaType'
+  | 'childrenImageSharp___internal___owner'
+  | 'childrenImageSharp___internal___type'
   | 'childImageSharp___fixed___base64'
   | 'childImageSharp___fixed___tracedSVG'
   | 'childImageSharp___fixed___aspectRatio'
@@ -559,6 +676,7 @@ export type FileFieldsEnum =
   | 'childImageSharp___sizes___originalName'
   | 'childImageSharp___sizes___presentationWidth'
   | 'childImageSharp___sizes___presentationHeight'
+  | 'childImageSharp___gatsbyImageData'
   | 'childImageSharp___original___width'
   | 'childImageSharp___original___height'
   | 'childImageSharp___original___src'
@@ -606,6 +724,119 @@ export type FileFieldsEnum =
   | 'childImageSharp___internal___mediaType'
   | 'childImageSharp___internal___owner'
   | 'childImageSharp___internal___type'
+  | 'childrenSettingYaml'
+  | 'childrenSettingYaml___id'
+  | 'childrenSettingYaml___parent___id'
+  | 'childrenSettingYaml___parent___parent___id'
+  | 'childrenSettingYaml___parent___parent___children'
+  | 'childrenSettingYaml___parent___children'
+  | 'childrenSettingYaml___parent___children___id'
+  | 'childrenSettingYaml___parent___children___children'
+  | 'childrenSettingYaml___parent___internal___content'
+  | 'childrenSettingYaml___parent___internal___contentDigest'
+  | 'childrenSettingYaml___parent___internal___description'
+  | 'childrenSettingYaml___parent___internal___fieldOwners'
+  | 'childrenSettingYaml___parent___internal___ignoreType'
+  | 'childrenSettingYaml___parent___internal___mediaType'
+  | 'childrenSettingYaml___parent___internal___owner'
+  | 'childrenSettingYaml___parent___internal___type'
+  | 'childrenSettingYaml___children'
+  | 'childrenSettingYaml___children___id'
+  | 'childrenSettingYaml___children___parent___id'
+  | 'childrenSettingYaml___children___parent___children'
+  | 'childrenSettingYaml___children___children'
+  | 'childrenSettingYaml___children___children___id'
+  | 'childrenSettingYaml___children___children___children'
+  | 'childrenSettingYaml___children___internal___content'
+  | 'childrenSettingYaml___children___internal___contentDigest'
+  | 'childrenSettingYaml___children___internal___description'
+  | 'childrenSettingYaml___children___internal___fieldOwners'
+  | 'childrenSettingYaml___children___internal___ignoreType'
+  | 'childrenSettingYaml___children___internal___mediaType'
+  | 'childrenSettingYaml___children___internal___owner'
+  | 'childrenSettingYaml___children___internal___type'
+  | 'childrenSettingYaml___internal___content'
+  | 'childrenSettingYaml___internal___contentDigest'
+  | 'childrenSettingYaml___internal___description'
+  | 'childrenSettingYaml___internal___fieldOwners'
+  | 'childrenSettingYaml___internal___ignoreType'
+  | 'childrenSettingYaml___internal___mediaType'
+  | 'childrenSettingYaml___internal___owner'
+  | 'childrenSettingYaml___internal___type'
+  | 'childrenSettingYaml___meta___title'
+  | 'childrenSettingYaml___meta___description'
+  | 'childrenSettingYaml___meta___url'
+  | 'childrenSettingYaml___meta___twitter'
+  | 'childrenSettingYaml___meta___facebook'
+  | 'childrenSettingYaml___meta___ogImage'
+  | 'childrenSettingYaml___pages'
+  | 'childrenSettingYaml___pages___id'
+  | 'childrenSettingYaml___pages___title'
+  | 'childrenSettingYaml___pages___description'
+  | 'childrenSettingYaml___facilities'
+  | 'childrenSettingYaml___facilities___id'
+  | 'childrenSettingYaml___facilities___title'
+  | 'childrenSettingYaml___facilities___description'
+  | 'childrenSettingYaml___facilities___details'
+  | 'childrenSettingYaml___facilities___details___id'
+  | 'childrenSettingYaml___facilities___details___title'
+  | 'childrenSettingYaml___facilities___details___description'
+  | 'childSettingYaml___id'
+  | 'childSettingYaml___parent___id'
+  | 'childSettingYaml___parent___parent___id'
+  | 'childSettingYaml___parent___parent___children'
+  | 'childSettingYaml___parent___children'
+  | 'childSettingYaml___parent___children___id'
+  | 'childSettingYaml___parent___children___children'
+  | 'childSettingYaml___parent___internal___content'
+  | 'childSettingYaml___parent___internal___contentDigest'
+  | 'childSettingYaml___parent___internal___description'
+  | 'childSettingYaml___parent___internal___fieldOwners'
+  | 'childSettingYaml___parent___internal___ignoreType'
+  | 'childSettingYaml___parent___internal___mediaType'
+  | 'childSettingYaml___parent___internal___owner'
+  | 'childSettingYaml___parent___internal___type'
+  | 'childSettingYaml___children'
+  | 'childSettingYaml___children___id'
+  | 'childSettingYaml___children___parent___id'
+  | 'childSettingYaml___children___parent___children'
+  | 'childSettingYaml___children___children'
+  | 'childSettingYaml___children___children___id'
+  | 'childSettingYaml___children___children___children'
+  | 'childSettingYaml___children___internal___content'
+  | 'childSettingYaml___children___internal___contentDigest'
+  | 'childSettingYaml___children___internal___description'
+  | 'childSettingYaml___children___internal___fieldOwners'
+  | 'childSettingYaml___children___internal___ignoreType'
+  | 'childSettingYaml___children___internal___mediaType'
+  | 'childSettingYaml___children___internal___owner'
+  | 'childSettingYaml___children___internal___type'
+  | 'childSettingYaml___internal___content'
+  | 'childSettingYaml___internal___contentDigest'
+  | 'childSettingYaml___internal___description'
+  | 'childSettingYaml___internal___fieldOwners'
+  | 'childSettingYaml___internal___ignoreType'
+  | 'childSettingYaml___internal___mediaType'
+  | 'childSettingYaml___internal___owner'
+  | 'childSettingYaml___internal___type'
+  | 'childSettingYaml___meta___title'
+  | 'childSettingYaml___meta___description'
+  | 'childSettingYaml___meta___url'
+  | 'childSettingYaml___meta___twitter'
+  | 'childSettingYaml___meta___facebook'
+  | 'childSettingYaml___meta___ogImage'
+  | 'childSettingYaml___pages'
+  | 'childSettingYaml___pages___id'
+  | 'childSettingYaml___pages___title'
+  | 'childSettingYaml___pages___description'
+  | 'childSettingYaml___facilities'
+  | 'childSettingYaml___facilities___id'
+  | 'childSettingYaml___facilities___title'
+  | 'childSettingYaml___facilities___description'
+  | 'childSettingYaml___facilities___details'
+  | 'childSettingYaml___facilities___details___id'
+  | 'childSettingYaml___facilities___details___title'
+  | 'childSettingYaml___facilities___details___description'
   | 'id'
   | 'parent___id'
   | 'parent___parent___id'
@@ -691,63 +922,7 @@ export type FileFieldsEnum =
   | 'internal___ignoreType'
   | 'internal___mediaType'
   | 'internal___owner'
-  | 'internal___type'
-  | 'childSettingYaml___id'
-  | 'childSettingYaml___parent___id'
-  | 'childSettingYaml___parent___parent___id'
-  | 'childSettingYaml___parent___parent___children'
-  | 'childSettingYaml___parent___children'
-  | 'childSettingYaml___parent___children___id'
-  | 'childSettingYaml___parent___children___children'
-  | 'childSettingYaml___parent___internal___content'
-  | 'childSettingYaml___parent___internal___contentDigest'
-  | 'childSettingYaml___parent___internal___description'
-  | 'childSettingYaml___parent___internal___fieldOwners'
-  | 'childSettingYaml___parent___internal___ignoreType'
-  | 'childSettingYaml___parent___internal___mediaType'
-  | 'childSettingYaml___parent___internal___owner'
-  | 'childSettingYaml___parent___internal___type'
-  | 'childSettingYaml___children'
-  | 'childSettingYaml___children___id'
-  | 'childSettingYaml___children___parent___id'
-  | 'childSettingYaml___children___parent___children'
-  | 'childSettingYaml___children___children'
-  | 'childSettingYaml___children___children___id'
-  | 'childSettingYaml___children___children___children'
-  | 'childSettingYaml___children___internal___content'
-  | 'childSettingYaml___children___internal___contentDigest'
-  | 'childSettingYaml___children___internal___description'
-  | 'childSettingYaml___children___internal___fieldOwners'
-  | 'childSettingYaml___children___internal___ignoreType'
-  | 'childSettingYaml___children___internal___mediaType'
-  | 'childSettingYaml___children___internal___owner'
-  | 'childSettingYaml___children___internal___type'
-  | 'childSettingYaml___internal___content'
-  | 'childSettingYaml___internal___contentDigest'
-  | 'childSettingYaml___internal___description'
-  | 'childSettingYaml___internal___fieldOwners'
-  | 'childSettingYaml___internal___ignoreType'
-  | 'childSettingYaml___internal___mediaType'
-  | 'childSettingYaml___internal___owner'
-  | 'childSettingYaml___internal___type'
-  | 'childSettingYaml___meta___title'
-  | 'childSettingYaml___meta___description'
-  | 'childSettingYaml___meta___url'
-  | 'childSettingYaml___meta___twitter'
-  | 'childSettingYaml___meta___facebook'
-  | 'childSettingYaml___meta___ogImage'
-  | 'childSettingYaml___pages'
-  | 'childSettingYaml___pages___id'
-  | 'childSettingYaml___pages___title'
-  | 'childSettingYaml___pages___description'
-  | 'childSettingYaml___facilities'
-  | 'childSettingYaml___facilities___id'
-  | 'childSettingYaml___facilities___title'
-  | 'childSettingYaml___facilities___description'
-  | 'childSettingYaml___facilities___details'
-  | 'childSettingYaml___facilities___details___id'
-  | 'childSettingYaml___facilities___details___title'
-  | 'childSettingYaml___facilities___details___description';
+  | 'internal___type';
 
 export type FileFilterInput = {
   sourceInstanceName?: Maybe<StringQueryOperatorInput>;
@@ -784,12 +959,14 @@ export type FileFilterInput = {
   blksize?: Maybe<IntQueryOperatorInput>;
   blocks?: Maybe<IntQueryOperatorInput>;
   publicURL?: Maybe<StringQueryOperatorInput>;
+  childrenImageSharp?: Maybe<ImageSharpFilterListInput>;
   childImageSharp?: Maybe<ImageSharpFilterInput>;
+  childrenSettingYaml?: Maybe<SettingYamlFilterListInput>;
+  childSettingYaml?: Maybe<SettingYamlFilterInput>;
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
   children?: Maybe<NodeFilterListInput>;
   internal?: Maybe<InternalFilterInput>;
-  childSettingYaml?: Maybe<SettingYamlFilterInput>;
 };
 
 export type FileGroupConnection = {
@@ -839,9 +1016,22 @@ export type ImageFit =
 
 export type ImageFormat = 
   | 'NO_CHANGE'
+  | 'AUTO'
   | 'JPG'
   | 'PNG'
-  | 'WEBP';
+  | 'WEBP'
+  | 'AVIF';
+
+export type ImageLayout = 
+  | 'FIXED'
+  | 'FULL_WIDTH'
+  | 'CONSTRAINED';
+
+export type ImagePlaceholder = 
+  | 'DOMINANT_COLOR'
+  | 'TRACED_SVG'
+  | 'BLURRED'
+  | 'NONE';
 
 export type ImageSharp = Node & {
   fixed?: Maybe<ImageSharpFixed>;
@@ -850,6 +1040,7 @@ export type ImageSharp = Node & {
   fluid?: Maybe<ImageSharpFluid>;
   /** @deprecated Sizes was deprecated in Gatsby v2. It's been renamed to "fluid" https://example.com/write-docs-and-fix-this-example-link */
   sizes?: Maybe<ImageSharpSizes>;
+  gatsbyImageData: Scalars['JSON'];
   original?: Maybe<ImageSharpOriginal>;
   resize?: Maybe<ImageSharpResize>;
   id: Scalars['ID'];
@@ -955,6 +1146,28 @@ export type ImageSharpSizesArgs = {
 };
 
 
+export type ImageSharpGatsbyImageDataArgs = {
+  layout?: Maybe<ImageLayout>;
+  width?: Maybe<Scalars['Int']>;
+  height?: Maybe<Scalars['Int']>;
+  aspectRatio?: Maybe<Scalars['Float']>;
+  placeholder?: Maybe<ImagePlaceholder>;
+  blurredOptions?: Maybe<BlurredOptions>;
+  tracedSVGOptions?: Maybe<Potrace>;
+  formats?: Maybe<Array<Maybe<ImageFormat>>>;
+  outputPixelDensities?: Maybe<Array<Maybe<Scalars['Float']>>>;
+  breakpoints?: Maybe<Array<Maybe<Scalars['Int']>>>;
+  sizes?: Maybe<Scalars['String']>;
+  quality?: Maybe<Scalars['Int']>;
+  jpgOptions?: Maybe<JpgOptions>;
+  pngOptions?: Maybe<PngOptions>;
+  webpOptions?: Maybe<WebPOptions>;
+  avifOptions?: Maybe<AvifOptions>;
+  transformOptions?: Maybe<TransformOptions>;
+  background?: Maybe<Scalars['String']>;
+};
+
+
 export type ImageSharpResizeArgs = {
   width?: Maybe<Scalars['Int']>;
   height?: Maybe<Scalars['Int']>;
@@ -1049,6 +1262,7 @@ export type ImageSharpFieldsEnum =
   | 'sizes___originalName'
   | 'sizes___presentationWidth'
   | 'sizes___presentationHeight'
+  | 'gatsbyImageData'
   | 'original___width'
   | 'original___height'
   | 'original___src'
@@ -1150,12 +1364,17 @@ export type ImageSharpFilterInput = {
   resolutions?: Maybe<ImageSharpResolutionsFilterInput>;
   fluid?: Maybe<ImageSharpFluidFilterInput>;
   sizes?: Maybe<ImageSharpSizesFilterInput>;
+  gatsbyImageData?: Maybe<JsonQueryOperatorInput>;
   original?: Maybe<ImageSharpOriginalFilterInput>;
   resize?: Maybe<ImageSharpResizeFilterInput>;
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
   children?: Maybe<NodeFilterListInput>;
   internal?: Maybe<InternalFilterInput>;
+};
+
+export type ImageSharpFilterListInput = {
+  elemMatch?: Maybe<ImageSharpFilterInput>;
 };
 
 export type ImageSharpFixed = {
@@ -1347,6 +1566,20 @@ export type IntQueryOperatorInput = {
   nin?: Maybe<Array<Maybe<Scalars['Int']>>>;
 };
 
+export type JpgOptions = {
+  quality?: Maybe<Scalars['Int']>;
+  progressive?: Maybe<Scalars['Boolean']>;
+};
+
+
+export type JsonQueryOperatorInput = {
+  eq?: Maybe<Scalars['JSON']>;
+  ne?: Maybe<Scalars['JSON']>;
+  in?: Maybe<Array<Maybe<Scalars['JSON']>>>;
+  nin?: Maybe<Array<Maybe<Scalars['JSON']>>>;
+  regex?: Maybe<Scalars['JSON']>;
+  glob?: Maybe<Scalars['JSON']>;
+};
 
 export type MicrocmsArchive = Node & {
   id: Scalars['ID'];
@@ -1934,6 +2167,11 @@ export type PageInfo = {
   totalCount: Scalars['Int'];
 };
 
+export type PngOptions = {
+  quality?: Maybe<Scalars['Int']>;
+  compressionSpeed?: Maybe<Scalars['Int']>;
+};
+
 export type Potrace = {
   turnPolicy?: Maybe<PotraceTurnPolicy>;
   turdSize?: Maybe<Scalars['Float']>;
@@ -2013,12 +2251,14 @@ export type QueryFileArgs = {
   blksize?: Maybe<IntQueryOperatorInput>;
   blocks?: Maybe<IntQueryOperatorInput>;
   publicURL?: Maybe<StringQueryOperatorInput>;
+  childrenImageSharp?: Maybe<ImageSharpFilterListInput>;
   childImageSharp?: Maybe<ImageSharpFilterInput>;
+  childrenSettingYaml?: Maybe<SettingYamlFilterListInput>;
+  childSettingYaml?: Maybe<SettingYamlFilterInput>;
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
   children?: Maybe<NodeFilterListInput>;
   internal?: Maybe<InternalFilterInput>;
-  childSettingYaml?: Maybe<SettingYamlFilterInput>;
 };
 
 
@@ -2132,6 +2372,7 @@ export type QueryImageSharpArgs = {
   resolutions?: Maybe<ImageSharpResolutionsFilterInput>;
   fluid?: Maybe<ImageSharpFluidFilterInput>;
   sizes?: Maybe<ImageSharpSizesFilterInput>;
+  gatsbyImageData?: Maybe<JsonQueryOperatorInput>;
   original?: Maybe<ImageSharpOriginalFilterInput>;
   resize?: Maybe<ImageSharpResizeFilterInput>;
   id?: Maybe<StringQueryOperatorInput>;
@@ -2450,6 +2691,10 @@ export type SettingYamlFilterInput = {
   meta?: Maybe<SettingYamlMetaFilterInput>;
   pages?: Maybe<SettingYamlPagesFilterListInput>;
   facilities?: Maybe<SettingYamlFacilitiesFilterListInput>;
+};
+
+export type SettingYamlFilterListInput = {
+  elemMatch?: Maybe<SettingYamlFilterInput>;
 };
 
 export type SettingYamlGroupConnection = {
@@ -3009,23 +3254,30 @@ export type SitePageFieldsEnum =
   | 'pluginCreator___resolve'
   | 'pluginCreator___name'
   | 'pluginCreator___version'
+  | 'pluginCreator___pluginOptions___isTSX'
+  | 'pluginCreator___pluginOptions___jsxPragma'
+  | 'pluginCreator___pluginOptions___allExtensions'
+  | 'pluginCreator___pluginOptions___displayName'
+  | 'pluginCreator___pluginOptions___minify'
+  | 'pluginCreator___pluginOptions___transpileTemplateLiterals'
+  | 'pluginCreator___pluginOptions___pure'
   | 'pluginCreator___pluginOptions___exclude'
+  | 'pluginCreator___pluginOptions___output'
+  | 'pluginCreator___pluginOptions___createLinkInHead'
   | 'pluginCreator___pluginOptions___name'
   | 'pluginCreator___pluginOptions___path'
-  | 'pluginCreator___pluginOptions___short_name'
-  | 'pluginCreator___pluginOptions___start_url'
-  | 'pluginCreator___pluginOptions___background_color'
-  | 'pluginCreator___pluginOptions___theme_color'
-  | 'pluginCreator___pluginOptions___display'
-  | 'pluginCreator___pluginOptions___cache_busting_mode'
-  | 'pluginCreator___pluginOptions___include_favicon'
-  | 'pluginCreator___pluginOptions___legacy'
-  | 'pluginCreator___pluginOptions___theme_color_in_head'
-  | 'pluginCreator___pluginOptions___fileName'
+  | 'pluginCreator___pluginOptions___base64Width'
+  | 'pluginCreator___pluginOptions___stripMetadata'
+  | 'pluginCreator___pluginOptions___defaultQuality'
+  | 'pluginCreator___pluginOptions___failOnError'
   | 'pluginCreator___pluginOptions___codegenConfig___maybeValue'
   | 'pluginCreator___pluginOptions___alias____'
   | 'pluginCreator___pluginOptions___extensions'
   | 'pluginCreator___pluginOptions___trackingId'
+  | 'pluginCreator___pluginOptions___head'
+  | 'pluginCreator___pluginOptions___anonymize'
+  | 'pluginCreator___pluginOptions___respectDNT'
+  | 'pluginCreator___pluginOptions___pageTransitionDelay'
   | 'pluginCreator___pluginOptions___apiKey'
   | 'pluginCreator___pluginOptions___serviceId'
   | 'pluginCreator___pluginOptions___apis'
@@ -3218,23 +3470,30 @@ export type SitePluginFieldsEnum =
   | 'resolve'
   | 'name'
   | 'version'
+  | 'pluginOptions___isTSX'
+  | 'pluginOptions___jsxPragma'
+  | 'pluginOptions___allExtensions'
+  | 'pluginOptions___displayName'
+  | 'pluginOptions___minify'
+  | 'pluginOptions___transpileTemplateLiterals'
+  | 'pluginOptions___pure'
   | 'pluginOptions___exclude'
+  | 'pluginOptions___output'
+  | 'pluginOptions___createLinkInHead'
   | 'pluginOptions___name'
   | 'pluginOptions___path'
-  | 'pluginOptions___short_name'
-  | 'pluginOptions___start_url'
-  | 'pluginOptions___background_color'
-  | 'pluginOptions___theme_color'
-  | 'pluginOptions___display'
-  | 'pluginOptions___cache_busting_mode'
-  | 'pluginOptions___include_favicon'
-  | 'pluginOptions___legacy'
-  | 'pluginOptions___theme_color_in_head'
-  | 'pluginOptions___fileName'
+  | 'pluginOptions___base64Width'
+  | 'pluginOptions___stripMetadata'
+  | 'pluginOptions___defaultQuality'
+  | 'pluginOptions___failOnError'
   | 'pluginOptions___codegenConfig___maybeValue'
   | 'pluginOptions___alias____'
   | 'pluginOptions___extensions'
   | 'pluginOptions___trackingId'
+  | 'pluginOptions___head'
+  | 'pluginOptions___anonymize'
+  | 'pluginOptions___respectDNT'
+  | 'pluginOptions___pageTransitionDelay'
   | 'pluginOptions___apiKey'
   | 'pluginOptions___serviceId'
   | 'pluginOptions___apis'
@@ -3355,23 +3614,30 @@ export type SitePluginPackageJsonPeerDependenciesFilterListInput = {
 };
 
 export type SitePluginPluginOptions = {
+  isTSX?: Maybe<Scalars['Boolean']>;
+  jsxPragma?: Maybe<Scalars['String']>;
+  allExtensions?: Maybe<Scalars['Boolean']>;
+  displayName?: Maybe<Scalars['Boolean']>;
+  minify?: Maybe<Scalars['Boolean']>;
+  transpileTemplateLiterals?: Maybe<Scalars['Boolean']>;
+  pure?: Maybe<Scalars['Boolean']>;
   exclude?: Maybe<Array<Maybe<Scalars['String']>>>;
+  output?: Maybe<Scalars['String']>;
+  createLinkInHead?: Maybe<Scalars['Boolean']>;
   name?: Maybe<Scalars['String']>;
   path?: Maybe<Scalars['String']>;
-  short_name?: Maybe<Scalars['String']>;
-  start_url?: Maybe<Scalars['String']>;
-  background_color?: Maybe<Scalars['String']>;
-  theme_color?: Maybe<Scalars['String']>;
-  display?: Maybe<Scalars['String']>;
-  cache_busting_mode?: Maybe<Scalars['String']>;
-  include_favicon?: Maybe<Scalars['Boolean']>;
-  legacy?: Maybe<Scalars['Boolean']>;
-  theme_color_in_head?: Maybe<Scalars['Boolean']>;
-  fileName?: Maybe<Scalars['String']>;
+  base64Width?: Maybe<Scalars['Int']>;
+  stripMetadata?: Maybe<Scalars['Boolean']>;
+  defaultQuality?: Maybe<Scalars['Int']>;
+  failOnError?: Maybe<Scalars['Boolean']>;
   codegenConfig?: Maybe<SitePluginPluginOptionsCodegenConfig>;
   alias?: Maybe<SitePluginPluginOptionsAlias>;
   extensions?: Maybe<Array<Maybe<Scalars['String']>>>;
   trackingId?: Maybe<Scalars['String']>;
+  head?: Maybe<Scalars['Boolean']>;
+  anonymize?: Maybe<Scalars['Boolean']>;
+  respectDNT?: Maybe<Scalars['Boolean']>;
+  pageTransitionDelay?: Maybe<Scalars['Int']>;
   apiKey?: Maybe<Scalars['String']>;
   serviceId?: Maybe<Scalars['String']>;
   apis?: Maybe<Array<Maybe<SitePluginPluginOptionsApis>>>;
@@ -3407,23 +3673,30 @@ export type SitePluginPluginOptionsCodegenConfigFilterInput = {
 };
 
 export type SitePluginPluginOptionsFilterInput = {
+  isTSX?: Maybe<BooleanQueryOperatorInput>;
+  jsxPragma?: Maybe<StringQueryOperatorInput>;
+  allExtensions?: Maybe<BooleanQueryOperatorInput>;
+  displayName?: Maybe<BooleanQueryOperatorInput>;
+  minify?: Maybe<BooleanQueryOperatorInput>;
+  transpileTemplateLiterals?: Maybe<BooleanQueryOperatorInput>;
+  pure?: Maybe<BooleanQueryOperatorInput>;
   exclude?: Maybe<StringQueryOperatorInput>;
+  output?: Maybe<StringQueryOperatorInput>;
+  createLinkInHead?: Maybe<BooleanQueryOperatorInput>;
   name?: Maybe<StringQueryOperatorInput>;
   path?: Maybe<StringQueryOperatorInput>;
-  short_name?: Maybe<StringQueryOperatorInput>;
-  start_url?: Maybe<StringQueryOperatorInput>;
-  background_color?: Maybe<StringQueryOperatorInput>;
-  theme_color?: Maybe<StringQueryOperatorInput>;
-  display?: Maybe<StringQueryOperatorInput>;
-  cache_busting_mode?: Maybe<StringQueryOperatorInput>;
-  include_favicon?: Maybe<BooleanQueryOperatorInput>;
-  legacy?: Maybe<BooleanQueryOperatorInput>;
-  theme_color_in_head?: Maybe<BooleanQueryOperatorInput>;
-  fileName?: Maybe<StringQueryOperatorInput>;
+  base64Width?: Maybe<IntQueryOperatorInput>;
+  stripMetadata?: Maybe<BooleanQueryOperatorInput>;
+  defaultQuality?: Maybe<IntQueryOperatorInput>;
+  failOnError?: Maybe<BooleanQueryOperatorInput>;
   codegenConfig?: Maybe<SitePluginPluginOptionsCodegenConfigFilterInput>;
   alias?: Maybe<SitePluginPluginOptionsAliasFilterInput>;
   extensions?: Maybe<StringQueryOperatorInput>;
   trackingId?: Maybe<StringQueryOperatorInput>;
+  head?: Maybe<BooleanQueryOperatorInput>;
+  anonymize?: Maybe<BooleanQueryOperatorInput>;
+  respectDNT?: Maybe<BooleanQueryOperatorInput>;
+  pageTransitionDelay?: Maybe<IntQueryOperatorInput>;
   apiKey?: Maybe<StringQueryOperatorInput>;
   serviceId?: Maybe<StringQueryOperatorInput>;
   apis?: Maybe<SitePluginPluginOptionsApisFilterListInput>;
@@ -3467,6 +3740,19 @@ export type StringQueryOperatorInput = {
   nin?: Maybe<Array<Maybe<Scalars['String']>>>;
   regex?: Maybe<Scalars['String']>;
   glob?: Maybe<Scalars['String']>;
+};
+
+export type TransformOptions = {
+  grayscale?: Maybe<Scalars['Boolean']>;
+  duotone?: Maybe<DuotoneGradient>;
+  rotate?: Maybe<Scalars['Int']>;
+  trim?: Maybe<Scalars['Float']>;
+  cropFocus?: Maybe<ImageCropFocus>;
+  fit?: Maybe<ImageFit>;
+};
+
+export type WebPOptions = {
+  quality?: Maybe<Scalars['Int']>;
 };
 
 export type AllImageFileQueryVariables = Exact<{ [key: string]: never; }>;
