@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef } from 'react';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 // import Transition, { TransitionStatus } from 'react-transition-group/Transition';
@@ -17,6 +17,7 @@ import {
   TypeStyle,
 } from '@/constants';
 import { IntersectionFadeIn, Parallax, ReverseParallax } from '@/effects';
+import { isSafari } from '@/util/ua';
 
 export const IntroModule: React.FC = () => {
   return (
@@ -201,13 +202,20 @@ export const IntroModule: React.FC = () => {
   );
 };
 
-const MessageTypography: React.FC = ({ children }) => (
-  <IntersectionFadeIn>
-    <MessageTypographyLayout>
-      <MessageTypographyStyle>{children}</MessageTypographyStyle>
-    </MessageTypographyLayout>
-  </IntersectionFadeIn>
-);
+const MessageTypography: React.FC = ({ children }) => {
+  const ref = useRef<HTMLSpanElement>(null);
+  const width = ref.current?.clientWidth;
+
+  isSafari();
+
+  return (
+    <IntersectionFadeIn>
+      <MessageTypographyLayout style={isSafari() && width ? { width: `${width}px` } : {}}>
+        <MessageTypographyStyle ref={ref}>{children}</MessageTypographyStyle>
+      </MessageTypographyLayout>
+    </IntersectionFadeIn>
+  );
+};
 
 const MessageTypographyStyle = styled.span`
   ${Typography.Mixin.DISPLAY};
