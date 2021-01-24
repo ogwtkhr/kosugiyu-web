@@ -22,7 +22,7 @@ const Container = styled.span<UnderLineTextProps>`
       case SizeType.SMALL:
         return withRem(TextSize.LARGE);
       case SizeType.LARGE:
-        return withRem(TextSize.XX_LARGE);
+        return withRem(TextSize.XXX_LARGE);
       default:
         return withRem(TextSize.X_LARGE);
     }

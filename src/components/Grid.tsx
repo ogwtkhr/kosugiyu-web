@@ -116,7 +116,7 @@ export const GridImage: React.FC<GridImageProps> = ({ src, parallaxSpeed = 0.2 }
         }
       }
     >
-      <IntersectionFadeIn withSlideIn fillLayout>
+      <IntersectionFadeIn slideIn fillLayout>
         <Picture relativePath={src} />
       </IntersectionFadeIn>
     </GridImageContainer>

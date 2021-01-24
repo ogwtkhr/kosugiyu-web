@@ -99,7 +99,7 @@ export const getCurtainAnimationMixin = ({
 };
 
 export type FadeInMixinProps = {
-  withSlideIn?: boolean;
+  slideIn?: boolean;
 } & AnimationMixinProps;
 
 export const getFadeInMixin = ({
@@ -115,8 +115,8 @@ export const getFadeInMixin = ({
     position: relative;
     transition: ${duration}ms ${easing};
     opacity: ${({ isAnimate }) => (isAnimate ? 1 : 0)};
-    ${({ withSlideIn, isAnimate }) =>
-      withSlideIn
+    ${({ slideIn, isAnimate }) =>
+      slideIn
         ? css`
             transform: translateY(${isAnimate ? 0 : slideInMoment}px);
           `

@@ -25,7 +25,7 @@ export const IntroModule: React.FC = () => {
         <IntroStoryUnitColumnMain>
           <IntroStoryNormalPhoto>
             <IntersectionFadeIn fillLayout>
-              <Picture relativePath="photos/top/story_1.jpg" />
+              <Picture relativePath="photos/intro/story_1.jpg" />
             </IntersectionFadeIn>
           </IntroStoryNormalPhoto>
         </IntroStoryUnitColumnMain>
@@ -48,7 +48,7 @@ export const IntroModule: React.FC = () => {
               rowEnd: 11,
             }}
           >
-            <GridImage src="photos/top/story_2.jpg" parallaxSpeed={0.09} />
+            <GridImage src="photos/intro/story_2.jpg" parallaxSpeed={0.09} />
           </GridItem>
           <GridItem
             grid={{
@@ -58,7 +58,7 @@ export const IntroModule: React.FC = () => {
               rowEnd: 11,
             }}
           >
-            <GridImage src="photos/top/story_3.jpg" parallaxSpeed={0.06} />
+            <GridImage src="photos/intro/story_3.jpg" parallaxSpeed={0.06} />
           </GridItem>
           {/* 2段目左*/}
           <GridItem
@@ -69,7 +69,7 @@ export const IntroModule: React.FC = () => {
               rowEnd: 19,
             }}
           >
-            <GridImage src="photos/top/story_4.jpg" parallaxSpeed={0.07} />
+            <GridImage src="photos/intro/story_4.jpg" parallaxSpeed={0.07} />
           </GridItem>
           {/* 2段目右 */}
           <GridItem
@@ -80,7 +80,7 @@ export const IntroModule: React.FC = () => {
               rowEnd: 19,
             }}
           >
-            <GridImage src="photos/top/story_5.jpg" parallaxSpeed={0.07} />
+            <GridImage src="photos/intro/story_5.jpg" parallaxSpeed={0.07} />
           </GridItem>
           {/* 3段目左 */}
           <GridItem
@@ -91,7 +91,7 @@ export const IntroModule: React.FC = () => {
               rowEnd: 27,
             }}
           >
-            <GridImage src="photos/top/story_6.jpg" parallaxSpeed={0.07} />
+            <GridImage src="photos/intro/story_6.jpg" parallaxSpeed={0.07} />
           </GridItem>
           {/* 4段目左 */}
           <GridItem
@@ -102,7 +102,7 @@ export const IntroModule: React.FC = () => {
               rowEnd: 35,
             }}
           >
-            <GridImage src="photos/top/story_7.jpg" parallaxSpeed={0.07} />
+            <GridImage src="photos/intro/story_7.jpg" parallaxSpeed={0.07} />
           </GridItem>
           {/* 3段目右 */}
           <GridItem
@@ -113,7 +113,7 @@ export const IntroModule: React.FC = () => {
               rowEnd: 35,
             }}
           >
-            <GridImage src="photos/top/story_8.jpg" parallaxSpeed={0.07} />
+            <GridImage src="photos/intro/story_8.jpg" parallaxSpeed={0.07} />
           </GridItem>
         </GridContainer>
         <MessageInGrid>
@@ -122,16 +122,26 @@ export const IntroModule: React.FC = () => {
               関東大震災後、東京の中心部からやってきたファミリー層や高齢者世帯によって、新興住宅街がつくられたこのエリア。戦後になると、作家やアーティストをはじめ若者も多く移り住むようになり、多種多様な人びとが、ときに“中央線文化”とも呼ばれる独自のカルチャーを形作ってきました。
             </MessageTypography>
           </IntersectionFadeIn>
+          <IntroStoryIllustration style={{ top: `calc(100% + ${Spacing.LARGE}px)`, right: 0 }}>
+            <IntersectionFadeIn fillLayout wait={500}>
+              <Picture relativePath="illustrations/intro/story_1.png" />
+            </IntersectionFadeIn>
+          </IntroStoryIllustration>
         </MessageInGrid>
       </GridOuter>
       <IntroStoryUnitNormal>
         <IntroStoryUnitColumnSub>
+          <IntroStoryIllustration style={{ top: `20%`, right: `-${Spacing.LARGE}px` }}>
+            <IntersectionFadeIn fillLayout wait={500}>
+              <Picture relativePath="illustrations/intro/story_2.png" />
+            </IntersectionFadeIn>
+          </IntroStoryIllustration>
           <MessageTypography>小杉湯は昭和8年（1933年）にこの街で生まれました。</MessageTypography>
         </IntroStoryUnitColumnSub>
         <IntroStoryUnitColumnMain>
           <IntersectionFadeIn fillLayout>
             <IntroStoryNormalPhoto>
-              <Picture relativePath="photos/top/story_9.jpg" />
+              <Picture relativePath="photos/intro/story_9.jpg" />
             </IntroStoryNormalPhoto>
           </IntersectionFadeIn>
         </IntroStoryUnitColumnMain>
@@ -140,11 +150,16 @@ export const IntroModule: React.FC = () => {
         <IntroStoryUnitColumnMain>
           <IntersectionFadeIn fillLayout>
             <IntroStoryNormalPhoto>
-              <Picture relativePath="photos/top/story_10.jpg" />
+              <Picture relativePath="photos/intro/story_10.jpg" />
             </IntroStoryNormalPhoto>
           </IntersectionFadeIn>
         </IntroStoryUnitColumnMain>
         <IntroStoryUnitColumnSub>
+          <IntroStoryIllustration style={{ top: `30%`, left: `${Spacing.LARGE}px` }}>
+            <IntersectionFadeIn fillLayout wait={500}>
+              <Picture relativePath="illustrations/intro/story_3.png" />
+            </IntersectionFadeIn>
+          </IntroStoryIllustration>
           <MessageTypography>
             高円寺らしい“ごちゃ混ぜ感”をぎゅっと凝縮したような、街の銭湯。
             創業当時の建物を守りつつ、時代に合わせて中身を変え続け、高円寺の人々とともにあり続けてきました。
@@ -161,7 +176,7 @@ export const IntroModule: React.FC = () => {
 
         <IntroStoryFinalPhoto>
           <Picture
-            relativePath="photos/top/story_11.jpg"
+            relativePath="photos/intro/story_11.jpg"
             imgStyle={{
               objectPosition: '50% 0',
             }}
@@ -208,6 +223,7 @@ const IntroStoryUnitNormal = styled.section`
 `;
 
 const IntroStoryUnitColumnSub = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -234,6 +250,15 @@ const IntroStoryNormalPhoto = styled.div`
     &::after {
       display: none;
     }
+  `}
+`;
+
+const IntroStoryIllustration = styled.div`
+  position: absolute;
+  width: 100px;
+  z-index: 1;
+  ${media.lessThan(ScreenType.MEDIUM)`
+    
   `}
 `;
 
