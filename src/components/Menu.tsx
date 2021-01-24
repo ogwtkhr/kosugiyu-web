@@ -152,7 +152,7 @@ const TriggerContainer = styled.button<PropsWithTransition>`
     left: auto;
     right: ${Spacing.X_LARGE}px;
     top: ${Spacing.XXX_LARGE}px;
-    width: ${Spacing.X_LARGE}px;
+    width: ${Spacing.XX_LARGE}px;
     height: ${Spacing.X_LARGE}px;
   `}
 `;

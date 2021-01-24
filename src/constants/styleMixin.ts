@@ -11,9 +11,11 @@ import { ModuleWidth, Spacing } from './spacing';
 export const getResponsiveOffsetMixin = ({
   maxWidth,
   margin,
+  marginSmall,
 }: {
   maxWidth?: number;
   margin?: number;
+  marginSmall?: number;
 } = {}): any => {
   return css`
     max-width: ${maxWidth}px;
@@ -22,7 +24,18 @@ export const getResponsiveOffsetMixin = ({
     ${media.lessThan(calcResponsivePoint(maxWidth, margin))`
       margin-left: ${margin}px;
       margin-right: ${margin}px;
-  `}
+    `}
+
+    ${media.lessThan(ScreenType.MEDIUM)`
+      ${
+        marginSmall
+          ? css`
+              margin-left: ${marginSmall}px;
+              margin-right: ${marginSmall}px;
+            `
+          : ''
+      }
+    `}
   `;
 };
 
@@ -68,6 +81,7 @@ export const StyleMixin = {
     ${getResponsiveOffsetMixin({
       maxWidth: ModuleWidth.SEMI_WIDE,
       margin: Spacing.XXX_LARGE,
+      marginSmall: Spacing.LARGE,
     })}
   `,
 } as const;

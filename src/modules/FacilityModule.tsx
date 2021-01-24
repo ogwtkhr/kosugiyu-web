@@ -25,12 +25,11 @@ const InformationRow = styled.div`
   ${getResponsiveOffsetMixin({
     maxWidth: ModuleWidth.MIDDLE,
     margin: Spacing.XXX_LARGE,
+    marginSmall: Spacing.LARGE,
   })};
 
   ${media.lessThan(ScreenType.MEDIUM)`
     display: block;
-    margin-left: ${Spacing.LARGE}px;
-    margin-right: ${Spacing.LARGE}px;
   `}
 `;
 

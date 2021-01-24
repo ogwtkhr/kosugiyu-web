@@ -5,23 +5,7 @@ import { Picture, GoogleMap, RippleCircle, CommonTitle, UnderLineText } from '@/
 import styled from 'styled-components';
 
 import { getTextBreakFragment } from '@/util/jsx';
-import {
-  AspectRatio,
-  Colors,
-  LineHeight,
-  LetterSpacing,
-  ModuleWidth,
-  ModuleWidthWithUnit,
-  ScreenType,
-  Spacing,
-  TextSize,
-  TextWeight,
-  SizeType,
-  Typography,
-  BigSpacing,
-  StyleMixin,
-  getResponsiveOffsetMixin,
-} from '@/constants';
+import { AspectRatio, Colors, ScreenType, Spacing, TextSize, Typography } from '@/constants';
 import media from 'styled-media-query';
 import { Shadow } from '@/constants/shadow';
 import { rgba } from 'polished';
