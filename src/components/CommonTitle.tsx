@@ -4,6 +4,7 @@ import { Picture, UnderLineText } from '@/components';
 import { Spacing, ModuleWidth, ScreenType, SizeType, ModuleHeight } from '@/constants';
 import media from 'styled-media-query';
 import { getTextBreakFragment } from '@/util/jsx';
+import { ReverseParallax } from '@/effects';
 
 type CommonTitleProps = {
   title: string;
@@ -18,7 +19,9 @@ export const CommonTitle: React.FC<CommonTitleProps> = ({ title, imagePath }) =>
       </TitleText>
     </TitleMain>
     <TitleImage>
-      <Picture relativePath={imagePath} />
+      <ReverseParallax zoom={1.2} zoomSmall={1.7} basePosition="top">
+        <Picture relativePath={imagePath} />
+      </ReverseParallax>
     </TitleImage>
   </Container>
 );
@@ -36,6 +39,7 @@ const Container = styled.div`
 
 const TitleImage = styled.div`
   flex: 1;
+  overflow: hidden;
 `;
 
 const TitleMain = styled.div`

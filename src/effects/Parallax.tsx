@@ -1,6 +1,17 @@
 import React, { useMemo } from 'react';
 import { useParallax, ParallaxDirectionType } from '@/hooks';
 import styled, { css } from 'styled-components';
+import media from 'styled-media-query';
+import { ValueOf } from '@/types';
+import { ScreenType } from '@/constants';
+
+const BasePosition = {
+  TOP: 'top',
+  CENTER: 'center',
+  BOTTOM: 'bottom',
+} as const;
+
+type BasePosition = ValueOf<typeof BasePosition>;
 
 type ParallaxProps = {
   fillLayout?: boolean;
@@ -9,6 +20,8 @@ type ParallaxProps = {
   max?: number;
   direction?: ParallaxDirectionType;
   zoom?: number;
+  zoomSmall?: number;
+  basePosition?: BasePosition;
 };
 
 export const Parallax: React.FC<ParallaxProps> = ({
@@ -19,13 +32,22 @@ export const Parallax: React.FC<ParallaxProps> = ({
   direction,
   children,
   zoom = 1,
+  zoomSmall,
+  basePosition = BasePosition.CENTER,
 }) => {
-  const [ref, { center: parallaxSeed }] = useParallax<HTMLDivElement>({
+  const [ref, { center, top, bottom }] = useParallax<HTMLDivElement>({
     min,
     max,
     coefficient,
     direction,
   });
+  const seeds = {
+    [BasePosition.TOP]: top,
+    [BasePosition.CENTER]: center,
+    [BasePosition.BOTTOM]: bottom,
+  };
+
+  const parallaxSeed = seeds[basePosition];
   const transformProperty = useMemo(() => `translateY(${parallaxSeed}px)`, [parallaxSeed]);
 
   return (
@@ -36,7 +58,9 @@ export const Parallax: React.FC<ParallaxProps> = ({
         transform: transformProperty,
       }}
     >
-      <Inner zoom={zoom}>{children}</Inner>
+      <Inner zoom={zoom} zoomSmall={zoomSmall}>
+        {children}
+      </Inner>
     </Outer>
   );
 };
@@ -59,13 +83,22 @@ const Outer = styled.div<Pick<ParallaxContainerProps, 'fillLayout'>>`
       : ''};
 `;
 
-const Inner = styled.div<Pick<ParallaxContainerProps, 'zoom'>>`
+const Inner = styled.div<Pick<ParallaxContainerProps, 'zoom' | 'zoomSmall'>>`
   width: 100%;
   height: 100%;
   ${({ zoom }) =>
     zoom
       ? css`
           transform: scale(${zoom});
+        `
+      : ''};
+
+  ${({ zoomSmall }) =>
+    zoomSmall
+      ? css`
+          ${media.lessThan(ScreenType.MEDIUM)`
+            transform: scale(${zoomSmall});
+          `}
         `
       : ''};
 `;
