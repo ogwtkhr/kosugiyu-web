@@ -206,8 +206,6 @@ const MessageTypography: React.FC = ({ children }) => {
   const ref = useRef<HTMLSpanElement>(null);
   const width = ref.current?.clientWidth;
 
-  isSafari();
-
   return (
     <IntersectionFadeIn>
       <MessageTypographyLayout style={isSafari() && width ? { width: `${width}px` } : {}}>
