@@ -4,7 +4,7 @@ import { Picture, UnderLineText } from '@/components';
 import { Spacing, ModuleWidth, ScreenType, SizeType, ModuleHeight } from '@/constants';
 import media from 'styled-media-query';
 import { getTextBreakFragment } from '@/util/jsx';
-import { ReverseParallax } from '@/effects';
+import { ReverseParallax, ParallaxBasePosition } from '@/effects';
 
 type CommonTitleProps = {
   title: string;
