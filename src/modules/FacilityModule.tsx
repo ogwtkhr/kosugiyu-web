@@ -30,11 +30,20 @@ const InformationRow = styled.div`
 
   ${media.lessThan(ScreenType.MEDIUM)`
     display: block;
+    margin-top: ${BigSpacing.X_SMALL}px;
+    margin-bottom: ${Spacing.XXX_LARGE}px;
+
   `}
 `;
 
 const InformationUnit = styled.section`
   flex: 1;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    & + & {
+       margin-top: ${BigSpacing.X_SMALL}px;
+    }
+  `}
 `;
 
 const InformationHeading = styled.h3``;

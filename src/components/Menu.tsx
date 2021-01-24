@@ -112,7 +112,7 @@ const Type = styled.span`
   letter-spacing: 0.2em;
 
   ${media.lessThan(ScreenType.MEDIUM)`
-    font-size: ${TextSize.XXX_LARGE}rem;
+    font-size: ${TextSize.X_LARGE}rem;
   `}
 `;
 

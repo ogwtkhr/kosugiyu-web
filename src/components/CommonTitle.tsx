@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Picture, UnderLineText } from '@/components';
 import { Spacing, ModuleWidth, ScreenType, SizeType, ModuleHeight } from '@/constants';
 import media from 'styled-media-query';
+import { getTextBreakFragment } from '@/util/jsx';
 
 type CommonTitleProps = {
   title: string;
@@ -13,7 +14,7 @@ export const CommonTitle: React.FC<CommonTitleProps> = ({ title, imagePath }) =>
   <Container>
     <TitleMain>
       <TitleText>
-        <UnderLineText size={SizeType.LARGE}>{title}</UnderLineText>
+        <UnderLineText size={SizeType.LARGE}>{getTextBreakFragment(title)}</UnderLineText>
       </TitleText>
     </TitleMain>
     <TitleImage>
@@ -42,7 +43,7 @@ const TitleMain = styled.div`
   width: 20%;
 
   ${media.lessThan(ScreenType.MEDIUM)`
-    width: 50%;
+    width: 30%;
   `}
 `;
 
@@ -53,4 +54,14 @@ const TitleText = styled.h2`
   right: -${Spacing.X_LARGE}px;
   padding-left: ${Spacing.LARGE}px;
   transform: translateY(-50%);
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    right: -${Spacing.XX_LARGE}px;
+  `}
+
+  br {
+    ${media.greaterThan(ScreenType.MEDIUM)`
+      display: none;
+    `}
+  }
 `;
