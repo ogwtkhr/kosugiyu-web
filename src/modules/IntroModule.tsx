@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useRef } from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 // import Transition, { TransitionStatus } from 'react-transition-group/Transition';
