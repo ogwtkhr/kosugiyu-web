@@ -3,7 +3,6 @@ import { BaseLayout, Meta } from '@/layouts';
 import { usePageInfo } from '@/hooks';
 import { Picture, GoogleMap, RippleCircle, CommonTitle, UnderLineText } from '@/components';
 import styled from 'styled-components';
-import { ChevronUp, ChevronDown } from '@styled-icons/bootstrap';
 
 import { getTextBreakFragment } from '@/util/jsx';
 import {
@@ -341,12 +340,12 @@ const IndicatorCurrent = styled.span`
   font-size: 4rem;
 `;
 
-const UpButton = styled(ChevronUp)`
+const UpButton = styled.div`
   cursor: pointer;
   /* filter: drop-shadow(${`0 ${Spacing.SMALL}px 2px ${rgba(Colors.ABSTRACT_BLACK, 0.6)}`}); */
 `;
 
-const DownButton = styled(ChevronDown)`
+const DownButton = styled.div`
   cursor: pointer;
   // filter: drop-shadow(${`0 ${Spacing.SMALL}px 2px ${rgba(Colors.ABSTRACT_BLACK, 0.6)}`});
 `;
