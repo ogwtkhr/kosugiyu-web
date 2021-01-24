@@ -3,11 +3,14 @@ import styled from 'styled-components';
 import { Picture, ScrollLine } from '@/components';
 import { Colors, ScreenType, Spacing, StyleMixin, TextSize, TypeFace } from '@/constants';
 import media from 'styled-media-query';
+import { ReverseParallax } from '@/effects';
 
 export const HeroImage: React.FC = () => {
   return (
     <Container>
-      <Picture relativePath={`photos/top/hero_1.jpg`} />
+      <ReverseParallax zoom={1.1}>
+        <Picture relativePath={`photos/top/hero_1.jpg`} />
+      </ReverseParallax>
       <BusinessInfo>
         平日 15:30-25:45 土日 8:00-25:45 木曜定休
         <br />

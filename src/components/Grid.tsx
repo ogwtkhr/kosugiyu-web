@@ -6,7 +6,7 @@ import Picture from './Picture';
 import { ScreenType, ScreenValue } from '@/constants';
 
 import { isNumber } from 'lodash';
-import { IntersectionFadeIn } from '@/effects';
+import { IntersectionFadeIn, ReverseParallax } from '@/effects';
 
 type NumberOrString = number | string;
 
@@ -95,20 +95,24 @@ export const GridItem = styled.div<GridItemProps>`
 
 type GridImageProps = {
   src: string;
+  speed?: number;
 };
 
-export const GridImage: React.FC<GridImageProps> = ({ src }) => {
+export const GridImage: React.FC<GridImageProps> = ({ src, speed }) => {
   return (
     <GridImageContainer>
-      <IntersectionFadeIn slideIn fillLayout>
-        <Picture relativePath={src} />
-      </IntersectionFadeIn>
+      <ReverseParallax zoom={1.2} fillLayout coefficient={speed}>
+        <IntersectionFadeIn slideIn fillLayout>
+          <Picture relativePath={src} />
+        </IntersectionFadeIn>
+      </ReverseParallax>
     </GridImageContainer>
   );
 };
 
 const GridImageContainer = styled.div`
   position: relative;
+  overflow: hidden;
   width: 100%;
   height: 100%;
 `;

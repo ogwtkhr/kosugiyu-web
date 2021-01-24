@@ -27,14 +27,13 @@ export const Article: React.FC<ArticleProps> = ({ body }) => {
 
 export const Container = styled.article`
   max-width: ${ModuleWidth.ARTICLE}px;
-  margin-left: auto;
   margin-right: auto;
+  margin-left: auto;
   ${media.lessThan(ScreenType.MEDIUM)`
       margin: 0 ${Spacing.LARGE}px;
     `}
 
   & p {
-    padding-top: ${Spacing.LARGE}px;
     padding-bottom: ${Spacing.LARGE}px;
     font-size: ${TextSize.NORMAL}rem;
     font-weight: ${TextWeight.MEDIUM};
@@ -42,6 +41,10 @@ export const Container = styled.article`
     ${media.lessThan(ScreenType.MEDIUM)`
         font-size: ${TextSize.SMALL}rem;
       `}
+  }
+
+  & p:not(:first-child) {
+    padding-top: ${Spacing.LARGE}px;
   }
 
   & h1 {

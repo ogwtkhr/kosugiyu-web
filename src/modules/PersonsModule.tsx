@@ -15,6 +15,7 @@ import {
 } from '@/constants';
 import { PersonItem, TopPersonItem, Picture, Button, ButtonContainer } from '@/components';
 import media from 'styled-media-query';
+import { ReverseParallax } from '@/effects';
 
 type PersonsModuleProps = {
   useTitle?: boolean;
@@ -68,7 +69,9 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({
               </PersonsHeadingBodyCopyLargeScreen>
             </PersonsHeadingMain>
             <PersonsHeadingImage>
-              <Picture relativePath="photos/persons/hero.jpg" />
+              <ReverseParallax zoom={1.2} zoomSmall={1.7} basePosition="top">
+                <Picture relativePath="photos/persons/hero.jpg" />
+              </ReverseParallax>
             </PersonsHeadingImage>
           </PersonsHeadingInner>
           <PersonsHeadingBodyCopySmallScreen>
@@ -146,6 +149,7 @@ const PersonsHeadingInner = styled.div`
 
 const PersonsHeadingImage = styled.div`
   flex: 1;
+  overflow: hidden;
 `;
 
 const PersonsHeadingMain = styled.div`

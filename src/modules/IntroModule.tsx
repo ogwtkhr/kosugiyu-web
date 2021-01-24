@@ -51,7 +51,7 @@ export const IntroModule: React.FC = () => {
               rowEnd: 11,
             }}
           >
-            <GridImage src="photos/intro/story_2.jpg" />
+            <GridImage src="photos/intro/story_2.jpg" speed={0.08} />
           </GridItem>
           <GridItem
             grid={{
@@ -61,7 +61,7 @@ export const IntroModule: React.FC = () => {
               rowEnd: 11,
             }}
           >
-            <GridImage src="photos/intro/story_3.jpg" />
+            <GridImage src="photos/intro/story_3.jpg" speed={0.05} />
           </GridItem>
           {/* 2段目左*/}
           <GridItem
@@ -72,7 +72,7 @@ export const IntroModule: React.FC = () => {
               rowEnd: 19,
             }}
           >
-            <GridImage src="photos/intro/story_4.jpg" />
+            <GridImage src="photos/intro/story_4.jpg" speed={0.05} />
           </GridItem>
           {/* 2段目右 */}
           <GridItem
@@ -83,7 +83,7 @@ export const IntroModule: React.FC = () => {
               rowEnd: 19,
             }}
           >
-            <GridImage src="photos/intro/story_5.jpg" />
+            <GridImage src="photos/intro/story_5.jpg" speed={0.05} />
           </GridItem>
           {/* 3段目左 */}
           <GridItem
@@ -94,7 +94,7 @@ export const IntroModule: React.FC = () => {
               rowEnd: 27,
             }}
           >
-            <GridImage src="photos/intro/story_6.jpg" />
+            <GridImage src="photos/intro/story_6.jpg" speed={0.05} />
           </GridItem>
           {/* 4段目左 */}
           <GridItem
@@ -105,7 +105,7 @@ export const IntroModule: React.FC = () => {
               rowEnd: 35,
             }}
           >
-            <GridImage src="photos/intro/story_7.jpg" />
+            <GridImage src="photos/intro/story_7.jpg" speed={0.05} />
           </GridItem>
           {/* 3段目右 */}
           <GridItem
@@ -116,7 +116,7 @@ export const IntroModule: React.FC = () => {
               rowEnd: 35,
             }}
           >
-            <GridImage src="photos/intro/story_8.jpg" />
+            <GridImage src="photos/intro/story_8.jpg" speed={0.09} />
           </GridItem>
         </GridContainer>
         <MessageInGrid>

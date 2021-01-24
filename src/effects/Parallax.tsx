@@ -5,13 +5,13 @@ import media from 'styled-media-query';
 import { ValueOf } from '@/types';
 import { ScreenType } from '@/constants';
 
-const BasePosition = {
+export const ParallaxBasePosition = {
   TOP: 'top',
   CENTER: 'center',
   BOTTOM: 'bottom',
 } as const;
 
-type BasePosition = ValueOf<typeof BasePosition>;
+export type ParallaxBasePosition = ValueOf<typeof ParallaxBasePosition>;
 
 type ParallaxProps = {
   fillLayout?: boolean;
@@ -21,7 +21,7 @@ type ParallaxProps = {
   direction?: ParallaxDirectionType;
   zoom?: number;
   zoomSmall?: number;
-  basePosition?: BasePosition;
+  basePosition?: ParallaxBasePosition;
 };
 
 export const Parallax: React.FC<ParallaxProps> = ({
@@ -33,7 +33,7 @@ export const Parallax: React.FC<ParallaxProps> = ({
   children,
   zoom = 1,
   zoomSmall,
-  basePosition = BasePosition.CENTER,
+  basePosition = ParallaxBasePosition.CENTER,
 }) => {
   const [ref, { center, top, bottom }] = useParallax<HTMLDivElement>({
     min,
@@ -42,9 +42,9 @@ export const Parallax: React.FC<ParallaxProps> = ({
     direction,
   });
   const seeds = {
-    [BasePosition.TOP]: top,
-    [BasePosition.CENTER]: center,
-    [BasePosition.BOTTOM]: bottom,
+    [ParallaxBasePosition.TOP]: top,
+    [ParallaxBasePosition.CENTER]: center,
+    [ParallaxBasePosition.BOTTOM]: bottom,
   };
 
   const parallaxSeed = seeds[basePosition];

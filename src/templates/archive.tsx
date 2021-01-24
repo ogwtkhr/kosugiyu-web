@@ -20,10 +20,10 @@ import {
   DateFormat,
 } from '@/constants';
 import media from 'styled-media-query';
-import { useParallax } from '@/hooks';
 import { stripTag } from '@/util/string';
 import { Article, ArticleInfo } from '@/components';
 import { TwitterTweetButton, FacebookShareButton } from '@/components/SocialButton';
+import { ReverseParallax } from '@/effects';
 
 type ArchivePageProps = {
   data: Pick<Query, 'microcmsArchive'>;
@@ -36,16 +36,7 @@ const ArchivePage: React.FC<ArchivePageProps> = ({ data }) => {
   const writerName = data.microcmsArchive?.writer?.name;
   const body = data.microcmsArchive?.body;
 
-  const [mainVisualRef, { top: parallaxSeed }] = useParallax<HTMLDivElement>({
-    min: 0,
-    max: 1000,
-    coefficient: 0.2,
-    direction: 'reverse',
-  });
   const strippedBody = useMemo(() => stripTag(body || '').slice(0, 200), [body]);
-  const mainVisualTransformProperty = useMemo(() => `translateY(${parallaxSeed}px)`, [
-    parallaxSeed,
-  ]);
   const publishedDate = useMemo(() => dayjs(publishedAt).format(DateFormat.YEAR_MONTH_DATE_JP), [
     publishedAt,
   ]);
@@ -74,15 +65,14 @@ const ArchivePage: React.FC<ArchivePageProps> = ({ data }) => {
             </SocialIcon>
           </SocialIcons>
         </TitleContainer>
-        <MainVisualContainer ref={mainVisualRef}>
-          <MainVisual
-            src={mainVisual}
-            style={{
-              transform: mainVisualTransformProperty,
-            }}
-          />
+        <MainVisualContainer>
+          <ReverseParallax basePosition="top" zoom={1.1} min={0} max={1000}>
+            <MainVisual src={mainVisual} />
+          </ReverseParallax>
         </MainVisualContainer>
-        <Article body={data.microcmsArchive?.body || ''} />
+        <ArticleContainer>
+          <Article body={data.microcmsArchive?.body || ''} />
+        </ArticleContainer>
         <InfoList>
           {data.microcmsArchive?.info?.map(
             (item) =>
@@ -214,6 +204,14 @@ const MainVisual = styled.div`
       /* padding-bottom: ${AspectRatio.R_1_BY_1}%; */
       padding-bottom: 70%;
     }
+  `}
+`;
+
+const ArticleContainer = styled.div`
+  margin: ${Spacing.XX_LARGE}px 0;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    margin: ${Spacing.LARGE}px 0;
   `}
 `;
 

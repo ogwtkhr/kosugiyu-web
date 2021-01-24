@@ -16,7 +16,7 @@ import {
 } from '@/constants';
 
 import { ArrowIcon } from '@/components';
-import { IntersectionFadeIn } from '@/effects';
+import { IntersectionFadeIn, ReverseParallax, ParallaxBasePosition } from '@/effects';
 
 type PersonItemProps = {
   position: string;
@@ -38,39 +38,43 @@ export const PersonItem: React.FC<PersonItemProps> = ({
 
   return (
     <IntersectionFadeIn>
-      <PersonThumbnailContainer>
-        <PersonThumbnail src={mainVisualUrl} />
-        <PersonInfo>
-          <PersonPosition>{position}</PersonPosition>
-          <PersonNameContainer>
-            <PersonName>{name}</PersonName>
+      <Container>
+        <ThumbnailContainer>
+          <ReverseParallax zoom={1.1} coefficient={0.03} min={-800} max={800}>
+            <Thumbnail src={mainVisualUrl} />
+          </ReverseParallax>
+        </ThumbnailContainer>
+        <Info>
+          <Position>{position}</Position>
+          <NameContainer>
+            <Name>{name}</Name>
             {showArrowIcon && (
-              <PersonIconContainer>
+              <IconContainer>
                 <ArrowIcon />
-              </PersonIconContainer>
+              </IconContainer>
             )}
-          </PersonNameContainer>
-        </PersonInfo>
-      </PersonThumbnailContainer>
+          </NameContainer>
+        </Info>
+      </Container>
     </IntersectionFadeIn>
   );
 };
-const PersonInfo = styled.div`
+const Info = styled.div`
   margin-top: ${Spacing.NORMAL}px;
 `;
 
-const PersonPosition = styled.p`
+const Position = styled.p`
   font-size: ${TextSize.X_SMALL}rem;
   ${Typography.Mixin.DISPLAY};
 `;
 
-const PersonNameContainer = styled.div`
+const NameContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
 `;
 
-const PersonName = styled.h3`
+const Name = styled.h3`
   color: ${Colors.ABSTRACT_BLACK};
   font-size: ${TextSize.LARGE}rem;
   line-height: ${LineHeight.NORMAL};
@@ -82,16 +86,20 @@ const PersonName = styled.h3`
   `};
 `;
 
-const PersonIconContainer = styled.div`
+const IconContainer = styled.div`
   width: ${Spacing.XX_LARGE}px;
   ${media.lessThan(ScreenType.MEDIUM)`
     font-size: ${TextSize.SMALL}rem;
   `};
 `;
 
-const PersonThumbnailContainer = styled.div``;
+const Container = styled.div``;
 
-const PersonThumbnail = styled.div`
+const ThumbnailContainer = styled.div`
+  overflow: hidden;
+`;
+
+const Thumbnail = styled.div`
   width: 100%;
   ${StyleMixin.BACKGROUND_IMAGE_WITH_SRC}
 
@@ -107,37 +115,50 @@ const PersonThumbnail = styled.div`
   `}
 `;
 
-type TopPersonItemProps = {
+type TopItemProps = {
   title: string;
+  parallaxBasePosition?: ParallaxBasePosition;
 } & PersonItemProps;
 
-export const TopPersonItem: React.FC<TopPersonItemProps> = ({
+export const TopPersonItem: React.FC<TopItemProps> = ({
   position,
   name,
   title,
   mainVisualUrl,
   showArrowIcon = true,
+  parallaxBasePosition = ParallaxBasePosition.CENTER,
 }) => {
   return (
     <IntersectionFadeIn>
-      <TopPersonContainer>
-        <TopPersonThumbnail src={mainVisualUrl} />
-        <TopPersonInfo>
-          <TopPersonPosition>{position}</TopPersonPosition>
-          <TopPersonName>{name}</TopPersonName>
-          <TopPersonTitle>{title}</TopPersonTitle>
+      <TopContainer>
+        <TopThumbnailContainer>
+          <ReverseParallax
+            fillLayout
+            basePosition={parallaxBasePosition}
+            zoom={1.1}
+            coefficient={0.07}
+            min={-800}
+            max={800}
+          >
+            <TopThumbnail src={mainVisualUrl} />
+          </ReverseParallax>
+        </TopThumbnailContainer>
+        <TopInfo>
+          <TopPosition>{position}</TopPosition>
+          <TopName>{name}</TopName>
+          <TopTitle>{title}</TopTitle>
           {showArrowIcon && (
-            <TopPersonIconContainer>
+            <TopIconContainer>
               <ArrowIcon />
-            </TopPersonIconContainer>
+            </TopIconContainer>
           )}
-        </TopPersonInfo>
-      </TopPersonContainer>
+        </TopInfo>
+      </TopContainer>
     </IntersectionFadeIn>
   );
 };
 
-const TopPersonContainer = styled.div`
+const TopContainer = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -150,14 +171,19 @@ const TopPersonContainer = styled.div`
   `}
 `;
 
-const TopPersonThumbnail = styled.div`
+const TopThumbnailContainer = styled.div`
+  overflow: hidden;
   width: 40%;
-  ${StyleMixin.BACKGROUND_IMAGE_WITH_SRC};
+  height: 100%;
 
   ${media.lessThan(ScreenType.MEDIUM)`
     margin: 0 auto;
     width: 80%;
   `}
+`;
+
+const TopThumbnail = styled.div`
+  ${StyleMixin.BACKGROUND_IMAGE_WITH_SRC};
 
   &::after {
     content: '';
@@ -166,7 +192,7 @@ const TopPersonThumbnail = styled.div`
   }
 `;
 
-const TopPersonInfo = styled.div`
+const TopInfo = styled.div`
   width: 40%;
 
   ${media.lessThan(ScreenType.MEDIUM)`
@@ -175,7 +201,7 @@ const TopPersonInfo = styled.div`
   `}
 `;
 
-const TopPersonPosition = styled.p`
+const TopPosition = styled.p`
   font-size: ${TextSize.SMALL}rem;
   ${Typography.Mixin.DISPLAY};
 
@@ -184,7 +210,7 @@ const TopPersonPosition = styled.p`
   `}
 `;
 
-const TopPersonName = styled.h3`
+const TopName = styled.h3`
   ${Typography.Mixin.DISPLAY};
   margin-top: ${Spacing.NORMAL}px;
   font-size: ${TextSize.XXX_LARGE}rem;
@@ -195,13 +221,13 @@ const TopPersonName = styled.h3`
   `}
 `;
 
-const TopPersonTitle = styled.p`
+const TopTitle = styled.p`
   margin-top: ${Spacing.NORMAL}px;
   font-size: ${TextSize.X_SMALL}rem;
   ${Typography.Mixin.DISPLAY};
 `;
 
-const TopPersonIconContainer = styled.div`
+const TopIconContainer = styled.div`
   width: ${Spacing.XX_LARGE}px;
   margin-top: ${Spacing.NORMAL}px;
   margin-left: auto;

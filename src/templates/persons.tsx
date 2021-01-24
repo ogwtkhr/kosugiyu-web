@@ -5,11 +5,11 @@ import dayjs from 'dayjs';
 import { Query } from '@/types';
 import { BaseLayout, Meta } from '@/layouts';
 import styled from 'styled-components';
-import { Colors, DateFormat } from '@/constants';
+import { BigSpacing, Colors, DateFormat, ScreenType, Spacing } from '@/constants';
 import media from 'styled-media-query';
-import { useParallax } from '@/hooks';
 import { stripTag } from '@/util/string';
 import { TopPersonItem, Article, ArticleInfo } from '@/components';
+import { ParallaxBasePosition } from '@/effects';
 
 type PersonsPageProps = {
   data: Pick<Query, 'microcmsPersons'>;
@@ -25,16 +25,8 @@ const PersonsPage: React.FC<PersonsPageProps> = ({ data }) => {
   const body = data.microcmsPersons?.body || '';
   const credit = data.microcmsPersons?.credit || '';
 
-  const [mainVisualRef, { top: parallaxSeed }] = useParallax<HTMLDivElement>({
-    min: 0,
-    max: 1000,
-    coefficient: 0.2,
-    direction: 'reverse',
-  });
   const strippedBody = useMemo(() => stripTag(body || '').slice(0, 200), [body]);
-  const mainVisualTransformProperty = useMemo(() => `translateY(${parallaxSeed}px)`, [
-    parallaxSeed,
-  ]);
+
   const publishedDate = useMemo(() => dayjs(publishedAt).format(DateFormat.YEAR_MONTH_DATE_JP), [
     publishedAt,
   ]);
@@ -45,22 +37,17 @@ const PersonsPage: React.FC<PersonsPageProps> = ({ data }) => {
     <BaseLayout useHeader>
       <Meta title={title} description={strippedBody} ogImage={mainVisual} />
       <Container>
-        {/* <MainVisualContainer ref={mainVisualRef}>
-          <MainVisual
-            src={mainVisual}
-            style={{
-              transform: mainVisualTransformProperty,
-            }}
-          />
-        </MainVisualContainer> */}
         <TopPersonItem
           title={title}
           position={personPosition}
           name={name}
           mainVisualUrl={mainVisual}
           showArrowIcon={false}
+          parallaxBasePosition={ParallaxBasePosition.TOP}
         />
-        <Article body={data.microcmsPersons?.body || ''} />
+        <ArticleContainer>
+          <Article body={data.microcmsPersons?.body || ''} />
+        </ArticleContainer>
       </Container>
       <ArticleInfo title="クレジット" body={credit} />
     </BaseLayout>
@@ -90,19 +77,12 @@ const Container = styled.div`
   background-color: ${Colors.UI_PAPER};
 `;
 
-// const iconMixin = css`
-//   width: ${Spacing.X_LARGE}px;
-//   height: ${Spacing.X_LARGE}px;
-//   color: ${Colors.ABSTRACT_NAVY};
-// `;
+const ArticleContainer = styled.div`
+  margin: ${BigSpacing.SMALL}px 0;
 
-// const TwitterIcon = styled(Twitter)`
-//   ${iconMixin};
-// `;
-
-// const FacebookIcon = styled(FacebookCircle)`
-//   ${iconMixin};
-//   margin-left: ${Spacing.NORMAL}px;
-// `;
+  ${media.lessThan(ScreenType.MEDIUM)`
+    margin: ${Spacing.LARGE}px 0;
+  `}
+`;
 
 export default PersonsPage;
