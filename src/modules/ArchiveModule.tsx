@@ -21,6 +21,7 @@ import {
 import dayjs from 'dayjs';
 import media from 'styled-media-query';
 import { CommonTitle } from '@/components';
+import { groupByIndex } from '@/util/array';
 
 export const ArchiveModule: React.FC = () => {
   const data = useStaticQuery<AllMicrocmsArchiveQuery>(graphql`
@@ -39,10 +40,31 @@ export const ArchiveModule: React.FC = () => {
     }
   `);
 
+  const baseArticles: ArticleItemProps[] = data.allMicrocmsArchive.nodes.map((entry) => {
+    const slug = entry.slug || '';
+    const title = entry.title || '';
+    const mainVisualUrl = entry?.mainVisual?.url || '';
+    const publishedAt = entry?.publishedAt || '';
+    return {
+      slug,
+      title,
+      mainVisualUrl,
+      publishedAt,
+    };
+  });
+
   // TODO
-  const baseArticles = data.allMicrocmsArchive.nodes;
-  const articles = [...baseArticles, ...baseArticles, ...baseArticles, ...baseArticles];
+  const articles = [
+    ...baseArticles,
+    ...baseArticles,
+    ...baseArticles,
+    ...baseArticles,
+    ...baseArticles,
+    ...baseArticles,
+  ];
   const years = ['2021', '2020'];
+
+  const groupedArticle = groupByIndex(baseArticles, 11);
 
   return (
     <Container>
@@ -62,19 +84,10 @@ export const ArchiveModule: React.FC = () => {
           </ArticleYear>
           <ArticleListContainer>
             <ArticleList>
-              {articles.map((entry) => {
-                const slug = entry.slug || '';
-                const title = entry.title || '';
-                const mainVisualUrl = entry?.mainVisual?.url || '';
-                const publishedAt = entry?.publishedAt || '';
+              {groupedArticle.map((group, index) => {
                 return (
-                  <ArticleListItem key={entry.slug}>
-                    <ArticleItem
-                      slug={slug}
-                      title={title}
-                      mainVisualUrl={mainVisualUrl}
-                      publishedAt={publishedAt}
-                    />
+                  <ArticleListItem key={index}>
+                    <ArticleGroup>{group}</ArticleGroup>
                   </ArticleListItem>
                 );
               })}
@@ -90,6 +103,49 @@ const Container = styled.div`
   width: 100%;
   background-color: ${Colors.UI_PAPER};
 `;
+
+type ArticleGroupProps = {
+  children: (ArticleItemProps | undefined)[];
+};
+
+const ArticleGroup: React.FC<ArticleGroupProps> = ({ children }) => {
+  const [
+    article1,
+    article2,
+    article3,
+    article4,
+    article5,
+    article6,
+    article7,
+    article8,
+    article9,
+    article10,
+    article11,
+  ] = children;
+  return (
+    <ArticleGroupContainer>
+      <ArticleGroupRow>
+        <ArticleGroupColumn>
+          {article1 && <ArticleGroupItem>{article1}</ArticleGroupItem>}
+        </ArticleGroupColumn>
+      </ArticleGroupRow>
+    </ArticleGroupContainer>
+  );
+};
+
+const ArticleGroupContainer = styled.div``;
+
+const ArticleGroupRow = styled.div`
+  display: flex;
+`;
+
+const ArticleGroupColumn = styled.div`
+  flex: 1;
+`;
+
+const ArticleGroupItem: React.FC<{ children: ArticleItemProps }> = ({ children }) => (
+  <ArticleItem {...children} />
+);
 
 type ArticleItemProps = {
   slug: string;
@@ -169,20 +225,24 @@ const ArticleListContainer = styled.div`
   width: 100%;
 `;
 
-const ArticleList = styled.ul`
-  display: grid;
-  grid-gap: ${Spacing.XX_LARGE}px;
-  grid-template-columns: repeat(3, 1fr);
-  margin: 0 auto;
-  overflow: hidden;
-`;
+// const ArticleList = styled.ul`
+//   display: grid;
+//   grid-gap: ${Spacing.XX_LARGE}px;
+//   grid-template-columns: repeat(3, 1fr);
+//   margin: 0 auto;
+//   overflow: hidden;
+// `;
 
-const ArticleListItem = styled.li`
-  margin-bottom: ${Spacing.XX_LARGE}px;
-  ${media.lessThan(ScreenType.MEDIUM)`
-    margin-bottom: ${Spacing.LARGE}px;
-  `}
-`;
+const ArticleList = styled.div``;
+
+// const ArticleListItem = styled.li`
+//   margin-bottom: ${Spacing.XX_LARGE}px;
+//   ${media.lessThan(ScreenType.MEDIUM)`
+//     margin-bottom: ${Spacing.LARGE}px;
+//   `}
+// `;
+
+const ArticleListItem = styled.div``;
 
 const ArticleItemContainer = styled.article``;
 
