@@ -25,6 +25,7 @@
     "react-helmet": "^6.1.0",
     "react-transition-group": "^4.4.1",
     "reset.css": "^2.0.2",
+    "ssr-window": "^3.0.0",
     "styled-components": "^5.2.0",
     "styled-icons": "^10.25.0",
     "styled-media-query": "^2.1.2"

@@ -30,8 +30,6 @@
     "react/prop-types": "off"
   },
   "globals": {
-    "window": true,
-    "document": true,
     "IntersectionObserver": true,
     "google": true
   }

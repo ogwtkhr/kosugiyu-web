@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { window } from '@/util/window';
 import { TwitterIcon, FacebookIcon } from './Icon';
 
 type SocialBaseProps = {

@@ -2,6 +2,7 @@ import { ValueOf } from '@/types';
 import { DomEventType } from '@/constants';
 import { isString, isUndefined } from 'lodash';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { window } from '@/util/window';
 
 export const ParallaxDirectionType = {
   NORMAL: 'normal',

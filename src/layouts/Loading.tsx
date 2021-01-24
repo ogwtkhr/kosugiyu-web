@@ -12,7 +12,7 @@ export const Loading: React.FC = () => {
     };
     // window.addEventListener(DomEventType.LOAD, handler);
     // TODO: 完全に仮
-    window.setTimeout(handler, 500);
+    setTimeout(handler, 500);
     return () => {
       // window.removeEventListener(DomEventType.LOAD, handler);
     };
