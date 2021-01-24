@@ -16,7 +16,7 @@ import {
   TextWeight,
   TypeStyle,
 } from '@/constants';
-import { IntersectionFadeIn } from '@/animations';
+import { IntersectionFadeIn, ReverseParallax } from '@/effects';
 
 export const IntroModule: React.FC = () => {
   return (
@@ -24,9 +24,11 @@ export const IntroModule: React.FC = () => {
       <IntroStoryUnitNormal>
         <IntroStoryUnitColumnMain>
           <IntroStoryNormalPhoto>
-            <IntersectionFadeIn fillLayout>
-              <Picture relativePath="photos/intro/story_1.jpg" />
-            </IntersectionFadeIn>
+            <ReverseParallax zoom={1.2}>
+              <IntersectionFadeIn fillLayout>
+                <Picture relativePath="photos/intro/story_1.jpg" />
+              </IntersectionFadeIn>
+            </ReverseParallax>
           </IntroStoryNormalPhoto>
         </IntroStoryUnitColumnMain>
         <IntroStoryUnitColumnSub>
@@ -48,7 +50,7 @@ export const IntroModule: React.FC = () => {
               rowEnd: 11,
             }}
           >
-            <GridImage src="photos/intro/story_2.jpg" parallaxSpeed={0.09} />
+            <GridImage src="photos/intro/story_2.jpg" />
           </GridItem>
           <GridItem
             grid={{
@@ -58,7 +60,7 @@ export const IntroModule: React.FC = () => {
               rowEnd: 11,
             }}
           >
-            <GridImage src="photos/intro/story_3.jpg" parallaxSpeed={0.06} />
+            <GridImage src="photos/intro/story_3.jpg" />
           </GridItem>
           {/* 2段目左*/}
           <GridItem
@@ -69,7 +71,7 @@ export const IntroModule: React.FC = () => {
               rowEnd: 19,
             }}
           >
-            <GridImage src="photos/intro/story_4.jpg" parallaxSpeed={0.07} />
+            <GridImage src="photos/intro/story_4.jpg" />
           </GridItem>
           {/* 2段目右 */}
           <GridItem
@@ -80,7 +82,7 @@ export const IntroModule: React.FC = () => {
               rowEnd: 19,
             }}
           >
-            <GridImage src="photos/intro/story_5.jpg" parallaxSpeed={0.07} />
+            <GridImage src="photos/intro/story_5.jpg" />
           </GridItem>
           {/* 3段目左 */}
           <GridItem
@@ -91,7 +93,7 @@ export const IntroModule: React.FC = () => {
               rowEnd: 27,
             }}
           >
-            <GridImage src="photos/intro/story_6.jpg" parallaxSpeed={0.07} />
+            <GridImage src="photos/intro/story_6.jpg" />
           </GridItem>
           {/* 4段目左 */}
           <GridItem
@@ -102,7 +104,7 @@ export const IntroModule: React.FC = () => {
               rowEnd: 35,
             }}
           >
-            <GridImage src="photos/intro/story_7.jpg" parallaxSpeed={0.07} />
+            <GridImage src="photos/intro/story_7.jpg" />
           </GridItem>
           {/* 3段目右 */}
           <GridItem
@@ -113,7 +115,7 @@ export const IntroModule: React.FC = () => {
               rowEnd: 35,
             }}
           >
-            <GridImage src="photos/intro/story_8.jpg" parallaxSpeed={0.07} />
+            <GridImage src="photos/intro/story_8.jpg" />
           </GridItem>
         </GridContainer>
         <MessageInGrid>
@@ -141,7 +143,11 @@ export const IntroModule: React.FC = () => {
         <IntroStoryUnitColumnMain>
           <IntersectionFadeIn fillLayout>
             <IntroStoryNormalPhoto>
-              <Picture relativePath="photos/intro/story_9.jpg" />
+              <ReverseParallax zoom={1.2}>
+                <IntersectionFadeIn fillLayout>
+                  <Picture relativePath="photos/intro/story_9.jpg" />
+                </IntersectionFadeIn>
+              </ReverseParallax>
             </IntroStoryNormalPhoto>
           </IntersectionFadeIn>
         </IntroStoryUnitColumnMain>
@@ -150,7 +156,11 @@ export const IntroModule: React.FC = () => {
         <IntroStoryUnitColumnMain>
           <IntersectionFadeIn fillLayout>
             <IntroStoryNormalPhoto>
-              <Picture relativePath="photos/intro/story_10.jpg" />
+              <ReverseParallax zoom={1.2}>
+                <IntersectionFadeIn fillLayout>
+                  <Picture relativePath="photos/intro/story_10.jpg" />
+                </IntersectionFadeIn>
+              </ReverseParallax>
             </IntroStoryNormalPhoto>
           </IntersectionFadeIn>
         </IntroStoryUnitColumnMain>
@@ -240,6 +250,7 @@ const IntroStoryUnitColumnMain = styled.div`
 `;
 
 const IntroStoryNormalPhoto = styled.div`
+  overflow: hidden;
   &::after {
     content: '';
     display: block;

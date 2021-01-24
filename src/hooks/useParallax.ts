@@ -1,6 +1,14 @@
+import { ValueOf } from '@/types';
 import { DomEventType } from '@/constants';
-import { isString, isUndefined } from '@/util/type';
+import { isString, isUndefined } from 'lodash';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+
+export const ParallaxDirectionType = {
+  NORMAL: 'normal',
+  REVERSE: 'reverse',
+} as const;
+
+export type ParallaxDirectionType = ValueOf<typeof ParallaxDirectionType>;
 
 type Options = {
   // 係数
@@ -10,7 +18,7 @@ type Options = {
   // 最大キャップ
   max?: number;
   // スクロール方向 = normal -> 負方向に加算（閾値超えスクロールが負方向を向く）
-  direction?: 'normal' | 'reverse' | -1 | 1;
+  direction?: ParallaxDirectionType | -1 | 1;
 };
 
 type ScrollInfo = {
@@ -26,7 +34,7 @@ const defaultOptions: Options = {
   coefficient: 1,
   min: undefined,
   max: undefined,
-  direction: 'normal',
+  direction: ParallaxDirectionType.NORMAL,
 };
 
 export const useParallax = <T extends HTMLElement = HTMLElement>(
@@ -46,7 +54,12 @@ export const useParallax = <T extends HTMLElement = HTMLElement>(
   });
 
   const direction = useMemo(
-    () => (isString(directionParam) ? (directionParam === 'normal' ? 1 : -1) : directionParam!),
+    () =>
+      isString(directionParam)
+        ? directionParam === ParallaxDirectionType.NORMAL
+          ? 1
+          : -1
+        : directionParam || 1,
     [directionParam],
   );
 

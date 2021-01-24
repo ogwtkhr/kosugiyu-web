@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 import { usePrevious } from '@/hooks';
 import Picture from './Picture';
-import { isUndefined } from '@/util/type';
+import { isUndefined } from 'lodash';
 import { Transitions } from '@/constants';
 
 type ParallaxType = 'zoomout' | 'zoomin' | 'scroll';

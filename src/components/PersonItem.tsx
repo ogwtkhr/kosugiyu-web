@@ -16,7 +16,7 @@ import {
 } from '@/constants';
 
 import { ArrowIcon } from '@/components';
-import { IntersectionFadeIn } from '@/animations';
+import { IntersectionFadeIn } from '@/effects';
 
 type PersonItemProps = {
   position: string;

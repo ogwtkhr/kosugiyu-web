@@ -1,13 +1,12 @@
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import media from 'styled-media-query';
-import { useParallax } from '@/hooks';
 import { BoxProps, boxMixin, getBoxExpression } from './Box';
 import Picture from './Picture';
 import { ScreenType, ScreenValue } from '@/constants';
 
 import { isNumber } from 'lodash';
-import { IntersectionFadeIn } from '@/animations';
+import { IntersectionFadeIn } from '@/effects';
 
 type NumberOrString = number | string;
 
@@ -96,26 +95,11 @@ export const GridItem = styled.div<GridItemProps>`
 
 type GridImageProps = {
   src: string;
-  parallaxSpeed?: number;
 };
 
-export const GridImage: React.FC<GridImageProps> = ({ src, parallaxSpeed = 0.2 }) => {
-  const [parallaxRef, { center: parallaxSeed }] = useParallax<HTMLDivElement>({
-    coefficient: parallaxSpeed,
-    direction: 'normal',
-  });
-
-  const transform = useMemo(() => `translateY(${parallaxSeed}px)`, [parallaxSeed]);
-
+export const GridImage: React.FC<GridImageProps> = ({ src }) => {
   return (
-    <GridImageContainer
-      ref={parallaxRef}
-      style={
-        {
-          // transform,
-        }
-      }
-    >
+    <GridImageContainer>
       <IntersectionFadeIn slideIn fillLayout>
         <Picture relativePath={src} />
       </IntersectionFadeIn>

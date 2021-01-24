@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { joinStyleWithSemicolon } from '@/util/style';
 import { StyleUnit } from '@/constants/styleUnit';
-import { isUndefined, isString } from '@/util/type';
+import { isUndefined, isString } from 'lodash';
 
 type StringOrNumber = string | number;
 

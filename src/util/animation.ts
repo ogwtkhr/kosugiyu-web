@@ -1,7 +1,5 @@
-import { TransitionStatus } from 'react-transition-group/Transition';
 import { Colors, Transitions, Spacing } from '@/constants';
-import { css, keyframes, FlattenInterpolation, ThemedStyledProps } from 'styled-components';
-import { isBoolean } from './type';
+import { css, keyframes } from 'styled-components';
 
 export type AnimationMixinProps = {
   isAnimate: boolean;
