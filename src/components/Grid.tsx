@@ -1,13 +1,13 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import media from 'styled-media-query';
-import { useIntersectionObserver, useParallax } from '@/hooks';
+import { useParallax } from '@/hooks';
 import { BoxProps, boxMixin, getBoxExpression } from './Box';
 import Picture from './Picture';
-import { Colors, ScreenType, ScreenValue } from '@/constants';
-import { getCurtainAnimationMixin, AnimationMixinProps, getFadeInMixin } from '@/util/animation';
-import { Shadow } from '@/constants/shadow';
+import { ScreenType, ScreenValue } from '@/constants';
+
 import { isNumber } from 'lodash';
+import { IntersectionFadeIn } from '@/animations';
 
 type NumberOrString = number | string;
 
@@ -100,13 +100,6 @@ type GridImageProps = {
 };
 
 export const GridImage: React.FC<GridImageProps> = ({ src, parallaxSpeed = 0.2 }) => {
-  // TODO: パララックスラッパー
-  const [intersectionRef, isIntersecting] = useIntersectionObserver<HTMLDivElement>({
-    init: {
-      threshold: [0],
-      rootMargin: '100px',
-    },
-  });
   const [parallaxRef, { center: parallaxSeed }] = useParallax<HTMLDivElement>({
     coefficient: parallaxSpeed,
     direction: 'normal',
@@ -123,9 +116,9 @@ export const GridImage: React.FC<GridImageProps> = ({ src, parallaxSpeed = 0.2 }
         }
       }
     >
-      <GridImageInner ref={intersectionRef} isAnimate={isIntersecting}>
+      <IntersectionFadeIn withSlideIn fillLayout>
         <Picture relativePath={src} />
-      </GridImageInner>
+      </IntersectionFadeIn>
     </GridImageContainer>
   );
 };
@@ -134,10 +127,4 @@ const GridImageContainer = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-`;
-
-const GridImageInner = styled.div<AnimationMixinProps>`
-  width: 100%;
-  height: 100%;
-  ${getFadeInMixin()}
 `;

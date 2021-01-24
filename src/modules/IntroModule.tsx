@@ -24,7 +24,7 @@ export const IntroModule: React.FC = () => {
       <IntroStoryUnitNormal>
         <IntroStoryUnitColumnMain>
           <IntroStoryNormalPhoto>
-            <IntersectionFadeIn fill>
+            <IntersectionFadeIn fillLayout>
               <Picture relativePath="photos/top/story_1.jpg" />
             </IntersectionFadeIn>
           </IntroStoryNormalPhoto>
@@ -117,7 +117,7 @@ export const IntroModule: React.FC = () => {
           </GridItem>
         </GridContainer>
         <MessageInGrid>
-          <IntersectionFadeIn fill>
+          <IntersectionFadeIn fillLayout>
             <MessageTypography>
               関東大震災後、東京の中心部からやってきたファミリー層や高齢者世帯によって、新興住宅街がつくられたこのエリア。戦後になると、作家やアーティストをはじめ若者も多く移り住むようになり、多種多様な人びとが、ときに“中央線文化”とも呼ばれる独自のカルチャーを形作ってきました。
             </MessageTypography>
@@ -129,7 +129,7 @@ export const IntroModule: React.FC = () => {
           <MessageTypography>小杉湯は昭和8年（1933年）にこの街で生まれました。</MessageTypography>
         </IntroStoryUnitColumnSub>
         <IntroStoryUnitColumnMain>
-          <IntersectionFadeIn fill>
+          <IntersectionFadeIn fillLayout>
             <IntroStoryNormalPhoto>
               <Picture relativePath="photos/top/story_9.jpg" />
             </IntroStoryNormalPhoto>
@@ -138,7 +138,7 @@ export const IntroModule: React.FC = () => {
       </IntroStoryUnitNormal>
       <IntroStoryUnitNormal>
         <IntroStoryUnitColumnMain>
-          <IntersectionFadeIn fill>
+          <IntersectionFadeIn fillLayout>
             <IntroStoryNormalPhoto>
               <Picture relativePath="photos/top/story_10.jpg" />
             </IntroStoryNormalPhoto>

@@ -1,26 +1,39 @@
 import React from 'react';
 import { useIntersectionObserver } from '@/hooks';
 import styled, { css } from 'styled-components';
-import { getFadeInMixin, AnimationMixinProps } from '@/util/animation';
+import { getFadeInMixin, FadeInMixinProps } from '@/util/animation';
 
-type IntersectionFadeInProps = {
-  fill?: boolean;
+type IntersectionFadeInBaseProps = {
+  fillLayout?: boolean;
 };
 
-export const IntersectionFadeIn: React.FC<IntersectionFadeInProps> = ({ fill, children }) => {
+type IntersectionFadeInProps = IntersectionFadeInBaseProps & Pick<FadeInMixinProps, 'withSlideIn'>;
+
+export const IntersectionFadeIn: React.FC<IntersectionFadeInProps> = ({
+  fillLayout,
+  withSlideIn,
+  children,
+}) => {
   const [ref, isIntersecting] = useIntersectionObserver<HTMLDivElement>();
 
   return (
-    <Container ref={ref} fill={fill} isAnimate={isIntersecting}>
+    <Container
+      ref={ref}
+      fillLayout={fillLayout}
+      isAnimate={isIntersecting}
+      withSlideIn={withSlideIn}
+    >
       {children}
     </Container>
   );
 };
 
-const Container = styled.div<IntersectionFadeInProps & AnimationMixinProps>`
+type IntersectionFadeInContainerProps = IntersectionFadeInBaseProps & FadeInMixinProps;
+
+const Container = styled.div<IntersectionFadeInContainerProps>`
   ${getFadeInMixin()};
-  ${({ fill }) =>
-    fill
+  ${({ fillLayout }) =>
+    fillLayout
       ? css`
           width: 100%;
           height: 100%;

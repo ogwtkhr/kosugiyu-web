@@ -1,5 +1,5 @@
 import { TransitionStatus } from 'react-transition-group/Transition';
-import { Colors, Transitions } from '@/constants';
+import { Colors, Transitions, Spacing } from '@/constants';
 import { css, keyframes, FlattenInterpolation, ThemedStyledProps } from 'styled-components';
 import { isBoolean } from './type';
 
@@ -98,17 +98,29 @@ export const getCurtainAnimationMixin = ({
   `;
 };
 
+export type FadeInMixinProps = {
+  withSlideIn?: boolean;
+} & AnimationMixinProps;
+
 export const getFadeInMixin = ({
   duration = 1000,
   easing = Transitions.BASE_TRANSITION,
+  slideInMoment = Spacing.LARGE,
 }: {
   duration?: number;
   easing?: string;
+  slideInMoment?: number;
 } = {}): any => {
-  return css<AnimationMixinProps>`
+  return css<FadeInMixinProps>`
     position: relative;
     transition: ${duration}ms ${easing};
     opacity: ${({ isAnimate }) => (isAnimate ? 1 : 0)};
+    ${({ withSlideIn, isAnimate }) =>
+      withSlideIn
+        ? css`
+            transform: translateY(${isAnimate ? 0 : slideInMoment}px);
+          `
+        : ''}
   `;
 };
 
