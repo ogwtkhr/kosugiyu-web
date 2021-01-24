@@ -14,8 +14,8 @@ type ParallaxProps = {
 export const Parallax: React.FC<ParallaxProps> = ({
   fillLayout,
   coefficient = 0.1,
-  min,
-  max,
+  min = -1000,
+  max = 1000,
   direction,
   children,
   zoom = 1,

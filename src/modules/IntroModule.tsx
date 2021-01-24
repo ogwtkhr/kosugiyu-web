@@ -16,7 +16,7 @@ import {
   TextWeight,
   TypeStyle,
 } from '@/constants';
-import { IntersectionFadeIn, ReverseParallax } from '@/effects';
+import { IntersectionFadeIn, Parallax, ReverseParallax } from '@/effects';
 
 export const IntroModule: React.FC = () => {
   return (
@@ -24,7 +24,7 @@ export const IntroModule: React.FC = () => {
       <IntroStoryUnitNormal>
         <IntroStoryUnitColumnMain>
           <IntroStoryNormalPhoto>
-            <ReverseParallax zoom={1.2}>
+            <ReverseParallax zoom={1.2} fillLayout>
               <IntersectionFadeIn fillLayout>
                 <Picture relativePath="photos/intro/story_1.jpg" />
               </IntersectionFadeIn>
@@ -143,7 +143,7 @@ export const IntroModule: React.FC = () => {
         <IntroStoryUnitColumnMain>
           <IntersectionFadeIn fillLayout>
             <IntroStoryNormalPhoto>
-              <ReverseParallax zoom={1.2}>
+              <ReverseParallax zoom={1.2} fillLayout>
                 <IntersectionFadeIn fillLayout>
                   <Picture relativePath="photos/intro/story_9.jpg" />
                 </IntersectionFadeIn>
@@ -156,7 +156,7 @@ export const IntroModule: React.FC = () => {
         <IntroStoryUnitColumnMain>
           <IntersectionFadeIn fillLayout>
             <IntroStoryNormalPhoto>
-              <ReverseParallax zoom={1.2}>
+              <ReverseParallax zoom={1.2} fillLayout>
                 <IntersectionFadeIn fillLayout>
                   <Picture relativePath="photos/intro/story_10.jpg" />
                 </IntersectionFadeIn>
@@ -185,12 +185,16 @@ export const IntroModule: React.FC = () => {
         </IntroStoryFinalMessage>
 
         <IntroStoryFinalPhoto>
-          <Picture
-            relativePath="photos/intro/story_11.jpg"
-            imgStyle={{
-              objectPosition: '50% 0',
-            }}
-          />
+          <IntersectionFadeIn fillLayout>
+            <Parallax coefficient={0.16} min={0} fillLayout>
+              <Picture
+                relativePath="photos/intro/story_11.jpg"
+                imgStyle={{
+                  objectPosition: '50% 0',
+                }}
+              />
+            </Parallax>
+          </IntersectionFadeIn>
         </IntroStoryFinalPhoto>
       </IntroStoryUnitFinal>
     </>
@@ -275,6 +279,9 @@ const IntroStoryIllustration = styled.div`
 
 const IntroStoryUnitFinal = styled.section`
   position: relative;
+  max-height: 1000px;
+  overflow: hidden;
+  padding-top: ${BigSpacing.LARGE}px;
 
   &::after {
     content: '';
@@ -306,6 +313,10 @@ const IntroStoryFinalMessage = styled.div`
   width: 100%;
   height: 300px;
   z-index: 1;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    height: 200px;
+  `}
 `;
 
 const GridOuter = styled.div`
