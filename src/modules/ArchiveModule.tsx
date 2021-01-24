@@ -22,6 +22,7 @@ import dayjs from 'dayjs';
 import media from 'styled-media-query';
 import { CommonTitle } from '@/components';
 import { groupByIndex } from '@/util/array';
+import { ValueOf } from '@/types';
 
 export const ArchiveModule: React.FC = () => {
   const data = useStaticQuery<AllMicrocmsArchiveQuery>(graphql`
@@ -147,11 +148,16 @@ const ArticleGroupItem: React.FC<{ children: ArticleItemProps }> = ({ children }
   <ArticleItem {...children} />
 );
 
+// const ArticleItemType = {};
+
+// type ArticleItemType = ValueOf<typeof ArticleItemTYpe>;
+
 type ArticleItemProps = {
   slug: string;
   title: string;
   mainVisualUrl: string;
   publishedAt: string;
+  // type: 
 };
 
 const ArticleItem: React.FC<ArticleItemProps> = ({ slug, title, mainVisualUrl, publishedAt }) => {

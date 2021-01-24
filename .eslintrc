@@ -6,7 +6,9 @@
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
     "plugin:prettier/recommended",
-    "prettier/@typescript-eslint"
+    "prettier/@typescript-eslint",
+    "plugin:import/errors",
+    "plugin:import/warnings"
   ],
   "parserOptions": {
     "ecmaVersion": 2018,
@@ -22,6 +24,9 @@
         "map": [["@", "./src/"]],
         "extensions": [".js", ".jsx", ".ts", ".d.ts", ".tsx"]
       }
+    },
+    "import/parsers": {
+      "@typescript-eslint/parser": [ ".ts", ".tsx", ".d.ts" ]
     }
   },
   "rules": {
