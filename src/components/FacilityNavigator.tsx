@@ -31,8 +31,10 @@ export const FacilityNavigator: React.FC = () => {
   const { title, description } = facilityInfo[currentIndex];
   return (
     <Container>
-      <BigImageContainer index={currentIndex}>
-        <Picture relativePath="illustrations/facility/all_facilities.jpg" />
+      <BigImageContainer>
+        <BigImage index={currentIndex}>
+          <Picture relativePath="illustrations/facility/all_facilities.jpg" />
+        </BigImage>
       </BigImageContainer>
 
       <Controls>
@@ -93,35 +95,42 @@ const Container = styled.div`
   }
 `;
 
-const BigImageContainer = styled.div<IndexInjectable>`
+const BigImageContainer = styled.div`
   position: absolute;
+  top: 50%;
+  left: 50%;
   width: 200vw;
   height: 155vw;
-  top: 0;
-  left: 0;
-  transition: 1s ease;
-  transform: scale(1);
+  transform: translate(-50%, -50%);
   z-index: ${FacilityLayers.BIG_IMAGE};
+
+  ${media.greaterThan(ScreenType.HUGE)`
+    width: 2600px;
+    height: 2040px;
+  `}
+`;
+
+const BigImage = styled.div<IndexInjectable>`
+  width: 100%;
+  height: 100%;
+  transition: 1s ease;
 
   ${({ index }) => {
     switch (index) {
       // 外観
       case 0:
         return css`
-          transform: scale(0.3);
-          top: -60vw;
-          left: -70vw;
+          transform: scale(0.35) translate(10%, 0);
         `;
       // 玄関
       case 1:
         return css`
-          top: -110vw;
-          left: -100vw;
+          transform: translate(-20%, -25%);
         `;
       case 2:
         return css`
-          top: -90vw;
-          left: -100vw;
+          /* top: -90vw;
+          left: -100vw; */
         `;
       default:
         return '';
@@ -134,7 +143,7 @@ const DescriptionWindow = styled.div<IndexInjectable>`
   /* right: 5vw;
   bottom: 5vw;
   width: 600px; */
-  top: 0;
+  top: ${BigSpacing.NORMAL}px;
   left: 0;
   width: 420px;
   padding: ${Spacing.X_LARGE}px ${Spacing.XXX_LARGE}px;
@@ -146,7 +155,7 @@ const DescriptionWindow = styled.div<IndexInjectable>`
 
 const DescriptionTitle = styled.h3`
   ${Typography.Mixin.DISPLAY};
-  font-size: ${TextSize.LARGE}rem;
+  font-size: ${TextSize.X_LARGE}rem;
 `;
 
 const DescriptionBody = styled.p`

@@ -54,6 +54,17 @@ export const NextIcon: React.FC<IconProps> = ({ color = defaultColor }) => {
   );
 };
 
+export const OtherWindowIcon: React.FC<IconProps> = ({ color = defaultColor }) => {
+  return (
+    <BlockSvg fill="none" viewBox="0 0 15 15">
+      <path
+        d="M13.75 3.75v7.5h-10v-7.5h10zM15 0H2.5v12.5H15V0zM1.25 13.75V1.875H0V15h13.125v-1.25H1.25z"
+        fill={color}
+      />
+    </BlockSvg>
+  );
+};
+
 const BlockSvg = styled.svg`
   display: block;
   width: 100%;
