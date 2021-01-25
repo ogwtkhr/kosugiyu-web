@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useFacilityInfo } from '@/hooks';
-import { Picture } from '@/components';
+import { Picture, PrevIcon, NextIcon } from '@/components';
 import styled, { css } from 'styled-components';
 
 import { getTextBreakFragment } from '@/util/jsx';
@@ -25,44 +25,34 @@ export const FacilityNavigator: React.FC = () => {
   const { title, description } = facilityInfo[currentIndex];
   return (
     <Container>
-      <FacilityView>
-        <BigImageContainer index={currentIndex}>
-          <Picture relativePath="illustrations/facility/all_facilities.jpg" />
-        </BigImageContainer>
+      <BigImageContainer index={currentIndex}>
+        <Picture relativePath="illustrations/facility/all_facilities.jpg" />
+      </BigImageContainer>
 
-        {/* {currentIndex === 2 && (
-          <RippleCircle
-            style={{
-              top: '33vw',
-              left: '40vw',
-            }}
-          />
-        )} */}
-        <DescriptionWindow index={currentIndex}>
-          <DescriptionTitle>{title}</DescriptionTitle>
-          <DescriptionBody>{description}</DescriptionBody>
-          <DescriptionPhoto>
-            <Picture relativePath={'photos/facility/facility_photo_1.jpg'} />
-          </DescriptionPhoto>
-          <FacilityInfoControls>
-            <UpButton
-              color={Colors.ABSTRACT_WHITE}
-              onClick={() => {
-                if (currentIndex > 0) setCurrentIndex(currentIndex - 1);
-              }}
-            />
-            <Indicator>
-              <IndicatorCurrent>{currentIndex + 1}</IndicatorCurrent>/{facilityInfo.length}
-            </Indicator>
-            <DownButton
-              color={Colors.ABSTRACT_WHITE}
-              onClick={() => {
-                if (currentIndex < facilityInfo.length - 1) setCurrentIndex(currentIndex + 1);
-              }}
-            />
-          </FacilityInfoControls>
-        </DescriptionWindow>
-      </FacilityView>
+      <Controls>
+        <UpButton
+          color={Colors.ABSTRACT_WHITE}
+          onClick={() => {
+            if (currentIndex > 0) setCurrentIndex(currentIndex - 1);
+          }}
+        />
+        <Indicator>
+          <IndicatorCurrent>{currentIndex + 1}</IndicatorCurrent>/{facilityInfo.length}
+        </Indicator>
+        <DownButton
+          color={Colors.ABSTRACT_WHITE}
+          onClick={() => {
+            if (currentIndex < facilityInfo.length - 1) setCurrentIndex(currentIndex + 1);
+          }}
+        />
+      </Controls>
+      <DescriptionWindow index={currentIndex}>
+        <DescriptionTitle>{title}</DescriptionTitle>
+        <DescriptionBody>{description}</DescriptionBody>
+        <DescriptionPhoto>
+          <Picture relativePath={'photos/facility/facility_photo_1.jpg'} />
+        </DescriptionPhoto>
+      </DescriptionWindow>
     </Container>
   );
 };
@@ -71,7 +61,21 @@ type IndexInjectable = {
   index: number;
 };
 
-const Container = styled.div``;
+const Container = styled.div`
+  position: relative;
+  width: 100%;
+  /* overflow: hidden; */
+
+  &::after {
+    content: '';
+    display: block;
+    padding-bottom: 50%;
+
+    ${media.lessThan(ScreenType.MEDIUM)`
+      padding-bottom: 80vh;
+    `}
+  }
+`;
 
 const BigImageContainer = styled.div<IndexInjectable>`
   position: absolute;
@@ -146,23 +150,7 @@ const DescriptionPhoto = styled.div`
   } */
 `;
 
-const FacilityView = styled.div`
-  position: relative;
-  width: 100%;
-  /* overflow: hidden; */
-
-  &::after {
-    content: '';
-    display: block;
-    padding-bottom: 50%;
-
-    ${media.lessThan(ScreenType.MEDIUM)`
-      padding-bottom: 80vh;
-    `}
-  }
-`;
-
-const FacilityInfoControls = styled.div`
+const Controls = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -176,7 +164,6 @@ const FacilityInfoControls = styled.div`
 const Indicator = styled.p`
   font-family: 'Roboto Condensed';
   color: ${Colors.ABSTRACT_WHITE};
-  text-shadow: ${`0 ${Spacing.SMALL}px ${Spacing.X_LARGE}px ${rgba(Colors.ABSTRACT_BLACK, 0.6)}`};
   font-size: 2rem;
 `;
 
@@ -189,7 +176,6 @@ const UpButton = styled.div`
   width: 20px;
   height: 20px;
   background-color: blue;
-  /* filter: drop-shadow(${`0 ${Spacing.SMALL}px 2px ${rgba(Colors.ABSTRACT_BLACK, 0.6)}`}); */
 `;
 
 const DownButton = styled.div`
@@ -197,12 +183,4 @@ const DownButton = styled.div`
   width: 20px;
   height: 20px;
   background-color: blue;
-  // filter: drop-shadow(${`0 ${Spacing.SMALL}px 2px ${rgba(Colors.ABSTRACT_BLACK, 0.6)}`});
-`;
-
-const WindowContainer = styled.div`
-  position: fixed;
-  width: 800px;
-  top: 100px;
-  left: 100px;
 `;

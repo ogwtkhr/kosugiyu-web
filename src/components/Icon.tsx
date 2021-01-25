@@ -38,6 +38,22 @@ export const FacebookIcon: React.FC<IconProps> = ({ color = defaultColor }) => {
   );
 };
 
+export const PrevIcon: React.FC<IconProps> = ({ color = defaultColor }) => {
+  return (
+    <BlockSvg fill="none" viewBox="0 0 11 19">
+      <path d="M10.228 19L0 9.49 10.228 0 11 .696 1.522 9.49 11 18.304l-.772.696z" fill={color} />
+    </BlockSvg>
+  );
+};
+
+export const NextIcon: React.FC<IconProps> = ({ color = defaultColor }) => {
+  return (
+    <BlockSvg fill="none" viewBox="0 0 11 19">
+      <path d="M.772 0L11 9.51.772 19 0 18.304 9.478 9.51 0 .696.772 0z" fill={color} />
+    </BlockSvg>
+  );
+};
+
 const BlockSvg = styled.svg`
   display: block;
   width: 100%;

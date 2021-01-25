@@ -1,219 +1,111 @@
 import React from 'react';
-import { GoogleMap, UnderLineText, FacilityNavigator, FacilityLayers } from '@/components';
-import styled from 'styled-components';
-
 import {
-  Colors,
-  LineHeight,
-  LetterSpacing,
-  ModuleWidth,
-  ScreenType,
-  Spacing,
-  TextSize,
-  Typography,
-  BigSpacing,
-  getResponsiveOffsetMixin,
-} from '@/constants';
-import media from 'styled-media-query';
+  GoogleMap,
+  FacilityNavigator,
+  InformationRow,
+  InformationUnit,
+  InformationGroupRow,
+  InformationGroup,
+  InformationContentRow,
+  InformationContent,
+  InformationItem,
+  InformationContentDashLine,
+  InformationNormalText,
+} from '@/components';
+import styled from 'styled-components';
 
 export const FacilityModule: React.FC = () => {
   return (
     <Container>
       <InformationRow>
-        <InformationUnit>
-          <InformationHeading>
-            <UnderLineText>営業時間</UnderLineText>
-          </InformationHeading>
-          <InformationContainer>
+        <InformationUnit title="営業時間">
+          <InformationGroup>
             <InformationContentRow>
-              <InformationContent>
-                <InformationContentHeading>平日</InformationContentHeading>
-              </InformationContent>
+              <InformationContent title="平日" />
               <InformationContent flex={1}>
-                <InformationDescriptionList>
-                  <InformationDescriptionTerm>午後</InformationDescriptionTerm>
-                  <InformationDescriptionDetail>15:30</InformationDescriptionDetail>
-                </InformationDescriptionList>
+                <InformationItem title="午後" body="15:30" />
                 <InformationContentDashLine />
-                <InformationDescriptionList>
-                  <InformationDescriptionTerm>深夜</InformationDescriptionTerm>
-                  <InformationDescriptionDetail>1:45</InformationDescriptionDetail>
-                </InformationDescriptionList>
+                <InformationItem title="深夜" body="1:45" />
               </InformationContent>
             </InformationContentRow>
             <InformationContentRow>
-              <InformationContent>
-                <InformationContentHeading>土・日曜</InformationContentHeading>
-              </InformationContent>
+              <InformationContent title="土・日曜" />
               <InformationContent flex={1}>
-                <InformationDescriptionList>
-                  <InformationDescriptionTerm>午前</InformationDescriptionTerm>
-                  <InformationDescriptionDetail>8:00</InformationDescriptionDetail>
-                </InformationDescriptionList>
+                <InformationItem title="午前" body="8:00" />
                 <InformationContentDashLine />
-                <InformationDescriptionList>
-                  <InformationDescriptionTerm>深夜</InformationDescriptionTerm>
-                  <InformationDescriptionDetail>1:45</InformationDescriptionDetail>
-                </InformationDescriptionList>
+                <InformationItem title="深夜" body="1:45" />
               </InformationContent>
             </InformationContentRow>
             <InformationContentRow>
               <InformationNormalText>最終受付1:30、木曜定休</InformationNormalText>
             </InformationContentRow>
-          </InformationContainer>
+          </InformationGroup>
         </InformationUnit>
 
-        <InformationUnit>
-          <InformationHeading>
-            <UnderLineText>入浴料金</UnderLineText>
-          </InformationHeading>
-          <InformationContainer>
+        <InformationUnit title="入浴料金">
+          <InformationGroup>
             <InformationContentRow>
               <InformationContent flex={1}>
-                <InformationDescriptionList>
-                  <InformationDescriptionTerm>大人</InformationDescriptionTerm>
-                  <InformationDescriptionDetail>
-                    470<InformationDescriptionDetailSupple>円</InformationDescriptionDetailSupple>
-                  </InformationDescriptionDetail>
-                </InformationDescriptionList>
-                <InformationDescriptionList>
-                  <InformationDescriptionTerm>中人（小学生）</InformationDescriptionTerm>
-                  <InformationDescriptionDetail>
-                    180<InformationDescriptionDetailSupple>円</InformationDescriptionDetailSupple>
-                  </InformationDescriptionDetail>
-                </InformationDescriptionList>
-                <InformationDescriptionList>
-                  <InformationDescriptionTerm>小人（0〜5歳）</InformationDescriptionTerm>
-                  <InformationDescriptionDetail>
-                    80<InformationDescriptionDetailSupple>円</InformationDescriptionDetailSupple>
-                  </InformationDescriptionDetail>
-                </InformationDescriptionList>
+                <InformationItem title="大人" price={470} />
+                <InformationItem title="中人（小学生）" price={180} />
+                <InformationItem title="小人（0〜5歳）" price={80} />
               </InformationContent>
             </InformationContentRow>
             <InformationContentRow>
               <InformationContent flex={1}>
-                <InformationDescriptionList>
-                  <InformationDescriptionTerm>共通入浴券（10枚）</InformationDescriptionTerm>
-                  <InformationDescriptionDetail>
-                    <div>
-                      4,400
-                      <InformationDescriptionDetailSupple>円</InformationDescriptionDetailSupple>
-                    </div>
-                    <InformationDescriptionSupple>1回につき30円お得</InformationDescriptionSupple>
-                  </InformationDescriptionDetail>
-                </InformationDescriptionList>
+                <InformationItem
+                  title="共通入浴券（10枚）"
+                  price={4400}
+                  supple="1回につき30円お得"
+                />
               </InformationContent>
             </InformationContentRow>
-          </InformationContainer>
+          </InformationGroup>
         </InformationUnit>
       </InformationRow>
       <InformationRow>
-        <InformationUnit>
-          <InformationHeading>
-            <UnderLineText>施設紹介</UnderLineText>
-          </InformationHeading>
+        <InformationUnit title="施設紹介">
           <FacilityNavigator />
         </InformationUnit>
       </InformationRow>
       <InformationRow>
-        <InformationUnit>
-          <InformationHeading>
-            <UnderLineText>サービス</UnderLineText>
-          </InformationHeading>
-          <InformationContainerRow>
-            <InformationContainer>
-              <InformationContentRow>
-                <InformationContent>
-                  <InformationContentHeading>貸出タオル</InformationContentHeading>
-                </InformationContent>
-              </InformationContentRow>
+        <InformationUnit title="サービス">
+          <InformationGroupRow>
+            <InformationGroup title="貸出タオル">
               <InformationContentRow>
                 <InformationContent flex={1}>
-                  <InformationDescriptionList>
-                    <InformationDescriptionTerm>フェイスタオル</InformationDescriptionTerm>
-                    <InformationDescriptionDetail>
-                      <div>無料</div>
-                      <InformationDescriptionSupple>（2枚目〜50円）</InformationDescriptionSupple>
-                    </InformationDescriptionDetail>
-                  </InformationDescriptionList>
-                  <InformationDescriptionList>
-                    <InformationDescriptionTerm>バスタオル</InformationDescriptionTerm>
-                    <InformationDescriptionDetail>
-                      <div>
-                        180
-                        <InformationDescriptionDetailSupple>円</InformationDescriptionDetailSupple>
-                      </div>
-                      <InformationDescriptionSupple>
-                        （IKEUCHI ORGANIC）
-                      </InformationDescriptionSupple>
-                    </InformationDescriptionDetail>
-                  </InformationDescriptionList>
+                  <InformationItem title="フェイスタオル" body="無料" supple="（2枚目〜50円）" />
+                  <InformationItem title="バスタオル" price={180} supple="（IKEUCHI ORGANIC）" />
                 </InformationContent>
               </InformationContentRow>
-            </InformationContainer>
+            </InformationGroup>
 
-            <InformationContainer>
-              <InformationContentRow>
-                <InformationContent>
-                  <InformationContentHeading>その他設備</InformationContentHeading>
-                </InformationContent>
-              </InformationContentRow>
+            <InformationGroup title="その他設備">
               <InformationContentRow>
                 <InformationContent flex={1}>
-                  <InformationDescriptionList>
-                    <InformationDescriptionTerm>ドライヤー</InformationDescriptionTerm>
-                    <InformationDescriptionDetail>
-                      <div>
-                        20
-                        <InformationDescriptionDetailSupple>円</InformationDescriptionDetailSupple>
-                      </div>
-                      <InformationDescriptionSupple>（3分）</InformationDescriptionSupple>
-                    </InformationDescriptionDetail>
-                  </InformationDescriptionList>
-                  <InformationDescriptionList>
-                    <InformationDescriptionTerm>マッサージ機</InformationDescriptionTerm>
-                    <InformationDescriptionDetail>
-                      <div>
-                        100
-                        <InformationDescriptionDetailSupple>円</InformationDescriptionDetailSupple>
-                      </div>
-                      <InformationDescriptionSupple>（10分）</InformationDescriptionSupple>
-                    </InformationDescriptionDetail>
-                  </InformationDescriptionList>
-                  <InformationDescriptionList>
-                    <InformationDescriptionTerm>Wi-Fi</InformationDescriptionTerm>
-                    <InformationDescriptionDetail>
-                      <div>無料</div>
-                    </InformationDescriptionDetail>
-                  </InformationDescriptionList>
+                  <InformationItem title="ドライヤー" price={20} supple="（3分）" />
+                  <InformationItem title="マッサージ機" price={100} supple="（10分）" />
+                  <InformationItem title="マッサージ機" body="無料" />
                 </InformationContent>
               </InformationContentRow>
-            </InformationContainer>
-          </InformationContainerRow>
+            </InformationGroup>
+          </InformationGroupRow>
 
-          <InformationContainerRow>
-            <InformationContainer>
-              <InformationContentRow>
-                <InformationContent>
-                  <InformationContentHeading>アメニティ</InformationContentHeading>
-                </InformationContent>
-              </InformationContentRow>
+          <InformationGroupRow>
+            <InformationGroup title="アメニティ">
               <InformationContentRow fix={false}>
                 <InformationNormalText>
                   シャンプー、ボディーソープ、コンディショナー、洗顔、クレンジング、化粧水、乳液、ボディクリームなど完備
                 </InformationNormalText>
               </InformationContentRow>
-            </InformationContainer>
-          </InformationContainerRow>
+            </InformationGroup>
+          </InformationGroupRow>
         </InformationUnit>
       </InformationRow>
       <InformationRow>
-        <InformationUnit>
-          <InformationHeading>
-            <UnderLineText>アクセス</UnderLineText>
-          </InformationHeading>
-          <InformationContainerRow>
-            <InformationContainer>
+        <InformationUnit title="アクセス">
+          <InformationGroupRow>
+            <InformationGroup>
               <InformationContentRow fix={false}>
                 <InformationNormalText>
                   高円寺駅北口から純情商店街・更新通り商店街を経由し徒歩5分
@@ -221,8 +113,8 @@ export const FacilityModule: React.FC = () => {
                   〒166-0002 杉並区高円寺北3-32-2 / 03-3337-6198
                 </InformationNormalText>
               </InformationContentRow>
-            </InformationContainer>
-          </InformationContainerRow>
+            </InformationGroup>
+          </InformationGroupRow>
         </InformationUnit>
       </InformationRow>
       <GoogleMap />
@@ -231,140 +123,3 @@ export const FacilityModule: React.FC = () => {
 };
 
 const Container = styled.section``;
-
-const InformationRow = styled.div`
-  display: flex;
-  margin-top: ${BigSpacing.NORMAL}px;
-  margin-bottom: ${BigSpacing.NORMAL}px;
-  ${getResponsiveOffsetMixin({
-    maxWidth: ModuleWidth.MIDDLE,
-    margin: Spacing.XXX_LARGE,
-    marginSmall: Spacing.LARGE,
-  })};
-
-  ${media.lessThan(ScreenType.MEDIUM)`
-    display: block;
-    margin-top: ${BigSpacing.X_SMALL}px;
-    margin-bottom: ${Spacing.XXX_LARGE}px;
-  `}
-`;
-
-const InformationUnit = styled.section`
-  flex: 1;
-
-  ${media.lessThan(ScreenType.MEDIUM)`
-    & + & {
-       margin-top: ${BigSpacing.X_SMALL}px;
-    }
-  `}
-`;
-
-const InformationHeading = styled.h3`
-  position: relative;
-  z-index: ${FacilityLayers.OVER_BIG_IMAGE};
-`;
-
-const InformationContainerRow = styled.div`
-  display: flex;
-  ${media.lessThan(ScreenType.MEDIUM)`
-    display: block;
-  `}
-`;
-
-const InformationContainer = styled.div`
-  position: relative;
-  z-index: ${FacilityLayers.OVER_BIG_IMAGE};
-  flex: 1;
-  margin: ${Spacing.XX_LARGE}px 0;
-`;
-
-type InformationContentRowProps = { fix?: boolean };
-
-const InformationContentRow = styled.div<InformationContentRowProps>`
-  display: flex;
-  max-width: ${({ fix = true }) => (fix ? '400px' : '')};
-  align-items: center;
-
-  & + & {
-    margin-top: ${Spacing.XX_LARGE}px;
-  }
-
-  ${media.lessThan(ScreenType.MEDIUM)`
-    display: block;
-    & + & {
-      margin-top: ${Spacing.X_LARGE}px;
-    }
-  `}
-`;
-
-const InformationContent = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: top;
-  justify-content: flex-start;
-  flex: ${({ flex }: { flex?: number }) => (flex ? flex : '')};
-
-  ${media.lessThan(ScreenType.MEDIUM)`
-    & + & {
-      margin-top: ${Spacing.NORMAL}px;
-    };
-  `};
-`;
-
-const InformationContentHeading = styled.h4`
-  ${Typography.Mixin.DISPLAY};
-  width: 140px;
-  font-size: ${TextSize.LARGE}rem;
-
-  ${media.lessThan(ScreenType.MEDIUM)`
-    font-size: ${TextSize.NORMAL}rem;
-  `};
-`;
-
-const InformationDescriptionList = styled.dl`
-  & + & {
-    margin-left: ${Spacing.X_LARGE}px;
-  }
-`;
-
-const InformationDescriptionTerm = styled.dt`
-  ${Typography.Mixin.DISPLAY};
-  line-height: ${LineHeight.MONOLITHIC};
-  color: ${Colors.UI_TEXT_SUB};
-  margin-bottom: ${Spacing.NORMAL}px;
-  font-size: ${TextSize.XX_SMALL}rem;
-`;
-
-const InformationDescriptionDetail = styled.dd`
-  ${Typography.Mixin.DISPLAY};
-  font-size: ${TextSize.XX_LARGE}rem;
-  line-height: ${LineHeight.MONOLITHIC};
-`;
-
-const InformationDescriptionSupple = styled.p`
-  margin-top: ${Spacing.NORMAL}px;
-  font-size: ${({ size }: { size?: TextSize }) => size || TextSize.SMALL}rem;
-  letter-spacing: ${LetterSpacing.SEMI_WIDE}em;
-`;
-
-const InformationDescriptionDetailSupple = styled.small`
-  font-size: ${TextSize.SMALL}rem;
-`;
-
-const InformationContentDashLine = styled.hr`
-  display: block;
-  margin: 0 ${Spacing.LARGE}px;
-  width: ${Spacing.X_LARGE}px;
-  height: 1px;
-  background-color: ${Colors.UI_LINE_NORMAL};
-`;
-
-const InformationNormalText = styled.p`
-  ${Typography.Mixin.DISPLAY};
-  font-size: ${TextSize.NORMAL}rem;
-  letter-spacing: ${LetterSpacing.SEMI_WIDE}em;
-
-  ${media.lessThan(ScreenType.MEDIUM)`
-  font-size: ${TextSize.SMALL}rem;
-  `}
-`;
