@@ -246,7 +246,6 @@ const InformationRow = styled.div`
     display: block;
     margin-top: ${BigSpacing.X_SMALL}px;
     margin-bottom: ${Spacing.XXX_LARGE}px;
-
   `}
 `;
 

@@ -6,7 +6,6 @@ import {
   StyleMixin,
   Typography,
   TextSize,
-  Colors,
   Spacing,
   BigSpacing,
   ModuleWidth,
@@ -20,6 +19,7 @@ import { ReverseParallax, ParallaxBasePosition } from '@/effects';
 type PersonsModuleProps = {
   useTitle?: boolean;
   summaryMode?: boolean;
+  summaryMax?: number;
   enableTopEmphasis?: boolean;
   withVerticalMargin?: boolean;
 };
@@ -27,6 +27,7 @@ type PersonsModuleProps = {
 export const PersonsModule: React.FC<PersonsModuleProps> = ({
   useTitle,
   summaryMode,
+  summaryMax = 3,
   enableTopEmphasis = true,
   withVerticalMargin,
 }) => {
@@ -50,6 +51,7 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({
   const basePersons = data.allMicrocmsPersons.nodes;
   const [topPerson, ...restPersons] = basePersons;
   const persons = enableTopEmphasis ? restPersons : basePersons;
+  const summarizedPersons = summaryMode ? persons.slice(0, summaryMax) : persons;
 
   const topPersonSlug = topPerson?.slug || '';
   const topPersonPosition = topPerson?.position || '';
@@ -100,7 +102,7 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({
             </PersonsHeadingSubTitle>
           )}
           <PersonList>
-            {persons.map((person) => {
+            {summarizedPersons.map((person) => {
               const slug = person.slug || '';
               const position = person.position || '';
               const name = person.name || '';
@@ -115,9 +117,11 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({
             })}
           </PersonList>
         </PersonListContainer>
-        <ButtonContainer>
-          <Button to="/persons">さらに読む</Button>
-        </ButtonContainer>
+        {summaryMode && persons.length > summaryMax && (
+          <ButtonContainer>
+            <Button to="/persons">さらに読む</Button>
+          </ButtonContainer>
+        )}
       </Container>
     </>
   );

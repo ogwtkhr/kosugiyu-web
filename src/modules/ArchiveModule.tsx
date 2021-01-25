@@ -36,7 +36,7 @@ export const ArchiveModule: React.FC = () => {
     };
   });
 
-  // TODO
+  // TODO（実データを年ごとにグループする、lodash#groupBy?）
   const articles = [
     ...baseArticles,
     ...baseArticles,
@@ -45,7 +45,7 @@ export const ArchiveModule: React.FC = () => {
     ...baseArticles,
     ...baseArticles,
   ];
-  const years = ['2021', '2020'];
+  const years = ['2021', '2020', '2019'];
 
   const groupedArticle = groupByIndex(articles, 11);
 
@@ -54,8 +54,15 @@ export const ArchiveModule: React.FC = () => {
       <CommonTitle title="できごと" imagePath="photos/archive/hero.jpg" />
       <YearNavigation>
         <YearNavigationList>
-          {years.map((year) => (
-            <YearNavigationItem key={year}>{year}</YearNavigationItem>
+          {years.map((year, index) => (
+            <>
+              <YearNavigationItem key={year}>{year}</YearNavigationItem>
+              {index < years.length - 1 && (
+                <YearNavigationLineContainer>
+                  <YearNavigationLine />
+                </YearNavigationLineContainer>
+              )}
+            </>
           ))}
         </YearNavigationList>
       </YearNavigation>
@@ -81,6 +88,7 @@ const Container = styled.div`
   background-color: ${Colors.UI_PAPER};
 `;
 
+// TODO: 色検討
 const YearNavigation = styled.nav`
   position: fixed;
   top: 50%;
@@ -96,17 +104,21 @@ const YearNavigationItem = styled.li`
   color: ${Colors.UI_TEXT_DARK_BACKGROUND};
   font-size: ${TextSize.SMALL}rem;
 
-  /* &::after {
-    content: '';
-    display: block;
-    width: 1px;
-    height: ${Spacing.NORMAL}px;
-    background-color
-  } */
-
   &:last-child {
     margin-bottom: none;
   }
+`;
+
+const YearNavigationLineContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+`;
+
+const YearNavigationLine = styled.div`
+  width: 1px;
+  height: ${Spacing.LARGE}px;
+  background-color: ${Colors.UI_LINE_WEAKEN};
 `;
 
 const ArticlesByYear = styled.div`
