@@ -12,3 +12,4 @@ export * from './styleMixin';
 export * from './aspectRatio';
 export * from './format';
 export * from './sizeType';
+export * from './className';

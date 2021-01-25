@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Picture, ScrollLine } from '@/components';
-import { Colors, ScreenType, Spacing, TextSize, TypeFace } from '@/constants';
+import { Colors, LineHeight, ScreenType, Spacing, TextSize, TypeFace } from '@/constants';
 import media from 'styled-media-query';
 import { ReverseParallax, ParallaxBasePosition } from '@/effects';
 
@@ -35,10 +35,11 @@ const Container = styled.div`
 
 const BusinessInfo = styled.div`
   position: absolute;
-  top: ${Spacing.NORMAL}px;
-  right: ${Spacing.NORMAL}px;
+  top: ${Spacing.LARGE}px;
+  right: ${Spacing.LARGE}px;
   color: ${Colors.UI_TEXT_DARK_BACKGROUND};
   font-size: ${TextSize.X_SMALL}rem;
+  line-height: ${LineHeight.MONOLITHIC};
   ${media.greaterThan(ScreenType.MEDIUM)`
     & br {
       display: none;

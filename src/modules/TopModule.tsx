@@ -141,7 +141,7 @@ const LogoContainer = styled.div`
 `;
 
 const Logo = styled.h1`
-  width: 43px;
+  width: 38px;
 
   ${media.lessThan(ScreenType.MEDIUM)`
     width: 28px;
@@ -149,7 +149,7 @@ const Logo = styled.h1`
 `;
 
 const LogoCopy = styled.p`
-  margin-top: ${Spacing.X_LARGE}px;
+  margin-top: ${Spacing.XX_LARGE}px;
   font-size: ${TextSize.SMALL}rem;
   font-weight: ${TextWeight.BOLD};
   letter-spacing: 0.3rem;
@@ -171,7 +171,7 @@ const SocialAccountContainer = styled.div`
 
 const SocialAccountButton = styled.div`
   & + & {
-    margin-top: ${Spacing.NORMAL}px;
+    margin-top: ${Spacing.MIDDLE}px;
   }
   ${media.lessThan(ScreenType.MEDIUM)`
     display: none;

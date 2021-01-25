@@ -9,11 +9,19 @@ export const GlobalStyle = createGlobalStyle`
 
   html {
     font-size: 62.5%;
+
+    &.is-cropped {
+      overflow: hidden;
+    }
   }
 
   body {
     ${Typography.Mixin.BASE};
     background-color: ${Colors.UI_PAPER};
+
+    .is-cropped & {
+      overflow: hidden;
+    }
   }
 
   button {

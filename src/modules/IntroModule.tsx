@@ -126,18 +126,22 @@ export const IntroModule: React.FC = () => {
             </MessageTypography>
           </IntersectionFadeIn>
           <IntroStoryIllustration style={{ top: `calc(100% + ${Spacing.LARGE}px)`, right: 0 }}>
-            <IntersectionFadeIn fillLayout wait={500}>
-              <Picture relativePath="illustrations/intro/story_1.png" />
-            </IntersectionFadeIn>
+            <Parallax>
+              <IntersectionFadeIn fillLayout wait={500}>
+                <Picture relativePath="illustrations/intro/story_1.png" />
+              </IntersectionFadeIn>
+            </Parallax>
           </IntroStoryIllustration>
         </MessageInGrid>
       </GridOuter>
       <IntroStoryUnitNormal>
         <IntroStoryUnitColumnSub>
           <IntroStoryIllustration style={{ top: `20%`, right: `-${Spacing.LARGE}px` }}>
-            <IntersectionFadeIn fillLayout wait={500}>
-              <Picture relativePath="illustrations/intro/story_2.png" />
-            </IntersectionFadeIn>
+            <Parallax>
+              <IntersectionFadeIn fillLayout wait={500}>
+                <Picture relativePath="illustrations/intro/story_2.png" />
+              </IntersectionFadeIn>
+            </Parallax>
           </IntroStoryIllustration>
           <MessageTypography>小杉湯は昭和8年（1933年）にこの街で生まれました。</MessageTypography>
         </IntroStoryUnitColumnSub>
@@ -167,9 +171,11 @@ export const IntroModule: React.FC = () => {
         </IntroStoryUnitColumnMain>
         <IntroStoryUnitColumnSub>
           <IntroStoryIllustration style={{ top: `30%`, left: `${Spacing.LARGE}px` }}>
-            <IntersectionFadeIn fillLayout wait={500}>
-              <Picture relativePath="illustrations/intro/story_3.png" />
-            </IntersectionFadeIn>
+            <Parallax>
+              <IntersectionFadeIn fillLayout wait={500}>
+                <Picture relativePath="illustrations/intro/story_3.png" />
+              </IntersectionFadeIn>
+            </Parallax>
           </IntroStoryIllustration>
           <MessageTypography>
             高円寺らしい“ごちゃ混ぜ感”をぎゅっと凝縮したような、街の銭湯。

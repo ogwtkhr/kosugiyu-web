@@ -1,4 +1,4 @@
-import { Colors, Layer, Opacity } from '@/constants';
+import { Colors, Layer, Opacity, ClassName } from '@/constants';
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { PropsWithTransition } from '@/types';
@@ -19,14 +19,6 @@ const windowTransitionTimeout = {
   exit: DEFAULT_DURATION,
 };
 
-// const scrollHandler = (e: Event) => {
-//   e.preventDefault();
-// };
-
-// const TOUCHMOVE = 'touchmove';
-// const MOUSEWHEEL = 'mousewheel';
-// const option = { passive: false };
-
 export const Overlay: React.FC<OverlayProps> = ({
   isOpen,
   duration = DEFAULT_DURATION,
@@ -34,15 +26,13 @@ export const Overlay: React.FC<OverlayProps> = ({
   children,
   layer = Layer.OVERLAY,
 }) => {
-  // useEffect(() => {
-  //   if (isOpen) {
-  //     window.addEventListener(TOUCHMOVE, scrollHandler, option);
-  //     window.addEventListener(MOUSEWHEEL, scrollHandler, option);
-  //   } else {
-  //     window.removeEventListener(TOUCHMOVE, scrollHandler);
-  //     window.removeEventListener(MOUSEWHEEL, scrollHandler);
-  //   }
-  // }, [isOpen]);
+  useEffect(() => {
+    if (isOpen) {
+      window.document.documentElement.classList.add(ClassName.STATE.CROPPED);
+    } else {
+      window.document.documentElement.classList.remove(ClassName.STATE.CROPPED);
+    }
+  }, [isOpen]);
   return (
     <Transition in={isOpen} timeout={windowTransitionTimeout} unmountOnExit>
       {(state) => (
