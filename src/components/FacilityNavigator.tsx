@@ -113,6 +113,7 @@ const BigImageContainer = styled.div`
 const BigImage = styled.div<IndexInjectable>`
   width: 100%;
   height: 100%;
+  opacity: 1;
   transition: 1s ease;
 
   ${({ index }) => {
@@ -125,12 +126,34 @@ const BigImage = styled.div<IndexInjectable>`
       // 玄関
       case 1:
         return css`
-          transform: translate(-20%, -25%);
+          transform: translate(-8%, -29%);
         `;
+      // 番台
       case 2:
         return css`
-          /* top: -90vw;
-          left: -100vw; */
+          transform: scale(1.2) translate(-6%, -18%);
+        `;
+      // 脱衣所
+      case 3:
+        return css`
+          transform: scale(0.8) translate(0, -4%);
+        `;
+      // 浴室
+      case 4:
+        return css`
+          transform: scale(0.6) translate(23%, 19%);
+        `;
+      // 待合室兼ギャラリー
+      case 5:
+        return css`
+          transform: scale(1.1) translate(-25%, -14%);
+        `;
+      // コインランドリー、となり
+      case 6:
+      case 7:
+        return css`
+          opacity: 0;
+          transform: scale(1) translate(0, 0);
         `;
       default:
         return '';
@@ -140,9 +163,6 @@ const BigImage = styled.div<IndexInjectable>`
 
 const DescriptionWindow = styled.div<IndexInjectable>`
   position: absolute;
-  /* right: 5vw;
-  bottom: 5vw;
-  width: 600px; */
   top: ${BigSpacing.NORMAL}px;
   left: 0;
   width: 420px;
@@ -160,23 +180,17 @@ const DescriptionTitle = styled.h3`
 
 const DescriptionBody = styled.p`
   ${Typography.Mixin.DISPLAY};
+  margin-top: ${Spacing.NORMAL}px;
   font-size: ${TextSize.SMALL}rem;
 `;
 
 const DescriptionPhoto = styled.div`
-  display: none;
-  top: -150px;
-  right: -${Spacing.XX_LARGE}px;
   position: absolute;
-  width: 300px;
-  background-color: gray;
+  bottom: calc(100% - ${Spacing.XXX_LARGE}px);
+  left: calc(100% - ${BigSpacing.NORMAL}px);
+  width: 240px;
   border: solid 2px ${Colors.UI_LINE_NORMAL};
-
-  /* &::after {
-    content: '';
-    display: block;
-    padding-bottom: ${AspectRatio.R_4_BY_3}%;
-  } */
+  background-color: gray;
 `;
 
 const Controls = styled.div`

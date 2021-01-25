@@ -40,6 +40,7 @@ export const BaseLayout: React.FC<BaseLayoutProps> = ({
 
 const Main = styled.main`
   background-color: ${Colors.UI_PAPER};
+  overflow: hidden;
 `;
 
 export default BaseLayout;

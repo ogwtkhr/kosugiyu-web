@@ -7,7 +7,7 @@
     ogImage: /meta/ogimage.jpg
   pages:
     - id: top
-      title: トップ
+      title: 小杉湯について
       # TODO
       description: 昭和八年創業。高円寺の銭湯「小杉湯」の公式ウェブサイトです。
     - id: persons
