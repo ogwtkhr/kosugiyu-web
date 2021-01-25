@@ -6,12 +6,10 @@ import Transition from 'react-transition-group/Transition';
 
 import { getTextBreakFragment } from '@/util/jsx';
 import {
-  AspectRatio,
   BigSpacing,
   Colors,
   Layer,
   LineHeight,
-  ModuleWidth,
   ScreenType,
   ScreenValue,
   Spacing,
@@ -50,7 +48,7 @@ export const FacilityNavigator: React.FC = () => {
     <Container>
       <BigImageContainer>
         <ReverseParallax fillLayout>
-          <BigImage index={currentIndex}>
+          <BigImage id={id}>
             <Picture relativePath="illustrations/facility/all_facilities.jpg" />
           </BigImage>
         </ReverseParallax>
@@ -95,7 +93,7 @@ export const FacilityNavigator: React.FC = () => {
         </DetailButton>
       )}
 
-      <DescriptionWindow index={currentIndex}>
+      <DescriptionWindow id={id}>
         <DescriptionTitle>{title}</DescriptionTitle>
         <DescriptionBody>{getTextBreakFragment(description)}</DescriptionBody>
         <DescriptionPhoto>
@@ -138,8 +136,8 @@ export const FacilityNavigator: React.FC = () => {
   );
 };
 
-type IndexInjectable = {
-  index: number;
+type IdInjectable = {
+  id: string;
 };
 
 const Container = styled.div`
@@ -173,16 +171,16 @@ const BigImageContainer = styled.div`
   `}
 `;
 
-const BigImage = styled.div<IndexInjectable>`
+const BigImage = styled.div<IdInjectable>`
   width: 100%;
   height: 100%;
   transition: 1s ease;
   opacity: 1;
 
-  ${({ index }) => {
-    switch (index) {
+  ${({ id }) => {
+    switch (id) {
       // 外観
-      case 0:
+      case 'facade':
         return css`
           transform: scale(0.35) translate(10%, 0);
           ${media.lessThan(ScreenType.MEDIUM)`
@@ -190,7 +188,7 @@ const BigImage = styled.div<IndexInjectable>`
           `}
         `;
       // 玄関
-      case 1:
+      case 'entrance':
         return css`
           transform: translate(-8%, -29%);
           ${media.lessThan(ScreenType.MEDIUM)`
@@ -198,7 +196,7 @@ const BigImage = styled.div<IndexInjectable>`
           `}
         `;
       // 番台
-      case 2:
+      case 'counter':
         return css`
           transform: scale(1.2) translate(-6%, -18%);
           ${media.lessThan(ScreenType.MEDIUM)`
@@ -206,7 +204,7 @@ const BigImage = styled.div<IndexInjectable>`
           `}
         `;
       // 脱衣所
-      case 3:
+      case 'changing_room':
         return css`
           transform: scale(0.8) translate(0, -4%);
           ${media.lessThan(ScreenType.MEDIUM)`
@@ -214,7 +212,7 @@ const BigImage = styled.div<IndexInjectable>`
           `}
         `;
       // 浴室
-      case 4:
+      case 'bathroom':
         return css`
           transform: scale(0.6) translate(23%, 19%);
           ${media.lessThan(ScreenType.MEDIUM)`
@@ -222,7 +220,7 @@ const BigImage = styled.div<IndexInjectable>`
           `}
         `;
       // 待合室兼ギャラリー
-      case 5:
+      case 'lounge':
         return css`
           transform: scale(1.1) translate(-25%, -14%);
           ${media.lessThan(ScreenType.MEDIUM)`
@@ -230,8 +228,8 @@ const BigImage = styled.div<IndexInjectable>`
           `}
         `;
       // コインランドリー、となり
-      case 6:
-      case 7:
+      case 'laundry':
+      case 'tonari':
         return css`
           opacity: 0;
           transform: scale(1) translate(0, 0);
@@ -248,7 +246,7 @@ const BaseWindow = styled.div`
   background-color: ${Colors.ABSTRACT_WHITE};
 `;
 
-const DescriptionWindow = styled(BaseWindow)<IndexInjectable>`
+const DescriptionWindow = styled(BaseWindow)<IdInjectable>`
   z-index: ${FacilityLayers.WINDOW_BASE};
   top: ${BigSpacing.NORMAL}px;
   left: 0;
