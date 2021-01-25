@@ -1,5 +1,5 @@
 import React from 'react';
-import { GoogleMap, UnderLineText, FacilityNavigator } from '@/components';
+import { GoogleMap, UnderLineText, FacilityNavigator, FacilityLayers } from '@/components';
 import styled from 'styled-components';
 
 import {
@@ -259,7 +259,10 @@ const InformationUnit = styled.section`
   `}
 `;
 
-const InformationHeading = styled.h3``;
+const InformationHeading = styled.h3`
+  position: relative;
+  z-index: ${FacilityLayers.OVER_BIG_IMAGE};
+`;
 
 const InformationContainerRow = styled.div`
   display: flex;
@@ -269,8 +272,10 @@ const InformationContainerRow = styled.div`
 `;
 
 const InformationContainer = styled.div`
-  margin: ${Spacing.XX_LARGE}px 0;
+  position: relative;
+  z-index: ${FacilityLayers.OVER_BIG_IMAGE};
   flex: 1;
+  margin: ${Spacing.XX_LARGE}px 0;
 `;
 
 type InformationContentRowProps = { fix?: boolean };

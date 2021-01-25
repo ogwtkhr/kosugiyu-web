@@ -3771,6 +3771,14 @@ export type SiteMetaDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type SiteMetaDataQuery = { settingYaml?: Maybe<{ meta?: Maybe<Pick<SettingYamlMeta, 'title' | 'description' | 'url' | 'twitter' | 'facebook' | 'ogImage'>> }> };
 
+export type FacilityInfoQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type FacilityInfoQuery = { settingYaml?: Maybe<{ facilities?: Maybe<Array<Maybe<(
+      Pick<SettingYamlFacilities, 'id' | 'title' | 'description'>
+      & { details?: Maybe<Array<Maybe<Pick<SettingYamlFacilitiesDetails, 'id' | 'title' | 'description'>>>> }
+    )>>> }> };
+
 export type GoogleApiKeyQueryVariables = Exact<{ [key: string]: never; }>;
 
 
