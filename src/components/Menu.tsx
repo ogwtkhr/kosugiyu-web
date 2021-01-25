@@ -40,21 +40,16 @@ export const Menu: React.FC<MenuProps> = ({ isTriggerShow }) => {
           />
         )}
       </Transition>
-      <Transition in={isOpen} timeout={transitionTimeout} unmountOnExit>
-        {(state) => {
-          return (
-            <Overlay state={state}>
-              {menuList.map(({ id, label }) => (
-                <Item key={id}>
-                  <Link to={`/${id !== 'top' ? id : ''}`}>
-                    <Type>{label}</Type>
-                  </Link>
-                </Item>
-              ))}
-            </Overlay>
-          );
-        }}
-      </Transition>
+
+      <Overlay isOpen={isOpen}>
+        {menuList.map(({ id, label }) => (
+          <Item key={id}>
+            <Link to={`/${id !== 'top' ? id : ''}`}>
+              <Type>{label}</Type>
+            </Link>
+          </Item>
+        ))}
+      </Overlay>
     </>
   );
 };

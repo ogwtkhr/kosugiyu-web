@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useFacilityInfo } from '@/hooks';
-import { Picture, PrevIcon, NextIcon, OtherWindowIcon } from '@/components';
+import { Picture, PrevIcon, NextIcon, OtherWindowIcon, Overlay } from '@/components';
 import styled, { css } from 'styled-components';
+import Transition from 'react-transition-group/Transition';
 
 import { getTextBreakFragment } from '@/util/jsx';
 import {
@@ -9,6 +10,7 @@ import {
   BigSpacing,
   Colors,
   LineHeight,
+  ModuleWidth,
   ScreenType,
   Spacing,
   TextSize,
@@ -16,6 +18,7 @@ import {
 } from '@/constants';
 import media from 'styled-media-query';
 import { Parallax, ReverseParallax } from '@/effects';
+import { UnderLineText } from './UnderLineText';
 
 export const FacilityLayers = {
   BACKGROUND: 1,
@@ -27,10 +30,24 @@ export const FacilityLayers = {
   MODAL: 7,
 } as const;
 
+// const windowTransitionTimeout = {
+//   enter: 10,
+//   exit: 300,
+// };
+
 export const FacilityNavigator: React.FC = () => {
   const facilityInfo = useFacilityInfo();
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const { title, description } = facilityInfo[currentIndex];
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [isDetailWindowOpen, setIsDetailWindowOpen] = useState<boolean>(false);
+  const { id, title, description, details } = facilityInfo[currentIndex];
+  const openDetailWindow = useCallback(() => {
+    setIsDetailWindowOpen(true);
+  }, []);
+  const closeDetailWindow = useCallback(() => {
+    setIsDetailWindowOpen(false);
+  }, []);
+  const hasDetails = !!details;
+
   return (
     <Container>
       <BigImageContainer>
@@ -45,6 +62,7 @@ export const FacilityNavigator: React.FC = () => {
         <ControlButton
           color={Colors.ABSTRACT_WHITE}
           onClick={() => {
+            closeDetailWindow();
             setCurrentIndex(currentIndex > 0 ? currentIndex - 1 : facilityInfo.length - 1);
           }}
         >
@@ -59,6 +77,7 @@ export const FacilityNavigator: React.FC = () => {
         <ControlButton
           color={Colors.ABSTRACT_WHITE}
           onClick={() => {
+            closeDetailWindow();
             setCurrentIndex(currentIndex < facilityInfo.length - 1 ? currentIndex + 1 : 0);
           }}
         >
@@ -68,19 +87,51 @@ export const FacilityNavigator: React.FC = () => {
           </ControlButtonIcon>
         </ControlButton>
       </Controls>
-      <DetailButton>
-        <DetailButtonLabel>解説</DetailButtonLabel>
-        <DetailButtonIcon>
-          <OtherWindowIcon />
-        </DetailButtonIcon>
-      </DetailButton>
+      {/* TODO: Transition */}
+      {hasDetails && (
+        <DetailButton onClick={openDetailWindow}>
+          <DetailButtonLabel>解説</DetailButtonLabel>
+          <DetailButtonIcon>
+            <OtherWindowIcon />
+          </DetailButtonIcon>
+        </DetailButton>
+      )}
+
       <DescriptionWindow index={currentIndex}>
         <DescriptionTitle>{title}</DescriptionTitle>
-        <DescriptionBody>{description}</DescriptionBody>
+        <DescriptionBody>{getTextBreakFragment(description)}</DescriptionBody>
         <DescriptionPhoto>
           <Picture relativePath={'photos/facility/facility_photo_1.jpg'} />
         </DescriptionPhoto>
       </DescriptionWindow>
+
+      <Overlay isOpen={hasDetails && isDetailWindowOpen} onClick={closeDetailWindow}>
+        <DetailWindow>
+          <DetailWindowInner>
+            <DetailWindowHeader>
+              <UnderLineText>{title}</UnderLineText>
+              <DetailWindowCloseButton />
+            </DetailWindowHeader>
+            <DetailList>
+              {details?.map(({ id, title, description }) => (
+                <DetailListItem key={id}>
+                  <DetailItem>
+                    <div>
+                      <DetailItemPhoto>
+                        <Picture relativePath={'photos/facility/facility_photo_1.jpg'} />
+                      </DetailItemPhoto>
+                    </div>
+                    <DetailDescriptionList>
+                      <DetailDescriptionTerm>{title}</DetailDescriptionTerm>
+                      <DetailDescriptionDetail>{description}</DetailDescriptionDetail>
+                    </DetailDescriptionList>
+                  </DetailItem>
+                </DetailListItem>
+              ))}
+            </DetailList>
+          </DetailWindowInner>
+        </DetailWindow>
+      </Overlay>
     </Container>
   );
 };
@@ -267,4 +318,79 @@ const DetailButtonIcon = styled.span`
   display: block;
   width: ${Spacing.LARGE}px;
   height: ${Spacing.LARGE}px;
+`;
+
+const DetailWindow = styled(BaseWindow)`
+  width: 100%;
+  max-width: ${ModuleWidth.ARTICLE}px;
+`;
+
+const DetailWindowInner = styled.div`
+  padding: ${Spacing.XX_LARGE}px;
+`;
+
+const DetailWindowHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const DetailWindowCloseButton = styled.button`
+  position: relative;
+  width: ${Spacing.XX_LARGE}px;
+  height: ${Spacing.XX_LARGE}px;
+
+  &::after,
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: ${Colors.UI_LINE_NORMAL};
+  }
+
+  &::before {
+    transform: rotate(45deg);
+  }
+  &::after {
+    transform: rotate(-45deg);
+  }
+`;
+
+const DetailList = styled.ul`
+  max-height: 70vh;
+  margin-top: ${Spacing.X_LARGE}px;
+  overflow: scroll;
+`;
+
+const DetailListItem = styled.li`
+  & + & {
+    margin-top: ${Spacing.X_LARGE}px;
+  }
+`;
+
+const DetailItem = styled.div`
+  display: flex;
+`;
+
+const DetailItemPhoto = styled.div`
+  width: 240px;
+`;
+
+const DetailDescriptionList = styled.dl`
+  flex: 1;
+  margin-left: ${Spacing.LARGE}px;
+`;
+
+const DetailDescriptionTerm = styled.dt`
+  ${Typography.Mixin.DISPLAY};
+  font-size: ${TextSize.LARGE}rem;
+`;
+
+const DetailDescriptionDetail = styled.dd`
+  ${Typography.Mixin.DISPLAY};
+  margin-top: ${Spacing.NORMAL}px;
+  font-size: ${TextSize.SMALL}rem;
 `;
