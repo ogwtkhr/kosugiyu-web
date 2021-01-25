@@ -79,7 +79,7 @@ type MenuListProps = {
 const MenuList: React.FC<MenuListProps> = ({ list, onIntroClick }) => (
   <>
     <MenuItem onClick={onIntroClick}>
-      <MenuType>小杉湯について</MenuType>
+      <MenuType as="button">小杉湯について</MenuType>
     </MenuItem>
     {list.map(({ id, label }) => (
       <MenuItem key={id}>
@@ -217,8 +217,6 @@ const MenuItem = styled.li`
   ${Typography.Mixin.DISPLAY};
   display: inline-block;
   margin-left: ${Spacing.MIDDLE}px;
-  line-height: ${LineHeight.MONOLITHIC};
-  font-size: ${TextSize.SMALL}rem;
   cursor: pointer;
 
   & a {
@@ -238,7 +236,9 @@ const MenuItem = styled.li`
 
 const MenuType = styled.span`
   display: inline-block;
+  font-size: ${TextSize.SMALL}rem;
   font-weight: ${TextWeight.BOLD};
+  line-height: ${LineHeight.MONOLITHIC};
 
   &::before {
     content: '●';

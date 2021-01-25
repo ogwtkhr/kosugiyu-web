@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useFacilityInfo } from '@/hooks';
-import { Picture, PrevIcon, NextIcon } from '@/components';
+import { Picture, PrevIcon, NextIcon, OtherWindowIcon } from '@/components';
 import styled, { css } from 'styled-components';
 
 import { getTextBreakFragment } from '@/util/jsx';
@@ -8,12 +8,14 @@ import {
   AspectRatio,
   BigSpacing,
   Colors,
+  LineHeight,
   ScreenType,
   Spacing,
   TextSize,
   Typography,
 } from '@/constants';
 import media from 'styled-media-query';
+import { Parallax, ReverseParallax } from '@/effects';
 
 export const FacilityLayers = {
   BACKGROUND: 1,
@@ -32,16 +34,18 @@ export const FacilityNavigator: React.FC = () => {
   return (
     <Container>
       <BigImageContainer>
-        <BigImage index={currentIndex}>
-          <Picture relativePath="illustrations/facility/all_facilities.jpg" />
-        </BigImage>
+        <ReverseParallax fillLayout>
+          <BigImage index={currentIndex}>
+            <Picture relativePath="illustrations/facility/all_facilities.jpg" />
+          </BigImage>
+        </ReverseParallax>
       </BigImageContainer>
 
       <Controls>
         <ControlButton
           color={Colors.ABSTRACT_WHITE}
           onClick={() => {
-            if (currentIndex > 0) setCurrentIndex(currentIndex - 1);
+            setCurrentIndex(currentIndex > 0 ? currentIndex - 1 : facilityInfo.length - 1);
           }}
         >
           <ControlButtonIcon>
@@ -55,7 +59,7 @@ export const FacilityNavigator: React.FC = () => {
         <ControlButton
           color={Colors.ABSTRACT_WHITE}
           onClick={() => {
-            if (currentIndex < facilityInfo.length - 1) setCurrentIndex(currentIndex + 1);
+            setCurrentIndex(currentIndex < facilityInfo.length - 1 ? currentIndex + 1 : 0);
           }}
         >
           次へ
@@ -64,6 +68,12 @@ export const FacilityNavigator: React.FC = () => {
           </ControlButtonIcon>
         </ControlButton>
       </Controls>
+      <DetailButton>
+        <DetailButtonLabel>詳細</DetailButtonLabel>
+        <DetailButtonIcon>
+          <OtherWindowIcon />
+        </DetailButtonIcon>
+      </DetailButton>
       <DescriptionWindow index={currentIndex}>
         <DescriptionTitle>{title}</DescriptionTitle>
         <DescriptionBody>{description}</DescriptionBody>
@@ -97,12 +107,12 @@ const Container = styled.div`
 
 const BigImageContainer = styled.div`
   position: absolute;
+  z-index: ${FacilityLayers.BIG_IMAGE};
   top: 50%;
   left: 50%;
   width: 200vw;
   height: 155vw;
   transform: translate(-50%, -50%);
-  z-index: ${FacilityLayers.BIG_IMAGE};
 
   ${media.greaterThan(ScreenType.HUGE)`
     width: 2600px;
@@ -113,8 +123,8 @@ const BigImageContainer = styled.div`
 const BigImage = styled.div<IndexInjectable>`
   width: 100%;
   height: 100%;
-  opacity: 1;
   transition: 1s ease;
+  opacity: 1;
 
   ${({ index }) => {
     switch (index) {
@@ -161,16 +171,19 @@ const BigImage = styled.div<IndexInjectable>`
   }}
 `;
 
-const DescriptionWindow = styled.div<IndexInjectable>`
+const BaseWindow = styled.div`
   position: absolute;
+  border: solid 2px ${Colors.UI_LINE_NORMAL};
+  background-color: ${Colors.ABSTRACT_WHITE};
+`;
+
+const DescriptionWindow = styled(BaseWindow)<IndexInjectable>`
+  z-index: ${FacilityLayers.WINDOW_BASE};
   top: ${BigSpacing.NORMAL}px;
   left: 0;
   width: 420px;
   padding: ${Spacing.X_LARGE}px ${Spacing.XXX_LARGE}px;
   transition: 1s ease;
-  border: solid 2px ${Colors.UI_LINE_NORMAL};
-  background-color: ${Colors.ABSTRACT_WHITE};
-  z-index: ${FacilityLayers.WINDOW_BASE};
 `;
 
 const DescriptionTitle = styled.h3`
@@ -193,33 +206,65 @@ const DescriptionPhoto = styled.div`
   background-color: gray;
 `;
 
+const CONTROLS_WIDTH = 200;
+const CONTROLS_HEIGHT = 40;
+
 const Controls = styled.div`
-  padding: ${Spacing.SMALL}px;
   display: flex;
-  justify-content: space-between;
-  width: 200px;
   position: absolute;
+  z-index: ${FacilityLayers.WINDOW_BASE};
   top: ${Spacing.XX_LARGE}px;
   left: 0;
-  z-index: ${FacilityLayers.WINDOW_BASE};
+  align-items: center;
+  justify-content: space-between;
+  width: ${CONTROLS_WIDTH}px;
+  height: ${CONTROLS_HEIGHT}px;
+  padding: 0 ${Spacing.SMALL}px;
   background-color: ${Colors.ABSTRACT_BLACK};
 `;
 
 const Indicator = styled.p`
   color: ${Colors.ABSTRACT_WHITE};
   font-size: ${TextSize.NORMAL}rem;
+  line-height: ${LineHeight.MONOLITHIC};
 `;
 
-const ControlButton = styled.div`
-  cursor: pointer;
+const ControlButton = styled.button`
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   width: ${BigSpacing.XX_SMALL}px;
   color: ${Colors.UI_TEXT_DARK_BACKGROUND};
+  font-size: ${TextSize.X_SMALL}rem;
+  cursor: pointer;
 `;
 
 const ControlButtonIcon = styled.div`
   width: 20px;
   height: 20px;
+`;
+
+const DetailButton = styled.button`
+  display: flex;
+  position: absolute;
+  z-index: ${FacilityLayers.WINDOW_BASE};
+  top: ${Spacing.XX_LARGE}px;
+  left: ${CONTROLS_WIDTH + Spacing.LARGE}px;
+  align-items: center;
+  justify-content: space-around;
+  width: 80px;
+  height: ${CONTROLS_HEIGHT}px;
+  padding: ${Spacing.SMALL}px;
+  border: solid 2px ${Colors.UI_LINE_NORMAL};
+  background-color: ${Colors.UI_PAPER};
+`;
+
+const DetailButtonLabel = styled.span`
+  display: block;
+`;
+
+const DetailButtonIcon = styled.span`
+  display: block;
+  width: ${Spacing.LARGE}px;
+  height: ${Spacing.LARGE}px;
 `;

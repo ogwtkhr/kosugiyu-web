@@ -17,6 +17,12 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   button {
+    padding: 0;
+    border: none;
+    /* outline: none; */
+    appearance: none;
+    background-color: transparent;
+    cursor: pointer;
     ${Typography.Mixin.BASE}
   }
 `;
