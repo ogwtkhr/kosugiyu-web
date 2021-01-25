@@ -9,9 +9,11 @@ import {
   AspectRatio,
   BigSpacing,
   Colors,
+  Layer,
   LineHeight,
   ModuleWidth,
   ScreenType,
+  ScreenValue,
   Spacing,
   TextSize,
   Typography,
@@ -20,20 +22,16 @@ import media from 'styled-media-query';
 import { Parallax, ReverseParallax } from '@/effects';
 import { UnderLineText } from './UnderLineText';
 
+// TODO: 統合
 export const FacilityLayers = {
   BACKGROUND: 1,
   BIG_IMAGE: 2,
   OVER_BIG_IMAGE: 3,
   WINDOW_BASE: 4,
-  WINDOW_POPUP: 5,
-  OVERLAY: 6,
-  MODAL: 7,
+  // WINDOW_POPUP: 5,
+  OVERLAY: Layer.PRIVILEGE,
+  // MODAL: Layer.PRIVILEGE,
 } as const;
-
-// const windowTransitionTimeout = {
-//   enter: 10,
-//   exit: 300,
-// };
 
 export const FacilityNavigator: React.FC = () => {
   const facilityInfo = useFacilityInfo();
@@ -105,7 +103,11 @@ export const FacilityNavigator: React.FC = () => {
         </DescriptionPhoto>
       </DescriptionWindow>
 
-      <Overlay isOpen={hasDetails && isDetailWindowOpen} onClick={closeDetailWindow}>
+      <Overlay
+        layer={FacilityLayers.OVERLAY}
+        isOpen={hasDetails && isDetailWindowOpen}
+        onClick={closeDetailWindow}
+      >
         <DetailWindow>
           <DetailWindowInner>
             <DetailWindowHeader>
@@ -183,31 +185,49 @@ const BigImage = styled.div<IndexInjectable>`
       case 0:
         return css`
           transform: scale(0.35) translate(10%, 0);
+          ${media.lessThan(ScreenType.MEDIUM)`
+            transform: scale(0.4) translate(-13%, -16%);
+          `}
         `;
       // 玄関
       case 1:
         return css`
           transform: translate(-8%, -29%);
+          ${media.lessThan(ScreenType.MEDIUM)`
+            transform: scale(1.2) translate(-18%, -40%);
+          `}
         `;
       // 番台
       case 2:
         return css`
           transform: scale(1.2) translate(-6%, -18%);
+          ${media.lessThan(ScreenType.MEDIUM)`
+            transform: scale(1.4) translate(-23%, -30%);
+          `}
         `;
       // 脱衣所
       case 3:
         return css`
           transform: scale(0.8) translate(0, -4%);
+          ${media.lessThan(ScreenType.MEDIUM)`
+            transform: scale(1.1) translate(-7%, -19%);
+          `}
         `;
       // 浴室
       case 4:
         return css`
           transform: scale(0.6) translate(23%, 19%);
+          ${media.lessThan(ScreenType.MEDIUM)`
+            transform: scale(0.9) translate(17%, 0%);
+          `}
         `;
       // 待合室兼ギャラリー
       case 5:
         return css`
           transform: scale(1.1) translate(-25%, -14%);
+          ${media.lessThan(ScreenType.MEDIUM)`
+            transform: scale(1.4) translate(-35%, -20%);
+          `}
         `;
       // コインランドリー、となり
       case 6:
@@ -235,29 +255,51 @@ const DescriptionWindow = styled(BaseWindow)<IndexInjectable>`
   width: 420px;
   padding: ${Spacing.X_LARGE}px ${Spacing.XXX_LARGE}px;
   transition: 1s ease;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    top: auto;
+    bottom: 0;
+    width: auto;
+    padding: ${Spacing.LARGE}px;
+  `}
 `;
 
 const DescriptionTitle = styled.h3`
   ${Typography.Mixin.DISPLAY};
   font-size: ${TextSize.X_LARGE}rem;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    font-size: ${TextSize.LARGE}rem;
+  `}
 `;
 
 const DescriptionBody = styled.p`
   ${Typography.Mixin.DISPLAY};
   margin-top: ${Spacing.NORMAL}px;
   font-size: ${TextSize.SMALL}rem;
+  ${media.lessThan(ScreenType.MEDIUM)`
+    max-height: 20vh;
+    overflow: scroll;
+    font-size: ${TextSize.X_SMALL}rem;
+  `}
 `;
 
 const DescriptionPhoto = styled.div`
   position: absolute;
   bottom: calc(100% - ${Spacing.XXX_LARGE}px);
   left: calc(100% - ${BigSpacing.NORMAL}px);
-  width: 240px;
+  width: 260px;
   border: solid 2px ${Colors.UI_LINE_NORMAL};
   background-color: gray;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    left: calc(100% - 110px);
+    width: 120px;
+  `}
 `;
 
 const CONTROLS_WIDTH = 200;
+const CONTROLS_WIDTH_SMALL = 170;
 const CONTROLS_HEIGHT = 40;
 
 const Controls = styled.div`
@@ -272,6 +314,10 @@ const Controls = styled.div`
   height: ${CONTROLS_HEIGHT}px;
   padding: 0 ${Spacing.SMALL}px;
   background-color: ${Colors.ABSTRACT_BLACK};
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    width: ${CONTROLS_WIDTH_SMALL}px;
+  `}
 `;
 
 const Indicator = styled.p`
@@ -308,6 +354,10 @@ const DetailButton = styled.button`
   padding: ${Spacing.SMALL}px;
   border: solid 2px ${Colors.UI_LINE_NORMAL};
   background-color: ${Colors.UI_PAPER};
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    left: ${CONTROLS_WIDTH_SMALL + Spacing.LARGE}px;
+  `}
 `;
 
 const DetailButtonLabel = styled.span`
@@ -322,11 +372,20 @@ const DetailButtonIcon = styled.span`
 
 const DetailWindow = styled(BaseWindow)`
   width: 100%;
-  max-width: ${ModuleWidth.ARTICLE}px;
+  max-width: ${ScreenValue.MEDIUM}px;
+  ${media.lessThan(ScreenType.MEDIUM)`
+    width: calc(100% -  ${Spacing.LARGE * 2}px);
+    margin-left: ${Spacing.LARGE}px;
+    margin-right: ${Spacing.LARGE}px;
+  `}
 `;
 
 const DetailWindowInner = styled.div`
   padding: ${Spacing.XX_LARGE}px;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    padding: ${Spacing.XX_LARGE}px ${Spacing.X_LARGE}px;
+  `}
 `;
 
 const DetailWindowHeader = styled.div`
@@ -373,15 +432,26 @@ const DetailListItem = styled.li`
 
 const DetailItem = styled.div`
   display: flex;
+  ${media.lessThan(ScreenType.MEDIUM)`
+    display: block;
+  `}
 `;
 
 const DetailItemPhoto = styled.div`
   width: 240px;
+  ${media.lessThan(ScreenType.MEDIUM)`
+    width: 100%;
+  `}
 `;
 
 const DetailDescriptionList = styled.dl`
   flex: 1;
   margin-left: ${Spacing.LARGE}px;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    margin-top: ${Spacing.LARGE}px;
+    margin-left: 0;
+  `}
 `;
 
 const DetailDescriptionTerm = styled.dt`
@@ -393,4 +463,7 @@ const DetailDescriptionDetail = styled.dd`
   ${Typography.Mixin.DISPLAY};
   margin-top: ${Spacing.NORMAL}px;
   font-size: ${TextSize.SMALL}rem;
+  ${media.lessThan(ScreenType.MEDIUM)`
+    font-size: ${TextSize.X_SMALL}rem;
+  `}
 `;

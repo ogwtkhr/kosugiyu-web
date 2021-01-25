@@ -9,6 +9,7 @@ type OverlayProps = {
   isOpen: boolean;
   onClick?: (arg: any) => void;
   duration?: number;
+  layer?: number;
 };
 
 const DEFAULT_DURATION = 300;
@@ -18,19 +19,20 @@ const windowTransitionTimeout = {
   exit: DEFAULT_DURATION,
 };
 
-const scrollHandler = (e: Event) => {
-  e.preventDefault();
-};
+// const scrollHandler = (e: Event) => {
+//   e.preventDefault();
+// };
 
-const TOUCHMOVE = 'touchmove';
-const MOUSEWHEEL = 'mousewheel';
-const option = { passive: false };
+// const TOUCHMOVE = 'touchmove';
+// const MOUSEWHEEL = 'mousewheel';
+// const option = { passive: false };
 
 export const Overlay: React.FC<OverlayProps> = ({
   isOpen,
   duration = DEFAULT_DURATION,
   onClick,
   children,
+  layer = Layer.OVERLAY,
 }) => {
   // useEffect(() => {
   //   if (isOpen) {
@@ -44,7 +46,7 @@ export const Overlay: React.FC<OverlayProps> = ({
   return (
     <Transition in={isOpen} timeout={windowTransitionTimeout} unmountOnExit>
       {(state) => (
-        <Container state={state} duration={duration} onClick={onClick}>
+        <Container state={state} duration={duration} onClick={onClick} layer={layer}>
           {children}
         </Container>
       )}
@@ -54,12 +56,13 @@ export const Overlay: React.FC<OverlayProps> = ({
 
 type ContainerProps = {
   duration: number;
+  layer: number;
 } & PropsWithTransition;
 
 export const Container = styled.div<ContainerProps>`
   display: flex;
   position: fixed;
-  z-index: ${Layer.OVERLAY};
+  z-index: ${({ layer }) => layer};
   top: 0;
   left: 0;
   flex-direction: column;
