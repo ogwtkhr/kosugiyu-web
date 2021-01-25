@@ -6,7 +6,7 @@ type IconProps = {
   color?: string;
 };
 
-const defaultColor = Colors.ABSTRACT_BLACK;
+const defaultColor = 'currentColor';
 
 export const ArrowIcon: React.FC<IconProps> = ({ color = defaultColor }) => {
   return (

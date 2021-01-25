@@ -4,10 +4,16 @@ import { Picture, PrevIcon, NextIcon } from '@/components';
 import styled, { css } from 'styled-components';
 
 import { getTextBreakFragment } from '@/util/jsx';
-import { AspectRatio, Colors, ScreenType, Spacing, TextSize, Typography } from '@/constants';
+import {
+  AspectRatio,
+  BigSpacing,
+  Colors,
+  ScreenType,
+  Spacing,
+  TextSize,
+  Typography,
+} from '@/constants';
 import media from 'styled-media-query';
-
-import { rgba } from 'polished';
 
 export const FacilityLayers = {
   BACKGROUND: 1,
@@ -30,21 +36,31 @@ export const FacilityNavigator: React.FC = () => {
       </BigImageContainer>
 
       <Controls>
-        <UpButton
+        <ControlButton
           color={Colors.ABSTRACT_WHITE}
           onClick={() => {
             if (currentIndex > 0) setCurrentIndex(currentIndex - 1);
           }}
-        />
+        >
+          <ControlButtonIcon>
+            <PrevIcon />
+          </ControlButtonIcon>
+          前へ
+        </ControlButton>
         <Indicator>
-          <IndicatorCurrent>{currentIndex + 1}</IndicatorCurrent>/{facilityInfo.length}
+          {currentIndex + 1}/{facilityInfo.length}
         </Indicator>
-        <DownButton
+        <ControlButton
           color={Colors.ABSTRACT_WHITE}
           onClick={() => {
             if (currentIndex < facilityInfo.length - 1) setCurrentIndex(currentIndex + 1);
           }}
-        />
+        >
+          次へ
+          <ControlButtonIcon>
+            <NextIcon />
+          </ControlButtonIcon>
+        </ControlButton>
       </Controls>
       <DescriptionWindow index={currentIndex}>
         <DescriptionTitle>{title}</DescriptionTitle>
@@ -115,9 +131,12 @@ const BigImageContainer = styled.div<IndexInjectable>`
 
 const DescriptionWindow = styled.div<IndexInjectable>`
   position: absolute;
-  right: 5vw;
+  /* right: 5vw;
   bottom: 5vw;
-  width: 600px;
+  width: 600px; */
+  top: 0;
+  left: 0;
+  width: 420px;
   padding: ${Spacing.X_LARGE}px ${Spacing.XXX_LARGE}px;
   transition: 1s ease;
   border: solid 2px ${Colors.UI_LINE_NORMAL};
@@ -136,6 +155,7 @@ const DescriptionBody = styled.p`
 `;
 
 const DescriptionPhoto = styled.div`
+  display: none;
   top: -150px;
   right: -${Spacing.XX_LARGE}px;
   position: absolute;
@@ -151,36 +171,32 @@ const DescriptionPhoto = styled.div`
 `;
 
 const Controls = styled.div`
+  padding: ${Spacing.SMALL}px;
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
-  width: 30px;
-  height: 130px;
+  width: 200px;
   position: absolute;
-  bottom: 0;
-  left: -80px;
+  top: ${Spacing.XX_LARGE}px;
+  left: 0;
+  z-index: ${FacilityLayers.WINDOW_BASE};
+  background-color: ${Colors.ABSTRACT_BLACK};
 `;
 
 const Indicator = styled.p`
-  font-family: 'Roboto Condensed';
   color: ${Colors.ABSTRACT_WHITE};
-  font-size: 2rem;
+  font-size: ${TextSize.NORMAL}rem;
 `;
 
-const IndicatorCurrent = styled.span`
-  font-size: 4rem;
-`;
-
-const UpButton = styled.div`
+const ControlButton = styled.div`
   cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: ${BigSpacing.XX_SMALL}px;
+  color: ${Colors.UI_TEXT_DARK_BACKGROUND};
+`;
+
+const ControlButtonIcon = styled.div`
   width: 20px;
   height: 20px;
-  background-color: blue;
-`;
-
-const DownButton = styled.div`
-  cursor: pointer;
-  width: 20px;
-  height: 20px;
-  background-color: blue;
 `;

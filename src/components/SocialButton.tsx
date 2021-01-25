@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { window } from '@/util/window';
 import { TwitterIcon, FacebookIcon } from './Icon';
+import { Colors } from '@/constants';
 
 type SocialBaseProps = {
   url?: string;
@@ -66,4 +67,5 @@ export const FacebookAccountButton: React.FC<SocialAccountProps> = ({ id }) => {
 
 const Container = styled.a`
   display: block;
+  color: ${Colors.UI_BASE};
 `;
