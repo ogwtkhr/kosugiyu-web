@@ -1,20 +1,12 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
-import {
-  Colors,
-  Opacity,
-  Layer,
-  Spacing,
-  StyleMixin,
-  ScreenType,
-  TextSize,
-  TextWeight,
-} from '@/constants';
-import Transition, { TransitionStatus } from 'react-transition-group/Transition';
+import { Layer, Spacing, StyleMixin, ScreenType, TextSize, TextWeight } from '@/constants';
+import Transition from 'react-transition-group/Transition';
 import { useMenu } from '@/hooks';
 import { Link } from 'gatsby';
-import { rgba } from 'polished';
 import media from 'styled-media-query';
+import { PropsWithTransition } from '@/types';
+import { Overlay } from '@/components/Overlay';
 
 const TRANSITION_TIME = 300;
 
@@ -34,8 +26,6 @@ export const Menu: React.FC<MenuProps> = ({ isTriggerShow }) => {
   const [isOpen, setIsOpen] = useState(false);
   const menuList = useMenu();
 
-  // TODO: ファーストビュー消すモード
-
   return (
     <>
       <Transition in={isTriggerShow} timeout={transitionTimeout} unmountOnExit>
@@ -53,7 +43,7 @@ export const Menu: React.FC<MenuProps> = ({ isTriggerShow }) => {
       <Transition in={isOpen} timeout={transitionTimeout} unmountOnExit>
         {(state) => {
           return (
-            <Content state={state}>
+            <Overlay state={state}>
               {menuList.map(({ id, label }) => (
                 <Item key={id}>
                   <Link to={`/${id !== 'top' ? id : ''}`}>
@@ -61,33 +51,13 @@ export const Menu: React.FC<MenuProps> = ({ isTriggerShow }) => {
                   </Link>
                 </Item>
               ))}
-            </Content>
+            </Overlay>
           );
         }}
       </Transition>
     </>
   );
 };
-
-type PropsWithTransition = {
-  state: TransitionStatus;
-};
-
-const Content = styled.div<PropsWithTransition>`
-  display: flex;
-  position: fixed;
-  z-index: ${Layer.OVERLAY};
-  top: 0;
-  left: 0;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  transition: opacity ${TRANSITION_TIME}ms ease;
-  opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
-  background-color: ${rgba(Colors.UI_PAPER, Opacity.OVERLAY)};
-`;
 
 const Item = styled.li`
   margin-top: ${Spacing.X_LARGE}px;

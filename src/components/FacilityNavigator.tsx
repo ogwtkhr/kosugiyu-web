@@ -69,7 +69,7 @@ export const FacilityNavigator: React.FC = () => {
         </ControlButton>
       </Controls>
       <DetailButton>
-        <DetailButtonLabel>詳細</DetailButtonLabel>
+        <DetailButtonLabel>解説</DetailButtonLabel>
         <DetailButtonIcon>
           <OtherWindowIcon />
         </DetailButtonIcon>
