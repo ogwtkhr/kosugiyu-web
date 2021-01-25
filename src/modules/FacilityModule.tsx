@@ -16,141 +16,6 @@ import {
 } from '@/constants';
 import media from 'styled-media-query';
 
-const Container = styled.section``;
-
-const InformationRow = styled.div`
-  display: flex;
-  margin-top: ${BigSpacing.NORMAL}px;
-  margin-bottom: ${BigSpacing.NORMAL}px;
-  ${getResponsiveOffsetMixin({
-    maxWidth: ModuleWidth.MIDDLE,
-    margin: Spacing.XXX_LARGE,
-    marginSmall: Spacing.LARGE,
-  })};
-
-  ${media.lessThan(ScreenType.MEDIUM)`
-    display: block;
-    margin-top: ${BigSpacing.X_SMALL}px;
-    margin-bottom: ${Spacing.XXX_LARGE}px;
-
-  `}
-`;
-
-const InformationUnit = styled.section`
-  flex: 1;
-
-  ${media.lessThan(ScreenType.MEDIUM)`
-    & + & {
-       margin-top: ${BigSpacing.X_SMALL}px;
-    }
-  `}
-`;
-
-const InformationHeading = styled.h3``;
-
-const InformationContainerRow = styled.div`
-  display: flex;
-  ${media.lessThan(ScreenType.MEDIUM)`
-    display: block;
-  `}
-`;
-
-const InformationContainer = styled.div`
-  margin: ${Spacing.XX_LARGE}px 0;
-  flex: 1;
-`;
-
-type InformationContentRowProps = { fix?: boolean };
-
-const InformationContentRow = styled.div<InformationContentRowProps>`
-  display: flex;
-  max-width: ${({ fix = true }) => (fix ? '400px' : '')};
-  align-items: center;
-
-  & + & {
-    margin-top: ${Spacing.XX_LARGE}px;
-  }
-
-  ${media.lessThan(ScreenType.MEDIUM)`
-    display: block;
-    & + & {
-      margin-top: ${Spacing.X_LARGE}px;
-    }
-  `}
-`;
-
-const InformationContent = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: top;
-  justify-content: flex-start;
-  flex: ${({ flex }: { flex?: number }) => (flex ? flex : '')};
-
-  ${media.lessThan(ScreenType.MEDIUM)`
-    & + & {
-      margin-top: ${Spacing.NORMAL}px;
-    };
-  `};
-`;
-
-const InformationContentHeading = styled.h4`
-  ${Typography.Mixin.DISPLAY};
-  width: 140px;
-  font-size: ${TextSize.LARGE}rem;
-
-  ${media.lessThan(ScreenType.MEDIUM)`
-    font-size: ${TextSize.NORMAL}rem;
-  `};
-`;
-
-const InformationDescriptionList = styled.dl`
-  & + & {
-    margin-left: ${Spacing.X_LARGE}px;
-  }
-`;
-
-const InformationDescriptionTerm = styled.dt`
-  ${Typography.Mixin.DISPLAY};
-  line-height: ${LineHeight.MONOLITHIC};
-  color: ${Colors.UI_TEXT_SUB};
-  margin-bottom: ${Spacing.NORMAL}px;
-  font-size: ${TextSize.XX_SMALL}rem;
-`;
-
-const InformationDescriptionDetail = styled.dd`
-  ${Typography.Mixin.DISPLAY};
-  font-size: ${TextSize.XX_LARGE}rem;
-  line-height: ${LineHeight.MONOLITHIC};
-`;
-
-const InformationDescriptionSupple = styled.p`
-  margin-top: ${Spacing.NORMAL}px;
-  font-size: ${({ size }: { size?: TextSize }) => size || TextSize.SMALL}rem;
-  letter-spacing: ${LetterSpacing.SEMI_WIDE}em;
-`;
-
-const InformationDescriptionDetailSupple = styled.small`
-  font-size: ${TextSize.SMALL}rem;
-`;
-
-const InformationContentDashLine = styled.hr`
-  display: block;
-  margin: 0 ${Spacing.LARGE}px;
-  width: ${Spacing.X_LARGE}px;
-  height: 1px;
-  background-color: ${Colors.UI_LINE_NORMAL};
-`;
-
-const InformationNormalText = styled.p`
-  ${Typography.Mixin.DISPLAY};
-  font-size: ${TextSize.NORMAL}rem;
-  letter-spacing: ${LetterSpacing.SEMI_WIDE}em;
-
-  ${media.lessThan(ScreenType.MEDIUM)`
-  font-size: ${TextSize.SMALL}rem;
-  `}
-`;
-
 export const FacilityModule: React.FC = () => {
   return (
     <Container>
@@ -364,3 +229,138 @@ export const FacilityModule: React.FC = () => {
     </Container>
   );
 };
+
+const Container = styled.section``;
+
+const InformationRow = styled.div`
+  display: flex;
+  margin-top: ${BigSpacing.NORMAL}px;
+  margin-bottom: ${BigSpacing.NORMAL}px;
+  ${getResponsiveOffsetMixin({
+    maxWidth: ModuleWidth.MIDDLE,
+    margin: Spacing.XXX_LARGE,
+    marginSmall: Spacing.LARGE,
+  })};
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    display: block;
+    margin-top: ${BigSpacing.X_SMALL}px;
+    margin-bottom: ${Spacing.XXX_LARGE}px;
+
+  `}
+`;
+
+const InformationUnit = styled.section`
+  flex: 1;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    & + & {
+       margin-top: ${BigSpacing.X_SMALL}px;
+    }
+  `}
+`;
+
+const InformationHeading = styled.h3``;
+
+const InformationContainerRow = styled.div`
+  display: flex;
+  ${media.lessThan(ScreenType.MEDIUM)`
+    display: block;
+  `}
+`;
+
+const InformationContainer = styled.div`
+  margin: ${Spacing.XX_LARGE}px 0;
+  flex: 1;
+`;
+
+type InformationContentRowProps = { fix?: boolean };
+
+const InformationContentRow = styled.div<InformationContentRowProps>`
+  display: flex;
+  max-width: ${({ fix = true }) => (fix ? '400px' : '')};
+  align-items: center;
+
+  & + & {
+    margin-top: ${Spacing.XX_LARGE}px;
+  }
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    display: block;
+    & + & {
+      margin-top: ${Spacing.X_LARGE}px;
+    }
+  `}
+`;
+
+const InformationContent = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: top;
+  justify-content: flex-start;
+  flex: ${({ flex }: { flex?: number }) => (flex ? flex : '')};
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    & + & {
+      margin-top: ${Spacing.NORMAL}px;
+    };
+  `};
+`;
+
+const InformationContentHeading = styled.h4`
+  ${Typography.Mixin.DISPLAY};
+  width: 140px;
+  font-size: ${TextSize.LARGE}rem;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    font-size: ${TextSize.NORMAL}rem;
+  `};
+`;
+
+const InformationDescriptionList = styled.dl`
+  & + & {
+    margin-left: ${Spacing.X_LARGE}px;
+  }
+`;
+
+const InformationDescriptionTerm = styled.dt`
+  ${Typography.Mixin.DISPLAY};
+  line-height: ${LineHeight.MONOLITHIC};
+  color: ${Colors.UI_TEXT_SUB};
+  margin-bottom: ${Spacing.NORMAL}px;
+  font-size: ${TextSize.XX_SMALL}rem;
+`;
+
+const InformationDescriptionDetail = styled.dd`
+  ${Typography.Mixin.DISPLAY};
+  font-size: ${TextSize.XX_LARGE}rem;
+  line-height: ${LineHeight.MONOLITHIC};
+`;
+
+const InformationDescriptionSupple = styled.p`
+  margin-top: ${Spacing.NORMAL}px;
+  font-size: ${({ size }: { size?: TextSize }) => size || TextSize.SMALL}rem;
+  letter-spacing: ${LetterSpacing.SEMI_WIDE}em;
+`;
+
+const InformationDescriptionDetailSupple = styled.small`
+  font-size: ${TextSize.SMALL}rem;
+`;
+
+const InformationContentDashLine = styled.hr`
+  display: block;
+  margin: 0 ${Spacing.LARGE}px;
+  width: ${Spacing.X_LARGE}px;
+  height: 1px;
+  background-color: ${Colors.UI_LINE_NORMAL};
+`;
+
+const InformationNormalText = styled.p`
+  ${Typography.Mixin.DISPLAY};
+  font-size: ${TextSize.NORMAL}rem;
+  letter-spacing: ${LetterSpacing.SEMI_WIDE}em;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+  font-size: ${TextSize.SMALL}rem;
+  `}
+`;
