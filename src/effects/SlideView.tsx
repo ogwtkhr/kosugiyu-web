@@ -11,14 +11,15 @@ export type SlideViewProps = {
 };
 
 export const SlideView: React.FC<SlideViewProps> = ({ autoPlay, index = 0, children }) => {
-  const timeout = isNumber(autoPlay) ? autoPlay : 3000;
+  const timeout = isNumber(autoPlay) ? autoPlay : 500;
   const [current, setCurrent] = useState<number>(index);
-  const [existForeground, setExistForeground] = useState<boolean>(true);
+  const [previous, setPrevious] = useState<number>(current);
+  const [existFadeOutView, setExistFadeOutView] = useState<boolean>(true);
   const [existCover, setExistCover] = useState<boolean>(false);
 
   const slideViews = React.Children.toArray(children);
-  const foregroundView = slideViews[current];
-  const backgroundView = slideViews[current + 1] || slideViews[0];
+  const fadeOutView = slideViews[previous];
+  const backgroundView = slideViews[current];
   const coverView = useRef<React.ReactNode>(backgroundView);
 
   const increment = useCallback(() => {
@@ -30,12 +31,10 @@ export const SlideView: React.FC<SlideViewProps> = ({ autoPlay, index = 0, child
   }, [index]);
 
   useEffect(() => {
-    setExistForeground(true);
-    // if (autoPlay) {
+    setExistFadeOutView(true);
     setTimeout(() => {
-      setExistForeground(false);
-    }, timeout);
-    // }
+      setExistFadeOutView(false);
+    }, 10);
   }, [current]);
 
   return (
@@ -43,17 +42,20 @@ export const SlideView: React.FC<SlideViewProps> = ({ autoPlay, index = 0, child
       <SlideViewLayout>{backgroundView}</SlideViewLayout>
       <SlideViewItem zIndex={1}>{backgroundView}</SlideViewItem>
       <Transition
-        in={existForeground}
+        in={existFadeOutView}
         timeout={timeout}
         onEnter={() => {
           setTimeout(() => {
+            console.log('entered');
             // のりしろの部分
             setExistCover(false);
             coverView.current = backgroundView;
           }, 50);
         }}
         onExited={() => {
+          // TODO: これを待たないと表示がおかしくなるのを何とかする
           setExistCover(true);
+          setPrevious(current);
           if (autoPlay) {
             increment();
           }
@@ -61,7 +63,7 @@ export const SlideView: React.FC<SlideViewProps> = ({ autoPlay, index = 0, child
       >
         {(state) => (
           <SlideViewItem className="foreground" state={state} zIndex={2}>
-            {foregroundView}
+            {fadeOutView}
           </SlideViewItem>
         )}
       </Transition>
@@ -90,7 +92,7 @@ const SlideViewItem = styled.div<SlideViewItemProps>`
     switch (state) {
       case TransitionStatus.EXITING:
         return css`
-          transition: 2s ease;
+          transition: 0.5s ease;
           opacity: 0;
         `;
       case TransitionStatus.EXITED:

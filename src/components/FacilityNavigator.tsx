@@ -122,9 +122,15 @@ export const FacilityNavigator: React.FC = () => {
         <DescriptionTitle>{title}</DescriptionTitle>
         <DescriptionBody>{getTextBreakFragment(description)}</DescriptionBody>
         <DescriptionPhoto>
-          <SlideView autoPlay>
+          <SlideView index={currentIndex}>
             <Picture relativePath={'photos/facility/facility_photo_1.jpg'} />
             <Picture relativePath={'photos/facility/facility_photo_2.jpg'} />
+            <Picture relativePath={'photos/facility/facility_photo_3.jpg'} />
+            <Picture relativePath={'photos/facility/facility_photo_4.jpg'} />
+            <Picture relativePath={'photos/facility/facility_photo_5.jpg'} />
+            <Picture relativePath={'photos/facility/facility_photo_6.jpg'} />
+            <Picture relativePath={'photos/facility/facility_photo_7.jpg'} />
+            <Picture relativePath={'photos/facility/facility_photo_8.jpg'} />
           </SlideView>
         </DescriptionPhoto>
       </DescriptionWindow>
