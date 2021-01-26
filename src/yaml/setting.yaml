@@ -10,16 +10,16 @@
       title: 小杉湯について
       # TODO
       description: 昭和八年創業。高円寺の銭湯「小杉湯」の公式ウェブサイトです。
+    - id: facility
+      title: 施設・営業案内
+      description: 'TODO: 施設・営業案内のdescription'
+    - id: archive
+      title: できごと
+      description: 'TODO: できごとのdescription'
     - id: persons
       title: ケノ日のハレ
       # TODO
       description: 昭和八年創業。高円寺の銭湯「小杉湯」にまつわる人々をご紹介します。
-    - id: archive
-      title: できごと
-      description: 'TODO: できごとのdescription'
-    - id: facility
-      title: 施設・営業案内
-      description: 'TODO: 施設・営業案内のdescription'
   facilities:
     - id: facade
       title: 外観
