@@ -23,7 +23,7 @@ const transitionTimeout = {
   exit: TRANSITION_TIME,
 };
 
-// enteringをフックにすると、マウントと同時に的にopacityが1になりアニメーションが適用されない
+// enteringをフックにすると、マウントと同時にopacityが1になりアニメーションが適用されない
 // entering -> enteredを10msecにして、即enteredに移行させる
 
 type MenuProps = {

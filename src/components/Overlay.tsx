@@ -55,7 +55,7 @@ type ContainerProps = {
   layer: number;
 } & PropsWithTransition;
 
-export const Container = styled.div<ContainerProps>`
+const Container = styled.div<ContainerProps>`
   display: flex;
   position: fixed;
   z-index: ${({ layer }) => layer};

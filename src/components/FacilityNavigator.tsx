@@ -19,7 +19,7 @@ import {
   PropsWithTransition,
 } from '@/constants';
 import media from 'styled-media-query';
-import { Parallax, ReverseParallax } from '@/effects';
+import { Parallax, ReverseParallax, SlideView } from '@/effects';
 import { UnderLineText } from './UnderLineText';
 import { ValueOf } from '@/types';
 
@@ -122,7 +122,10 @@ export const FacilityNavigator: React.FC = () => {
         <DescriptionTitle>{title}</DescriptionTitle>
         <DescriptionBody>{getTextBreakFragment(description)}</DescriptionBody>
         <DescriptionPhoto>
-          <Picture relativePath={'photos/facility/facility_photo_1.jpg'} />
+          <SlideView autoPlay>
+            <Picture relativePath={'photos/facility/facility_photo_1.jpg'} />
+            <Picture relativePath={'photos/facility/facility_photo_2.jpg'} />
+          </SlideView>
         </DescriptionPhoto>
       </DescriptionWindow>
 

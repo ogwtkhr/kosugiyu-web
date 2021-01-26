@@ -25,7 +25,7 @@ export const Article: React.FC<ArticleProps> = ({ body }) => {
   );
 };
 
-export const Container = styled.article`
+const Container = styled.article`
   max-width: ${ModuleWidth.ARTICLE}px;
   margin-right: auto;
   margin-left: auto;
