@@ -5,6 +5,7 @@ export const SizeType = {
   X_SMALL: 'xsmall',
   SMALL: 'small',
   MIDDLE: 'middle',
+  NORMAL: 'normal',
   LARGE: 'large',
   X_LARGE: 'xlarge',
   XX_LARGE: 'xxlarge',

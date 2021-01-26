@@ -2,9 +2,10 @@ import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { AllMicrocmsArchiveQuery } from '@/types';
 import styled from 'styled-components';
-import { StyleMixin, TextSize, Typography, Colors, Spacing } from '@/constants';
+import { StyleMixin, TextSize, Typography, Colors, Spacing, ScreenType } from '@/constants';
 import { CommonTitle, ArticleGroup, ArticleItemProps } from '@/components';
 import { groupByIndex } from '@/util/array';
+import media from 'styled-media-query';
 
 export const ArchiveModule: React.FC = () => {
   const data = useStaticQuery<AllMicrocmsArchiveQuery>(graphql`
@@ -94,6 +95,11 @@ const YearNavigation = styled.nav`
   top: 50%;
   left: ${Spacing.LARGE}px;
   mix-blend-mode: difference;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    left: auto;
+    right: ${Spacing.LARGE}px;
+  `}
 `;
 
 const YearNavigationList = styled.ul``;

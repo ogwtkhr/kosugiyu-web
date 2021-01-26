@@ -22,6 +22,7 @@ type ParallaxProps = {
   zoom?: number;
   zoomSmall?: number;
   basePosition?: ParallaxBasePosition;
+  verbose?: boolean;
 };
 
 export const Parallax: React.FC<ParallaxProps> = ({
@@ -34,12 +35,14 @@ export const Parallax: React.FC<ParallaxProps> = ({
   zoom = 1,
   zoomSmall,
   basePosition = ParallaxBasePosition.CENTER,
+  verbose,
 }) => {
   const [ref, { center, top, bottom }] = useParallax<HTMLDivElement>({
     min,
     max,
     coefficient,
     direction,
+    verbose,
   });
   const seeds = {
     [ParallaxBasePosition.TOP]: top,

@@ -8,13 +8,14 @@ import { ReverseParallax, ParallaxBasePosition } from '@/effects';
 export const HeroImage: React.FC = () => {
   return (
     <Container>
-      <ReverseParallax zoom={1.1} basePosition={ParallaxBasePosition.TOP} fillLayout>
+      <ReverseParallax zoom={1.1} basePosition={ParallaxBasePosition.TOP} fillLayout verbose>
         <Picture relativePath={`photos/top/hero_1.jpg`} />
       </ReverseParallax>
       <BusinessInfo>
-        平日 15:30-25:45 土日 8:00-25:45 木曜定休
-        <br />
-        <span> </span>
+        平日 15:30-25:45
+        <BreakOnlySmallScreen />
+        土日 8:00-25:45 木曜定休
+        <BreakOnlySmallScreen />
         入浴料金・大人470円
       </BusinessInfo>
       <ScrollLineContainer>
@@ -24,6 +25,25 @@ export const HeroImage: React.FC = () => {
     </Container>
   );
 };
+
+const BreakOnlySmallScreen: React.FC = () => (
+  <>
+    <Break />
+    <Span> </Span>
+  </>
+);
+
+const Break = styled.br`
+  ${media.greaterThan(ScreenType.MEDIUM)`
+    display: none;
+  `};
+`;
+
+const Span = styled.span`
+  ${media.lessThan(ScreenType.MEDIUM)`
+    display: none;
+  `}
+`;
 
 const Container = styled.div`
   position: relative;
@@ -40,17 +60,11 @@ const BusinessInfo = styled.div`
   color: ${Colors.UI_TEXT_DARK_BACKGROUND};
   font-size: ${TextSize.X_SMALL}rem;
   line-height: ${LineHeight.MONOLITHIC};
-  ${media.greaterThan(ScreenType.MEDIUM)`
-    & br {
-      display: none;
-    }
-  `};
+
   ${media.lessThan(ScreenType.MEDIUM)`
-    top: ${Spacing.NORMAL}px;
-    left: ${Spacing.NORMAL}px;
-    & span {
-      display: none;
-    }
+    top: ${Spacing.LARGE}px;
+    left: ${Spacing.LARGE}px;
+    line-height: ${LineHeight.NORMAL};
   `}
 `;
 

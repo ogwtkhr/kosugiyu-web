@@ -20,6 +20,8 @@ type Options = {
   max?: number;
   // スクロール方向 = normal -> 負方向に加算（閾値超えスクロールが負方向を向く）
   direction?: ParallaxDirectionType | -1 | 1;
+  // デバッグモード
+  verbose?: boolean;
 };
 
 type ScrollInfo = {
@@ -36,12 +38,13 @@ const defaultOptions: Options = {
   min: undefined,
   max: undefined,
   direction: ParallaxDirectionType.NORMAL,
+  verbose: false,
 };
 
 export const useParallax = <T extends HTMLElement = HTMLElement>(
   options: Options = {},
 ): [React.RefObject<T>, ScrollInfo] => {
-  const { coefficient, min, max, direction: directionParam } = {
+  const { coefficient, min, max, direction: directionParam, verbose } = {
     ...defaultOptions,
     ...options,
   };
@@ -79,13 +82,15 @@ export const useParallax = <T extends HTMLElement = HTMLElement>(
     const target = ref.current;
     const rect = target?.getBoundingClientRect();
     if (!rect) return;
+    const centerYInViewport = window.innerHeight / 2;
     const result: ScrollInfo = {
-      top: getValue(rect.top),
-      center: getValue(rect.top + rect.height / 2),
-      bottom: getValue(rect.bottom),
+      top: getValue(rect.top - centerYInViewport),
+      center: getValue(rect.top + rect.height / 2 - centerYInViewport),
+      bottom: getValue(rect.bottom - centerYInViewport),
     };
+    if (verbose) console.log(result);
     setCurrent(result);
-  }, [getValue]);
+  }, [getValue, verbose]);
 
   useEffect(() => {
     window.addEventListener(DomEventType.SCROLL, handler);

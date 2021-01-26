@@ -12,23 +12,26 @@ import {
   Spacing,
   ScreenType,
   DateFormat,
+  SizeType,
 } from '@/constants';
 import dayjs from 'dayjs';
 import media from 'styled-media-query';
 
-export const ArticleItemType = {
+export const ArticleItemDirection = {
   VERTICAL: 'vertical',
   HORIZONTAL: 'horizontal',
 } as const;
 
-export type ArticleItemType = ValueOf<typeof ArticleItemType>;
+export type ArticleItemDirection = ValueOf<typeof ArticleItemDirection>;
 
 export type ArticleItemProps = {
   slug: string;
   title: string;
   mainVisualUrl: string;
   publishedAt: string;
-  type?: ArticleItemType;
+  direction?: ArticleItemDirection;
+  textSize?: Extract<SizeType, 'small' | 'normal'>;
+  enableTextSizingOnSmallScreen?: boolean;
 };
 
 export const ArticleItem: React.FC<ArticleItemProps> = ({
@@ -36,7 +39,9 @@ export const ArticleItem: React.FC<ArticleItemProps> = ({
   title,
   mainVisualUrl,
   publishedAt,
-  type = ArticleItemType.VERTICAL,
+  direction = ArticleItemDirection.VERTICAL,
+  textSize,
+  enableTextSizingOnSmallScreen,
 }) => {
   const formattedPublishedAt = useMemo(
     () => dayjs(publishedAt).format(DateFormat.YEAR_MONTH_DATE_JP),
@@ -45,57 +50,76 @@ export const ArticleItem: React.FC<ArticleItemProps> = ({
 
   return (
     <ArticleItemContainer>
-      <ArticleLink type={type} to={`/archive/${slug}`}>
-        <ArticleThumbnailContainer type={type}>
+      <ArticleLink direction={direction} to={`/archive/${slug}`}>
+        <ArticleThumbnailContainer direction={direction}>
           <ArticleThumbnail src={mainVisualUrl} />
         </ArticleThumbnailContainer>
-        <ArticleTitleContainer type={type}>
-          <ArticleTitle>{title}</ArticleTitle>
-          <PublishDate>{formattedPublishedAt}</PublishDate>
+        <ArticleTitleContainer direction={direction}>
+          <ArticleTitle
+            textSize={textSize}
+            enableTextSizingOnSmallScreen={enableTextSizingOnSmallScreen}
+          >
+            {title}
+          </ArticleTitle>
+          <PublishDate enableTextSizingOnSmallScreen={enableTextSizingOnSmallScreen}>
+            {formattedPublishedAt}
+          </PublishDate>
         </ArticleTitleContainer>
       </ArticleLink>
     </ArticleItemContainer>
   );
 };
 
-type ArticleItemChildProps = Pick<ArticleItemProps, 'type'>;
+type ArticleItemChildPropsWithDirection = Pick<ArticleItemProps, 'direction'>;
+type ArticleItemChildPropsWithTextSize = Pick<
+  ArticleItemProps,
+  'textSize' | 'enableTextSizingOnSmallScreen'
+>;
 
-const ArticleLink = styled(Link)<ArticleItemChildProps>`
-  display: ${({ type }) => (type === ArticleItemType.VERTICAL ? 'block' : 'flex')};
+const ArticleLink = styled(Link)<ArticleItemChildPropsWithDirection>`
+  display: ${({ direction }) => (direction === ArticleItemDirection.VERTICAL ? 'block' : 'flex')};
   text-decoration: none;
   ${StyleMixin.HOVER_EFFECT.NORMAL};
 `;
 
 const ArticleItemContainer = styled.article``;
 
-const ArticleTitleContainer = styled.div<ArticleItemChildProps>`
+const ArticleTitleContainer = styled.div<ArticleItemChildPropsWithDirection>`
   flex: 1;
   max-width: 400px;
   padding: ${Spacing.LARGE}px 0;
-  ${({ type }) =>
-    type === ArticleItemType.HORIZONTAL
+  ${({ direction }) =>
+    direction === ArticleItemDirection.HORIZONTAL
       ? css`
           margin-left: ${Spacing.X_LARGE}px;
           display: flex;
           flex-direction: column;
           justify-content: center;
+          ${media.lessThan(ScreenType.MEDIUM)`
+            margin-left: ${Spacing.LARGE}px;
+            padding: 0;
+          `}
         `
       : ''};
 `;
 
-const ArticleTitle = styled.h3`
+const ArticleTitle = styled.h3<ArticleItemChildPropsWithTextSize>`
   ${Typography.Mixin.DISPLAY};
-  font-size: ${TextSize.LARGE}rem;
+  font-size: ${({ textSize }) =>
+    textSize === SizeType.SMALL ? TextSize.NORMAL : TextSize.LARGE}rem;
   line-height: ${LineHeight.NORMAL};
   text-decoration: none;
 
-  ${media.lessThan(ScreenType.MEDIUM)`
-    font-size: ${TextSize.NORMAL}rem;
+  ${media.lessThan<ArticleItemChildPropsWithTextSize>(ScreenType.MEDIUM)`
+    font-size: ${({ textSize, enableTextSizingOnSmallScreen }) =>
+      enableTextSizingOnSmallScreen && textSize === SizeType.SMALL
+        ? TextSize.SMALL
+        : TextSize.NORMAL}rem
   `}
 `;
 
-const ArticleThumbnailContainer = styled.div<ArticleItemChildProps>`
-  width: ${({ type }) => (type === ArticleItemType.VERTICAL ? 100 : 40)}%;
+const ArticleThumbnailContainer = styled.div<ArticleItemChildPropsWithDirection>`
+  width: ${({ direction }) => (direction === ArticleItemDirection.VERTICAL ? 100 : 40)}%;
   overflow: hidden;
 `;
 
@@ -110,8 +134,17 @@ const ArticleThumbnail = styled.div`
   }
 `;
 
-const PublishDate = styled.p`
+const PublishDate = styled.p<ArticleItemChildPropsWithTextSize>`
   ${Typography.Mixin.DISPLAY};
   color: ${Colors.UI_TEXT_SUB};
-  font-size: ${TextSize.SMALL}rem;
+  font-size: ${({ textSize }) =>
+    textSize === SizeType.SMALL ? TextSize.X_SMALL : TextSize.SMALL}rem;
+  line-height: ${LineHeight.NORMAL};
+
+  ${media.lessThan<ArticleItemChildPropsWithTextSize>(ScreenType.MEDIUM)`
+    font-size: ${({ textSize, enableTextSizingOnSmallScreen }) =>
+      enableTextSizingOnSmallScreen && textSize === SizeType.SMALL
+        ? TextSize.XX_SMALL
+        : TextSize.X_SMALL}rem
+  `}
 `;

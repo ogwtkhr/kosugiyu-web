@@ -35,6 +35,10 @@ export const GridContainer = styled.div<GridContainerProps>`
     grid-auto-rows: 40px;
     grid-template-rows: 40px;
   `};
+  ${media.lessThan(ScreenType.MEDIUM)`
+    grid-auto-rows: 7vw;
+    grid-template-rows: 7vw;
+  `};
 `;
 
 type GridColumnRange = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13;

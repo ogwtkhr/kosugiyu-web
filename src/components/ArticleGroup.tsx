@@ -1,8 +1,8 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { Spacing, ScreenType } from '@/constants';
+import { Spacing, ScreenType, SizeType } from '@/constants';
 import media from 'styled-media-query';
-import { ArticleItem, ArticleItemProps, ArticleItemType } from './ArticleItem';
+import { ArticleItem, ArticleItemProps, ArticleItemDirection } from './ArticleItem';
 
 const GUTTER_NORMAL = Spacing.XX_LARGE;
 const GUTTER_SMALL = Spacing.LARGE;
@@ -68,8 +68,24 @@ const ArticleSubGroupType1: React.FC<ArticleSubGroupType1Props> = ({ list }) => 
         </ArticleGroupGridItem>
       )}
       <ArticleGroupGridItem columnStart={2} columnEnd={3} rowStart={1} rowEnd={2}>
-        {second && <ArticleGroupItem type={ArticleItemType.HORIZONTAL}>{second}</ArticleGroupItem>}
-        {third && <ArticleGroupItem type={ArticleItemType.HORIZONTAL}>{third}</ArticleGroupItem>}
+        {second && (
+          <ArticleGroupItem
+            textSize={SizeType.SMALL}
+            direction={ArticleItemDirection.HORIZONTAL}
+            enableTextSizingOnSmallScreen
+          >
+            {second}
+          </ArticleGroupItem>
+        )}
+        {third && (
+          <ArticleGroupItem
+            textSize={SizeType.SMALL}
+            direction={ArticleItemDirection.HORIZONTAL}
+            enableTextSizingOnSmallScreen
+          >
+            {third}
+          </ArticleGroupItem>
+        )}
       </ArticleGroupGridItem>
     </ArticleGroupGrid>
   );
@@ -112,17 +128,49 @@ const ArticleSubGroupType3: React.FC<ArticleSubGroupType3Props> = ({ list }) => 
     <ArticleGroupGrid columns={fifth ? 2 : 1} collapseOnSmallScreen>
       <ArticleGroupGridItem columnStart={1} columnEnd={2} rowStart={1} rowEnd={2}>
         <ArticleGroupGrid columns={2}>
-          <ArticleGroupGridItem columnStart={1} columnEnd={2} rowStart={1} rowEnd={2}>
-            <ArticleGroupItem>{first}</ArticleGroupItem>
+          <ArticleGroupGridItem
+            columnStart={1}
+            columnEnd={2}
+            rowStart={1}
+            rowEnd={2}
+            disableVerticalGutterSmallScreen
+          >
+            <ArticleGroupItem textSize={SizeType.SMALL} enableTextSizingOnSmallScreen>
+              {first}
+            </ArticleGroupItem>
           </ArticleGroupGridItem>
-          <ArticleGroupGridItem columnStart={2} columnEnd={3} rowStart={1} rowEnd={2}>
-            <ArticleGroupItem>{second}</ArticleGroupItem>
+          <ArticleGroupGridItem
+            columnStart={2}
+            columnEnd={3}
+            rowStart={1}
+            rowEnd={2}
+            disableVerticalGutterSmallScreen
+          >
+            <ArticleGroupItem textSize={SizeType.SMALL} enableTextSizingOnSmallScreen>
+              {second}
+            </ArticleGroupItem>
           </ArticleGroupGridItem>
-          <ArticleGroupGridItem columnStart={1} columnEnd={2} rowStart={2} rowEnd={3}>
-            <ArticleGroupItem>{third}</ArticleGroupItem>
+          <ArticleGroupGridItem
+            columnStart={1}
+            columnEnd={2}
+            rowStart={2}
+            rowEnd={3}
+            disableVerticalGutterSmallScreen
+          >
+            <ArticleGroupItem textSize={SizeType.SMALL} enableTextSizingOnSmallScreen>
+              {third}
+            </ArticleGroupItem>
           </ArticleGroupGridItem>
-          <ArticleGroupGridItem columnStart={2} columnEnd={3} rowStart={2} rowEnd={3}>
-            <ArticleGroupItem>{fourth}</ArticleGroupItem>
+          <ArticleGroupGridItem
+            columnStart={2}
+            columnEnd={3}
+            rowStart={2}
+            rowEnd={3}
+            disableVerticalGutterSmallScreen
+          >
+            <ArticleGroupItem textSize={SizeType.SMALL} enableTextSizingOnSmallScreen>
+              {fourth}
+            </ArticleGroupItem>
           </ArticleGroupGridItem>
         </ArticleGroupGrid>
       </ArticleGroupGridItem>
@@ -179,6 +227,7 @@ type ArticleGroupGridItemProps = {
   rowEnd: number;
   columnStart: number;
   columnEnd: number;
+  disableVerticalGutterSmallScreen?: boolean;
 };
 
 const ArticleGroupGridItem = styled.div<ArticleGroupGridItemProps>`
@@ -186,13 +235,34 @@ const ArticleGroupGridItem = styled.div<ArticleGroupGridItemProps>`
     grid-row: ${rowStart} / ${rowEnd};
     grid-column: ${columnStart} / ${columnEnd};
   `}
+
+  ${({ disableVerticalGutterSmallScreen }) =>
+    !disableVerticalGutterSmallScreen
+      ? css`
+          ${media.lessThan(ScreenType.MEDIUM)`
+            margin-top: ${Spacing.LARGE}px;
+          `}
+        `
+      : ''}
 `;
 
-type ArticleGroupItemProps = { type?: ArticleItemType; children: ArticleItemProps };
+type ArticleGroupItemProps = {
+  children: ArticleItemProps;
+} & Pick<ArticleItemProps, 'textSize' | 'direction' | 'enableTextSizingOnSmallScreen'>;
 
-const ArticleGroupItem: React.FC<ArticleGroupItemProps> = ({ type, children }) => (
+const ArticleGroupItem: React.FC<ArticleGroupItemProps> = ({
+  textSize,
+  direction,
+  enableTextSizingOnSmallScreen,
+  children,
+}) => (
   <ArticleGroupItemContainer>
-    <ArticleItem type={type} {...children} />
+    <ArticleItem
+      textSize={textSize}
+      direction={direction}
+      enableTextSizingOnSmallScreen={enableTextSizingOnSmallScreen}
+      {...children}
+    />
   </ArticleGroupItemContainer>
 );
 

@@ -89,6 +89,7 @@ const Name = styled.h3`
 const IconContainer = styled.div`
   width: ${Spacing.XX_LARGE}px;
   ${media.lessThan(ScreenType.MEDIUM)`
+    width: ${Spacing.X_LARGE}px;
     font-size: ${TextSize.SMALL}rem;
   `};
 `;

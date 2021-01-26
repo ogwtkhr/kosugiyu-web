@@ -51,7 +51,7 @@ export const IntroModule: React.FC = () => {
               rowEnd: 11,
             }}
           >
-            <GridImage src="photos/intro/story_2.jpg" speed={0.08} />
+            <GridImage src="photos/intro/story_2.jpg" speed={0.06} />
           </GridItem>
           <GridItem
             grid={{
@@ -61,7 +61,7 @@ export const IntroModule: React.FC = () => {
               rowEnd: 11,
             }}
           >
-            <GridImage src="photos/intro/story_3.jpg" speed={0.05} />
+            <GridImage src="photos/intro/story_3.jpg" speed={0.03} />
           </GridItem>
           {/* 2段目左*/}
           <GridItem
@@ -71,8 +71,14 @@ export const IntroModule: React.FC = () => {
               rowStart: 12,
               rowEnd: 19,
             }}
+            gridSmall={{
+              columnStart: 1,
+              columnEnd: 4,
+              rowStart: 12,
+              rowEnd: 19,
+            }}
           >
-            <GridImage src="photos/intro/story_4.jpg" speed={0.05} />
+            <GridImage src="photos/intro/story_4.jpg" speed={0.03} />
           </GridItem>
           {/* 2段目右 */}
           <GridItem
@@ -82,8 +88,14 @@ export const IntroModule: React.FC = () => {
               rowStart: 12,
               rowEnd: 19,
             }}
+            gridSmall={{
+              columnStart: 10,
+              columnEnd: 13,
+              rowStart: 12,
+              rowEnd: 19,
+            }}
           >
-            <GridImage src="photos/intro/story_5.jpg" speed={0.05} />
+            <GridImage src="photos/intro/story_5.jpg" speed={0.03} />
           </GridItem>
           {/* 3段目左 */}
           <GridItem
@@ -94,7 +106,7 @@ export const IntroModule: React.FC = () => {
               rowEnd: 27,
             }}
           >
-            <GridImage src="photos/intro/story_6.jpg" speed={0.05} />
+            <GridImage src="photos/intro/story_6.jpg" speed={0.03} />
           </GridItem>
           {/* 4段目左 */}
           <GridItem
@@ -105,7 +117,7 @@ export const IntroModule: React.FC = () => {
               rowEnd: 35,
             }}
           >
-            <GridImage src="photos/intro/story_7.jpg" speed={0.05} />
+            <GridImage src="photos/intro/story_7.jpg" speed={0.03} />
           </GridItem>
           {/* 3段目右 */}
           <GridItem
@@ -116,7 +128,7 @@ export const IntroModule: React.FC = () => {
               rowEnd: 35,
             }}
           >
-            <GridImage src="photos/intro/story_8.jpg" speed={0.09} />
+            <GridImage src="photos/intro/story_8.jpg" speed={0.097} />
           </GridItem>
         </GridContainer>
         <MessageInGrid>
@@ -125,24 +137,24 @@ export const IntroModule: React.FC = () => {
               関東大震災後、東京の中心部からやってきたファミリー層や高齢者世帯によって、新興住宅街がつくられたこのエリア。戦後になると、作家やアーティストをはじめ若者も多く移り住むようになり、多種多様な人びとが、ときに“中央線文化”とも呼ばれる独自のカルチャーを形作ってきました。
             </MessageTypography>
           </IntersectionFadeIn>
-          <IntroStoryIllustration style={{ top: `calc(100% + ${Spacing.LARGE}px)`, right: 0 }}>
+          <IntroStoryIllustration1>
             <Parallax>
               <IntersectionFadeIn fillLayout wait={500}>
                 <Picture relativePath="illustrations/intro/story_1.png" />
               </IntersectionFadeIn>
             </Parallax>
-          </IntroStoryIllustration>
+          </IntroStoryIllustration1>
         </MessageInGrid>
       </GridOuter>
       <IntroStoryUnitNormal>
         <IntroStoryUnitColumnSub>
-          <IntroStoryIllustration style={{ top: `20%`, right: `-${Spacing.LARGE}px` }}>
+          <IntroStoryIllustration2>
             <Parallax>
               <IntersectionFadeIn fillLayout wait={500}>
                 <Picture relativePath="illustrations/intro/story_2.png" />
               </IntersectionFadeIn>
             </Parallax>
-          </IntroStoryIllustration>
+          </IntroStoryIllustration2>
           <MessageTypography>小杉湯は昭和8年（1933年）にこの街で生まれました。</MessageTypography>
         </IntroStoryUnitColumnSub>
         <IntroStoryUnitColumnMain>
@@ -170,13 +182,13 @@ export const IntroModule: React.FC = () => {
           </IntersectionFadeIn>
         </IntroStoryUnitColumnMain>
         <IntroStoryUnitColumnSub>
-          <IntroStoryIllustration style={{ top: `30%`, left: `${Spacing.LARGE}px` }}>
+          <IntroStoryIllustration3>
             <Parallax>
               <IntersectionFadeIn fillLayout wait={500}>
                 <Picture relativePath="illustrations/intro/story_3.png" />
               </IntersectionFadeIn>
             </Parallax>
-          </IntroStoryIllustration>
+          </IntroStoryIllustration3>
           <MessageTypography>
             高円寺らしい“ごちゃ混ぜ感”をぎゅっと凝縮したような、街の銭湯。
             創業当時の建物を守りつつ、時代に合わせて中身を変え続け、高円寺の人々とともにあり続けてきました。
@@ -193,7 +205,7 @@ export const IntroModule: React.FC = () => {
 
         <IntroStoryFinalPhoto>
           <IntersectionFadeIn fillLayout>
-            <Parallax coefficient={0.16} min={0} fillLayout>
+            <Parallax coefficient={0.12} min={0} fillLayout>
               <Picture
                 relativePath="photos/intro/story_11.jpg"
                 imgStyle={{
@@ -249,12 +261,12 @@ const IntroStoryUnitNormal = styled.section`
 `;
 
 const IntroStoryUnitColumnSub = styled.div`
-  position: relative;
   display: flex;
+  position: relative;
+  flex: 1;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  flex: 1;
 `;
 
 const IntroStoryUnitColumnMain = styled.div`
@@ -284,16 +296,39 @@ const IntroStoryIllustration = styled.div`
   position: absolute;
   width: 100px;
   z-index: 1;
+
   ${media.lessThan(ScreenType.MEDIUM)`
-    
+    width: 72px;
+  `}
+`;
+
+const IntroStoryIllustration1 = styled(IntroStoryIllustration)`
+  top: calc(100% + ${Spacing.LARGE}px);
+  right: 0;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    right: 40%;
+  `}
+`;
+
+const IntroStoryIllustration2 = styled(IntroStoryIllustration)`
+  top: 20%;
+  right: -${Spacing.LARGE}px;
+`;
+
+const IntroStoryIllustration3 = styled(IntroStoryIllustration)`
+  top: 30%;
+  left: ${Spacing.LARGE}px;
+  ${media.lessThan(ScreenType.MEDIUM)`
+    left: -${Spacing.XX_LARGE}px;
   `}
 `;
 
 const IntroStoryUnitFinal = styled.section`
   position: relative;
   max-height: 1000px;
-  overflow: hidden;
   padding-top: ${BigSpacing.LARGE}px;
+  overflow: hidden;
 
   &::after {
     content: '';
@@ -319,12 +354,12 @@ const IntroStoryFinalPhoto = styled.section`
 const IntroStoryFinalMessage = styled.div`
   display: flex;
   position: absolute;
+  z-index: 1;
   top: 0;
   left: 0;
   justify-content: center;
   width: 100%;
   height: 300px;
-  z-index: 1;
 
   ${media.lessThan(ScreenType.MEDIUM)`
     height: 200px;

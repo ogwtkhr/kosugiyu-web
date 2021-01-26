@@ -11,6 +11,7 @@ import {
   ModuleWidth,
   ScreenType,
   ModuleHeight,
+  Colors,
 } from '@/constants';
 import { PersonItem, TopPersonItem, Picture, Button, ButtonContainer } from '@/components';
 import media from 'styled-media-query';
@@ -71,7 +72,12 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({
               </PersonsHeadingBodyCopyLargeScreen>
             </PersonsHeadingMain>
             <PersonsHeadingImage>
-              <ReverseParallax zoom={1.2} zoomSmall={1.7} basePosition={ParallaxBasePosition.TOP}>
+              <ReverseParallax
+                zoom={1.1}
+                zoomSmall={1.7}
+                basePosition={ParallaxBasePosition.TOP}
+                fillLayout
+              >
                 <Picture relativePath="photos/persons/hero.jpg" />
               </ReverseParallax>
             </PersonsHeadingImage>
@@ -137,6 +143,10 @@ const HeadingTitle: React.FC = () => (
 const Container = styled.div<Pick<PersonsModuleProps, 'withVerticalMargin'>>`
   max-width: ${ModuleWidth.MIDDLE}px;
   margin: ${({ withVerticalMargin }) => `${withVerticalMargin ? BigSpacing.LARGE : 0}px auto`};
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    margin: ${Spacing.LARGE}px auto;
+  `}
 `;
 
 const PersonsHeadingContainer = styled.div``;
@@ -169,12 +179,16 @@ const PersonsHeadingMain = styled.div`
 
 const PersonsHeadingSubTitle = styled.div`
   margin-right: ${BigSpacing.SMALL}px;
+  ${media.lessThan(ScreenType.MEDIUM)`
+    margin-right: 0;
+  `}
 `;
 
 const PersonsHeadingTitle = styled.div`
   display: flex;
   ${media.lessThan(ScreenType.MEDIUM)`
-    margin: 0 auto;
+    justify-content: center;
+    margin-bottom: ${Spacing.LARGE}px;
   `}
 `;
 
@@ -210,6 +224,7 @@ const PersonsHeadingBodyCopySmallScreen = styled.p`
 
 const PersonLink = styled(Link)`
   display: block;
+  color: ${Colors.UI_TEXT_MAIN};
   text-decoration: none;
   ${StyleMixin.HOVER_EFFECT.NORMAL};
 `;
@@ -240,7 +255,7 @@ const PersonList = styled.ul`
 
   ${media.lessThan(ScreenType.MEDIUM)`
     grid-template-columns: repeat(2, 1fr);
-    grid-gap: ${Spacing.LARGE}px ${Spacing.XX_LARGE}px;
+    grid-gap: ${Spacing.XX_LARGE}px ${Spacing.LARGE}px;
     margin-left: ${Spacing.LARGE}px;
     margin-right: ${Spacing.LARGE}px;
   `}

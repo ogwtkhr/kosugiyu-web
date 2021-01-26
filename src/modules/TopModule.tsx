@@ -188,6 +188,7 @@ const HeroArea = styled.div`
   margin-right: ${Spacing.XXX_LARGE}px;
   ${media.lessThan(ScreenType.MEDIUM)`
     margin-top: 0;
+    margin-right: ${Spacing.X_LARGE}px;
     height: 100%;
   `}
 `;
