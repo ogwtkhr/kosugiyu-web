@@ -15,10 +15,13 @@ import {
   Spacing,
   TextSize,
   Typography,
+  TransitionStatus,
+  PropsWithTransition,
 } from '@/constants';
 import media from 'styled-media-query';
 import { Parallax, ReverseParallax } from '@/effects';
 import { UnderLineText } from './UnderLineText';
+import { ValueOf } from '@/types';
 
 // TODO: 統合
 export const FacilityLayers = {
@@ -30,6 +33,19 @@ export const FacilityLayers = {
   OVERLAY: Layer.PRIVILEGE,
   // MODAL: Layer.PRIVILEGE,
 } as const;
+
+const FacilityID = {
+  FACADE: 'facade',
+  ENTRANCE: 'entrance',
+  COUNTER: 'counter',
+  CHANGING_ROOM: 'changing_room',
+  BATHROOM: 'bathroom',
+  LOUNGE: 'lounge',
+  LAUNDRY: 'laundry',
+  TONARI: 'tonari',
+} as const;
+
+type FacilityID = ValueOf<typeof FacilityID>;
 
 export const FacilityNavigator: React.FC = () => {
   const facilityInfo = useFacilityInfo();
@@ -53,6 +69,15 @@ export const FacilityNavigator: React.FC = () => {
           </BigImage>
         </ReverseParallax>
       </BigImageContainer>
+
+      <BackgroundPhoto
+        isActive={id === FacilityID.LAUNDRY}
+        relativePath="photos/facility/bg_laundry.jpg"
+      />
+      <BackgroundPhoto
+        isActive={id === FacilityID.TONARI}
+        relativePath="photos/facility/bg_tonari.jpg"
+      />
 
       <Controls>
         <ControlButton
@@ -180,7 +205,7 @@ const BigImage = styled.div<IdInjectable>`
   ${({ id }) => {
     switch (id) {
       // 外観
-      case 'facade':
+      case FacilityID.FACADE:
         return css`
           transform: scale(0.35) translate(10%, 0);
           ${media.lessThan(ScreenType.MEDIUM)`
@@ -188,7 +213,7 @@ const BigImage = styled.div<IdInjectable>`
           `}
         `;
       // 玄関
-      case 'entrance':
+      case FacilityID.ENTRANCE:
         return css`
           transform: translate(-8%, -29%);
           ${media.lessThan(ScreenType.MEDIUM)`
@@ -196,7 +221,7 @@ const BigImage = styled.div<IdInjectable>`
           `}
         `;
       // 番台
-      case 'counter':
+      case FacilityID.COUNTER:
         return css`
           transform: scale(1.2) translate(-6%, -18%);
           ${media.lessThan(ScreenType.MEDIUM)`
@@ -204,7 +229,7 @@ const BigImage = styled.div<IdInjectable>`
           `}
         `;
       // 脱衣所
-      case 'changing_room':
+      case FacilityID.CHANGING_ROOM:
         return css`
           transform: scale(0.8) translate(0, -4%);
           ${media.lessThan(ScreenType.MEDIUM)`
@@ -212,7 +237,7 @@ const BigImage = styled.div<IdInjectable>`
           `}
         `;
       // 浴室
-      case 'bathroom':
+      case FacilityID.BATHROOM:
         return css`
           transform: scale(0.6) translate(23%, 19%);
           ${media.lessThan(ScreenType.MEDIUM)`
@@ -220,7 +245,7 @@ const BigImage = styled.div<IdInjectable>`
           `}
         `;
       // 待合室兼ギャラリー
-      case 'lounge':
+      case FacilityID.LOUNGE:
         return css`
           transform: scale(1.1) translate(-25%, -14%);
           ${media.lessThan(ScreenType.MEDIUM)`
@@ -228,8 +253,8 @@ const BigImage = styled.div<IdInjectable>`
           `}
         `;
       // コインランドリー、となり
-      case 'laundry':
-      case 'tonari':
+      case FacilityID.LAUNDRY:
+      case FacilityID.TONARI:
         return css`
           opacity: 0;
           transform: scale(1) translate(0, 0);
@@ -238,6 +263,33 @@ const BigImage = styled.div<IdInjectable>`
         return '';
     }
   }}
+`;
+
+type BackgroundPhotoProps = {
+  isActive: boolean;
+  relativePath: string;
+};
+
+const BackgroundPhoto: React.FC<BackgroundPhotoProps> = ({ isActive, relativePath }) => (
+  <Transition in={isActive} timeout={200}>
+    {(state) => (
+      <BackgroundPhotoContainer state={state}>
+        <Picture relativePath={relativePath} />
+      </BackgroundPhotoContainer>
+    )}
+  </Transition>
+);
+
+const BackgroundPhotoContainer = styled.div<PropsWithTransition>`
+  position: absolute;
+  top: ${Spacing.X_LARGE}px;
+  right: ${Spacing.X_LARGE}px;
+  bottom: ${Spacing.X_LARGE}px;
+  left: ${Spacing.X_LARGE}px;
+  width: calc(100% - ${Spacing.X_LARGE * 2}px);
+  height: calc(100% - ${Spacing.X_LARGE * 2}px);
+  transition: 1s ease;
+  opacity: ${({ state }) => (state === TransitionStatus.ENTERED ? 1 : 0)};
 `;
 
 const BaseWindow = styled.div`

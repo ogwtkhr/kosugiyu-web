@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Colors, Layer } from '@/constants';
-import Transition, { TransitionStatus } from 'react-transition-group/Transition';
+import { Colors, Layer, PropsWithTransition, TransitionStatus } from '@/constants';
+import Transition from 'react-transition-group/Transition';
 
 export const Loading: React.FC = () => {
   const [isShow, setIsShow] = useState(true);
@@ -33,11 +33,7 @@ export const Loading: React.FC = () => {
   );
 };
 
-type ContainerProps = {
-  state: TransitionStatus;
-};
-
-const Container = styled.div<ContainerProps>`
+const Container = styled.div<PropsWithTransition>`
   display: flex;
   position: fixed;
   z-index: ${Layer.PRIVILEGE};
@@ -49,7 +45,7 @@ const Container = styled.div<ContainerProps>`
   width: 100%;
   height: 100%;
   transition: opacity 1s ease;
-  opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
+  opacity: ${({ state }) => (state === TransitionStatus.ENTERED ? 1 : 0)};
   background-color: ${Colors.UI_PAPER};
 `;
 

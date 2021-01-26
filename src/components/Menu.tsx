@@ -1,11 +1,19 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
-import { Layer, Spacing, StyleMixin, ScreenType, TextSize, TextWeight } from '@/constants';
+import {
+  Layer,
+  Spacing,
+  StyleMixin,
+  ScreenType,
+  TextSize,
+  TextWeight,
+  PropsWithTransition,
+  TransitionStatus,
+} from '@/constants';
 import Transition from 'react-transition-group/Transition';
 import { useMenu } from '@/hooks';
 import { Link } from 'gatsby';
 import media from 'styled-media-query';
-import { PropsWithTransition } from '@/types';
 import { Overlay } from '@/components/Overlay';
 
 const TRANSITION_TIME = 300;
@@ -108,7 +116,7 @@ const TriggerContainer = styled.button<PropsWithTransition>`
   height: ${Spacing.X_LARGE}px;
   mix-blend-mode: difference;
   transition: opacity ${TRANSITION_TIME}ms ease;
-  opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
+  opacity: ${({ state }) => (state === TransitionStatus.ENTERED ? 1 : 0)};
   ${media.greaterThan(ScreenType.HUGE)`
     top: 88px;
   `}

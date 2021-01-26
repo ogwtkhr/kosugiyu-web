@@ -27,8 +27,10 @@ export const GlobalStyle = createGlobalStyle`
   button {
     padding: 0;
     border: none;
-    /* outline: none; */
+    outline: none;
+    /* TODO
     appearance: none;
+     */
     background-color: transparent;
     cursor: pointer;
     ${Typography.Mixin.BASE}

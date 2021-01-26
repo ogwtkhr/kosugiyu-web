@@ -1,7 +1,13 @@
-import { Colors, Layer, Opacity, ClassName } from '@/constants';
+import {
+  Colors,
+  Layer,
+  Opacity,
+  ClassName,
+  PropsWithTransition,
+  TransitionStatus,
+} from '@/constants';
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { PropsWithTransition } from '@/types';
 import { rgba } from 'polished';
 import Transition from 'react-transition-group/Transition';
 
@@ -61,6 +67,6 @@ export const Container = styled.div<ContainerProps>`
   width: 100%;
   height: 100%;
   transition: opacity ${({ duration }) => duration}ms ease;
-  opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
+  opacity: ${({ state }) => (state === TransitionStatus.ENTERED ? 1 : 0)};
   background-color: ${rgba(Colors.UI_PAPER, Opacity.OVERLAY)};
 `;
