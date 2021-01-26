@@ -38,54 +38,32 @@ export const SlideView: React.FC<SlideViewProps> = ({ autoPlay, children }) => {
   return (
     <SlideViewContainer>
       <SlideViewLayout>{backgroundView}</SlideViewLayout>
-      <SlideViewItem
-        style={{
-          zIndex: 1,
-        }}
-      >
-        {backgroundView}
-      </SlideViewItem>
+      <SlideViewItem zIndex={1}>{backgroundView}</SlideViewItem>
       <Transition
         in={existForeground}
         timeout={timeout}
         onEnter={() => {
-          console.log('onEntering.');
           setTimeout(() => {
+            // のりしろの部分
             setExistCover(false);
             coverView.current = backgroundView;
-          }, 1000);
+          }, 50);
         }}
         onExited={() => {
-          console.log('onExit.');
+          setExistCover(true);
           if (autoPlay) {
-            setExistCover(true);
-            setTimeout(() => {
-              increment();
-            }, 3000);
+            increment();
           }
         }}
       >
         {(state) => (
-          <SlideViewItem
-            className="foreground"
-            state={state}
-            style={{
-              zIndex: 2,
-            }}
-          >
+          <SlideViewItem className="foreground" state={state} zIndex={2}>
             {foregroundView}
           </SlideViewItem>
         )}
       </Transition>
-      {existCover && (
-        <SlideViewItem
-          style={{
-            zIndex: 3,
-          }}
-        >
-          {coverView.current}
-        </SlideViewItem>
-      )}
+      {/* チラツキ防止カバー */}
+      {existCover && <SlideViewItem zIndex={3}>{coverView.current}</SlideViewItem>}
     </SlideViewContainer>
   );
 };
@@ -96,6 +74,7 @@ const SlideViewContainer = styled.div`
 
 export type SlideViewItemProps = {
   inTransition?: boolean;
+  zIndex?: number;
 } & Partial<PropsWithTransition>;
 
 const SlideViewItem = styled.div<SlideViewItemProps>`
@@ -121,6 +100,7 @@ const SlideViewItem = styled.div<SlideViewItemProps>`
         `;
     }
   }};
+  ${({ zIndex }) => (isNumber(zIndex) ? zIndex : '')}
 `;
 
 const SlideViewLayout = styled.div`
