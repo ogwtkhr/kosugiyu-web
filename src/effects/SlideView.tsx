@@ -6,33 +6,36 @@ import styled, { css } from 'styled-components';
 
 export type SlideViewProps = {
   autoPlay?: boolean | number;
+  index?: number;
   children: JSX.Element[];
 };
 
-export const SlideView: React.FC<SlideViewProps> = ({ autoPlay, children }) => {
-  const initial = 0;
+export const SlideView: React.FC<SlideViewProps> = ({ autoPlay, index = 0, children }) => {
   const timeout = isNumber(autoPlay) ? autoPlay : 3000;
-  const [current, setCurrent] = useState<number>(initial);
+  const [current, setCurrent] = useState<number>(index);
   const [existForeground, setExistForeground] = useState<boolean>(true);
   const [existCover, setExistCover] = useState<boolean>(false);
 
   const slideViews = React.Children.toArray(children);
   const foregroundView = slideViews[current];
-  const backgroundView = slideViews[current + 1] || slideViews[initial];
+  const backgroundView = slideViews[current + 1] || slideViews[0];
   const coverView = useRef<React.ReactNode>(backgroundView);
 
   const increment = useCallback(() => {
-    setCurrent((c) => (c + 1 >= slideViews.length ? initial : c + 1));
+    setCurrent((c) => (c + 1 >= slideViews.length ? 0 : c + 1));
   }, [slideViews]);
 
   useEffect(() => {
-    console.log('current change:', current);
+    setCurrent(index);
+  }, [index]);
+
+  useEffect(() => {
     setExistForeground(true);
-    if (autoPlay) {
-      setTimeout(() => {
-        setExistForeground(false);
-      }, timeout);
-    }
+    // if (autoPlay) {
+    setTimeout(() => {
+      setExistForeground(false);
+    }, timeout);
+    // }
   }, [current]);
 
   return (
