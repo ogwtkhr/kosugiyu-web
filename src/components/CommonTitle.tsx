@@ -24,6 +24,7 @@ export const CommonTitle: React.FC<CommonTitleProps> = ({ title, imagePath }) =>
         zoomSmall={1.7}
         basePosition={ParallaxBasePosition.TOP}
         fillLayout
+        verbose
       >
         <Picture relativePath={imagePath} />
       </ReverseParallax>

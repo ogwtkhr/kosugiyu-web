@@ -1,7 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import { rgba } from 'polished';
-import { Spacing, LINE, Colors, Transitions, Opacity, TextSize, Typography } from '@/constants';
+import {
+  Spacing,
+  BigSpacing,
+  LINE,
+  Colors,
+  Transitions,
+  Opacity,
+  TextSize,
+  Typography,
+} from '@/constants';
 import { ArrowIcon } from '@/components';
 import { Link } from 'gatsby';
 
@@ -62,7 +71,7 @@ const ButtonIcon = styled.div`
 export const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
-  padding: ${Spacing.XXX_LARGE}px 0;
+  margin: ${BigSpacing.NORMAL}px 0;
 `;
 
 export default Button;

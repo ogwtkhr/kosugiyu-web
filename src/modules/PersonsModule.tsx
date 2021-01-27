@@ -15,7 +15,7 @@ import {
 } from '@/constants';
 import { PersonItem, TopPersonItem, Picture, Button, ButtonContainer } from '@/components';
 import media from 'styled-media-query';
-import { ReverseParallax, ParallaxBasePosition } from '@/effects';
+import { ReverseParallax, ParallaxBasePosition, IntersectionFadeIn } from '@/effects';
 
 type PersonsModuleProps = {
   useTitle?: boolean;
@@ -59,6 +59,7 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({
   const topPersonName = topPerson?.name || '';
   const topPersonTitle = topPerson?.title || '';
   const topPersonMainVisualUrl = topPerson?.mainVisual?.url || '';
+  const isSummaryView = summaryMode && persons.length > summaryMax;
 
   return (
     <>
@@ -123,7 +124,7 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({
             })}
           </PersonList>
         </PersonListContainer>
-        {summaryMode && persons.length > summaryMax && (
+        {isSummaryView && (
           <ButtonContainer>
             <Button to="/persons">さらに読む</Button>
           </ButtonContainer>
@@ -134,15 +135,18 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({
 };
 
 const HeadingTitle: React.FC = () => (
-  <PersonsHeadingTitle>
-    <PersonsHeadingTitleSub>日常の中の非日常を届ける</PersonsHeadingTitleSub>
-    <PersonsHeadingTitleMain>ケノ日のハレ</PersonsHeadingTitleMain>
-  </PersonsHeadingTitle>
+  <IntersectionFadeIn>
+    <PersonsHeadingTitle>
+      <PersonsHeadingTitleSub>日常の中の非日常を届ける</PersonsHeadingTitleSub>
+      <PersonsHeadingTitleMain>ケノ日のハレ</PersonsHeadingTitleMain>
+    </PersonsHeadingTitle>
+  </IntersectionFadeIn>
 );
 
 const Container = styled.div<Pick<PersonsModuleProps, 'withVerticalMargin'>>`
   max-width: ${ModuleWidth.MIDDLE}px;
-  margin: ${({ withVerticalMargin }) => `${withVerticalMargin ? BigSpacing.LARGE : 0}px auto`};
+  margin: ${({ withVerticalMargin }) =>
+    `${withVerticalMargin ? BigSpacing.LARGE : 0}px auto ${BigSpacing.NORMAL}px`};
 
   ${media.lessThan(ScreenType.MEDIUM)`
     margin: ${Spacing.LARGE}px auto;

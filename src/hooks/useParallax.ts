@@ -84,7 +84,8 @@ export const useParallax = <T extends HTMLElement = HTMLElement>(
     if (!rect) return;
     const centerYInViewport = window.innerHeight / 2;
     const result: ScrollInfo = {
-      top: getValue(rect.top - centerYInViewport),
+      top: getValue(rect.top), // TODO
+      // top: getValue(rect.top - centerYInViewport), // TODO
       center: getValue(rect.top + rect.height / 2 - centerYInViewport),
       bottom: getValue(rect.bottom - centerYInViewport),
     };

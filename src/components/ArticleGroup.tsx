@@ -26,7 +26,6 @@ export const ArticleGroup: React.FC<ArticleGroupProps> = ({ children }) => {
     article11,
   ] = children;
   if (!article1) return <div />;
-  console.log(children);
   return (
     <ArticleGroupContainer>
       <ArticleSubGroupType1 list={[article1, article2, article3]} />
