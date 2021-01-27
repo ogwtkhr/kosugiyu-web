@@ -85,7 +85,7 @@ export const FacilityModule: React.FC = () => {
                 <InformationContent flex={1}>
                   <InformationItem title="ドライヤー" price={20} supple="（3分）" />
                   <InformationItem title="マッサージ機" price={100} supple="（10分）" />
-                  <InformationItem title="マッサージ機" body="無料" />
+                  <InformationItem title="Wi-Fi" body="無料" />
                 </InformationContent>
               </InformationContentRow>
             </InformationGroup>
