@@ -1,3 +1,4 @@
+import { ScreenValue } from './../constants/screen';
 import { ValueOf } from '@/types';
 import { DomEventType } from '@/constants';
 import { isString, isUndefined } from 'lodash';
@@ -33,6 +34,8 @@ type ScrollInfo = {
   bottom: number;
 };
 
+const SMALL_SCREEN_COEFFICIENT = 0.6;
+
 const defaultOptions: Options = {
   coefficient: 1,
   min: undefined,
@@ -42,12 +45,23 @@ const defaultOptions: Options = {
 };
 
 export const useParallax = <T extends HTMLElement = HTMLElement>(
-  options: Options = {},
+  options: Options = {
+    coefficient: 1,
+    min: undefined,
+    max: undefined,
+    direction: ParallaxDirectionType.NORMAL,
+    verbose: false,
+  },
 ): [React.RefObject<T>, ScrollInfo] => {
-  const { coefficient, min, max, direction: directionParam, verbose } = {
+  const { coefficient: baseCoefficient, min, max, direction: directionParam, verbose } = {
     ...defaultOptions,
     ...options,
   };
+
+  const coefficient =
+    window.innerWidth < ScreenValue.MEDIUM
+      ? baseCoefficient! * SMALL_SCREEN_COEFFICIENT
+      : baseCoefficient!;
 
   const ref = useRef<T>(null);
 
@@ -95,11 +109,18 @@ export const useParallax = <T extends HTMLElement = HTMLElement>(
 
   useEffect(() => {
     window.addEventListener(DomEventType.SCROLL, handler);
+    window.addEventListener(DomEventType.RESIZE, handler);
 
     return () => {
       window.removeEventListener(DomEventType.SCROLL, handler);
+      window.removeEventListener(DomEventType.RESIZE, handler);
     };
   }, [handler]);
+
+  // 初期描画
+  useEffect(() => {
+    handler();
+  }, []);
 
   return [ref, current];
 };

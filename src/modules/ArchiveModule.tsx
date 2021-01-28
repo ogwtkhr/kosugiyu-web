@@ -56,14 +56,14 @@ export const ArchiveModule: React.FC = () => {
       <YearNavigation>
         <YearNavigationList>
           {years.map((year, index) => (
-            <>
+            <div key={year}>
               <YearNavigationItem key={year}>{year}</YearNavigationItem>
               {index < years.length - 1 && (
                 <YearNavigationLineContainer>
                   <YearNavigationLine />
                 </YearNavigationLineContainer>
               )}
-            </>
+            </div>
           ))}
         </YearNavigationList>
       </YearNavigation>

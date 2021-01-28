@@ -2,6 +2,7 @@ import { ValueOf } from '@/types';
 
 export const DomEventType = {
   SCROLL: 'scroll',
+  RESIZE: 'resize',
   LOAD: 'load',
 } as const;
 
