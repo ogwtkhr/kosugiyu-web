@@ -1595,8 +1595,8 @@ export type MicrocmsArchive = Node & {
   mainVisual?: Maybe<MicrocmsArchiveMainVisual>;
   body?: Maybe<Scalars['String']>;
   info?: Maybe<Array<Maybe<MicrocmsArchiveInfo>>>;
-  writer?: Maybe<MicrocmsArchiveWriter>;
   archiveId?: Maybe<Scalars['String']>;
+  publishDate?: Maybe<Scalars['Date']>;
 };
 
 
@@ -1625,6 +1625,14 @@ export type MicrocmsArchivePublishedAtArgs = {
 
 
 export type MicrocmsArchiveRevisedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+export type MicrocmsArchivePublishDateArgs = {
   formatString?: Maybe<Scalars['String']>;
   fromNow?: Maybe<Scalars['Boolean']>;
   difference?: Maybe<Scalars['String']>;
@@ -1759,12 +1767,8 @@ export type MicrocmsArchiveFieldsEnum =
   | 'info___fieldId'
   | 'info___head'
   | 'info___body'
-  | 'writer___id'
-  | 'writer___createdAt'
-  | 'writer___updatedAt'
-  | 'writer___publishedAt'
-  | 'writer___name'
-  | 'archiveId';
+  | 'archiveId'
+  | 'publishDate';
 
 export type MicrocmsArchiveFilterInput = {
   id?: Maybe<StringQueryOperatorInput>;
@@ -1780,8 +1784,8 @@ export type MicrocmsArchiveFilterInput = {
   mainVisual?: Maybe<MicrocmsArchiveMainVisualFilterInput>;
   body?: Maybe<StringQueryOperatorInput>;
   info?: Maybe<MicrocmsArchiveInfoFilterListInput>;
-  writer?: Maybe<MicrocmsArchiveWriterFilterInput>;
   archiveId?: Maybe<StringQueryOperatorInput>;
+  publishDate?: Maybe<DateQueryOperatorInput>;
 };
 
 export type MicrocmsArchiveGroupConnection = {
@@ -1824,46 +1828,6 @@ export type MicrocmsArchiveMainVisualFilterInput = {
 export type MicrocmsArchiveSortInput = {
   fields?: Maybe<Array<Maybe<MicrocmsArchiveFieldsEnum>>>;
   order?: Maybe<Array<Maybe<SortOrderEnum>>>;
-};
-
-export type MicrocmsArchiveWriter = {
-  id?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['Date']>;
-  updatedAt?: Maybe<Scalars['Date']>;
-  publishedAt?: Maybe<Scalars['Date']>;
-  name?: Maybe<Scalars['String']>;
-};
-
-
-export type MicrocmsArchiveWriterCreatedAtArgs = {
-  formatString?: Maybe<Scalars['String']>;
-  fromNow?: Maybe<Scalars['Boolean']>;
-  difference?: Maybe<Scalars['String']>;
-  locale?: Maybe<Scalars['String']>;
-};
-
-
-export type MicrocmsArchiveWriterUpdatedAtArgs = {
-  formatString?: Maybe<Scalars['String']>;
-  fromNow?: Maybe<Scalars['Boolean']>;
-  difference?: Maybe<Scalars['String']>;
-  locale?: Maybe<Scalars['String']>;
-};
-
-
-export type MicrocmsArchiveWriterPublishedAtArgs = {
-  formatString?: Maybe<Scalars['String']>;
-  fromNow?: Maybe<Scalars['Boolean']>;
-  difference?: Maybe<Scalars['String']>;
-  locale?: Maybe<Scalars['String']>;
-};
-
-export type MicrocmsArchiveWriterFilterInput = {
-  id?: Maybe<StringQueryOperatorInput>;
-  createdAt?: Maybe<DateQueryOperatorInput>;
-  updatedAt?: Maybe<DateQueryOperatorInput>;
-  publishedAt?: Maybe<DateQueryOperatorInput>;
-  name?: Maybe<StringQueryOperatorInput>;
 };
 
 export type MicrocmsPersons = Node & {
@@ -2322,8 +2286,6 @@ export type QueryAllDirectoryArgs = {
 export type QuerySiteArgs = {
   buildTime?: Maybe<DateQueryOperatorInput>;
   siteMetadata?: Maybe<SiteSiteMetadataFilterInput>;
-  port?: Maybe<IntQueryOperatorInput>;
-  host?: Maybe<StringQueryOperatorInput>;
   polyfill?: Maybe<BooleanQueryOperatorInput>;
   pathPrefix?: Maybe<StringQueryOperatorInput>;
   id?: Maybe<StringQueryOperatorInput>;
@@ -2423,8 +2385,8 @@ export type QueryMicrocmsArchiveArgs = {
   mainVisual?: Maybe<MicrocmsArchiveMainVisualFilterInput>;
   body?: Maybe<StringQueryOperatorInput>;
   info?: Maybe<MicrocmsArchiveInfoFilterListInput>;
-  writer?: Maybe<MicrocmsArchiveWriterFilterInput>;
   archiveId?: Maybe<StringQueryOperatorInput>;
+  publishDate?: Maybe<DateQueryOperatorInput>;
 };
 
 
@@ -2748,8 +2710,6 @@ export type SettingYamlSortInput = {
 export type Site = Node & {
   buildTime?: Maybe<Scalars['Date']>;
   siteMetadata?: Maybe<SiteSiteMetadata>;
-  port?: Maybe<Scalars['Int']>;
-  host?: Maybe<Scalars['String']>;
   polyfill?: Maybe<Scalars['Boolean']>;
   pathPrefix?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
@@ -2954,8 +2914,6 @@ export type SiteFieldsEnum =
   | 'siteMetadata___author'
   | 'siteMetadata___googleApiKey'
   | 'siteMetadata___siteUrl'
-  | 'port'
-  | 'host'
   | 'polyfill'
   | 'pathPrefix'
   | 'id'
@@ -3048,8 +3006,6 @@ export type SiteFieldsEnum =
 export type SiteFilterInput = {
   buildTime?: Maybe<DateQueryOperatorInput>;
   siteMetadata?: Maybe<SiteSiteMetadataFilterInput>;
-  port?: Maybe<IntQueryOperatorInput>;
-  host?: Maybe<StringQueryOperatorInput>;
   polyfill?: Maybe<BooleanQueryOperatorInput>;
   pathPrefix?: Maybe<StringQueryOperatorInput>;
   id?: Maybe<StringQueryOperatorInput>;
@@ -3798,7 +3754,7 @@ export type AllMicrocmsArchiveQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type AllMicrocmsArchiveQuery = { allMicrocmsArchive: { nodes: Array<(
-      Pick<MicrocmsArchive, 'id' | 'title' | 'slug' | 'publishedAt'>
+      Pick<MicrocmsArchive, 'id' | 'title' | 'slug' | 'publishedAt' | 'publishDate'>
       & { mainVisual?: Maybe<Pick<MicrocmsArchiveMainVisual, 'url'>> }
     )> } };
 
@@ -3816,8 +3772,8 @@ export type Unnamed_1_QueryVariables = Exact<{
 
 
 export type Unnamed_1_Query = { microcmsArchive?: Maybe<(
-    Pick<MicrocmsArchive, 'title' | 'body' | 'publishedAt'>
-    & { writer?: Maybe<Pick<MicrocmsArchiveWriter, 'name'>>, mainVisual?: Maybe<Pick<MicrocmsArchiveMainVisual, 'url'>>, info?: Maybe<Array<Maybe<Pick<MicrocmsArchiveInfo, 'fieldId' | 'head' | 'body'>>>> }
+    Pick<MicrocmsArchive, 'title' | 'body' | 'publishDate' | 'publishedAt'>
+    & { mainVisual?: Maybe<Pick<MicrocmsArchiveMainVisual, 'url'>>, info?: Maybe<Array<Maybe<Pick<MicrocmsArchiveInfo, 'fieldId' | 'head' | 'body'>>>> }
   )> };
 
 export type Unnamed_2_QueryVariables = Exact<{

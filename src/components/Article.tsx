@@ -29,9 +29,11 @@ const Container = styled.article`
   max-width: ${ModuleWidth.ARTICLE}px;
   margin-right: auto;
   margin-left: auto;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
   ${media.lessThan(ScreenType.MEDIUM)`
-      margin: 0 ${Spacing.LARGE}px;
-    `}
+    margin: 0 ${Spacing.LARGE}px;
+  `}
 
   & p {
     padding-bottom: ${Spacing.LARGE}px;
@@ -39,8 +41,8 @@ const Container = styled.article`
     font-weight: ${TextWeight.MEDIUM};
 
     ${media.lessThan(ScreenType.MEDIUM)`
-        font-size: ${TextSize.SMALL}rem;
-      `}
+      font-size: ${TextSize.SMALL}rem;
+    `}
   }
 
   & p:not(:first-child) {
@@ -53,8 +55,8 @@ const Container = styled.article`
     font-size: ${TextSize.LARGE}rem;
 
     ${media.lessThan(ScreenType.MEDIUM)`
-        font-size: ${TextSize.NORMAL}rem;
-      `}
+      font-size: ${TextSize.NORMAL}rem;
+    `}
   }
 
   & strong {

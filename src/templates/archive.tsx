@@ -32,16 +32,16 @@ type ArchivePageProps = {
 
 const ArchivePage: React.FC<ArchivePageProps> = ({ data }) => {
   const title = data.microcmsArchive?.title;
-  const publishedAt = data.microcmsArchive?.publishedAt;
+  const publishDate = data.microcmsArchive?.publishDate || data.microcmsArchive?.publishedAt;
   const mainVisual = data.microcmsArchive?.mainVisual?.url;
   const body = data.microcmsArchive?.body;
 
   const strippedBody = useMemo(() => stripTag(body || '').slice(0, 200), [body]);
-  const publishedDate = useMemo(() => dayjs(publishedAt).format(DateFormat.YEAR_MONTH_DATE_JP), [
-    publishedAt,
+  const publishedDate = useMemo(() => dayjs(publishDate).format(DateFormat.YEAR_MONTH_DATE_JP), [
+    publishDate,
   ]);
 
-  if (!title || !publishedAt || !mainVisual || !body) return <div>data not exists.</div>;
+  if (!title || !publishDate || !mainVisual || !body) return <div>data not exists.</div>;
   return (
     <BaseLayout useHeader>
       <Meta title={title} description={strippedBody} ogImage={mainVisual} />
@@ -99,10 +99,8 @@ export const query = graphql`
     microcmsArchive(slug: { eq: $slug }) {
       title
       body
+      publishDate
       publishedAt
-      writer {
-        name
-      }
       mainVisual {
         url
       }
@@ -156,6 +154,7 @@ const MetaInfoContainer = styled.div`
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
+  margin-top: ${Spacing.LARGE}px;
 `;
 
 const SocialIcons = styled.div`

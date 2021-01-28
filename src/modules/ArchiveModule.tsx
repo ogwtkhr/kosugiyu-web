@@ -6,6 +6,7 @@ import { StyleMixin, TextSize, TypographyMixin, Colors, Spacing, ScreenType } fr
 import { CommonTitle, ArticleGroup, ArticleItemProps } from '@/components';
 import { groupByIndex } from '@/util/array';
 import media from 'styled-media-query';
+import { orderBy } from 'lodash';
 
 export const ArchiveModule: React.FC = () => {
   const data = useStaticQuery<AllMicrocmsArchiveQuery>(graphql`
@@ -16,6 +17,7 @@ export const ArchiveModule: React.FC = () => {
           title
           slug
           publishedAt
+          publishDate
           mainVisual {
             url
           }
@@ -24,28 +26,24 @@ export const ArchiveModule: React.FC = () => {
     }
   `);
 
-  const baseArticles: ArticleItemProps[] = data.allMicrocmsArchive.nodes.map((entry) => {
-    const slug = entry.slug || '';
-    const title = entry.title || '';
-    const mainVisualUrl = entry?.mainVisual?.url || '';
-    const publishedAt = entry?.publishedAt || '';
-    return {
-      slug,
-      title,
-      mainVisualUrl,
-      publishedAt,
-    };
-  });
+  const articles: ArticleItemProps[] = orderBy(
+    data.allMicrocmsArchive.nodes.map((entry) => {
+      const slug = entry.slug || '';
+      const title = entry.title || '';
+      const mainVisualUrl = entry?.mainVisual?.url || '';
+      const publishDate = entry?.publishDate || entry?.publishedAt || '';
+      return {
+        slug,
+        title,
+        mainVisualUrl,
+        publishDate,
+      };
+    }),
+    'publishDate',
+    'desc',
+  );
 
   // TODO（実データを年ごとにグループする、lodash#groupBy?）
-  const articles = [
-    ...baseArticles,
-    ...baseArticles,
-    ...baseArticles,
-    ...baseArticles,
-    ...baseArticles,
-    ...baseArticles,
-  ];
   const years = ['2021', '2020', '2019'];
 
   const groupedArticle = groupByIndex(articles, 11);

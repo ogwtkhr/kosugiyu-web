@@ -13,6 +13,7 @@ import {
   ScreenType,
   DateFormat,
   SizeType,
+  LetterSpacing,
 } from '@/constants';
 import dayjs from 'dayjs';
 import media from 'styled-media-query';
@@ -28,7 +29,7 @@ export type ArticleItemProps = {
   slug: string;
   title: string;
   mainVisualUrl: string;
-  publishedAt: string;
+  publishDate: string;
   direction?: ArticleItemDirection;
   textSize?: Extract<SizeType, 'small' | 'normal'>;
   enableTextSizingOnSmallScreen?: boolean;
@@ -38,14 +39,14 @@ export const ArticleItem: React.FC<ArticleItemProps> = ({
   slug,
   title,
   mainVisualUrl,
-  publishedAt,
+  publishDate,
   direction = ArticleItemDirection.VERTICAL,
   textSize,
   enableTextSizingOnSmallScreen,
 }) => {
-  const formattedPublishedAt = useMemo(
-    () => dayjs(publishedAt).format(DateFormat.YEAR_MONTH_DATE_JP),
-    [publishedAt],
+  const formattedPublishDate = useMemo(
+    () => dayjs(publishDate).format(DateFormat.YEAR_MONTH_DATE_JP),
+    [publishDate],
   );
 
   return (
@@ -62,7 +63,7 @@ export const ArticleItem: React.FC<ArticleItemProps> = ({
             {title}
           </ArticleTitle>
           <PublishDate enableTextSizingOnSmallScreen={enableTextSizingOnSmallScreen}>
-            {formattedPublishedAt}
+            {formattedPublishDate}
           </PublishDate>
         </ArticleTitleContainer>
       </ArticleLink>
@@ -86,7 +87,7 @@ const ArticleItemContainer = styled.article``;
 
 const ArticleTitleContainer = styled.div<ArticleItemChildPropsWithDirection>`
   flex: 1;
-  max-width: 400px;
+  /* max-width: 400px; */
   padding: ${Spacing.LARGE}px 0;
   ${({ direction }) =>
     direction === ArticleItemDirection.HORIZONTAL
@@ -109,6 +110,7 @@ const ArticleTitle = styled.h3<ArticleItemChildPropsWithTextSize>`
     textSize === SizeType.SMALL ? TextSize.NORMAL : TextSize.LARGE}rem;
   line-height: ${LineHeight.NORMAL};
   text-decoration: none;
+  letter-spacing: ${LetterSpacing.SEMI_WIDE}em;
 
   ${media.lessThan<ArticleItemChildPropsWithTextSize>(ScreenType.MEDIUM)`
     font-size: ${({ textSize, enableTextSizingOnSmallScreen }) =>
