@@ -16,7 +16,7 @@ export const Meta: React.FC<Props> = ({
   title: propsTitle,
   description,
   ogImage,
-  lang = 'en',
+  lang = 'ja',
   meta = [],
 }) => {
   const {
