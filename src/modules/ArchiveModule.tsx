@@ -2,7 +2,7 @@ import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { AllMicrocmsArchiveQuery } from '@/types';
 import styled from 'styled-components';
-import { StyleMixin, TextSize, Typography, Colors, Spacing, ScreenType } from '@/constants';
+import { StyleMixin, TextSize, TypographyMixin, Colors, Spacing, ScreenType } from '@/constants';
 import { CommonTitle, ArticleGroup, ArticleItemProps } from '@/components';
 import { groupByIndex } from '@/util/array';
 import media from 'styled-media-query';
@@ -106,7 +106,7 @@ const YearNavigationList = styled.ul``;
 
 const YearNavigationItem = styled.li`
   margin-bottom: ${Spacing.SMALL}px;
-  ${Typography.Mixin.DISPLAY};
+  ${TypographyMixin.DISPLAY};
   color: ${Colors.UI_TEXT_DARK_BACKGROUND};
   font-size: ${TextSize.SMALL}rem;
 
@@ -141,7 +141,7 @@ const ArticleYear = styled.div`
 `;
 
 const ArticleYearText = styled.p`
-  ${Typography.Mixin.DISPLAY};
+  ${TypographyMixin.DISPLAY};
   display: inline-block;
   padding-bottom: ${Spacing.NORMAL}px;
   border-bottom: solid 1px ${Colors.UI_LINE_NORMAL};

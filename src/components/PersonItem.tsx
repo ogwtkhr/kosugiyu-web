@@ -9,7 +9,7 @@ import {
   StyleMixin,
   AspectRatio,
   Colors,
-  Typography,
+  TypographyMixin,
   TextSize,
   ScreenType,
   LineHeight,
@@ -65,7 +65,7 @@ const Info = styled.div`
 
 const Position = styled.p`
   font-size: ${TextSize.X_SMALL}rem;
-  ${Typography.Mixin.DISPLAY};
+  ${TypographyMixin.DISPLAY};
 `;
 
 const NameContainer = styled.div`
@@ -79,7 +79,7 @@ const Name = styled.h3`
   font-size: ${TextSize.LARGE}rem;
   line-height: ${LineHeight.NORMAL};
   text-decoration: none;
-  ${Typography.Mixin.DISPLAY};
+  ${TypographyMixin.DISPLAY};
 
   ${media.lessThan(ScreenType.MEDIUM)`
     font-size: ${TextSize.NORMAL}rem;
@@ -204,7 +204,7 @@ const TopInfo = styled.div`
 
 const TopPosition = styled.p`
   font-size: ${TextSize.SMALL}rem;
-  ${Typography.Mixin.DISPLAY};
+  ${TypographyMixin.DISPLAY};
 
   ${media.lessThan(ScreenType.MEDIUM)`
     text-align: center;
@@ -212,7 +212,7 @@ const TopPosition = styled.p`
 `;
 
 const TopName = styled.h3`
-  ${Typography.Mixin.DISPLAY};
+  ${TypographyMixin.DISPLAY};
   margin-top: ${Spacing.NORMAL}px;
   font-size: ${TextSize.XXX_LARGE}rem;
 
@@ -225,7 +225,7 @@ const TopName = styled.h3`
 const TopTitle = styled.p`
   margin-top: ${Spacing.NORMAL}px;
   font-size: ${TextSize.X_SMALL}rem;
-  ${Typography.Mixin.DISPLAY};
+  ${TypographyMixin.DISPLAY};
 `;
 
 const TopIconContainer = styled.div`

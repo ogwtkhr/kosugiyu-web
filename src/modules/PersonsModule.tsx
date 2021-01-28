@@ -4,7 +4,7 @@ import { AllMicrocmsPersonsQuery } from '@/types';
 import styled from 'styled-components';
 import {
   StyleMixin,
-  Typography,
+  TypographyMixin,
   TextSize,
   Spacing,
   BigSpacing,
@@ -197,20 +197,20 @@ const PersonsHeadingTitle = styled.div`
 `;
 
 const PersonsHeadingTitleMain = styled.h1`
-  ${Typography.Mixin.DISPLAY};
-  ${Typography.Mixin.VERTICAL_WRITING};
+  ${TypographyMixin.DISPLAY};
+  ${TypographyMixin.VERTICAL_WRITING};
   font-size: ${TextSize.XXX_LARGE}rem;
 `;
 
 const PersonsHeadingTitleSub = styled.p`
-  ${Typography.Mixin.DISPLAY};
-  ${Typography.Mixin.VERTICAL_WRITING};
+  ${TypographyMixin.DISPLAY};
+  ${TypographyMixin.VERTICAL_WRITING};
   margin-top: ${Spacing.XX_LARGE}px;
   font-size: ${TextSize.X_SMALL}rem;
 `;
 
 const PersonsHeadingBodyCopyLargeScreen = styled.p`
-  ${Typography.Mixin.DISPLAY};
+  ${TypographyMixin.DISPLAY};
   font-size: ${TextSize.SMALL}rem;
   ${media.lessThan(ScreenType.MEDIUM)`
     display: none;
@@ -219,7 +219,7 @@ const PersonsHeadingBodyCopyLargeScreen = styled.p`
 
 const PersonsHeadingBodyCopySmallScreen = styled.p`
   margin: ${Spacing.LARGE}px;
-  ${Typography.Mixin.DISPLAY};
+  ${TypographyMixin.DISPLAY};
   font-size: ${TextSize.X_SMALL}rem;
   ${media.greaterThan(ScreenType.MEDIUM)`
     display: none;

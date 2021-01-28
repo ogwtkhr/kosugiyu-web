@@ -10,7 +10,7 @@ import {
   ScreenType,
   Spacing,
   TextSize,
-  Typography,
+  TypographyMixin,
   BigSpacing,
   getResponsiveOffsetMixin,
 } from '@/constants';
@@ -133,7 +133,7 @@ const InformationContentContainer = styled.div<InformationContentProps>`
 `;
 
 const InformationContentHeading = styled.h4`
-  ${Typography.Mixin.DISPLAY};
+  ${TypographyMixin.DISPLAY};
   width: 140px;
   font-size: ${TextSize.LARGE}rem;
 
@@ -172,7 +172,7 @@ const InformationDescriptionList = styled.dl`
 `;
 
 const InformationDescriptionTerm = styled.dt`
-  ${Typography.Mixin.DISPLAY};
+  ${TypographyMixin.DISPLAY};
   margin-bottom: ${Spacing.NORMAL}px;
   color: ${Colors.UI_TEXT_SUB};
   font-size: ${TextSize.XX_SMALL}rem;
@@ -180,7 +180,7 @@ const InformationDescriptionTerm = styled.dt`
 `;
 
 const InformationDescriptionDetail = styled.dd`
-  ${Typography.Mixin.DISPLAY};
+  ${TypographyMixin.DISPLAY};
   font-size: ${TextSize.XX_LARGE}rem;
   line-height: ${LineHeight.MONOLITHIC};
 `;
@@ -204,7 +204,7 @@ export const InformationContentDashLine = styled.hr`
 `;
 
 export const InformationNormalText = styled.p`
-  ${Typography.Mixin.DISPLAY};
+  ${TypographyMixin.DISPLAY};
   font-size: ${TextSize.NORMAL}rem;
   letter-spacing: ${LetterSpacing.SEMI_WIDE}em;
 

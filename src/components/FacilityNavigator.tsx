@@ -14,7 +14,7 @@ import {
   ScreenValue,
   Spacing,
   TextSize,
-  Typography,
+  TypographyMixin,
   TransitionStatus,
   PropsWithTransition,
 } from '@/constants';
@@ -324,7 +324,7 @@ const DescriptionWindow = styled(BaseWindow)<IdInjectable>`
 `;
 
 const DescriptionTitle = styled.h3`
-  ${Typography.Mixin.DISPLAY};
+  ${TypographyMixin.DISPLAY};
   font-size: ${TextSize.X_LARGE}rem;
 
   ${media.lessThan(ScreenType.MEDIUM)`
@@ -333,7 +333,7 @@ const DescriptionTitle = styled.h3`
 `;
 
 const DescriptionBody = styled.p`
-  ${Typography.Mixin.DISPLAY};
+  ${TypographyMixin.DISPLAY};
   margin-top: ${Spacing.NORMAL}px;
   font-size: ${TextSize.SMALL}rem;
   ${media.lessThan(ScreenType.MEDIUM)`
@@ -514,12 +514,12 @@ const DetailDescriptionList = styled.dl`
 `;
 
 const DetailDescriptionTerm = styled.dt`
-  ${Typography.Mixin.DISPLAY};
+  ${TypographyMixin.DISPLAY};
   font-size: ${TextSize.LARGE}rem;
 `;
 
 const DetailDescriptionDetail = styled.dd`
-  ${Typography.Mixin.DISPLAY};
+  ${TypographyMixin.DISPLAY};
   margin-top: ${Spacing.NORMAL}px;
   font-size: ${TextSize.SMALL}rem;
   ${media.lessThan(ScreenType.MEDIUM)`

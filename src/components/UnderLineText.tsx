@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { TextSize, Typography, Colors, ScreenType, SizeType } from '@/constants';
+import { TextSize, TypographyMixin, Colors, ScreenType, SizeType } from '@/constants';
 import media from 'styled-media-query';
 import { withRem } from '@/util/style';
 
@@ -15,7 +15,7 @@ export const UnderLineText: React.FC<UnderLineTextProps> = ({ size, children }) 
 const Container = styled.span<UnderLineTextProps>`
   display: inline-block;
   padding-bottom: 0.2em;
-  ${Typography.Mixin.DISPLAY};
+  ${TypographyMixin.DISPLAY};
   border-bottom: solid 1px ${Colors.UI_LINE_NORMAL};
   font-size: ${({ size }) => {
     switch (size) {

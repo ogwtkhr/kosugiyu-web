@@ -5,7 +5,7 @@ import media from 'styled-media-query';
 import { GridContainer, GridItem, GridImage, Picture } from '@/components';
 
 import {
-  Typography,
+  TypographyMixin,
   Colors,
   ScreenType,
   TextSize,
@@ -234,8 +234,8 @@ const MessageTypography: React.FC = ({ children }) => {
 };
 
 const MessageTypographyStyle = styled.span`
-  ${Typography.Mixin.DISPLAY};
-  ${Typography.Mixin.VERTICAL_WRITING};
+  ${TypographyMixin.DISPLAY};
+  ${TypographyMixin.VERTICAL_WRITING};
   font-size: ${TextSize.NORMAL}rem;
 
   ${media.lessThan(ScreenType.MEDIUM)`

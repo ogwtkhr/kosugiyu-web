@@ -1,6 +1,6 @@
 // import React from 'react';
 import styled from 'styled-components';
-import { Spacing, Typography, ScreenType } from '@/constants';
+import { Spacing, TypographyMixin, ScreenType } from '@/constants';
 import media from 'styled-media-query';
 
 type HeadingProps = {
@@ -12,7 +12,7 @@ type HeadingProps = {
 // };
 
 export const Heading = styled.h2<HeadingProps>`
-  ${Typography.Mixin.DISPLAY}
+  ${TypographyMixin.DISPLAY}
   font-size: 3rem;
 `;
 

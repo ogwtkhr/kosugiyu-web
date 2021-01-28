@@ -6,7 +6,7 @@ import {
   StyleMixin,
   AspectRatio,
   TextSize,
-  Typography,
+  TypographyMixin,
   LineHeight,
   Colors,
   Spacing,
@@ -104,7 +104,7 @@ const ArticleTitleContainer = styled.div<ArticleItemChildPropsWithDirection>`
 `;
 
 const ArticleTitle = styled.h3<ArticleItemChildPropsWithTextSize>`
-  ${Typography.Mixin.DISPLAY};
+  ${TypographyMixin.DISPLAY};
   font-size: ${({ textSize }) =>
     textSize === SizeType.SMALL ? TextSize.NORMAL : TextSize.LARGE}rem;
   line-height: ${LineHeight.NORMAL};
@@ -135,7 +135,7 @@ const ArticleThumbnail = styled.div`
 `;
 
 const PublishDate = styled.p<ArticleItemChildPropsWithTextSize>`
-  ${Typography.Mixin.DISPLAY};
+  ${TypographyMixin.DISPLAY};
   color: ${Colors.UI_TEXT_SUB};
   font-size: ${({ textSize }) =>
     textSize === SizeType.SMALL ? TextSize.X_SMALL : TextSize.SMALL}rem;

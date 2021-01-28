@@ -6,7 +6,7 @@ import {
   TextWeight,
   Spacing,
   Colors,
-  Typography,
+  TypographyMixin,
   TextSize,
   ScreenType,
 } from '@/constants';
@@ -48,7 +48,7 @@ const Container = styled.article`
   }
 
   & h1 {
-    ${Typography.Mixin.DISPLAY};
+    ${TypographyMixin.DISPLAY};
     margin-top: ${Spacing.XXX_LARGE}px;
     font-size: ${TextSize.LARGE}rem;
 
@@ -68,9 +68,14 @@ const Container = styled.article`
     margin-top: ${Spacing.X_LARGE}px;
 
     ${media.lessThan(ScreenType.MEDIUM)`
-        margin-left: -${Spacing.LARGE}px;
-        margin-right: -${Spacing.LARGE}px;
-        width: calc(100% + ${Spacing.LARGE * 2}px);
+      margin-left: -${Spacing.LARGE}px;
+      margin-right: -${Spacing.LARGE}px;
+      margin-top: 0;
+      width: calc(100% + ${Spacing.LARGE * 2}px);
     `}
+  }
+
+  & a {
+    ${TypographyMixin.LINK};
   }
 `;

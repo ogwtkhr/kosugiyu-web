@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import { Typography, Colors } from '@/constants';
+import { TypographyMixin, Colors } from '@/constants';
 
 export const GlobalStyle = createGlobalStyle`
   
@@ -16,7 +16,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    ${Typography.Mixin.BASE};
+    ${TypographyMixin.BASE};
     background-color: ${Colors.UI_PAPER};
 
     .is-cropped & {
@@ -33,7 +33,7 @@ export const GlobalStyle = createGlobalStyle`
      */
     background-color: transparent;
     cursor: pointer;
-    ${Typography.Mixin.BASE}
+    ${TypographyMixin.BASE}
   }
 `;
 

@@ -45,7 +45,7 @@ export const LetterSpacing = {
   WIDE: 0.25,
 } as const;
 
-const Mixin = {
+export const TypographyMixin = {
   BASE: css`
     color: ${Colors.UI_TEXT_MAIN};
     font-family: ${TypeFace.BASE};
@@ -80,6 +80,26 @@ const Mixin = {
   HORIZONTAL_WRITING: css`
     writing-mode: initial;
   `,
+  LINK: css`
+    transition: opacity 0.2s ease;
+    border-bottom: 1px ${Colors.UI_TEXT_MAIN} dotted;
+    color: ${Colors.UI_TEXT_MAIN};
+    text-decoration: none;
+
+    &:hover {
+      opacity: 0.4;
+    }
+  `,
+  LINK_SUB: css`
+    transition: opacity 0.2s ease;
+    border-bottom: 1px ${Colors.UI_TEXT_SUB} dotted;
+    color: ${Colors.UI_TEXT_SUB};
+    text-decoration: none;
+
+    &:hover {
+      opacity: 0.6;
+    }
+  `,
 } as const;
 
 export const Typography = {
@@ -88,7 +108,7 @@ export const Typography = {
   TypeFace,
   TypeStyle,
   LineHeight,
-  Mixin,
+  Mixin: TypographyMixin,
 } as const;
 
 export default Typography;

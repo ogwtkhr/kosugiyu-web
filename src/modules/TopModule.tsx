@@ -4,7 +4,7 @@ import media from 'styled-media-query';
 import { Link } from 'gatsby';
 import {
   Spacing,
-  Typography,
+  TypographyMixin,
   ScreenType,
   Colors,
   TextSize,
@@ -153,7 +153,7 @@ const LogoCopy = styled.p`
   font-size: ${TextSize.SMALL}rem;
   font-weight: ${TextWeight.BOLD};
   letter-spacing: 0.3rem;
-  ${Typography.Mixin.VERTICAL_WRITING};
+  ${TypographyMixin.VERTICAL_WRITING};
 
   ${media.lessThan(ScreenType.MEDIUM)`
     font-size: ${TextSize.X_SMALL}rem;
@@ -215,7 +215,7 @@ const MenuListSmallScreen = styled.ul`
 `;
 
 const MenuItem = styled.li`
-  ${Typography.Mixin.DISPLAY};
+  ${TypographyMixin.DISPLAY};
   display: inline-block;
   margin-left: ${Spacing.MIDDLE}px;
   cursor: pointer;

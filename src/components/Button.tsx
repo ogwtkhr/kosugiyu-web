@@ -9,7 +9,7 @@ import {
   Transitions,
   Opacity,
   TextSize,
-  Typography,
+  TypographyMixin,
 } from '@/constants';
 import { ArrowIcon } from '@/components';
 import { Link } from 'gatsby';
@@ -41,7 +41,7 @@ export const Button: React.FC<ButtonProps> = (props) => {
 };
 
 const StyledButton = styled(Link)`
-  ${Typography.Mixin.DISPLAY};
+  ${TypographyMixin.DISPLAY};
   display: inline-block;
   width: 240px;
   padding: ${Spacing.MIDDLE}px ${Spacing.XXX_LARGE}px;

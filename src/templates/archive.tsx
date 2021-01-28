@@ -12,12 +12,13 @@ import {
   StyleMixin,
   AspectRatio,
   Colors,
-  Typography,
+  TypographyMixin,
   TextSize,
   ScreenType,
   LineHeight,
   Layer,
   DateFormat,
+  getResponsiveOffsetMixin,
 } from '@/constants';
 import media from 'styled-media-query';
 import { stripTag } from '@/util/string';
@@ -33,7 +34,6 @@ const ArchivePage: React.FC<ArchivePageProps> = ({ data }) => {
   const title = data.microcmsArchive?.title;
   const publishedAt = data.microcmsArchive?.publishedAt;
   const mainVisual = data.microcmsArchive?.mainVisual?.url;
-  const writerName = data.microcmsArchive?.writer?.name;
   const body = data.microcmsArchive?.body;
 
   const strippedBody = useMemo(() => stripTag(body || '').slice(0, 200), [body]);
@@ -41,8 +41,7 @@ const ArchivePage: React.FC<ArchivePageProps> = ({ data }) => {
     publishedAt,
   ]);
 
-  if (!title || !publishedAt || !writerName || !mainVisual || !body)
-    return <div>data not exists.</div>;
+  if (!title || !publishedAt || !mainVisual || !body) return <div>data not exists.</div>;
   return (
     <BaseLayout useHeader>
       <Meta title={title} description={strippedBody} ogImage={mainVisual} />
@@ -54,19 +53,25 @@ const ArchivePage: React.FC<ArchivePageProps> = ({ data }) => {
               <MetaInfo>
                 <PublishedDate>{publishedDate}</PublishedDate>
               </MetaInfo>
+              <SocialIcons>
+                <SocialIcon>
+                  <TwitterTweetButton />
+                </SocialIcon>
+                <SocialIcon>
+                  <FacebookShareButton />
+                </SocialIcon>
+              </SocialIcons>
             </MetaInfoContainer>
           </TitleInner>
-          <SocialIcons>
-            <SocialIcon>
-              <TwitterTweetButton />
-            </SocialIcon>
-            <SocialIcon>
-              <FacebookShareButton />
-            </SocialIcon>
-          </SocialIcons>
         </TitleContainer>
         <MainVisualContainer>
-          <ReverseParallax basePosition={ParallaxBasePosition.TOP} zoom={1.1} min={0} max={1000}>
+          <ReverseParallax
+            basePosition={ParallaxBasePosition.TOP}
+            coefficient={0.08}
+            zoom={1.1}
+            min={0}
+            max={1000}
+          >
             <MainVisual src={mainVisual} />
           </ReverseParallax>
         </MainVisualContainer>
@@ -75,10 +80,10 @@ const ArchivePage: React.FC<ArchivePageProps> = ({ data }) => {
         </ArticleContainer>
         <InfoList>
           {data.microcmsArchive?.info?.map(
-            (item) =>
+            (item, index) =>
               item?.head &&
               item?.body && (
-                <InfoListItem>
+                <InfoListItem key={index}>
                   <ArticleInfo title={item.head} body={item.body}></ArticleInfo>
                 </InfoListItem>
               ),
@@ -116,23 +121,28 @@ const Container = styled.div`
 
 const TitleContainer = styled.div`
   display: flex;
-  margin: ${Spacing.XXX_LARGE}px auto;
-  justify-content: space-between;
   position: relative;
   z-index: ${Layer.BASE};
-  max-width: ${ModuleWidth.MIDDLE}px;
+  justify-content: space-between;
+  margin-top: ${Spacing.XXX_LARGE}px;
+  margin-bottom: ${Spacing.XXX_LARGE}px;
 
   ${media.lessThan(ScreenType.MEDIUM)`
-    display: block;
-    margin: 0;
-    padding: 0 ${Spacing.LARGE}px ${Spacing.LARGE}px;
+    margin-top: ${Spacing.LARGE}px;
+    margin-bottom: ${Spacing.LARGE}px;
   `}
+
+  ${getResponsiveOffsetMixin({
+    maxWidth: ModuleWidth.MIDDLE,
+    margin: Spacing.XXX_LARGE,
+    marginSmall: Spacing.LARGE,
+  })};
 `;
 
 const TitleInner = styled.div``;
 
 const Title = styled.h2`
-  ${Typography.Mixin.DISPLAY};
+  ${TypographyMixin.DISPLAY};
   font-size: ${TextSize.X_LARGE}rem;
   font-weight: ${TextWeight.BOLD};
   line-height: ${LineHeight.NORMAL};
@@ -144,12 +154,8 @@ const Title = styled.h2`
 
 const MetaInfoContainer = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
-
-  ${media.lessThan(ScreenType.MEDIUM)`
-    display: block;
-  `}
 `;
 
 const SocialIcons = styled.div`
@@ -172,7 +178,7 @@ const SocialIcon = styled.div`
 const MetaInfo = styled.div``;
 
 const PublishedDate = styled.p`
-  ${Typography.Mixin.DISPLAY};
+  ${TypographyMixin.DISPLAY};
   font-size: ${TextSize.SMALL}rem;
   color: ${Colors.UI_TEXT_SUB};
 `;
@@ -182,9 +188,6 @@ const MainVisualContainer = styled.div`
   max-width: ${ModuleWidth.MIDDLE}px;
   margin: 0 auto;
   overflow: hidden;
-
-  ${media.greaterThan(ScreenType.LARGE)`
-  `}
 `;
 
 const MainVisual = styled.div`
