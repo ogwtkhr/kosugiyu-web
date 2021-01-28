@@ -25,7 +25,7 @@ export const IntroModule: React.FC = () => {
       <IntroStoryUnitNormal>
         <IntroStoryUnitColumnMain>
           <IntroStoryNormalPhoto>
-            <ReverseParallax zoom={1.2} fillLayout>
+            <ReverseParallax zoom={1.2} fillLayout verbose>
               <IntersectionFadeIn fillLayout>
                 <Picture relativePath="photos/intro/story_1.jpg" />
               </IntersectionFadeIn>

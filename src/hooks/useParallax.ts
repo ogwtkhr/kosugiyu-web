@@ -72,20 +72,20 @@ export const useParallax = <T extends HTMLElement = HTMLElement>(
       const baseValue = value * direction;
       const minCapped = isUndefined(min) ? baseValue : Math.max(baseValue, min);
       const maxCapped = isUndefined(max) ? minCapped : Math.min(minCapped, max);
-      return isUndefined(coefficient) ? maxCapped : maxCapped * coefficient;
+      return Math.round(isUndefined(coefficient) ? maxCapped : maxCapped * coefficient);
     },
     [coefficient, direction, min, max],
   );
 
   const handler = useCallback(() => {
-    // console.log('`useParallax` scroll handler called.');
     const target = ref.current;
     const rect = target?.getBoundingClientRect();
     if (!rect) return;
     const centerYInViewport = window.innerHeight / 2;
     const result: ScrollInfo = {
-      top: getValue(rect.top), // TODO
-      // top: getValue(rect.top - centerYInViewport), // TODO
+      // TODO: 基準点をどこに持つ？
+      // top: getValue(rect.top),
+      top: getValue(rect.top - centerYInViewport), // TODO
       center: getValue(rect.top + rect.height / 2 - centerYInViewport),
       bottom: getValue(rect.bottom - centerYInViewport),
     };
