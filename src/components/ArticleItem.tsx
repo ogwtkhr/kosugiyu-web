@@ -49,6 +49,8 @@ export const ArticleItem: React.FC<ArticleItemProps> = ({
     [publishDate],
   );
 
+  // TODO: テーマ機能
+
   return (
     <ArticleItemContainer>
       <ArticleLink direction={direction} to={`/archive/${slug}`}>

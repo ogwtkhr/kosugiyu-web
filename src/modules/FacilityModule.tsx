@@ -22,7 +22,7 @@ export const FacilityModule: React.FC = () => {
           <InformationGroup>
             <InformationContentRow>
               <InformationContent title="平日" />
-              <InformationContent flex={1}>
+              <InformationContent flex={1} verticalAlign="center">
                 <InformationItem title="午後" body="15:30" />
                 <InformationContentDashLine />
                 <InformationItem title="深夜" body="1:45" />

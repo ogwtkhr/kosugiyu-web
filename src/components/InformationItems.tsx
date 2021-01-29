@@ -107,14 +107,16 @@ export const InformationContentRow = styled.div<InformationContentRowProps>`
 
 type InformationContentProps = {
   flex?: number;
+  verticalAlign?: 'top' | 'center';
 };
 
 export const InformationContent: React.FC<InformationContentProps & TitleInjectable> = ({
   title,
   flex,
+  verticalAlign = 'top',
   children,
 }) => (
-  <InformationContentContainer flex={flex}>
+  <InformationContentContainer flex={flex} verticalAlign={verticalAlign}>
     {title && <InformationContentHeading>{title}</InformationContentHeading>}
     {children}
   </InformationContentContainer>
@@ -123,7 +125,7 @@ export const InformationContent: React.FC<InformationContentProps & TitleInjecta
 const InformationContentContainer = styled.div<InformationContentProps>`
   display: flex;
   flex: ${({ flex }: { flex?: number }) => (flex ? flex : '')};
-  align-items: flex-start;
+  align-items: ${({ verticalAlign }) => (verticalAlign === 'top' ? 'flex-start' : 'center')};
 
   ${media.lessThan(ScreenType.MEDIUM)`
     & + & {
