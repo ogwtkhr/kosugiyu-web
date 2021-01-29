@@ -434,8 +434,7 @@ const DetailWindow = styled(BaseWindow)`
   max-width: ${ScreenValue.MEDIUM}px;
   ${media.lessThan(ScreenType.MEDIUM)`
     width: calc(100% -  ${Spacing.LARGE * 2}px);
-    margin-left: ${Spacing.LARGE}px;
-    margin-right: ${Spacing.LARGE}px;
+    max-width: 360px;
   `}
 `;
 

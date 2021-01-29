@@ -113,7 +113,7 @@ const TriggerContainer = styled.button<PropsWithTransition>`
   top: 68px;
   right: ${Spacing.XXX_LARGE}px;
   width: ${Spacing.XXX_LARGE}px;
-  height: ${Spacing.X_LARGE}px;
+  height: ${Spacing.LARGE}px;
   mix-blend-mode: difference;
   transition: opacity ${TRANSITION_TIME}ms ease;
   opacity: ${({ state }) => (state === TransitionStatus.ENTERED ? 1 : 0)};
@@ -123,10 +123,11 @@ const TriggerContainer = styled.button<PropsWithTransition>`
 
   ${media.lessThan(ScreenType.MEDIUM)`
     left: auto;
-    right: ${Spacing.X_LARGE}px;
+    right: ${Spacing.LARGE}px;
     top: ${Spacing.XXX_LARGE}px;
     width: ${Spacing.XX_LARGE}px;
-    height: ${Spacing.X_LARGE}px;
+    height: 20px;
+
   `}
 `;
 

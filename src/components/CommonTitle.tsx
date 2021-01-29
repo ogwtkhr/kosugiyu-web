@@ -65,7 +65,10 @@ const TitleText = styled.h2`
   transform: translateY(-50%);
 
   ${media.lessThan(ScreenType.MEDIUM)`
-    right: -${Spacing.XX_LARGE}px;
+    min-width: 200px;
+    left: ${Spacing.LARGE}px;
+    right: auto;
+    padding-left: 0;
   `}
 
   br {
