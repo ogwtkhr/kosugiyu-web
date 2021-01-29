@@ -19,7 +19,7 @@ import {
   PropsWithTransition,
 } from '@/constants';
 import media from 'styled-media-query';
-import { Parallax, ReverseParallax, SlideView } from '@/effects';
+import { ReverseParallax, SlideView } from '@/effects';
 import { UnderLineText } from './UnderLineText';
 import { ValueOf } from '@/types';
 
@@ -123,14 +123,12 @@ export const FacilityNavigator: React.FC = () => {
         <DescriptionBody>{getTextBreakFragment(description)}</DescriptionBody>
         <DescriptionPhoto>
           <SlideView index={currentIndex}>
-            <Picture relativePath="photos/facility/facility_photo_1.jpg" />
-            <Picture relativePath="photos/facility/facility_photo_2.jpg" />
-            <Picture relativePath="photos/facility/facility_photo_3.jpg" />
-            <Picture relativePath="photos/facility/facility_photo_4.jpg" />
-            <Picture relativePath="photos/facility/facility_photo_5.jpg" />
-            <Picture relativePath="photos/facility/facility_photo_6.jpg" />
-            <Picture relativePath="photos/facility/facility_photo_7.jpg" />
-            <Picture relativePath="photos/facility/facility_photo_8.jpg" />
+            {(Object.keys(FacilityID) as (keyof typeof FacilityID)[]).map((key) => (
+              <Picture
+                key={FacilityID[key]}
+                relativePath={`photos/facility/photo_${FacilityID[key]}.jpg`}
+              />
+            ))}
           </SlideView>
         </DescriptionPhoto>
       </DescriptionWindow>
@@ -152,7 +150,7 @@ export const FacilityNavigator: React.FC = () => {
                   <DetailItem>
                     <div>
                       <DetailItemPhoto>
-                        <Picture relativePath="photos/facility/facility_photo_1.jpg" />
+                        <Picture relativePath={`photos/facility/photo_${id}.jpg`} />
                       </DetailItemPhoto>
                     </div>
                     <DetailDescriptionList>
