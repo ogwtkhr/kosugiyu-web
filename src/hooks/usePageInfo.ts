@@ -1,12 +1,13 @@
 import { graphql, useStaticQuery } from 'gatsby';
 import { PageInfoQuery } from '@/types';
+import { PageId } from '@/constants';
 
 type Parameter = {
   id: string;
 };
 
 type PageInfo = {
-  id: string;
+  id: PageId;
   title: string;
   description: string;
 };

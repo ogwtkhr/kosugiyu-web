@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Helmet from 'react-helmet';
 import { useBaseMetaInfo } from '@/hooks';
 
@@ -31,62 +31,69 @@ export const Meta: React.FC<Props> = ({
   const image = ogImage || baseOgImage;
   const title = propsTitle || defaultTitle || '';
 
+  useEffect(() => {
+    console.log('Meta component mounted.');
+  }, []);
+
   return (
-    <Helmet
-      htmlAttributes={{
-        lang,
-      }}
-      title={title}
-      titleTemplate={`%s | ${defaultTitle}`}
-      defaultTitle={defaultTitle}
-      meta={[
-        {
-          name: 'description',
-          content: metaDescription,
-        },
-        {
-          property: 'og:title',
-          content: title,
-        },
-        {
-          property: 'og:description',
-          content: metaDescription,
-        },
-        {
-          property: 'og:type',
-          content: 'website',
-        },
-        {
-          property: 'og:image',
-          content: image,
-        },
-        {
-          name: 'twitter:card',
-          content: 'summary_large_image',
-        },
-        {
-          name: 'twitter:creator',
-          content: twitterAccount,
-        },
-        {
-          name: 'twitter:site',
-          content: twitterAccount,
-        },
-        {
-          name: 'twitter:description',
-          content: metaDescription,
-        },
-        ...meta,
-      ]}
-      link={[
-        {
-          href: 'https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,500&display=swap',
-          // 'https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,500|Roboto+Condensed&display=swap',
-          rel: 'stylesheet',
-          type: 'text/css',
-        },
-      ]}
-    />
+    <>
+      <div>testa</div>
+      <Helmet
+        htmlAttributes={{
+          lang,
+        }}
+        title={title}
+        titleTemplate={`%s | ${defaultTitle}`}
+        defaultTitle={defaultTitle}
+        meta={[
+          {
+            name: 'description',
+            content: metaDescription,
+          },
+          {
+            property: 'og:title',
+            content: title,
+          },
+          {
+            property: 'og:description',
+            content: metaDescription,
+          },
+          {
+            property: 'og:type',
+            content: 'website',
+          },
+          {
+            property: 'og:image',
+            content: image,
+          },
+          {
+            name: 'twitter:card',
+            content: 'summary_large_image',
+          },
+          {
+            name: 'twitter:creator',
+            content: twitterAccount,
+          },
+          {
+            name: 'twitter:site',
+            content: twitterAccount,
+          },
+          {
+            name: 'twitter:description',
+            content: metaDescription,
+          },
+          ...meta,
+        ]}
+        link={[
+          {
+            href: 'https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,500&display=swap',
+            // 'https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,500|Roboto+Condensed&display=swap',
+            rel: 'stylesheet',
+            type: 'text/css',
+          },
+        ]}
+      />
+    </>
   );
 };
 

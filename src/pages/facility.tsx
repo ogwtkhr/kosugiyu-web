@@ -2,10 +2,11 @@ import React from 'react';
 import { BaseLayout, Meta } from '@/layouts';
 import { usePageInfo } from '@/hooks';
 import { CommonTitle } from '@/components';
+import { PageId } from '@/constants';
 import { FacilityModule } from '@/modules';
 
 const FacilityPage: React.FC = () => {
-  const { title: pageTitle, description: pageDescription } = usePageInfo({ id: 'facility' });
+  const { title: pageTitle, description: pageDescription } = usePageInfo({ id: PageId.FACILITY });
 
   return (
     <>

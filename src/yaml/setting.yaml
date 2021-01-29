@@ -11,7 +11,7 @@
       # TODO
       description: 昭和八年創業。高円寺の銭湯「小杉湯」の公式ウェブサイトです。
     - id: facility
-      title: 施設・営業案内
+      title: 営業・施設案内
       description: 'TODO: 施設・営業案内のdescription'
     - id: archive
       title: できごと
