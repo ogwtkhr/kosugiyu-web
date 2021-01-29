@@ -114,7 +114,7 @@ const SideColumn = styled.div`
 
   ${media.lessThan(ScreenType.MEDIUM)`
     width: 100%;
-    height: 36%;
+    height: 40%;
     padding: 0;
   `}
 `;
@@ -122,7 +122,7 @@ const SideColumn = styled.div`
 const MainColumn = styled.div`
   flex: 1;
   ${media.lessThan(ScreenType.MEDIUM)`
-    height: 64%;
+    height: 60%;
   `}
 `;
 
@@ -132,6 +132,8 @@ const LogoContainer = styled.div`
   align-items: center;
 
   ${media.lessThan(ScreenType.MEDIUM)`
+    /* Safariで潰れるので一旦指定 */
+    width: 55px;
     position: absolute;
     top: ${Spacing.X_LARGE}px;
     right: ${Spacing.X_LARGE}px;
@@ -205,9 +207,10 @@ const MenuListNormalScreen = styled.ul`
 
 const MenuListSmallScreen = styled.ul`
   position: absolute;
-  left: ${Spacing.LARGE}px;
   bottom: ${Spacing.LARGE}px;
+  left: ${Spacing.LARGE}px;
   width: 80%;
+  line-height: ${LineHeight.MONOLITHIC};
 
   ${media.greaterThan(ScreenType.MEDIUM)`
     display: none;
@@ -218,19 +221,27 @@ const MenuItem = styled.li`
   ${TypographyMixin.DISPLAY};
   display: inline-block;
   margin-left: ${Spacing.MIDDLE}px;
+  line-height: ${LineHeight.MONOLITHIC};
   cursor: pointer;
 
   & a {
-    color: black;
+    display: block;
+    color: ${Colors.UI_TEXT_MAIN};
     text-decoration: none;
   }
 
   ${media.lessThan(ScreenType.MEDIUM)`
     display: inline-block;
     margin-left: 0;
-    line-height: ${LineHeight.NORMAL};
+    font-size: 1.4rem;
     &:nth-of-type(2n) {
       margin-left: ${Spacing.MIDDLE}px;
+    }
+    &:nth-of-type() 3{
+      margin-top: 10px;
+    }
+    &:nth-of-type(4) {
+      margin-top: 10px;
     }
   `}
 `;
