@@ -30,7 +30,7 @@ export const FacilityModule: React.FC = () => {
             </InformationContentRow>
             <InformationContentRow>
               <InformationContent title="土・日曜" />
-              <InformationContent flex={1}>
+              <InformationContent flex={1} verticalAlign="center">
                 <InformationItem title="午前" body="8:00" />
                 <InformationContentDashLine />
                 <InformationItem title="深夜" body="1:45" />
