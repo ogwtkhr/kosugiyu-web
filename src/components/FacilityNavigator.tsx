@@ -218,7 +218,7 @@ const BigImage = styled.div<IdInjectable>`
         return css`
           transform: scale(0.35) translate(10%, 0);
           ${media.lessThan(ScreenType.MEDIUM)`
-            transform: scale(0.4) translate(-13%, -16%);
+            transform: scale(0.4) translate(-13%, -31%);
           `}
         `;
       // 玄関
@@ -226,7 +226,7 @@ const BigImage = styled.div<IdInjectable>`
         return css`
           transform: translate(-8%, -29%);
           ${media.lessThan(ScreenType.MEDIUM)`
-            transform: scale(1.2) translate(-18%, -40%);
+            transform: scale(1.4) translate(-18%,-45%);
           `}
         `;
       // 番台
@@ -234,7 +234,7 @@ const BigImage = styled.div<IdInjectable>`
         return css`
           transform: scale(1.2) translate(-6%, -18%);
           ${media.lessThan(ScreenType.MEDIUM)`
-            transform: scale(1.4) translate(-23%, -30%);
+            transform: scale(1.8) translate(-20%,-36%);
           `}
         `;
       // 脱衣所
@@ -250,7 +250,7 @@ const BigImage = styled.div<IdInjectable>`
         return css`
           transform: scale(0.6) translate(23%, 19%);
           ${media.lessThan(ScreenType.MEDIUM)`
-            transform: scale(0.9) translate(17%, 0%);
+            transform: scale(0.9) translate(13%,-12%);
           `}
         `;
       // 待合室兼ギャラリー
@@ -258,7 +258,7 @@ const BigImage = styled.div<IdInjectable>`
         return css`
           transform: scale(1.1) translate(-25%, -14%);
           ${media.lessThan(ScreenType.MEDIUM)`
-            transform: scale(1.4) translate(-35%, -20%);
+            transform: scale(1.5) translate(-35%,-25%);
           `}
         `;
       // コインランドリー、となり
@@ -337,7 +337,6 @@ const DescriptionBody = styled.p`
   margin-top: ${Spacing.NORMAL}px;
   font-size: ${TextSize.SMALL}rem;
   ${media.lessThan(ScreenType.MEDIUM)`
-    max-height: 20vh;
     overflow: scroll;
     font-size: ${TextSize.X_SMALL}rem;
   `}
