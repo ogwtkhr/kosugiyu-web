@@ -123,7 +123,7 @@ export const InformationContent: React.FC<InformationContentProps & TitleInjecta
 const InformationContentContainer = styled.div<InformationContentProps>`
   display: flex;
   flex: ${({ flex }: { flex?: number }) => (flex ? flex : '')};
-  align-items: center;
+  align-items: flex-start;
 
   ${media.lessThan(ScreenType.MEDIUM)`
     & + & {

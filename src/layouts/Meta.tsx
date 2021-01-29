@@ -31,10 +31,6 @@ export const Meta: React.FC<Props> = ({
   const image = ogImage || baseOgImage;
   const title = propsTitle || defaultTitle || '';
 
-  useEffect(() => {
-    console.log('Meta component mounted.');
-  }, []);
-
   return (
     <Helmet
       htmlAttributes={{
