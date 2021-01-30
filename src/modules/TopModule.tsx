@@ -202,9 +202,13 @@ const SocialAccountContainerNormalScreen = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: ${Spacing.XX_LARGE}px;
+  width: ${Spacing.X_LARGE}px;
   ${media.lessThan(ScreenType.MEDIUM)`
-    display: none;
+    position: absolute;
+    width: 150px;
+    flex-direction: row;
+    top: ${Spacing.X_LARGE}px;
+    left: ${Spacing.X_LARGE}px;
   `}
 `;
 
@@ -216,6 +220,7 @@ const SocialAccountContainerSmallScreen = styled.div`
   /* flex-direction: column; */
   justify-content: space-between;
   width: 190px;
+  display: none;
 
   ${media.greaterThan(ScreenType.MEDIUM)`
     display: none;

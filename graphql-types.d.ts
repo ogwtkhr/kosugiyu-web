@@ -3743,7 +3743,7 @@ export type AllImageFileQuery = { desktopImages: { edges: Array<{ node: (
 export type SiteMetaDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type SiteMetaDataQuery = { settingYaml?: Maybe<{ meta?: Maybe<Pick<SettingYamlMeta, 'title' | 'description' | 'url' | 'twitter' | 'facebook' | 'ogImage'>> }> };
+export type SiteMetaDataQuery = { settingYaml?: Maybe<{ meta?: Maybe<Pick<SettingYamlMeta, 'title' | 'description' | 'url' | 'twitter' | 'facebook' | 'instagram' | 'note' | 'ogImage'>> }> };
 
 export type FacilityInfoQueryVariables = Exact<{ [key: string]: never; }>;
 

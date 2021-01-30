@@ -7,6 +7,8 @@ type MetaInfo = {
   url: string;
   twitter: string;
   facebook: string;
+  instagram: string;
+  note: string;
   ogImage: string;
 };
 
@@ -20,6 +22,8 @@ export const useBaseMetaInfo = (): MetaInfo => {
           url
           twitter
           facebook
+          instagram
+          note
           ogImage
         }
       }
@@ -33,6 +37,8 @@ export const useBaseMetaInfo = (): MetaInfo => {
   const url = baseMeta?.url || '';
   const twitter = baseMeta?.twitter || '';
   const facebook = baseMeta?.facebook || '';
+  const instagram = baseMeta?.instagram || '';
+  const note = baseMeta?.note || '';
   const ogImage = baseMeta?.ogImage || '';
 
   return {
@@ -41,6 +47,8 @@ export const useBaseMetaInfo = (): MetaInfo => {
     url,
     twitter,
     facebook,
+    instagram,
+    note,
     ogImage,
   };
 };
