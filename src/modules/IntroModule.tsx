@@ -13,8 +13,6 @@ import {
   Spacing,
   AspectRatio,
   ModuleWidth,
-  TextWeight,
-  TypeStyle,
 } from '@/constants';
 import { IntersectionFadeIn, Parallax, ReverseParallax } from '@/effects';
 import { isSafari } from '@/util/ua';
@@ -25,7 +23,7 @@ export const IntroModule: React.FC = () => {
       <IntroStoryUnitNormal>
         <IntroStoryUnitColumnMain>
           <IntroStoryNormalPhoto>
-            <ReverseParallax zoom={1.2} fillLayout verbose>
+            <ReverseParallax zoom={1.2} fillLayout>
               <IntersectionFadeIn fillLayout>
                 <Picture relativePath="photos/intro/story_1.jpg" />
               </IntersectionFadeIn>

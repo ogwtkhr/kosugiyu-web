@@ -3,7 +3,9 @@
     description: 杉並区・高円寺にある銭湯「小杉湯」。
     url: https://kosugiyu.co.jp
     twitter: kosugiyu
-    facebook: kosugiyu/
+    facebook: kosugiyu
+    instagram: kosugiyu_sento
+    note: kosugiyu
     ogImage: /meta/ogimage.jpg
   pages:
     - id: top

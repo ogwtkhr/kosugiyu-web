@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { window } from '@/util/window';
-import { TwitterIcon, FacebookIcon } from './Icon';
+import { TwitterIcon, FacebookIcon, InstagramIcon, NoteIcon } from './Icon';
 import { Colors } from '@/constants';
 
 type SocialBaseProps = {
   url?: string;
+  color?: string;
 };
 
 type TwitterTweetButtonProps = {
@@ -14,6 +15,7 @@ type TwitterTweetButtonProps = {
 
 type SocialAccountProps = {
   id: string;
+  color?: string;
 };
 
 const defaultProps = {
@@ -32,40 +34,59 @@ export const TwitterTweetButton: React.FC<TwitterTweetButtonProps> = ({
   )}&url=${encodeURIComponent(url)}`;
   return (
     <Container {...defaultProps} href={shareUrl}>
-      <TwitterIcon />
+      <TwitterIcon color={color} />
     </Container>
   );
 };
 
-export const FacebookShareButton: React.FC<SocialBaseProps> = ({ url: propsUrl }) => {
+export const FacebookShareButton: React.FC<SocialBaseProps> = ({ url: propsUrl, color }) => {
   const url = propsUrl || window.location.href;
   const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
   return (
     <Container {...defaultProps} href={shareUrl}>
-      <FacebookIcon />
+      <FacebookIcon color={color} />
     </Container>
   );
 };
 
-export const TwitterAccountButton: React.FC<SocialAccountProps> = ({ id }) => {
+export const TwitterAccountButton: React.FC<SocialAccountProps> = ({ id, color }) => {
   const url = `https://twitter.com/${id}`;
   return (
     <Container {...defaultProps} href={url}>
-      <TwitterIcon />
+      <TwitterIcon color={color} />
     </Container>
   );
 };
 
-export const FacebookAccountButton: React.FC<SocialAccountProps> = ({ id }) => {
-  const url = `https://www.facebook.com/${id}`;
+export const FacebookAccountButton: React.FC<SocialAccountProps> = ({ id, color }) => {
+  const url = `https://www.facebook.com/${id}/`;
   return (
     <Container {...defaultProps} href={url}>
-      <FacebookIcon />
+      <FacebookIcon color={color} />
+    </Container>
+  );
+};
+
+export const InstagramAccountButton: React.FC<SocialAccountProps> = ({ id, color }) => {
+  const url = `https://www.instagram.com/${id}/`;
+  return (
+    <Container {...defaultProps} href={url}>
+      <InstagramIcon color={color} />
+    </Container>
+  );
+};
+
+export const NoteAccountButton: React.FC<SocialAccountProps> = ({ id, color }) => {
+  const url = `https://note.com/${id}`;
+  return (
+    <Container {...defaultProps} href={url}>
+      <NoteIcon color={color} />
     </Container>
   );
 };
 
 const Container = styled.a`
   display: block;
-  color: ${Colors.UI_BASE};
+  /* color: ${Colors.UI_TEXT_SUB}; */
+  color: ${Colors.UI_TEXT_MAIN};
 `;

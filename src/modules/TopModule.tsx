@@ -13,7 +13,12 @@ import {
 } from '@/constants';
 import { HeroImage, MainLogo } from '@/components';
 import { useMenu, useBaseMetaInfo, useIntersectionObserver } from '@/hooks';
-import { FacebookAccountButton, TwitterAccountButton } from '@/components/SocialButton';
+import {
+  FacebookAccountButton,
+  TwitterAccountButton,
+  InstagramAccountButton,
+  NoteAccountButton,
+} from '@/components/SocialButton';
 
 type TopModuleProps = {
   onViewInStatusChange: (viewInStatus: boolean) => void;
@@ -21,7 +26,7 @@ type TopModuleProps = {
 
 export const TopModule: React.FC<TopModuleProps> = ({ onViewInStatusChange }) => {
   const menuList = useMenu({ ignoreTopData: true });
-  const { twitter, facebook } = useBaseMetaInfo();
+  const { twitter, facebook, instagram, note } = useBaseMetaInfo();
   const sentinelRef = useRef<HTMLDivElement>(null);
   const [containerRef, isContainerIntersecting] = useIntersectionObserver<HTMLDivElement>();
   const scroll = useCallback(() => {
@@ -30,6 +35,7 @@ export const TopModule: React.FC<TopModuleProps> = ({ onViewInStatusChange }) =>
       block: 'start',
     });
   }, []);
+  const socialAccounts = { twitter, facebook, instagram, note };
 
   useEffect(() => {
     onViewInStatusChange(isContainerIntersecting);
@@ -48,18 +54,19 @@ export const TopModule: React.FC<TopModuleProps> = ({ onViewInStatusChange }) =>
           <MenuListSmallScreen>
             <MenuList list={menuList} onIntroClick={scroll} />
           </MenuListSmallScreen>
-          <SocialAccountContainer>
-            <SocialAccountButton>
-              <TwitterAccountButton id={twitter} />
-            </SocialAccountButton>
-            <SocialAccountButton>
-              <FacebookAccountButton id={facebook} />
-            </SocialAccountButton>
-          </SocialAccountContainer>
+          <SocialAccountContainerNormalScreen>
+            <SocialAccountButtons accounts={socialAccounts} />
+          </SocialAccountContainerNormalScreen>
         </SideColumn>
         <MainColumn>
           <HeroArea>
             <HeroImage />
+            <SocialAccountContainerSmallScreen>
+              <SocialAccountButtons
+                accounts={socialAccounts}
+                color={Colors.UI_TEXT_DARK_BACKGROUND}
+              />
+            </SocialAccountContainerSmallScreen>
           </HeroArea>
         </MainColumn>
         <MenuListNormalScreen>
@@ -91,6 +98,33 @@ const MenuList: React.FC<MenuListProps> = ({ list, onIntroClick }) => (
   </>
 );
 
+type SocialAccounts = { twitter: string; facebook: string; instagram: string; note: string };
+
+type SocialAccountButtonsProps = {
+  accounts: SocialAccounts;
+  color?: string;
+};
+
+const SocialAccountButtons: React.FC<SocialAccountButtonsProps> = ({ accounts, color }) => {
+  const { twitter, facebook, instagram, note } = accounts;
+  return (
+    <>
+      <SocialAccountButton>
+        <InstagramAccountButton color={color} id={instagram} />
+      </SocialAccountButton>
+      <SocialAccountButton>
+        <NoteAccountButton color={color} id={note} />
+      </SocialAccountButton>
+      <SocialAccountButton>
+        <TwitterAccountButton color={color} id={twitter} />
+      </SocialAccountButton>
+      <SocialAccountButton>
+        <FacebookAccountButton color={color} id={facebook} />
+      </SocialAccountButton>
+    </>
+  );
+};
+
 const Container = styled.div`
   display: flex;
   position: relative;
@@ -110,7 +144,7 @@ const SideColumn = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 130px;
-  padding: ${Spacing.XXX_LARGE}px;
+  padding: ${Spacing.XXX_LARGE}px ${Spacing.XXX_LARGE}px ${Spacing.XX_LARGE}px;
 
   ${media.lessThan(ScreenType.MEDIUM)`
     width: 100%;
@@ -164,19 +198,40 @@ const LogoCopy = styled.p`
   `}
 `;
 
-const SocialAccountContainer = styled.div`
+const SocialAccountContainerNormalScreen = styled.div`
   display: flex;
-  width: ${Spacing.XX_LARGE}px;
   flex-direction: column;
-  justify-content: space-between; ;
+  justify-content: space-between;
+  width: ${Spacing.XX_LARGE}px;
+  ${media.lessThan(ScreenType.MEDIUM)`
+    display: none;
+  `}
+`;
+
+const SocialAccountContainerSmallScreen = styled.div`
+  display: flex;
+  position: absolute;
+  bottom: ${Spacing.X_LARGE}px;
+  left: ${Spacing.X_LARGE}px;
+  /* flex-direction: column; */
+  justify-content: space-between;
+  width: 190px;
+
+  ${media.greaterThan(ScreenType.MEDIUM)`
+    display: none;
+  `}
 `;
 
 const SocialAccountButton = styled.div`
   & + & {
     margin-top: ${Spacing.MIDDLE}px;
   }
+
   ${media.lessThan(ScreenType.MEDIUM)`
-    display: none;
+    & + & {
+      margin-top: 0;
+      margin-left: 20px;
+    }
   `}
 `;
 

@@ -768,6 +768,8 @@ export type FileFieldsEnum =
   | 'childrenSettingYaml___meta___url'
   | 'childrenSettingYaml___meta___twitter'
   | 'childrenSettingYaml___meta___facebook'
+  | 'childrenSettingYaml___meta___instagram'
+  | 'childrenSettingYaml___meta___note'
   | 'childrenSettingYaml___meta___ogImage'
   | 'childrenSettingYaml___pages'
   | 'childrenSettingYaml___pages___id'
@@ -824,6 +826,8 @@ export type FileFieldsEnum =
   | 'childSettingYaml___meta___url'
   | 'childSettingYaml___meta___twitter'
   | 'childSettingYaml___meta___facebook'
+  | 'childSettingYaml___meta___instagram'
+  | 'childSettingYaml___meta___note'
   | 'childSettingYaml___meta___ogImage'
   | 'childSettingYaml___pages'
   | 'childSettingYaml___pages___id'
@@ -1595,8 +1599,8 @@ export type MicrocmsArchive = Node & {
   mainVisual?: Maybe<MicrocmsArchiveMainVisual>;
   body?: Maybe<Scalars['String']>;
   info?: Maybe<Array<Maybe<MicrocmsArchiveInfo>>>;
-  archiveId?: Maybe<Scalars['String']>;
   publishDate?: Maybe<Scalars['Date']>;
+  archiveId?: Maybe<Scalars['String']>;
 };
 
 
@@ -1767,8 +1771,8 @@ export type MicrocmsArchiveFieldsEnum =
   | 'info___fieldId'
   | 'info___head'
   | 'info___body'
-  | 'archiveId'
-  | 'publishDate';
+  | 'publishDate'
+  | 'archiveId';
 
 export type MicrocmsArchiveFilterInput = {
   id?: Maybe<StringQueryOperatorInput>;
@@ -1784,8 +1788,8 @@ export type MicrocmsArchiveFilterInput = {
   mainVisual?: Maybe<MicrocmsArchiveMainVisualFilterInput>;
   body?: Maybe<StringQueryOperatorInput>;
   info?: Maybe<MicrocmsArchiveInfoFilterListInput>;
-  archiveId?: Maybe<StringQueryOperatorInput>;
   publishDate?: Maybe<DateQueryOperatorInput>;
+  archiveId?: Maybe<StringQueryOperatorInput>;
 };
 
 export type MicrocmsArchiveGroupConnection = {
@@ -2167,12 +2171,12 @@ export type Query = {
   allSitePage: SitePageConnection;
   imageSharp?: Maybe<ImageSharp>;
   allImageSharp: ImageSharpConnection;
-  settingYaml?: Maybe<SettingYaml>;
-  allSettingYaml: SettingYamlConnection;
   microcmsArchive?: Maybe<MicrocmsArchive>;
   allMicrocmsArchive: MicrocmsArchiveConnection;
   microcmsPersons?: Maybe<MicrocmsPersons>;
   allMicrocmsPersons: MicrocmsPersonsConnection;
+  settingYaml?: Maybe<SettingYaml>;
+  allSettingYaml: SettingYamlConnection;
   siteBuildMetadata?: Maybe<SiteBuildMetadata>;
   allSiteBuildMetadata: SiteBuildMetadataConnection;
   sitePlugin?: Maybe<SitePlugin>;
@@ -2286,6 +2290,8 @@ export type QueryAllDirectoryArgs = {
 export type QuerySiteArgs = {
   buildTime?: Maybe<DateQueryOperatorInput>;
   siteMetadata?: Maybe<SiteSiteMetadataFilterInput>;
+  port?: Maybe<IntQueryOperatorInput>;
+  host?: Maybe<StringQueryOperatorInput>;
   polyfill?: Maybe<BooleanQueryOperatorInput>;
   pathPrefix?: Maybe<StringQueryOperatorInput>;
   id?: Maybe<StringQueryOperatorInput>;
@@ -2352,25 +2358,6 @@ export type QueryAllImageSharpArgs = {
 };
 
 
-export type QuerySettingYamlArgs = {
-  id?: Maybe<StringQueryOperatorInput>;
-  parent?: Maybe<NodeFilterInput>;
-  children?: Maybe<NodeFilterListInput>;
-  internal?: Maybe<InternalFilterInput>;
-  meta?: Maybe<SettingYamlMetaFilterInput>;
-  pages?: Maybe<SettingYamlPagesFilterListInput>;
-  facilities?: Maybe<SettingYamlFacilitiesFilterListInput>;
-};
-
-
-export type QueryAllSettingYamlArgs = {
-  filter?: Maybe<SettingYamlFilterInput>;
-  sort?: Maybe<SettingYamlSortInput>;
-  skip?: Maybe<Scalars['Int']>;
-  limit?: Maybe<Scalars['Int']>;
-};
-
-
 export type QueryMicrocmsArchiveArgs = {
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
@@ -2385,8 +2372,8 @@ export type QueryMicrocmsArchiveArgs = {
   mainVisual?: Maybe<MicrocmsArchiveMainVisualFilterInput>;
   body?: Maybe<StringQueryOperatorInput>;
   info?: Maybe<MicrocmsArchiveInfoFilterListInput>;
-  archiveId?: Maybe<StringQueryOperatorInput>;
   publishDate?: Maybe<DateQueryOperatorInput>;
+  archiveId?: Maybe<StringQueryOperatorInput>;
 };
 
 
@@ -2422,6 +2409,25 @@ export type QueryMicrocmsPersonsArgs = {
 export type QueryAllMicrocmsPersonsArgs = {
   filter?: Maybe<MicrocmsPersonsFilterInput>;
   sort?: Maybe<MicrocmsPersonsSortInput>;
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+};
+
+
+export type QuerySettingYamlArgs = {
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+  meta?: Maybe<SettingYamlMetaFilterInput>;
+  pages?: Maybe<SettingYamlPagesFilterListInput>;
+  facilities?: Maybe<SettingYamlFacilitiesFilterListInput>;
+};
+
+
+export type QueryAllSettingYamlArgs = {
+  filter?: Maybe<SettingYamlFilterInput>;
+  sort?: Maybe<SettingYamlSortInput>;
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
 };
@@ -2631,6 +2637,8 @@ export type SettingYamlFieldsEnum =
   | 'meta___url'
   | 'meta___twitter'
   | 'meta___facebook'
+  | 'meta___instagram'
+  | 'meta___note'
   | 'meta___ogImage'
   | 'pages'
   | 'pages___id'
@@ -2674,6 +2682,8 @@ export type SettingYamlMeta = {
   url?: Maybe<Scalars['String']>;
   twitter?: Maybe<Scalars['String']>;
   facebook?: Maybe<Scalars['String']>;
+  instagram?: Maybe<Scalars['String']>;
+  note?: Maybe<Scalars['String']>;
   ogImage?: Maybe<Scalars['String']>;
 };
 
@@ -2683,6 +2693,8 @@ export type SettingYamlMetaFilterInput = {
   url?: Maybe<StringQueryOperatorInput>;
   twitter?: Maybe<StringQueryOperatorInput>;
   facebook?: Maybe<StringQueryOperatorInput>;
+  instagram?: Maybe<StringQueryOperatorInput>;
+  note?: Maybe<StringQueryOperatorInput>;
   ogImage?: Maybe<StringQueryOperatorInput>;
 };
 
@@ -2710,6 +2722,8 @@ export type SettingYamlSortInput = {
 export type Site = Node & {
   buildTime?: Maybe<Scalars['Date']>;
   siteMetadata?: Maybe<SiteSiteMetadata>;
+  port?: Maybe<Scalars['Int']>;
+  host?: Maybe<Scalars['String']>;
   polyfill?: Maybe<Scalars['Boolean']>;
   pathPrefix?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
@@ -2914,6 +2928,8 @@ export type SiteFieldsEnum =
   | 'siteMetadata___author'
   | 'siteMetadata___googleApiKey'
   | 'siteMetadata___siteUrl'
+  | 'port'
+  | 'host'
   | 'polyfill'
   | 'pathPrefix'
   | 'id'
@@ -3006,6 +3022,8 @@ export type SiteFieldsEnum =
 export type SiteFilterInput = {
   buildTime?: Maybe<DateQueryOperatorInput>;
   siteMetadata?: Maybe<SiteSiteMetadataFilterInput>;
+  port?: Maybe<IntQueryOperatorInput>;
+  host?: Maybe<StringQueryOperatorInput>;
   polyfill?: Maybe<BooleanQueryOperatorInput>;
   pathPrefix?: Maybe<StringQueryOperatorInput>;
   id?: Maybe<StringQueryOperatorInput>;
