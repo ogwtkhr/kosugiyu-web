@@ -95,8 +95,7 @@ const YearNavigation = styled.nav`
   mix-blend-mode: difference;
 
   ${media.lessThan(ScreenType.MEDIUM)`
-    left: auto;
-    right: ${Spacing.LARGE}px;
+    display: none;
   `}
 `;
 

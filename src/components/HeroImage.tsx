@@ -8,7 +8,7 @@ import { ReverseParallax, ParallaxBasePosition } from '@/effects';
 export const HeroImage: React.FC = () => {
   return (
     <Container>
-      <ReverseParallax zoom={1.1} basePosition={ParallaxBasePosition.TOP} fillLayout verbose>
+      <ReverseParallax zoom={1.1} basePosition={ParallaxBasePosition.TOP} fillLayout>
         <Picture relativePath={`photos/top/hero_1.jpg`} />
       </ReverseParallax>
       <BusinessInfo>

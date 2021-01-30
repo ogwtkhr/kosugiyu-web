@@ -5,7 +5,7 @@ import media from 'styled-media-query';
 import { ArticleItem, ArticleItemProps, ArticleItemDirection } from './ArticleItem';
 
 const GUTTER_NORMAL = Spacing.XX_LARGE;
-const GUTTER_SMALL = Spacing.LARGE;
+const GUTTER_SMALL = Spacing.XX_LARGE;
 
 type ArticleGroupProps = {
   children: (ArticleItemProps | undefined)[];

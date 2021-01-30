@@ -207,12 +207,14 @@ const SocialAccountContainerNormalScreen = styled.div`
   ${media.lessThan(ScreenType.MEDIUM)`
     position: absolute;
     width: 150px;
+    height: 24px;
     flex-direction: row;
     top: ${Spacing.X_LARGE}px;
     left: ${Spacing.X_LARGE}px;
   `}
 `;
 
+// TODO
 const SocialAccountContainerSmallScreen = styled.div`
   display: flex;
   position: absolute;
@@ -221,6 +223,7 @@ const SocialAccountContainerSmallScreen = styled.div`
   /* flex-direction: column; */
   justify-content: space-between;
   width: 190px;
+  height: 24px;
   display: none;
 
   ${media.greaterThan(ScreenType.MEDIUM)`
