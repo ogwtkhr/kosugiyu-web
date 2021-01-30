@@ -116,7 +116,7 @@ const SocialAccountContainer = styled.div`
   justify-content: space-between;
   width: 260px;
   height: 30px;
-  margin-top: ${Spacing.XX_LARGE}px;
+  margin-top: ${Spacing.XXX_LARGE}px;
 `;
 
 const SocialAccountButton = styled.div`

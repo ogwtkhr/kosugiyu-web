@@ -325,8 +325,7 @@ const IntroStoryIllustration3 = styled(IntroStoryIllustration)`
 const IntroStoryUnitFinal = styled.section`
   position: relative;
   max-height: 1000px;
-  padding-top: ${BigSpacing.LARGE}px;
-  overflow: hidden;
+  margin-top: 200px;
 
   &::after {
     content: '';
@@ -353,13 +352,14 @@ const IntroStoryFinalMessage = styled.div`
   display: flex;
   position: absolute;
   z-index: 1;
-  top: 0;
+  top: -60px;
   left: 0;
   justify-content: center;
   width: 100%;
   height: 300px;
 
   ${media.lessThan(ScreenType.MEDIUM)`
+    top: -120px;
     height: 200px;
   `}
 `;
