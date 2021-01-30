@@ -7,6 +7,7 @@ import { Colors } from '@/constants';
 type SocialBaseProps = {
   url?: string;
   color?: string;
+  type?: 'normal' | 'circle';
 };
 
 type TwitterTweetButtonProps = {
@@ -26,6 +27,7 @@ const defaultProps = {
 export const TwitterTweetButton: React.FC<TwitterTweetButtonProps> = ({
   url: propsUrl,
   title: propsTitle,
+  color,
 }) => {
   const url = propsUrl || window.location.href;
   const title = propsTitle || window.document.title;
