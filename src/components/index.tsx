@@ -13,6 +13,7 @@ export * from './GoogleMap';
 export * from './Picture';
 export * from './Menu';
 export * from './SineWave';
+export * from './SocialButton';
 export * from './Ripple';
 export * from './ScrollLine';
 export * from './PersonItem';

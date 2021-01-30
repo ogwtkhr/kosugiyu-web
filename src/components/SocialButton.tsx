@@ -1,13 +1,30 @@
 import React from 'react';
 import styled from 'styled-components';
 import { window } from '@/util/window';
-import { TwitterIcon, FacebookIcon, InstagramIcon, NoteIcon } from './Icon';
+import {
+  TwitterIcon,
+  FacebookIcon,
+  InstagramIcon,
+  NoteIcon,
+  TwitterCircleIcon,
+  FacebookCircleIcon,
+  InstagramCircleIcon,
+  NoteCircleIcon,
+} from './Icon';
 import { Colors } from '@/constants';
+import { ValueOf } from '@/types';
+
+const Shape = {
+  NORMAL: 'normal',
+  CIRCLE: 'circle',
+} as const;
+
+type Shape = ValueOf<typeof Shape>;
 
 type SocialBaseProps = {
   url?: string;
   color?: string;
-  type?: 'normal' | 'circle';
+  shape?: Shape;
 };
 
 type TwitterTweetButtonProps = {
@@ -17,6 +34,7 @@ type TwitterTweetButtonProps = {
 type SocialAccountProps = {
   id: string;
   color?: string;
+  shape?: Shape;
 };
 
 const defaultProps = {
@@ -28,6 +46,7 @@ export const TwitterTweetButton: React.FC<TwitterTweetButtonProps> = ({
   url: propsUrl,
   title: propsTitle,
   color,
+  shape,
 }) => {
   const url = propsUrl || window.location.href;
   const title = propsTitle || window.document.title;
@@ -36,59 +55,73 @@ export const TwitterTweetButton: React.FC<TwitterTweetButtonProps> = ({
   )}&url=${encodeURIComponent(url)}`;
   return (
     <Container {...defaultProps} href={shareUrl}>
-      <TwitterIcon color={color} />
+      {shape === Shape.CIRCLE ? <TwitterCircleIcon color={color} /> : <TwitterIcon color={color} />}
     </Container>
   );
 };
 
-export const FacebookShareButton: React.FC<SocialBaseProps> = ({ url: propsUrl, color }) => {
+export const FacebookShareButton: React.FC<SocialBaseProps> = ({ url: propsUrl, color, shape }) => {
   const url = propsUrl || window.location.href;
   const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
   return (
     <Container {...defaultProps} href={shareUrl}>
-      <FacebookIcon color={color} />
+      {shape === Shape.CIRCLE ? (
+        <FacebookCircleIcon color={color} />
+      ) : (
+        <FacebookIcon color={color} />
+      )}
     </Container>
   );
 };
 
-export const TwitterAccountButton: React.FC<SocialAccountProps> = ({ id, color }) => {
+export const TwitterAccountButton: React.FC<SocialAccountProps> = ({ id, color, shape }) => {
   const url = `https://twitter.com/${id}`;
   return (
     <Container {...defaultProps} href={url}>
-      <TwitterIcon color={color} />
+      {shape === Shape.CIRCLE ? <TwitterCircleIcon color={color} /> : <TwitterIcon color={color} />}
     </Container>
   );
 };
 
-export const FacebookAccountButton: React.FC<SocialAccountProps> = ({ id, color }) => {
+export const FacebookAccountButton: React.FC<SocialAccountProps> = ({ id, color, shape }) => {
   const url = `https://www.facebook.com/${id}/`;
   return (
     <Container {...defaultProps} href={url}>
-      <FacebookIcon color={color} />
+      {shape === Shape.CIRCLE ? (
+        <FacebookCircleIcon color={color} />
+      ) : (
+        <FacebookIcon color={color} />
+      )}
     </Container>
   );
 };
 
-export const InstagramAccountButton: React.FC<SocialAccountProps> = ({ id, color }) => {
+export const InstagramAccountButton: React.FC<SocialAccountProps> = ({ id, color, shape }) => {
   const url = `https://www.instagram.com/${id}/`;
   return (
     <Container {...defaultProps} href={url}>
-      <InstagramIcon color={color} />
+      {shape === Shape.CIRCLE ? (
+        <InstagramCircleIcon color={color} />
+      ) : (
+        <InstagramIcon color={color} />
+      )}
     </Container>
   );
 };
 
-export const NoteAccountButton: React.FC<SocialAccountProps> = ({ id, color }) => {
+export const NoteAccountButton: React.FC<SocialAccountProps> = ({ id, color, shape }) => {
   const url = `https://note.com/${id}`;
   return (
     <Container {...defaultProps} href={url}>
-      <NoteIcon color={color} />
+      {shape === Shape.CIRCLE ? <NoteCircleIcon color={color} /> : <NoteIcon color={color} />}
     </Container>
   );
 };
 
 const Container = styled.a`
   display: block;
+  width: 100%;
+  height: 100%;
   /* color: ${Colors.UI_TEXT_SUB}; */
   color: ${Colors.UI_TEXT_MAIN};
 `;

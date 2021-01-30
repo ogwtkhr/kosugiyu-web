@@ -54,10 +54,10 @@ const ArchivePage: React.FC<ArchivePageProps> = ({ data }) => {
               </MetaInfo>
               <SocialIcons>
                 <SocialIcon>
-                  <TwitterTweetButton />
+                  <TwitterTweetButton shape="circle" />
                 </SocialIcon>
                 <SocialIcon>
-                  <FacebookShareButton />
+                  <FacebookShareButton shape="circle" />
                 </SocialIcon>
               </SocialIcons>
             </MetaInfoContainer>

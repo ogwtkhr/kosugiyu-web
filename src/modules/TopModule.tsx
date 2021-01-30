@@ -11,14 +11,15 @@ import {
   TextWeight,
   LineHeight,
 } from '@/constants';
-import { HeroImage, MainLogo } from '@/components';
-import { useMenu, useBaseMetaInfo, useIntersectionObserver } from '@/hooks';
 import {
+  HeroImage,
+  MainLogo,
   FacebookAccountButton,
   TwitterAccountButton,
   InstagramAccountButton,
   NoteAccountButton,
-} from '@/components/SocialButton';
+} from '@/components';
+import { useMenu, useBaseMetaInfo, useIntersectionObserver } from '@/hooks';
 
 type TopModuleProps = {
   onViewInStatusChange: (viewInStatus: boolean) => void;
