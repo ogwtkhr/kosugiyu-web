@@ -202,7 +202,7 @@ const SocialAccountContainerNormalScreen = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: ${Spacing.X_LARGE}px;
+  width: 20px;
   ${media.lessThan(ScreenType.MEDIUM)`
     position: absolute;
     width: 150px;
@@ -229,7 +229,7 @@ const SocialAccountContainerSmallScreen = styled.div`
 
 const SocialAccountButton = styled.div`
   & + & {
-    margin-top: ${Spacing.MIDDLE}px;
+    margin-top: ${Spacing.X_LARGE}px;
   }
 
   ${media.lessThan(ScreenType.MEDIUM)`
