@@ -63,11 +63,7 @@ export const FacilityModule: React.FC = () => {
           </InformationGroup>
         </InformationUnit>
       </InformationRow>
-      <InformationRow>
-        <InformationUnit title="施設紹介">
-          <FacilityNavigator />
-        </InformationUnit>
-      </InformationRow>
+
       <InformationRow>
         <InformationUnit title="サービス">
           <InformationGroupRow>
@@ -102,6 +98,13 @@ export const FacilityModule: React.FC = () => {
           </InformationGroupRow>
         </InformationUnit>
       </InformationRow>
+
+      <InformationRow>
+        <InformationUnit title="施設紹介">
+          <FacilityNavigator />
+        </InformationUnit>
+      </InformationRow>
+
       <InformationRow>
         <InformationUnit title="アクセス">
           <InformationGroupRow>

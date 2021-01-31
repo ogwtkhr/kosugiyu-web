@@ -34,22 +34,30 @@ const Content = styled.header`
 const Heading = styled.h1``;
 
 const SiteLogo = styled.h1`
-  height: 80px;
-  margin: ${Spacing.XXX_LARGE}px;
-
-  ${media.greaterThan(ScreenType.HUGE)`
-    height: 90px;
-    margin: ${BigSpacing.X_SMALL}px;
-  `}
-
-  ${media.lessThan(ScreenType.MEDIUM)`
-    height: 60px;
-    margin: ${Spacing.X_LARGE}px;
-  `}
+  width: 100%;
+  height: 100%;
 `;
 
 const StyledLink = styled(Link)`
+  display: block;
+  height: 80px;
+  margin-top: ${Spacing.XXX_LARGE}px;
+  margin-bottom: ${Spacing.XXX_LARGE}px;
   text-decoration: none;
+
+  ${media.greaterThan(ScreenType.HUGE)`
+    height: 90px;
+    margin-top: ${BigSpacing.X_SMALL}px;
+    margin-bottom: ${BigSpacing.X_SMALL}px;
+  `}
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    width: 40px;
+    height: 50px;
+    margin-top: ${Spacing.X_LARGE}px;
+    margin-bottom: ${Spacing.X_LARGE}px;
+    
+  `}
 `;
 
 export default Header;

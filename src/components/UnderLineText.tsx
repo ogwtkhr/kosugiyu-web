@@ -16,7 +16,7 @@ const Container = styled.span<UnderLineTextProps>`
   display: inline-block;
   padding-bottom: 0.2em;
   ${TypographyMixin.DISPLAY};
-  border-bottom: solid 1px ${Colors.UI_LINE_NORMAL};
+  border-bottom: solid ${({ size }) => (size === SizeType.LARGE ? 2 : 1)}px ${Colors.UI_LINE_NORMAL};
   font-size: ${({ size }) => {
     switch (size) {
       case SizeType.SMALL:
