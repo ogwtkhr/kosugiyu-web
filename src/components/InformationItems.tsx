@@ -70,11 +70,7 @@ export const InformationGroupRow = styled.div`
 
 export const InformationGroup: React.FC<TitleInjectable> = ({ title, children }) => (
   <InformationGroupContainer>
-    {title && (
-      <InformationContentRow>
-        <InformationContent title={title} />
-      </InformationContentRow>
-    )}
+    {title && <InformationContentHeading>{title}</InformationContentHeading>}
     {children}
   </InformationGroupContainer>
 );
@@ -84,26 +80,13 @@ const InformationGroupContainer = styled.div`
   z-index: ${FacilityLayers.OVER_BIG_IMAGE};
   flex: 1;
   margin: ${Spacing.XX_LARGE}px 0;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    margin: ${Spacing.X_LARGE}px 0 ${Spacing.XXX_LARGE}px ;
+  `};
 `;
 
 type InformationContentRowProps = { fix?: boolean };
-
-export const InformationContentRow = styled.div<InformationContentRowProps>`
-  display: flex;
-  align-items: center;
-  max-width: ${({ fix = true }) => (fix ? '400px' : '')};
-
-  & + & {
-    margin-top: ${Spacing.XX_LARGE}px;
-  }
-
-  ${media.lessThan(ScreenType.MEDIUM)`
-    display: block;
-    & + & {
-      margin-top: ${Spacing.X_LARGE}px;
-    }
-  `}
-`;
 
 type InformationContentProps = {
   flex?: number;
@@ -142,6 +125,31 @@ const InformationContentHeading = styled.h4`
   ${media.lessThan(ScreenType.MEDIUM)`
     font-size: ${TextSize.NORMAL}rem;
   `};
+`;
+
+export const InformationContentRow = styled.div<InformationContentRowProps>`
+  display: flex;
+  align-items: center;
+  max-width: ${({ fix = true }) => (fix ? '400px' : '')};
+
+  & + & {
+    margin-top: ${Spacing.XX_LARGE}px;
+  }
+
+  ${InformationContentHeading} + & {
+    margin-top: ${Spacing.LARGE}px;
+  }
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    display: block;
+    & + & {
+      margin-top: ${Spacing.X_LARGE}px;
+    }
+
+    ${InformationContentHeading} + & {
+      margin-top: ${Spacing.NORMAL}px;
+    }
+  `}
 `;
 
 type InformationItemProps = {

@@ -72,7 +72,7 @@ const TitleText = styled.h2`
   `}
 
   br {
-    ${media.greaterThan(ScreenType.MEDIUM)`
+    ${media.greaterThan(ScreenType.LARGE)`
       display: none;
     `}
   }

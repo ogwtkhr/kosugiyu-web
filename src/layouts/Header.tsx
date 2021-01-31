@@ -40,13 +40,14 @@ const SiteLogo = styled.h1`
 
 const StyledLink = styled(Link)`
   display: block;
-  height: 80px;
+  width: 50px;
+  height: 72px;
   margin-top: ${Spacing.XXX_LARGE}px;
   margin-bottom: ${Spacing.XXX_LARGE}px;
   text-decoration: none;
 
   ${media.greaterThan(ScreenType.HUGE)`
-    height: 90px;
+    height: 88px;
     margin-top: ${BigSpacing.X_SMALL}px;
     margin-bottom: ${BigSpacing.X_SMALL}px;
   `}
