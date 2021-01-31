@@ -99,7 +99,7 @@ export const IntroModule: React.FC = () => {
           <GridItem
             grid={{
               columnStart: 1,
-              columnEnd: 5,
+              columnEnd: 4,
               rowStart: 20,
               rowEnd: 27,
             }}

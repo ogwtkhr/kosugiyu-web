@@ -36,8 +36,8 @@ export const GridContainer = styled.div<GridContainerProps>`
     grid-template-rows: 40px;
   `};
   ${media.lessThan(ScreenType.MEDIUM)`
-    grid-auto-rows: 7vw;
-    grid-template-rows: 7vw;
+    grid-auto-rows: 8vw;
+    grid-template-rows: 8vw;
   `};
 `;
 

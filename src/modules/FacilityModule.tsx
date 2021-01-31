@@ -108,7 +108,7 @@ export const FacilityModule: React.FC = () => {
             <InformationGroup>
               <InformationContentRow fix={false}>
                 <InformationNormalText>
-                  高円寺駅北口から純情商店街・更新通り商店街を経由し徒歩5分
+                  高円寺駅北口から純情商店街・庚申通り商店街を経由し徒歩5分
                   <br />
                   〒166-0002 杉並区高円寺北3-32-2 / 03-3337-6198
                 </InformationNormalText>
