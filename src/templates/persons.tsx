@@ -5,7 +5,16 @@ import dayjs from 'dayjs';
 import { Query } from '@/types';
 import { BaseLayout, Meta } from '@/layouts';
 import styled from 'styled-components';
-import { BigSpacing, Colors, DateFormat, ScreenType, Spacing } from '@/constants';
+import {
+  BigSpacing,
+  Colors,
+  DateFormat,
+  ScreenType,
+  Spacing,
+  AspectRatio,
+  StyleMixin,
+  ScreenValue,
+} from '@/constants';
 import media from 'styled-media-query';
 import { stripTag } from '@/util/string';
 import { TopPersonItem, Article, ArticleInfo } from '@/components';
@@ -21,9 +30,12 @@ const PersonsPage: React.FC<PersonsPageProps> = ({ data }) => {
   const personPosition = data.microcmsPersons?.position || '';
   const publishedAt = data.microcmsPersons?.publishedAt || '';
   const mainVisual = data.microcmsPersons?.mainVisual?.url || '';
+  const lastVisual = data.microcmsPersons?.lastVisual?.url || '';
   const writerName = data.microcmsPersons?.writer?.name || '';
   const body = data.microcmsPersons?.body || '';
   const credit = data.microcmsPersons?.credit || '';
+
+  console.log(data.microcmsPersons);
 
   const strippedBody = useMemo(() => stripTag(body || '').slice(0, 200), [body]);
 
@@ -50,6 +62,9 @@ const PersonsPage: React.FC<PersonsPageProps> = ({ data }) => {
         </ArticleContainer>
       </Container>
       <ArticleInfo title="クレジット" body={credit} />
+      <LastVisualContainer>
+        <LastVisual src={lastVisual} />
+      </LastVisualContainer>
     </BaseLayout>
   );
 };
@@ -69,6 +84,9 @@ export const query = graphql`
       mainVisual {
         url
       }
+      lastVisual {
+        url
+      }
     }
   }
 `;
@@ -83,6 +101,29 @@ const ArticleContainer = styled.div`
   ${media.lessThan(ScreenType.MEDIUM)`
     margin: ${Spacing.LARGE}px 0;
   `}
+`;
+
+const LastVisualContainer = styled.div`
+  overflow: hidden;
+  width: 100%;
+`;
+
+const LastVisual = styled.div`
+  ${StyleMixin.BACKGROUND_IMAGE_WITH_SRC};
+
+  &::after {
+    content: '';
+    display: block;
+    padding-bottom: ${AspectRatio.R_4_BY_3}%;
+
+    ${media.greaterThan(ScreenType.LARGE)`
+      padding-bottom: 1000px;
+    `}
+
+    ${media.greaterThan(ScreenType.HUGE)`
+      max-width: ${ScreenValue.HUGE}px;
+    `}
+  }
 `;
 
 export default PersonsPage;
