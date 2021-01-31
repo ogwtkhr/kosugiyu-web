@@ -19,12 +19,7 @@ export const CommonTitle: React.FC<CommonTitleProps> = ({ title, imagePath }) =>
       </TitleText>
     </TitleMain>
     <TitleImage>
-      <ReverseParallax
-        zoom={1.2}
-        zoomSmall={1.7}
-        basePosition={ParallaxBasePosition.TOP}
-        fillLayout
-      >
+      <ReverseParallax zoom={1.2} basePosition={ParallaxBasePosition.TOP} fillLayout>
         <Picture relativePath={imagePath} />
       </ReverseParallax>
     </TitleImage>
