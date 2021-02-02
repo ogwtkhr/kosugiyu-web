@@ -356,7 +356,7 @@ const DescriptionPhoto = styled.div`
   left: calc(100% - ${BigSpacing.NORMAL}px);
   width: 260px;
   border: solid 2px ${Colors.UI_LINE_NORMAL};
-  background-color: gray;
+  background-color: ${Colors.ABSTRACT_BLACK};
 
   ${media.lessThan(ScreenType.MEDIUM)`
     left: calc(100% - 110px);
