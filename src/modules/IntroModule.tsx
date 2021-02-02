@@ -210,7 +210,7 @@ export const IntroModule: React.FC = () => {
             onScroll={(e) => {
               const { center } = e;
               // 120〜0くらいのレンジなのでざっくり
-              setFinalPhotoOpacity((100 - center * 1.5) / 100);
+              setFinalPhotoOpacity((100 - center * 1.3) / 100);
             }}
             fillLayout
           >
@@ -246,7 +246,7 @@ const MessageTypographyStyle = styled.span`
   font-size: ${TextSize.NORMAL}rem;
 
   ${media.lessThan(ScreenType.MEDIUM)`
-    font-size: ${TextSize.SMALL}rem;
+    font-size: 1.3rem;
   `}
 `;
 
@@ -334,7 +334,11 @@ const IntroStoryIllustration3 = styled(IntroStoryIllustration)`
 const IntroStoryUnitFinal = styled.section`
   position: relative;
   max-height: 1000px;
-  margin-top: 200px;
+  margin-top: 300px;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    margin-top: 260px;
+  `}
 
   &::after {
     content: '';
@@ -361,14 +365,14 @@ const IntroStoryFinalMessage = styled.div`
   display: flex;
   position: absolute;
   z-index: 1;
-  top: -60px;
+  top: -160px;
   left: 0;
   justify-content: center;
   width: 100%;
   height: 300px;
 
   ${media.lessThan(ScreenType.MEDIUM)`
-    top: -120px;
+    top: -150px;
     height: 200px;
   `}
 `;
