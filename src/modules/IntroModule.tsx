@@ -32,7 +32,7 @@ export const IntroModule: React.FC = () => {
         </IntroStoryUnitColumnMain>
         <IntroStoryUnitColumnSub>
           <MessageTypography>
-            東京の一大ターミナル、新宿駅から10分。
+            東京の一大ターミナル、新宿駅から一〇分。
             <br />
             昔なつかしい商店街、古着屋、カフェ。演劇にアート、阿波踊り……。あらゆる文化が混ざり合い、老若男女が集う街、高円寺。
           </MessageTypography>
@@ -138,7 +138,7 @@ export const IntroModule: React.FC = () => {
         <MessageInGrid>
           <IntersectionFadeIn fillLayout>
             <MessageTypography>
-              関東大震災後、東京の中心部からやってきたファミリー層や高齢者世帯によって、新興住宅街がつくられたこのエリア。戦後になると、作家やアーティストをはじめ若者も多く移り住むようになり、多種多様な人びとが、ときに“中央線文化”とも呼ばれる独自のカルチャーを形作ってきました。
+              関東大震災後、東京の中心部からやってきたファミリー層や高齢者世帯によって、新興住宅街がつくられたこのエリア。戦後になると、作家やアーティストをはじめ若者も多く移り住むようになり、多種多様な人びとが、ときに「中央線文化」とも呼ばれる独自のカルチャーを形作ってきました。
             </MessageTypography>
           </IntersectionFadeIn>
           <IntroStoryIllustration1>
@@ -155,7 +155,9 @@ export const IntroModule: React.FC = () => {
               <Picture relativePath="illustrations/intro/story_2.png" />
             </IntersectionFadeIn>
           </IntroStoryIllustration2>
-          <MessageTypography>小杉湯は昭和8年（1933年）にこの街で生まれました。</MessageTypography>
+          <MessageTypography>
+            車の通りも少なく、子どもや年配の方も安心して過ごせる。交通の便が良く、働く人にもやさしい。さまざまな人が暮らす、まさに「混沌」ということばで形容するにふさわしい場所です。
+          </MessageTypography>
         </IntroStoryUnitColumnSub>
         <IntroStoryUnitColumnMain>
           <IntersectionFadeIn fillLayout>
@@ -188,8 +190,7 @@ export const IntroModule: React.FC = () => {
             </IntersectionFadeIn>
           </IntroStoryIllustration3>
           <MessageTypography>
-            高円寺らしい“ごちゃ混ぜ感”をぎゅっと凝縮したような、街の銭湯。
-            創業当時の建物を守りつつ、時代に合わせて中身を変え続け、高円寺の人々とともにあり続けてきました。
+            小杉湯は昭和八年（一九三三年）にこの街で生まれました。高円寺らしい「ごちゃ混ぜ感」をぎゅっと凝縮したような、街の銭湯。創業当時の建物を守りつつ、時代に合わせて中身を変え続け、高円寺の人々とともにあり続けてきました。
           </MessageTypography>
         </IntroStoryUnitColumnSub>
       </IntroStoryUnitNormal>
