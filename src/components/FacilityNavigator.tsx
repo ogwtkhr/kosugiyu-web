@@ -17,6 +17,7 @@ import {
   TypographyMixin,
   TransitionStatus,
   PropsWithTransition,
+  AspectRatio,
 } from '@/constants';
 import media from 'styled-media-query';
 import { ReverseParallax, SlideView } from '@/effects';
@@ -482,10 +483,17 @@ const DetailListItem = styled.li`
   & + & {
     margin-top: ${Spacing.X_LARGE}px;
   }
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    & + & {
+      margin-top: ${Spacing.XXX_LARGE}px;
+    }
+  `}
 `;
 
 const DetailItem = styled.div`
   display: flex;
+  }
   ${media.lessThan(ScreenType.MEDIUM)`
     display: block;
   `}
@@ -493,8 +501,10 @@ const DetailItem = styled.div`
 
 const DetailItemPhoto = styled.div`
   width: 240px;
+  height: ${240 * (AspectRatio.R_4_BY_3 / 100)}px;
   ${media.lessThan(ScreenType.MEDIUM)`
     width: 100%;
+    height: ${100 * (AspectRatio.R_4_BY_3 / 100)}%;
   `}
 `;
 
