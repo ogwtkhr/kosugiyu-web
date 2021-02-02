@@ -1599,8 +1599,8 @@ export type MicrocmsArchive = Node & {
   mainVisual?: Maybe<MicrocmsArchiveMainVisual>;
   body?: Maybe<Scalars['String']>;
   info?: Maybe<Array<Maybe<MicrocmsArchiveInfo>>>;
-  publishDate?: Maybe<Scalars['Date']>;
   archiveId?: Maybe<Scalars['String']>;
+  publishDate?: Maybe<Scalars['Date']>;
 };
 
 
@@ -1771,8 +1771,8 @@ export type MicrocmsArchiveFieldsEnum =
   | 'info___fieldId'
   | 'info___head'
   | 'info___body'
-  | 'publishDate'
-  | 'archiveId';
+  | 'archiveId'
+  | 'publishDate';
 
 export type MicrocmsArchiveFilterInput = {
   id?: Maybe<StringQueryOperatorInput>;
@@ -1788,8 +1788,8 @@ export type MicrocmsArchiveFilterInput = {
   mainVisual?: Maybe<MicrocmsArchiveMainVisualFilterInput>;
   body?: Maybe<StringQueryOperatorInput>;
   info?: Maybe<MicrocmsArchiveInfoFilterListInput>;
-  publishDate?: Maybe<DateQueryOperatorInput>;
   archiveId?: Maybe<StringQueryOperatorInput>;
+  publishDate?: Maybe<DateQueryOperatorInput>;
 };
 
 export type MicrocmsArchiveGroupConnection = {
@@ -1849,7 +1849,6 @@ export type MicrocmsPersons = Node & {
   title?: Maybe<Scalars['String']>;
   mainVisual?: Maybe<MicrocmsPersonsMainVisual>;
   body?: Maybe<Scalars['String']>;
-  writer?: Maybe<MicrocmsPersonsWriter>;
   lastVisual?: Maybe<MicrocmsPersonsLastVisual>;
   credit?: Maybe<Scalars['String']>;
   personsId?: Maybe<Scalars['String']>;
@@ -2013,11 +2012,6 @@ export type MicrocmsPersonsFieldsEnum =
   | 'mainVisual___height'
   | 'mainVisual___width'
   | 'body'
-  | 'writer___id'
-  | 'writer___createdAt'
-  | 'writer___updatedAt'
-  | 'writer___publishedAt'
-  | 'writer___name'
   | 'lastVisual___url'
   | 'lastVisual___height'
   | 'lastVisual___width'
@@ -2039,7 +2033,6 @@ export type MicrocmsPersonsFilterInput = {
   title?: Maybe<StringQueryOperatorInput>;
   mainVisual?: Maybe<MicrocmsPersonsMainVisualFilterInput>;
   body?: Maybe<StringQueryOperatorInput>;
-  writer?: Maybe<MicrocmsPersonsWriterFilterInput>;
   lastVisual?: Maybe<MicrocmsPersonsLastVisualFilterInput>;
   credit?: Maybe<StringQueryOperatorInput>;
   personsId?: Maybe<StringQueryOperatorInput>;
@@ -2081,46 +2074,6 @@ export type MicrocmsPersonsMainVisualFilterInput = {
 export type MicrocmsPersonsSortInput = {
   fields?: Maybe<Array<Maybe<MicrocmsPersonsFieldsEnum>>>;
   order?: Maybe<Array<Maybe<SortOrderEnum>>>;
-};
-
-export type MicrocmsPersonsWriter = {
-  id?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['Date']>;
-  updatedAt?: Maybe<Scalars['Date']>;
-  publishedAt?: Maybe<Scalars['Date']>;
-  name?: Maybe<Scalars['String']>;
-};
-
-
-export type MicrocmsPersonsWriterCreatedAtArgs = {
-  formatString?: Maybe<Scalars['String']>;
-  fromNow?: Maybe<Scalars['Boolean']>;
-  difference?: Maybe<Scalars['String']>;
-  locale?: Maybe<Scalars['String']>;
-};
-
-
-export type MicrocmsPersonsWriterUpdatedAtArgs = {
-  formatString?: Maybe<Scalars['String']>;
-  fromNow?: Maybe<Scalars['Boolean']>;
-  difference?: Maybe<Scalars['String']>;
-  locale?: Maybe<Scalars['String']>;
-};
-
-
-export type MicrocmsPersonsWriterPublishedAtArgs = {
-  formatString?: Maybe<Scalars['String']>;
-  fromNow?: Maybe<Scalars['Boolean']>;
-  difference?: Maybe<Scalars['String']>;
-  locale?: Maybe<Scalars['String']>;
-};
-
-export type MicrocmsPersonsWriterFilterInput = {
-  id?: Maybe<StringQueryOperatorInput>;
-  createdAt?: Maybe<DateQueryOperatorInput>;
-  updatedAt?: Maybe<DateQueryOperatorInput>;
-  publishedAt?: Maybe<DateQueryOperatorInput>;
-  name?: Maybe<StringQueryOperatorInput>;
 };
 
 /** Node Interface */
@@ -2389,8 +2342,8 @@ export type QueryMicrocmsArchiveArgs = {
   mainVisual?: Maybe<MicrocmsArchiveMainVisualFilterInput>;
   body?: Maybe<StringQueryOperatorInput>;
   info?: Maybe<MicrocmsArchiveInfoFilterListInput>;
-  publishDate?: Maybe<DateQueryOperatorInput>;
   archiveId?: Maybe<StringQueryOperatorInput>;
+  publishDate?: Maybe<DateQueryOperatorInput>;
 };
 
 
@@ -2417,7 +2370,6 @@ export type QueryMicrocmsPersonsArgs = {
   title?: Maybe<StringQueryOperatorInput>;
   mainVisual?: Maybe<MicrocmsPersonsMainVisualFilterInput>;
   body?: Maybe<StringQueryOperatorInput>;
-  writer?: Maybe<MicrocmsPersonsWriterFilterInput>;
   lastVisual?: Maybe<MicrocmsPersonsLastVisualFilterInput>;
   credit?: Maybe<StringQueryOperatorInput>;
   personsId?: Maybe<StringQueryOperatorInput>;
@@ -3270,11 +3222,11 @@ export type SitePageFieldsEnum =
   | 'pluginCreator___pluginOptions___anonymize'
   | 'pluginCreator___pluginOptions___respectDNT'
   | 'pluginCreator___pluginOptions___pageTransitionDelay'
+  | 'pluginCreator___pluginOptions___pathCheck'
   | 'pluginCreator___pluginOptions___apiKey'
   | 'pluginCreator___pluginOptions___serviceId'
   | 'pluginCreator___pluginOptions___apis'
   | 'pluginCreator___pluginOptions___apis___endpoint'
-  | 'pluginCreator___pluginOptions___pathCheck'
   | 'pluginCreator___nodeAPIs'
   | 'pluginCreator___browserAPIs'
   | 'pluginCreator___ssrAPIs'
@@ -3486,11 +3438,11 @@ export type SitePluginFieldsEnum =
   | 'pluginOptions___anonymize'
   | 'pluginOptions___respectDNT'
   | 'pluginOptions___pageTransitionDelay'
+  | 'pluginOptions___pathCheck'
   | 'pluginOptions___apiKey'
   | 'pluginOptions___serviceId'
   | 'pluginOptions___apis'
   | 'pluginOptions___apis___endpoint'
-  | 'pluginOptions___pathCheck'
   | 'nodeAPIs'
   | 'browserAPIs'
   | 'ssrAPIs'
@@ -3630,10 +3582,10 @@ export type SitePluginPluginOptions = {
   anonymize?: Maybe<Scalars['Boolean']>;
   respectDNT?: Maybe<Scalars['Boolean']>;
   pageTransitionDelay?: Maybe<Scalars['Int']>;
+  pathCheck?: Maybe<Scalars['Boolean']>;
   apiKey?: Maybe<Scalars['String']>;
   serviceId?: Maybe<Scalars['String']>;
   apis?: Maybe<Array<Maybe<SitePluginPluginOptionsApis>>>;
-  pathCheck?: Maybe<Scalars['Boolean']>;
 };
 
 export type SitePluginPluginOptionsAlias = {
@@ -3689,10 +3641,10 @@ export type SitePluginPluginOptionsFilterInput = {
   anonymize?: Maybe<BooleanQueryOperatorInput>;
   respectDNT?: Maybe<BooleanQueryOperatorInput>;
   pageTransitionDelay?: Maybe<IntQueryOperatorInput>;
+  pathCheck?: Maybe<BooleanQueryOperatorInput>;
   apiKey?: Maybe<StringQueryOperatorInput>;
   serviceId?: Maybe<StringQueryOperatorInput>;
   apis?: Maybe<SitePluginPluginOptionsApisFilterListInput>;
-  pathCheck?: Maybe<BooleanQueryOperatorInput>;
 };
 
 export type SitePluginSortInput = {
@@ -3819,7 +3771,7 @@ export type Unnamed_2_QueryVariables = Exact<{
 
 export type Unnamed_2_Query = { microcmsPersons?: Maybe<(
     Pick<MicrocmsPersons, 'title' | 'position' | 'name' | 'body' | 'credit' | 'publishedAt'>
-    & { writer?: Maybe<Pick<MicrocmsPersonsWriter, 'name'>>, mainVisual?: Maybe<Pick<MicrocmsPersonsMainVisual, 'url'>>, lastVisual?: Maybe<Pick<MicrocmsPersonsLastVisual, 'url'>> }
+    & { mainVisual?: Maybe<Pick<MicrocmsPersonsMainVisual, 'url'>>, lastVisual?: Maybe<Pick<MicrocmsPersonsLastVisual, 'url'>> }
   )> };
 
 export type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;

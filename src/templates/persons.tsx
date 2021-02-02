@@ -31,7 +31,6 @@ const PersonsPage: React.FC<PersonsPageProps> = ({ data }) => {
   const publishedAt = data.microcmsPersons?.publishedAt || '';
   const mainVisual = data.microcmsPersons?.mainVisual?.url || '';
   const lastVisual = data.microcmsPersons?.lastVisual?.url || '';
-  const writerName = data.microcmsPersons?.writer?.name || '';
   const body = data.microcmsPersons?.body || '';
   const credit = data.microcmsPersons?.credit || '';
 
@@ -43,8 +42,7 @@ const PersonsPage: React.FC<PersonsPageProps> = ({ data }) => {
     publishedAt,
   ]);
 
-  if (!title || !publishedAt || !writerName || !mainVisual || !body)
-    return <div>data not exists.</div>;
+  if (!title || !publishedAt || !mainVisual || !body) return <div>data not exists.</div>;
   return (
     <BaseLayout useHeader>
       <Meta title={title} description={strippedBody} ogImage={mainVisual} />
@@ -78,9 +76,6 @@ export const query = graphql`
       body
       credit
       publishedAt
-      writer {
-        name
-      }
       mainVisual {
         url
       }
