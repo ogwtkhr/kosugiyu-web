@@ -51,10 +51,6 @@ const StyledButton = styled(Link)`
   text-decoration: none;
   font-size: ${TextSize.NORMAL}rem;
   cursor: pointer;
-
-  &:hover {
-    /* background-color: ${rgba(Colors.UI_BASE, Opacity.HOVER_NORMAL)}; */
-  }
 `;
 
 const ButtonInner = styled.div`

@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import { BaseLayout, Meta } from '@/layouts';
 import { TopModule, IntroModule, PersonsModule } from '@/modules';
+import { useScreenThreshold } from '@/hooks';
+import { ScreenValue } from '@/constants';
 
 const IndexPage: React.FC = () => {
   const [isShowMenu, setIsShowMenu] = useState<boolean>(false);
+  const { overThreshold } = useScreenThreshold(ScreenValue.MEDIUM);
+  const isSmallScreen = !overThreshold;
+
   return (
     <>
-      <BaseLayout useHeader={false} showMenu={isShowMenu}>
+      <BaseLayout useHeader={false} showMenu={isSmallScreen || isShowMenu}>
         <Meta />
         <TopModule
           onViewInStatusChange={(viewInStatus) => {

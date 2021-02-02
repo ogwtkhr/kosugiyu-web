@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useParallax, ParallaxDirectionType } from '@/hooks';
 import styled, { css } from 'styled-components';
 import media from 'styled-media-query';
@@ -26,7 +26,7 @@ type ParallaxProps = {
   zoom?: number;
   zoomSmall?: number;
   basePosition?: ParallaxBasePosition;
-  onScroll?: (e: Seeds) => void;
+  onScroll?: (e: number) => void;
   verbose?: boolean;
 };
 
@@ -59,7 +59,9 @@ export const Parallax: React.FC<ParallaxProps> = ({
   const parallaxSeed = seeds[basePosition];
   const transformProperty = useMemo(() => `translateY(${parallaxSeed}px)`, [parallaxSeed]);
 
-  if (onScroll) onScroll(seeds);
+  useEffect(() => {
+    if (onScroll) onScroll(parallaxSeed);
+  }, [onScroll, parallaxSeed]);
 
   return (
     <Outer

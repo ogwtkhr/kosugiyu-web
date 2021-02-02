@@ -208,9 +208,8 @@ export const IntroModule: React.FC = () => {
             coefficient={0.12}
             min={0}
             onScroll={(e) => {
-              const { center } = e;
               // 120〜0くらいのレンジなのでざっくり
-              setFinalPhotoOpacity((100 - center * 1.3) / 100);
+              setFinalPhotoOpacity((100 - e * 1.3) / 100);
             }}
             fillLayout
           >
