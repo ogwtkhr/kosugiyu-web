@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 // import Transition, { TransitionStatus } from 'react-transition-group/Transition';
@@ -18,6 +18,7 @@ import { IntersectionFadeIn, Parallax, ReverseParallax } from '@/effects';
 import { isSafari } from '@/util/ua';
 
 export const IntroModule: React.FC = () => {
+  const [finalPhotoOpacity, setFinalPhotoOpacity] = useState(0);
   return (
     <>
       <IntroStoryUnitNormal>
@@ -202,17 +203,24 @@ export const IntroModule: React.FC = () => {
           </MessageTypographyStyle>
         </IntroStoryFinalMessage>
 
-        <IntroStoryFinalPhoto>
-          <IntersectionFadeIn fillLayout>
-            <Parallax coefficient={0.12} min={0} fillLayout>
-              <Picture
-                relativePath="photos/intro/story_11.jpg"
-                imgStyle={{
-                  objectPosition: '50% 0',
-                }}
-              />
-            </Parallax>
-          </IntersectionFadeIn>
+        <IntroStoryFinalPhoto style={{ opacity: finalPhotoOpacity }}>
+          <Parallax
+            coefficient={0.12}
+            min={0}
+            onScroll={(e) => {
+              const { center } = e;
+              // 120〜0くらいのレンジなのでざっくり
+              setFinalPhotoOpacity((100 - center * 1.5) / 100);
+            }}
+            fillLayout
+          >
+            <Picture
+              relativePath="photos/intro/story_11.jpg"
+              imgStyle={{
+                objectPosition: '50% 0',
+              }}
+            />
+          </Parallax>
         </IntroStoryFinalPhoto>
       </IntroStoryUnitFinal>
     </>

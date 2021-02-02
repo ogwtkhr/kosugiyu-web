@@ -13,6 +13,10 @@ export const ParallaxBasePosition = {
 
 export type ParallaxBasePosition = ValueOf<typeof ParallaxBasePosition>;
 
+type Seeds = {
+  [key in ParallaxBasePosition]: number;
+};
+
 type ParallaxProps = {
   fillLayout?: boolean;
   coefficient?: number;
@@ -22,6 +26,7 @@ type ParallaxProps = {
   zoom?: number;
   zoomSmall?: number;
   basePosition?: ParallaxBasePosition;
+  onScroll?: (e: Seeds) => void;
   verbose?: boolean;
 };
 
@@ -35,6 +40,7 @@ export const Parallax: React.FC<ParallaxProps> = ({
   zoom = 1,
   zoomSmall,
   basePosition = ParallaxBasePosition.CENTER,
+  onScroll,
   verbose,
 }) => {
   const [ref, { center, top, bottom }] = useParallax<HTMLDivElement>({
@@ -44,7 +50,7 @@ export const Parallax: React.FC<ParallaxProps> = ({
     direction,
     verbose,
   });
-  const seeds = {
+  const seeds: Seeds = {
     [ParallaxBasePosition.TOP]: top,
     [ParallaxBasePosition.CENTER]: center,
     [ParallaxBasePosition.BOTTOM]: bottom,
@@ -52,6 +58,8 @@ export const Parallax: React.FC<ParallaxProps> = ({
 
   const parallaxSeed = seeds[basePosition];
   const transformProperty = useMemo(() => `translateY(${parallaxSeed}px)`, [parallaxSeed]);
+
+  if (onScroll) onScroll(seeds);
 
   return (
     <Outer

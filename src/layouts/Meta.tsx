@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Helmet from 'react-helmet';
 import { useBaseMetaInfo } from '@/hooks';
 
@@ -12,13 +12,7 @@ type Props = {
   meta?: MetaItem[];
 };
 
-export const Meta: React.FC<Props> = ({
-  title: propsTitle,
-  description,
-  ogImage,
-  lang = 'ja',
-  meta = [],
-}) => {
+export const Meta: React.FC<Props> = ({ title, description, ogImage, lang = 'ja', meta = [] }) => {
   const {
     title: defaultTitle,
     description: defaultDescription,
@@ -29,7 +23,6 @@ export const Meta: React.FC<Props> = ({
   const metaDescription = description || defaultDescription;
   const twitterAccount = `@${twitter}`;
   const image = ogImage || baseOgImage;
-  const title = propsTitle || defaultTitle || '';
 
   return (
     <Helmet
