@@ -5,6 +5,10 @@ type FacilityInfo = {
   id: string;
   title: string;
   description: string;
+  link?: {
+    title: string;
+    url: string;
+  };
   details?: Pick<FacilityInfo, 'id' | 'title' | 'description'>[];
 };
 
@@ -20,6 +24,10 @@ export const useFacilityInfo = (): FacilityInfo[] => {
             id
             title
             description
+          }
+          link {
+            title
+            url
           }
         }
       }
@@ -40,11 +48,18 @@ export const useFacilityInfo = (): FacilityInfo[] => {
           description: detailDescription,
         };
       });
+      const link = facility?.link
+        ? {
+            title: facility?.link.title || '',
+            url: facility?.link.url || '',
+          }
+        : undefined;
       return {
         id,
         title,
         description,
         details,
+        link,
       };
     }) || [];
 

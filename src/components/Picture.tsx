@@ -73,6 +73,8 @@ export const Picture: React.FC<PictureProps> = ({
       ]
     : desktopImages) as FluidObject[];
 
+  console.log(imageSources);
+
   return (
     <>
       {imageSources ? (

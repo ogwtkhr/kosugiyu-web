@@ -52,7 +52,7 @@ export const FacilityNavigator: React.FC = () => {
   const facilityInfo = useFacilityInfo();
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [isDetailWindowOpen, setIsDetailWindowOpen] = useState<boolean>(false);
-  const { id, title, description, details } = facilityInfo[currentIndex];
+  const { id, title, description, details, link } = facilityInfo[currentIndex];
   const openDetailWindow = useCallback(() => {
     setIsDetailWindowOpen(true);
   }, []);
@@ -119,6 +119,15 @@ export const FacilityNavigator: React.FC = () => {
         </DetailButton>
       )}
 
+      {!!link && (
+        <DetailButton as="a" target="_blank" href={link.url}>
+          <DetailButtonLabel>{link.title}</DetailButtonLabel>
+          <DetailButtonIcon>
+            <OtherWindowIcon />
+          </DetailButtonIcon>
+        </DetailButton>
+      )}
+
       <DescriptionWindow id={id}>
         <DescriptionTitle>{title}</DescriptionTitle>
         <DescriptionBody>{getTextBreakFragment(description)}</DescriptionBody>
@@ -127,6 +136,7 @@ export const FacilityNavigator: React.FC = () => {
             {(Object.keys(FacilityID) as (keyof typeof FacilityID)[]).map((key) => (
               <Picture
                 key={FacilityID[key]}
+                loading="eager"
                 relativePath={`photos/facility/photo_${FacilityID[key]}.jpg`}
               />
             ))}
@@ -410,6 +420,8 @@ const DetailButton = styled.button`
   padding: ${Spacing.SMALL}px;
   border: solid 2px ${Colors.UI_LINE_NORMAL};
   background-color: ${Colors.UI_PAPER};
+  color: ${Colors.UI_TEXT_MAIN};
+  text-decoration: none;
 
   ${media.lessThan(ScreenType.MEDIUM)`
     left: ${CONTROLS_WIDTH_SMALL + Spacing.LARGE}px;
