@@ -145,13 +145,22 @@ export const TopPersonItem: React.FC<TopItemProps> = ({
           </ReverseParallax>
         </TopThumbnailContainer>
         <TopInfo>
-          <TopPosition>{position}</TopPosition>
-          <TopName>{name}</TopName>
+          <TopProfileContainer>
+            <TopProfile>
+              <TopPosition>{position}</TopPosition>
+              <TopName>{name}</TopName>
+            </TopProfile>
+            {showArrowIcon && (
+              <TopIconContainerSmallScreen>
+                <ArrowIcon />
+              </TopIconContainerSmallScreen>
+            )}
+          </TopProfileContainer>
           <TopTitle>{title}</TopTitle>
           {showArrowIcon && (
-            <TopIconContainer>
+            <TopIconContainerNormalScreen>
               <ArrowIcon />
-            </TopIconContainer>
+            </TopIconContainerNormalScreen>
           )}
         </TopInfo>
       </TopContainer>
@@ -161,8 +170,8 @@ export const TopPersonItem: React.FC<TopItemProps> = ({
 
 const TopContainer = styled.div`
   display: flex;
-  justify-content: space-around;
   align-items: center;
+  justify-content: space-around;
   max-width: ${ModuleWidth.SEMI_WIDE}px;
   margin: 0 auto;
 
@@ -173,9 +182,9 @@ const TopContainer = styled.div`
 `;
 
 const TopThumbnailContainer = styled.div`
-  overflow: hidden;
   width: 40%;
   height: 100%;
+  overflow: hidden;
 
   ${media.lessThan(ScreenType.MEDIUM)`
     margin: 0 auto;
@@ -202,6 +211,17 @@ const TopInfo = styled.div`
   `}
 `;
 
+const TopProfileContainer = styled.div`
+  ${media.lessThan(ScreenType.MEDIUM)`
+    display: flex;
+    justify-content: center;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  `}
+`;
+const TopProfile = styled.div``;
+
 const TopPosition = styled.p`
   font-size: ${TextSize.SMALL}rem;
   ${TypographyMixin.DISPLAY};
@@ -226,10 +246,27 @@ const TopTitle = styled.p`
   margin-top: ${Spacing.NORMAL}px;
   font-size: ${TextSize.X_SMALL}rem;
   ${TypographyMixin.DISPLAY};
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 80%;
+  `}
 `;
 
-const TopIconContainer = styled.div`
+const TopIconContainerNormalScreen = styled.div`
   width: ${Spacing.XX_LARGE}px;
   margin-top: ${Spacing.NORMAL}px;
   margin-left: auto;
+  ${media.lessThan(ScreenType.MEDIUM)`
+    display: none;
+  `}
+`;
+
+const TopIconContainerSmallScreen = styled.div`
+  width: ${Spacing.X_LARGE}px;
+  margin-left: ${Spacing.X_LARGE}px;
+  ${media.greaterThan(ScreenType.MEDIUM)`
+    display: none;
+  `}
 `;
