@@ -10,7 +10,6 @@ import {
   PropsWithTransition,
   TransitionStatus,
   Transitions,
-  Opacity,
 } from '@/constants';
 import Transition from 'react-transition-group/Transition';
 import { useMenu, useBaseMetaInfo } from '@/hooks';

@@ -6,7 +6,8 @@ import { StyleMixin, TextSize, TypographyMixin, Colors, Spacing, ScreenType } fr
 import { CommonTitle, ArticleGroup, ArticleItemProps } from '@/components';
 import { groupByIndex } from '@/util/array';
 import media from 'styled-media-query';
-import { orderBy } from 'lodash';
+import { orderBy, groupBy } from 'lodash';
+import dayjs from 'dayjs';
 
 export const ArchiveModule: React.FC = () => {
   const data = useStaticQuery<AllMicrocmsArchiveQuery>(graphql`
@@ -26,7 +27,7 @@ export const ArchiveModule: React.FC = () => {
     }
   `);
 
-  const articles: ArticleItemProps[] = orderBy(
+  const baseArticles: ArticleItemProps[] = orderBy(
     data.allMicrocmsArchive.nodes.map((entry) => {
       const slug = entry.slug || '';
       const title = entry.title || '';
@@ -43,41 +44,46 @@ export const ArchiveModule: React.FC = () => {
     'desc',
   );
 
-  // TODO（実データを年ごとにグループする、lodash#groupBy?）
-  const years = ['2021', '2020', '2019'];
-
-  const groupedArticle = groupByIndex(articles, 11);
+  const yearGroupedList = groupBy(baseArticles, (item) => dayjs(item.publishDate).get('year'));
+  const years = Object.keys(yearGroupedList).sort().reverse();
 
   return (
     <Container>
       <CommonTitle title="できごと" imagePath="photos/archive/hero.jpg" />
-      <YearNavigation>
-        <YearNavigationList>
-          {years.map((year, index) => (
-            <div key={year}>
-              <YearNavigationItem key={year}>{year}</YearNavigationItem>
-              {index < years.length - 1 && (
-                <YearNavigationLineContainer>
-                  <YearNavigationLine />
-                </YearNavigationLineContainer>
-              )}
-            </div>
-          ))}
-        </YearNavigationList>
-      </YearNavigation>
 
-      {years.map((year) => (
-        <ArticlesByYear key={year}>
-          <ArticleYear>
-            <ArticleYearText>{year}年のできごと</ArticleYearText>
-          </ArticleYear>
-          <ArticleList>
-            {groupedArticle.map((group, index) => {
-              return <ArticleGroup key={index}>{group}</ArticleGroup>;
-            })}
-          </ArticleList>
-        </ArticlesByYear>
-      ))}
+      {years.length > 1 && (
+        <YearNavigation>
+          <YearNavigationList>
+            {years.map((year, index) => (
+              <div key={year}>
+                <YearNavigationItem key={year}>{year}</YearNavigationItem>
+                {index < years.length - 1 && (
+                  <YearNavigationLineContainer>
+                    <YearNavigationLine />
+                  </YearNavigationLineContainer>
+                )}
+              </div>
+            ))}
+          </YearNavigationList>
+        </YearNavigation>
+      )}
+
+      {years.map((year) => {
+        const yearGroupedItem = yearGroupedList[year];
+        const groupedArticle = groupByIndex(yearGroupedItem, 11);
+        return (
+          <ArticlesByYear key={year}>
+            <ArticleYear>
+              <ArticleYearText>{year}年のできごと</ArticleYearText>
+            </ArticleYear>
+            <ArticleList>
+              {groupedArticle.map((group, index) => {
+                return <ArticleGroup key={index}>{group}</ArticleGroup>;
+              })}
+            </ArticleList>
+          </ArticlesByYear>
+        );
+      })}
     </Container>
   );
 };
