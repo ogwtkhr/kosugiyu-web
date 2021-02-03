@@ -321,6 +321,7 @@ const TopSubInfo = styled.div`
   justify-content: flex-start;
   margin-top: ${Spacing.LARGE}px;
   ${media.lessThan(ScreenType.MEDIUM)`
+    justify-content: space-between;
     margin-left: auto;
     margin-right: auto;
     max-width: 80%;
@@ -340,7 +341,7 @@ const TopSubInfoSocialButtons = styled.div`
 const TopSubInfoSocialButton = styled.div`
   width: 28px;
   & + & {
-    margin-left: ${Spacing.LARGE}px;
+    margin-left: ${Spacing.NORMAL}px;
   }
 `;
 

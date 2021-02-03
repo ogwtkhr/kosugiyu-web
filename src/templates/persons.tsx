@@ -103,7 +103,7 @@ const ArticleContainer = styled.div`
   margin: ${BigSpacing.SMALL}px 0;
 
   ${media.lessThan(ScreenType.MEDIUM)`
-    margin: ${Spacing.LARGE}px 0;
+    margin: ${Spacing.XX_LARGE}px 0;
   `}
 `;
 
