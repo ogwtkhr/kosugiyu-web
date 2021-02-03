@@ -62,8 +62,6 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({
   const topPersonMainVisualUrl = topPerson?.mainVisual?.url || '';
   const isSummaryView = summaryMode && persons.length > summaryMax;
 
-  console.log(summarizedPersons);
-
   return (
     <>
       {useTitle && (
