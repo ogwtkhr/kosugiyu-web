@@ -14,7 +14,7 @@ import {
   LineHeight,
 } from '@/constants';
 
-import { UnderLineText, ArrowIcon } from '@/components';
+import { TwitterTweetButton, FacebookShareButton, UnderLineText, ArrowIcon } from '@/components';
 import { IntersectionFadeIn, ReverseParallax, ParallaxBasePosition } from '@/effects';
 
 type PersonItemProps = {
@@ -32,11 +32,6 @@ export const PersonItem: React.FC<PersonItemProps> = ({
   showArrowIcon = true,
   isComingSoon,
 }) => {
-  // const formattedPublishedAt = useMemo(
-  //   () => dayjs(publishedAt).format(DateFormat.YEAR_MONTH_DATE_JP),
-  //   [publishedAt],
-  // );
-
   return (
     <IntersectionFadeIn>
       <Container>
@@ -136,8 +131,15 @@ const Thumbnail = styled.div<
   `}
 `;
 
+type SubInformation = {
+  twitter?: boolean;
+  facebook?: boolean;
+  publishDate?: string;
+};
+
 type TopItemProps = {
   title: string;
+  subInformation?: SubInformation;
   parallaxBasePosition?: ParallaxBasePosition;
 } & PersonItemProps;
 
@@ -147,6 +149,7 @@ export const TopPersonItem: React.FC<TopItemProps> = ({
   title,
   mainVisualUrl,
   showArrowIcon = true,
+  subInformation,
   parallaxBasePosition = ParallaxBasePosition.CENTER,
 }) => {
   return (
@@ -177,6 +180,11 @@ export const TopPersonItem: React.FC<TopItemProps> = ({
             )}
           </TopProfileContainer>
           <TopTitle>{title}</TopTitle>
+          {subInformation && (
+            <TopSubInfo>
+              <div>hoge</div>
+            </TopSubInfo>
+          )}
           {showArrowIcon && (
             <TopIconContainerNormalScreen>
               <ArrowIcon />
@@ -229,6 +237,11 @@ const TopInfo = styled.div`
     margin-top: ${Spacing.LARGE}px;
     width: auto;
   `}
+`;
+
+const TopSubInfo = styled.div`
+  display: flex;
+  margin-top: ${Spacing.LARGE}px;
 `;
 
 const TopProfileContainer = styled.div`

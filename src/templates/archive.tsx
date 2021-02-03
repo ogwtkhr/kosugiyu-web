@@ -69,17 +69,18 @@ const ArchivePage: React.FC<ArchivePageProps> = ({ data }) => {
         <ArticleContainer>
           <Article body={data.microcmsArchive?.body || ''} />
         </ArticleContainer>
-        <InfoList>
-          {data.microcmsArchive?.info?.map(
-            (item, index) =>
-              item?.head &&
-              item?.body && (
-                <InfoListItem key={index}>
-                  <ArticleInfo title={item.head} body={item.body}></ArticleInfo>
-                </InfoListItem>
-              ),
-          )}
-        </InfoList>
+        <ArticleInfo title="詳細情報">
+          {data.microcmsArchive?.info?.map((item, index) => (
+            <div key={index}>
+              {/* TODO */}
+              {item?.head && item?.body && (
+                <div>
+                  <span>{item.head}</span>：<span>{item.body}</span>
+                </div>
+              )}
+            </div>
+          ))}
+        </ArticleInfo>
       </Container>
     </BaseLayout>
   );

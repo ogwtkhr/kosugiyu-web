@@ -38,7 +38,9 @@ const PersonsPage: React.FC<PersonsPageProps> = ({ data }) => {
 
   const strippedBody = useMemo(() => stripTag(body || '').slice(0, 200), [body]);
 
-  const publishedDate = useMemo(() => dayjs(publishedAt).format(DateFormat.YEAR_MONTH_DATE_JP), [
+  console.log(publishedAt);
+
+  const publishDate = useMemo(() => dayjs(publishedAt).format(DateFormat.YEAR_MONTH_DATE_JP), [
     publishedAt,
   ]);
 
@@ -53,6 +55,11 @@ const PersonsPage: React.FC<PersonsPageProps> = ({ data }) => {
           name={name}
           mainVisualUrl={mainVisual}
           showArrowIcon={false}
+          subInformation={{
+            twitter: true,
+            facebook: true,
+            publishDate,
+          }}
           parallaxBasePosition={ParallaxBasePosition.TOP}
         />
         <ArticleContainer>

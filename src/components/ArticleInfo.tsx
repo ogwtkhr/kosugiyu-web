@@ -14,14 +14,18 @@ import { isUrl } from '@/util/string';
 
 type ArticleInfoProps = {
   title: string;
-  body: string;
+  body?: string;
 };
 
-export const ArticleInfo: React.FC<ArticleInfoProps> = ({ title, body }) => {
+export const ArticleInfo: React.FC<ArticleInfoProps> = ({ title, body, children }) => {
   return (
     <Container>
       <Title>{title}</Title>
-      <Body>{isUrl(body) ? <Link href={body}>{body}</Link> : body}</Body>
+      {body ? (
+        <Body>{isUrl(body) ? <Link href={body}>{body}</Link> : body}</Body>
+      ) : (
+        <Body>{children}</Body>
+      )}
     </Container>
   );
 };
