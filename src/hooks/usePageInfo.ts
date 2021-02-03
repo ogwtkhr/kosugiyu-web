@@ -10,6 +10,7 @@ type PageInfo = {
   id: PageId;
   title: string;
   description: string;
+  ogImage?: string;
 };
 
 export const usePageInfo = ({ id: searchId }: Parameter): PageInfo => {
@@ -20,6 +21,7 @@ export const usePageInfo = ({ id: searchId }: Parameter): PageInfo => {
           id
           title
           description
+          ogImage
         }
       }
     }

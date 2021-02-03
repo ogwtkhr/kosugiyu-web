@@ -9,7 +9,7 @@ export const HeroImage: React.FC = () => {
   return (
     <Container>
       <ReverseParallax zoom={1.1} basePosition={ParallaxBasePosition.TOP} fillLayout>
-        <Picture relativePath={`photos/top/hero_1.jpg`} />
+        <Picture relativePath="photos/top/hero.jpg" />
       </ReverseParallax>
       <BusinessInfo>
         平日 15:30-25:45
