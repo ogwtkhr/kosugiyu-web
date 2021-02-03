@@ -14,7 +14,7 @@ import {
   LineHeight,
 } from '@/constants';
 
-import { UnderLineText, ArrowIcon } from '@/components';
+import { TwitterTweetButton, FacebookShareButton, UnderLineText, ArrowIcon } from '@/components';
 import { IntersectionFadeIn, ReverseParallax, ParallaxBasePosition } from '@/effects';
 
 type PersonItemProps = {
@@ -32,11 +32,6 @@ export const PersonItem: React.FC<PersonItemProps> = ({
   showArrowIcon = true,
   isComingSoon,
 }) => {
-  // const formattedPublishedAt = useMemo(
-  //   () => dayjs(publishedAt).format(DateFormat.YEAR_MONTH_DATE_JP),
-  //   [publishedAt],
-  // );
-
   return (
     <IntersectionFadeIn>
       <Container>
@@ -136,8 +131,15 @@ const Thumbnail = styled.div<
   `}
 `;
 
+type SubInformation = {
+  twitter?: boolean;
+  facebook?: boolean;
+  publishDate?: string;
+};
+
 type TopItemProps = {
   title: string;
+  subInformation?: SubInformation;
   parallaxBasePosition?: ParallaxBasePosition;
 } & PersonItemProps;
 
@@ -147,6 +149,7 @@ export const TopPersonItem: React.FC<TopItemProps> = ({
   title,
   mainVisualUrl,
   showArrowIcon = true,
+  subInformation,
   parallaxBasePosition = ParallaxBasePosition.CENTER,
 }) => {
   return (
@@ -177,6 +180,27 @@ export const TopPersonItem: React.FC<TopItemProps> = ({
             )}
           </TopProfileContainer>
           <TopTitle>{title}</TopTitle>
+          {subInformation && (
+            <TopSubInfo>
+              {(subInformation.twitter || subInformation.facebook) && (
+                <TopSubInfoSocialButtons>
+                  {subInformation.twitter && (
+                    <TopSubInfoSocialButton>
+                      <TwitterTweetButton shape="circle" />
+                    </TopSubInfoSocialButton>
+                  )}
+                  {subInformation.facebook && (
+                    <TopSubInfoSocialButton>
+                      <FacebookShareButton shape="circle" />
+                    </TopSubInfoSocialButton>
+                  )}
+                </TopSubInfoSocialButtons>
+              )}
+              {subInformation.publishDate && (
+                <TopPublishDate>{subInformation.publishDate}</TopPublishDate>
+              )}
+            </TopSubInfo>
+          )}
           {showArrowIcon && (
             <TopIconContainerNormalScreen>
               <ArrowIcon />
@@ -289,4 +313,41 @@ const TopIconContainerSmallScreen = styled.div`
   ${media.greaterThan(ScreenType.MEDIUM)`
     display: none;
   `}
+`;
+
+const TopSubInfo = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: ${Spacing.LARGE}px;
+  ${media.lessThan(ScreenType.MEDIUM)`
+    justify-content: space-between;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 80%;
+  `}
+`;
+
+const TopSubInfoSocialButtons = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    justify-content: flex-end;
+  `}
+`;
+
+const TopSubInfoSocialButton = styled.div`
+  width: 28px;
+  & + & {
+    margin-left: ${Spacing.NORMAL}px;
+  }
+`;
+
+const TopPublishDate = styled.div`
+  ${TypographyMixin.SUB};
+  ${TopSubInfoSocialButtons} + & {
+    margin-left: ${Spacing.LARGE}px;
+  }
 `;

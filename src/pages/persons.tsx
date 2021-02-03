@@ -5,11 +5,11 @@ import { PageId } from '@/constants';
 import { usePageInfo } from '@/hooks';
 
 const PersonsPage: React.FC = () => {
-  const { title, description } = usePageInfo({ id: PageId.PERSONS });
+  const { title, description, ogImage } = usePageInfo({ id: PageId.PERSONS });
   return (
     <>
       <BaseLayout>
-        <Meta title={title} description={description} />
+        <Meta title={title} description={description} ogImage={ogImage} />
         <PersonsModule useTitle />
       </BaseLayout>
     </>

@@ -775,6 +775,7 @@ export type FileFieldsEnum =
   | 'childrenSettingYaml___pages___id'
   | 'childrenSettingYaml___pages___title'
   | 'childrenSettingYaml___pages___description'
+  | 'childrenSettingYaml___pages___ogImage'
   | 'childrenSettingYaml___facilities'
   | 'childrenSettingYaml___facilities___id'
   | 'childrenSettingYaml___facilities___title'
@@ -835,6 +836,7 @@ export type FileFieldsEnum =
   | 'childSettingYaml___pages___id'
   | 'childSettingYaml___pages___title'
   | 'childSettingYaml___pages___description'
+  | 'childSettingYaml___pages___ogImage'
   | 'childSettingYaml___facilities'
   | 'childSettingYaml___facilities___id'
   | 'childSettingYaml___facilities___title'
@@ -2148,12 +2150,12 @@ export type Query = {
   allSitePage: SitePageConnection;
   imageSharp?: Maybe<ImageSharp>;
   allImageSharp: ImageSharpConnection;
+  settingYaml?: Maybe<SettingYaml>;
+  allSettingYaml: SettingYamlConnection;
   microcmsArchive?: Maybe<MicrocmsArchive>;
   allMicrocmsArchive: MicrocmsArchiveConnection;
   microcmsPersons?: Maybe<MicrocmsPersons>;
   allMicrocmsPersons: MicrocmsPersonsConnection;
-  settingYaml?: Maybe<SettingYaml>;
-  allSettingYaml: SettingYamlConnection;
   siteBuildMetadata?: Maybe<SiteBuildMetadata>;
   allSiteBuildMetadata: SiteBuildMetadataConnection;
   sitePlugin?: Maybe<SitePlugin>;
@@ -2335,6 +2337,25 @@ export type QueryAllImageSharpArgs = {
 };
 
 
+export type QuerySettingYamlArgs = {
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+  meta?: Maybe<SettingYamlMetaFilterInput>;
+  pages?: Maybe<SettingYamlPagesFilterListInput>;
+  facilities?: Maybe<SettingYamlFacilitiesFilterListInput>;
+};
+
+
+export type QueryAllSettingYamlArgs = {
+  filter?: Maybe<SettingYamlFilterInput>;
+  sort?: Maybe<SettingYamlSortInput>;
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+};
+
+
 export type QueryMicrocmsArchiveArgs = {
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
@@ -2387,25 +2408,6 @@ export type QueryMicrocmsPersonsArgs = {
 export type QueryAllMicrocmsPersonsArgs = {
   filter?: Maybe<MicrocmsPersonsFilterInput>;
   sort?: Maybe<MicrocmsPersonsSortInput>;
-  skip?: Maybe<Scalars['Int']>;
-  limit?: Maybe<Scalars['Int']>;
-};
-
-
-export type QuerySettingYamlArgs = {
-  id?: Maybe<StringQueryOperatorInput>;
-  parent?: Maybe<NodeFilterInput>;
-  children?: Maybe<NodeFilterListInput>;
-  internal?: Maybe<InternalFilterInput>;
-  meta?: Maybe<SettingYamlMetaFilterInput>;
-  pages?: Maybe<SettingYamlPagesFilterListInput>;
-  facilities?: Maybe<SettingYamlFacilitiesFilterListInput>;
-};
-
-
-export type QueryAllSettingYamlArgs = {
-  filter?: Maybe<SettingYamlFilterInput>;
-  sort?: Maybe<SettingYamlSortInput>;
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
 };
@@ -2634,6 +2636,7 @@ export type SettingYamlFieldsEnum =
   | 'pages___id'
   | 'pages___title'
   | 'pages___description'
+  | 'pages___ogImage'
   | 'facilities'
   | 'facilities___id'
   | 'facilities___title'
@@ -2694,12 +2697,14 @@ export type SettingYamlPages = {
   id?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
+  ogImage?: Maybe<Scalars['String']>;
 };
 
 export type SettingYamlPagesFilterInput = {
   id?: Maybe<StringQueryOperatorInput>;
   title?: Maybe<StringQueryOperatorInput>;
   description?: Maybe<StringQueryOperatorInput>;
+  ogImage?: Maybe<StringQueryOperatorInput>;
 };
 
 export type SettingYamlPagesFilterListInput = {
@@ -3758,7 +3763,7 @@ export type MenuQuery = { settingYaml?: Maybe<{ pages?: Maybe<Array<Maybe<Pick<S
 export type PageInfoQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type PageInfoQuery = { settingYaml?: Maybe<{ pages?: Maybe<Array<Maybe<Pick<SettingYamlPages, 'id' | 'title' | 'description'>>>> }> };
+export type PageInfoQuery = { settingYaml?: Maybe<{ pages?: Maybe<Array<Maybe<Pick<SettingYamlPages, 'id' | 'title' | 'description' | 'ogImage'>>>> }> };
 
 export type AllMicrocmsArchiveQueryVariables = Exact<{ [key: string]: never; }>;
 

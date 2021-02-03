@@ -33,7 +33,8 @@ const ArchivePage: React.FC<ArchivePageProps> = ({ data }) => {
   const title = data.microcmsArchive?.title;
   const publishDate = data.microcmsArchive?.publishDate || data.microcmsArchive?.publishedAt;
   const mainVisual = data.microcmsArchive?.mainVisual?.url;
-  const body = data.microcmsArchive?.body;
+  const body = data.microcmsArchive?.body || '';
+  const info = data.microcmsArchive?.info;
 
   const strippedBody = useMemo(() => stripTag(body || '').slice(0, 200), [body]);
   const publishedDate = useMemo(() => dayjs(publishDate).format(DateFormat.YEAR_MONTH_DATE_JP), [
@@ -52,14 +53,14 @@ const ArchivePage: React.FC<ArchivePageProps> = ({ data }) => {
               <MetaInfo>
                 <PublishedDate>{publishedDate}</PublishedDate>
               </MetaInfo>
-              <SocialIcons>
-                <SocialIcon>
+              <SocialButtons>
+                <SocialButton>
                   <TwitterTweetButton shape="circle" />
-                </SocialIcon>
-                <SocialIcon>
+                </SocialButton>
+                <SocialButton>
                   <FacebookShareButton shape="circle" />
-                </SocialIcon>
-              </SocialIcons>
+                </SocialButton>
+              </SocialButtons>
             </MetaInfoContainer>
           </TitleInner>
         </TitleContainer>
@@ -69,17 +70,20 @@ const ArchivePage: React.FC<ArchivePageProps> = ({ data }) => {
         <ArticleContainer>
           <Article body={data.microcmsArchive?.body || ''} />
         </ArticleContainer>
-        <InfoList>
-          {data.microcmsArchive?.info?.map(
-            (item, index) =>
-              item?.head &&
-              item?.body && (
-                <InfoListItem key={index}>
-                  <ArticleInfo title={item.head} body={item.body}></ArticleInfo>
-                </InfoListItem>
-              ),
-          )}
-        </InfoList>
+        {info && info.length > 0 && (
+          <ArticleInfo title="詳細情報">
+            {data.microcmsArchive?.info?.map((item, index) => (
+              <div key={index}>
+                {/* TODO */}
+                {item?.head && item?.body && (
+                  <div>
+                    <span>{item.head}</span>：<span>{item.body}</span>
+                  </div>
+                )}
+              </div>
+            ))}
+          </ArticleInfo>
+        )}
       </Container>
     </BaseLayout>
   );
@@ -148,7 +152,7 @@ const MetaInfoContainer = styled.div`
   margin-top: ${Spacing.LARGE}px;
 `;
 
-const SocialIcons = styled.div`
+const SocialButtons = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -158,7 +162,7 @@ const SocialIcons = styled.div`
   `}
 `;
 
-const SocialIcon = styled.div`
+const SocialButton = styled.div`
   width: 28px;
   & + & {
     margin-left: ${Spacing.NORMAL}px;
