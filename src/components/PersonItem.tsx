@@ -68,7 +68,7 @@ export const PersonItem: React.FC<PersonItemProps> = ({
 
 type IsComingSoonAcceptable = Pick<PersonItemProps, 'isComingSoon'>;
 
-const Info = styled.div`
+const Info = styled.div<IsComingSoonAcceptable>`
   margin-top: ${Spacing.NORMAL}px;
   opacity: ${({ isComingSoon }) => (isComingSoon ? 0.2 : 1)};
 `;
