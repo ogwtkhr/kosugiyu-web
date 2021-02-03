@@ -1603,8 +1603,8 @@ export type MicrocmsArchive = Node & {
   mainVisual?: Maybe<MicrocmsArchiveMainVisual>;
   body?: Maybe<Scalars['String']>;
   info?: Maybe<Array<Maybe<MicrocmsArchiveInfo>>>;
-  archiveId?: Maybe<Scalars['String']>;
   publishDate?: Maybe<Scalars['Date']>;
+  archiveId?: Maybe<Scalars['String']>;
 };
 
 
@@ -1775,8 +1775,8 @@ export type MicrocmsArchiveFieldsEnum =
   | 'info___fieldId'
   | 'info___head'
   | 'info___body'
-  | 'archiveId'
-  | 'publishDate';
+  | 'publishDate'
+  | 'archiveId';
 
 export type MicrocmsArchiveFilterInput = {
   id?: Maybe<StringQueryOperatorInput>;
@@ -1792,8 +1792,8 @@ export type MicrocmsArchiveFilterInput = {
   mainVisual?: Maybe<MicrocmsArchiveMainVisualFilterInput>;
   body?: Maybe<StringQueryOperatorInput>;
   info?: Maybe<MicrocmsArchiveInfoFilterListInput>;
-  archiveId?: Maybe<StringQueryOperatorInput>;
   publishDate?: Maybe<DateQueryOperatorInput>;
+  archiveId?: Maybe<StringQueryOperatorInput>;
 };
 
 export type MicrocmsArchiveGroupConnection = {
@@ -2349,8 +2349,8 @@ export type QueryMicrocmsArchiveArgs = {
   mainVisual?: Maybe<MicrocmsArchiveMainVisualFilterInput>;
   body?: Maybe<StringQueryOperatorInput>;
   info?: Maybe<MicrocmsArchiveInfoFilterListInput>;
-  archiveId?: Maybe<StringQueryOperatorInput>;
   publishDate?: Maybe<DateQueryOperatorInput>;
+  archiveId?: Maybe<StringQueryOperatorInput>;
 };
 
 
@@ -3772,7 +3772,7 @@ export type AllMicrocmsPersonsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type AllMicrocmsPersonsQuery = { allMicrocmsPersons: { nodes: Array<(
-      Pick<MicrocmsPersons, 'id' | 'position' | 'title' | 'name' | 'slug'>
+      Pick<MicrocmsPersons, 'id' | 'position' | 'title' | 'name' | 'slug' | 'isComingSoon'>
       & { mainVisual?: Maybe<Pick<MicrocmsPersonsMainVisual, 'url'>> }
     )> } };
 

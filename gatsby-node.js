@@ -34,7 +34,7 @@ exports.createPages = async ({ graphql, actions }) => {
   result.data.allMicrocmsPersons.nodes.forEach((edge) => {
     const personPageInfo = edge;
     const { slug, isComingSoon } = personPageInfo;
-    if (isComingSoon) {
+    if (!isComingSoon) {
       console.log('Create page.', `/persons/${slug}`);
       createPage({
         path: `/persons/${slug}`,

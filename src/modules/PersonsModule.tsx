@@ -41,6 +41,7 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({
           title
           name
           slug
+          isComingSoon
           mainVisual {
             url
           }
@@ -114,11 +115,21 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({
               const position = person.position || '';
               const name = person.name || '';
               const mainVisualUrl = person?.mainVisual?.url || '';
+              const isComingSoon = person.isComingSoon;
               return (
                 <PersonListItem key={person.slug}>
-                  <PersonLink to={`/persons/${slug}`}>
-                    <PersonItem position={position} name={name} mainVisualUrl={mainVisualUrl} />
-                  </PersonLink>
+                  {!isComingSoon ? (
+                    <PersonLink to={`/persons/${slug}`}>
+                      <PersonItem position={position} name={name} mainVisualUrl={mainVisualUrl} />
+                    </PersonLink>
+                  ) : (
+                    <PersonItem
+                      position={position}
+                      name={name}
+                      mainVisualUrl={mainVisualUrl}
+                      isComingSoon={isComingSoon}
+                    />
+                  )}
                 </PersonListItem>
               );
             })}

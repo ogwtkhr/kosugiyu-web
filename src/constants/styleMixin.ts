@@ -1,9 +1,7 @@
 import { ScreenType } from './screen';
-import { Colors } from './colors';
-import { TextSize, TextWeight, Typography } from './typography';
 import { css } from 'styled-components';
-import Opacity from './opacity';
-import Transitions from './transitions';
+import { Opacity } from './opacity';
+import { Transitions } from './transitions';
 import { calcResponsivePoint } from '@/util/style';
 import media from 'styled-media-query';
 import { ModuleWidth, Spacing } from './spacing';
@@ -77,6 +75,12 @@ export const StyleMixin = {
       }
     `,
   },
+  ABSOLUTE_CENTERING: css`
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  `,
   RESPONSIVE_OFFSET: css`
     ${getResponsiveOffsetMixin({
       maxWidth: ModuleWidth.SEMI_WIDE,

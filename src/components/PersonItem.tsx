@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import {
   ModuleWidth,
   Spacing,
-  BigSpacing,
   StyleMixin,
   AspectRatio,
   Colors,
@@ -15,7 +14,7 @@ import {
   LineHeight,
 } from '@/constants';
 
-import { ArrowIcon } from '@/components';
+import { UnderLineText, ArrowIcon } from '@/components';
 import { IntersectionFadeIn, ReverseParallax, ParallaxBasePosition } from '@/effects';
 
 type PersonItemProps = {
@@ -23,6 +22,7 @@ type PersonItemProps = {
   name: string;
   mainVisualUrl: string;
   showArrowIcon?: boolean;
+  isComingSoon?: boolean;
 };
 
 export const PersonItem: React.FC<PersonItemProps> = ({
@@ -30,6 +30,7 @@ export const PersonItem: React.FC<PersonItemProps> = ({
   name,
   mainVisualUrl,
   showArrowIcon = true,
+  isComingSoon,
 }) => {
   // const formattedPublishedAt = useMemo(
   //   () => dayjs(publishedAt).format(DateFormat.YEAR_MONTH_DATE_JP),
@@ -41,10 +42,15 @@ export const PersonItem: React.FC<PersonItemProps> = ({
       <Container>
         <ThumbnailContainer>
           <ReverseParallax zoom={1.1} coefficient={0.03} min={-800} max={800}>
-            <Thumbnail src={mainVisualUrl} />
+            <Thumbnail src={mainVisualUrl} isComingSoon={isComingSoon} />
           </ReverseParallax>
+          {isComingSoon && (
+            <ComingSoonLabel>
+              <UnderLineText size="small">近日公開</UnderLineText>
+            </ComingSoonLabel>
+          )}
         </ThumbnailContainer>
-        <Info>
+        <Info isComingSoon={isComingSoon}>
           <Position>{position}</Position>
           <NameContainer>
             <Name>{name}</Name>
@@ -59,8 +65,12 @@ export const PersonItem: React.FC<PersonItemProps> = ({
     </IntersectionFadeIn>
   );
 };
+
+type IsComingSoonAcceptable = Pick<PersonItemProps, 'isComingSoon'>;
+
 const Info = styled.div`
   margin-top: ${Spacing.NORMAL}px;
+  opacity: ${({ isComingSoon }) => (isComingSoon ? 0.2 : 1)};
 `;
 
 const Position = styled.p`
@@ -96,12 +106,22 @@ const IconContainer = styled.div`
 
 const Container = styled.div``;
 
+const ComingSoonLabel = styled.div`
+  ${StyleMixin.ABSOLUTE_CENTERING};
+`;
+
 const ThumbnailContainer = styled.div`
+  position: relative;
   overflow: hidden;
 `;
 
-const Thumbnail = styled.div`
+const Thumbnail = styled.div<
+  {
+    src: string;
+  } & IsComingSoonAcceptable
+>`
   width: 100%;
+  opacity: ${({ isComingSoon }) => (isComingSoon ? 0.2 : 1)};
   ${StyleMixin.BACKGROUND_IMAGE_WITH_SRC}
 
   &::after {
