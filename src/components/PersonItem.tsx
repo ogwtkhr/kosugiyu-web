@@ -182,7 +182,23 @@ export const TopPersonItem: React.FC<TopItemProps> = ({
           <TopTitle>{title}</TopTitle>
           {subInformation && (
             <TopSubInfo>
-              <div>hoge</div>
+              {(subInformation.twitter || subInformation.facebook) && (
+                <TopSubInfoSocialButtons>
+                  {subInformation.twitter && (
+                    <TopSubInfoSocialButton>
+                      <TwitterTweetButton shape="circle" />
+                    </TopSubInfoSocialButton>
+                  )}
+                  {subInformation.facebook && (
+                    <TopSubInfoSocialButton>
+                      <FacebookShareButton shape="circle" />
+                    </TopSubInfoSocialButton>
+                  )}
+                </TopSubInfoSocialButtons>
+              )}
+              {subInformation.publishDate && (
+                <TopPublishDate>{subInformation.publishDate}</TopPublishDate>
+              )}
             </TopSubInfo>
           )}
           {showArrowIcon && (
@@ -237,11 +253,6 @@ const TopInfo = styled.div`
     margin-top: ${Spacing.LARGE}px;
     width: auto;
   `}
-`;
-
-const TopSubInfo = styled.div`
-  display: flex;
-  margin-top: ${Spacing.LARGE}px;
 `;
 
 const TopProfileContainer = styled.div`
@@ -302,4 +313,40 @@ const TopIconContainerSmallScreen = styled.div`
   ${media.greaterThan(ScreenType.MEDIUM)`
     display: none;
   `}
+`;
+
+const TopSubInfo = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: ${Spacing.LARGE}px;
+  ${media.lessThan(ScreenType.MEDIUM)`
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 80%;
+  `}
+`;
+
+const TopSubInfoSocialButtons = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    justify-content: flex-end;
+  `}
+`;
+
+const TopSubInfoSocialButton = styled.div`
+  width: 28px;
+  & + & {
+    margin-left: ${Spacing.LARGE}px;
+  }
+`;
+
+const TopPublishDate = styled.div`
+  ${TypographyMixin.SUB};
+  ${TopSubInfoSocialButtons} + & {
+    margin-left: ${Spacing.LARGE}px;
+  }
 `;
