@@ -13,12 +13,12 @@ import {
   Spacing,
   AspectRatio,
   StyleMixin,
-  ScreenValue,
+  ModuleWidth,
 } from '@/constants';
 import media from 'styled-media-query';
 import { stripTag } from '@/util/string';
 import { TopPersonItem, Article, ArticleInfo } from '@/components';
-import { ParallaxBasePosition } from '@/effects';
+import { ReverseParallax, ParallaxBasePosition } from '@/effects';
 
 type PersonsPageProps = {
   data: Pick<Query, 'microcmsPersons'>;
@@ -68,7 +68,9 @@ const PersonsPage: React.FC<PersonsPageProps> = ({ data }) => {
       </Container>
       <ArticleInfo title="クレジット" body={credit} />
       <LastVisualContainer>
-        <LastVisual src={lastVisual} />
+        <ReverseParallax zoom={1.1} fillLayout basePosition="center">
+          <LastVisual src={lastVisual} />
+        </ReverseParallax>
       </LastVisualContainer>
     </BaseLayout>
   );
@@ -106,8 +108,10 @@ const ArticleContainer = styled.div`
 `;
 
 const LastVisualContainer = styled.div`
-  overflow: hidden;
   width: 100%;
+  max-width: ${ModuleWidth.SEMI_WIDE}px;
+  margin: ${Spacing.XXX_LARGE}px auto;
+  overflow: hidden;
 `;
 
 const LastVisual = styled.div`
@@ -116,15 +120,7 @@ const LastVisual = styled.div`
   &::after {
     content: '';
     display: block;
-    padding-bottom: ${AspectRatio.R_4_BY_3}%;
-
-    ${media.greaterThan(ScreenType.LARGE)`
-      padding-bottom: 1000px;
-    `}
-
-    ${media.greaterThan(ScreenType.HUGE)`
-      max-width: ${ScreenValue.HUGE}px;
-    `}
+    padding-bottom: ${AspectRatio.PLATINUM_HORIZONTAL}%;
   }
 `;
 
