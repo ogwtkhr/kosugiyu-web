@@ -52,9 +52,6 @@ export const TopModule: React.FC<TopModuleProps> = ({ onViewInStatusChange }) =>
             </Logo>
             <LogoCopy>高円寺 昭和八年創業</LogoCopy>
           </LogoContainer>
-          <MenuListSmallScreen>
-            <MenuList list={menuList} onIntroClick={scroll} />
-          </MenuListSmallScreen>
           <SocialAccountContainerNormalScreen>
             <SocialAccountButtons accounts={socialAccounts} />
           </SocialAccountContainerNormalScreen>
@@ -149,7 +146,7 @@ const SideColumn = styled.div`
 
   ${media.lessThan(ScreenType.MEDIUM)`
     width: 100%;
-    height: 40%;
+    height: 36%;
     padding: 0;
   `}
 `;
@@ -157,7 +154,7 @@ const SideColumn = styled.div`
 const MainColumn = styled.div`
   flex: 1;
   ${media.lessThan(ScreenType.MEDIUM)`
-    height: 60%;
+    height: 64%;
   `}
 `;
 
@@ -170,7 +167,7 @@ const LogoContainer = styled.div`
     /* Safariで潰れるので一旦指定 */
     width: 55px;
     position: absolute;
-    top: ${Spacing.X_LARGE}px;
+    top: 72px;
     right: ${Spacing.X_LARGE}px;
     flex-direction: row;
     align-items: flex-start;
@@ -265,18 +262,6 @@ const MenuListNormalScreen = styled.ul`
   right: ${Spacing.XXX_LARGE}px;
 
   ${media.lessThan(ScreenType.MEDIUM)`
-    display: none;
-  `}
-`;
-
-const MenuListSmallScreen = styled.ul`
-  position: absolute;
-  bottom: ${Spacing.LARGE}px;
-  left: ${Spacing.LARGE}px;
-  width: 80%;
-  line-height: ${LineHeight.MONOLITHIC};
-
-  ${media.greaterThan(ScreenType.MEDIUM)`
     display: none;
   `}
 `;

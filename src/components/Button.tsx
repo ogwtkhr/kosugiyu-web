@@ -48,13 +48,9 @@ const StyledButton = styled(Link)`
   transition: ${Transitions.HOVER_TRANSITION_NORMAL};
   border: ${LINE.ShortHand.THIN};
   color: ${Colors.UI_TEXT_MAIN};
-  text-decoration: none;
   font-size: ${TextSize.NORMAL}rem;
+  text-decoration: none;
   cursor: pointer;
-
-  &:hover {
-    /* background-color: ${rgba(Colors.UI_BASE, Opacity.HOVER_NORMAL)}; */
-  }
 `;
 
 const ButtonInner = styled.div`

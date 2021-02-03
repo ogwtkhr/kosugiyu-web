@@ -9,6 +9,7 @@ import {
   TextWeight,
   PropsWithTransition,
   TransitionStatus,
+  Transitions,
 } from '@/constants';
 import Transition from 'react-transition-group/Transition';
 import { useMenu, useBaseMetaInfo } from '@/hooks';
@@ -153,14 +154,22 @@ const TriggerContainer = styled.button<PropsWithTransition>`
   mix-blend-mode: difference;
   transition: opacity ${TRANSITION_TIME}ms ease;
   opacity: ${({ state }) => (state === TransitionStatus.ENTERED ? 1 : 0)};
+
+  transition: opacity ${Transitions.HOVER_TRANSITION_NORMAL};
+  opacity: 1;
+
+  &:hover {
+    opacity: 0.2;
+  }
+
   ${media.greaterThan(ScreenType.HUGE)`
     top: 88px;
   `}
 
   ${media.lessThan(ScreenType.MEDIUM)`
     left: auto;
-    right: ${Spacing.LARGE}px;
-    top: ${Spacing.XXX_LARGE}px;
+    right: ${Spacing.X_LARGE}px;
+    top: ${Spacing.X_LARGE}px;
     width: ${Spacing.XX_LARGE}px;
     height: 20px;
 

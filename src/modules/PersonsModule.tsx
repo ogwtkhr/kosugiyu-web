@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql, useStaticQuery, Link } from 'gatsby';
 import { AllMicrocmsPersonsQuery } from '@/types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import {
   StyleMixin,
   TypographyMixin,
@@ -41,6 +41,7 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({
           title
           name
           slug
+          isComingSoon
           mainVisual {
             url
           }
@@ -108,17 +109,27 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({
               <HeadingTitle />
             </PersonsHeadingSubTitle>
           )}
-          <PersonList>
+          <PersonList under2={summarizedPersons.length <= 2}>
             {summarizedPersons.map((person) => {
               const slug = person.slug || '';
               const position = person.position || '';
               const name = person.name || '';
               const mainVisualUrl = person?.mainVisual?.url || '';
+              const isComingSoon = person.isComingSoon;
               return (
                 <PersonListItem key={person.slug}>
-                  <PersonLink to={`/persons/${slug}`}>
-                    <PersonItem position={position} name={name} mainVisualUrl={mainVisualUrl} />
-                  </PersonLink>
+                  {!isComingSoon ? (
+                    <PersonLink to={`/persons/${slug}`}>
+                      <PersonItem position={position} name={name} mainVisualUrl={mainVisualUrl} />
+                    </PersonLink>
+                  ) : (
+                    <PersonItem
+                      position={position}
+                      name={name}
+                      mainVisualUrl={mainVisualUrl}
+                      isComingSoon={isComingSoon}
+                    />
+                  )}
                 </PersonListItem>
               );
             })}
@@ -249,13 +260,27 @@ const PersonListContainer = styled.div`
   `}
 `;
 
-const PersonList = styled.ul`
+// TODO: ad hocなので後で消す？
+type PersonListProps = {
+  under2?: boolean;
+};
+
+const PersonList = styled.ul<PersonListProps>`
   display: grid;
   grid-gap: ${BigSpacing.XX_SMALL}px;
   grid-template-columns: repeat(3, 1fr);
   flex: 1;
   margin: 0 auto;
   overflow: hidden;
+
+  ${({ under2 }) =>
+    under2
+      ? css`
+          grid-template-columns: repeat(2, 1fr);
+          grid-gap: ${BigSpacing.SMALL}px;
+          max-width: 720px;
+        `
+      : ''}
 
   ${media.lessThan(ScreenType.MEDIUM)`
     grid-template-columns: repeat(2, 1fr);

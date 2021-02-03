@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import {
   ModuleWidth,
   Spacing,
-  BigSpacing,
   StyleMixin,
   AspectRatio,
   Colors,
@@ -15,7 +14,7 @@ import {
   LineHeight,
 } from '@/constants';
 
-import { ArrowIcon } from '@/components';
+import { UnderLineText, ArrowIcon } from '@/components';
 import { IntersectionFadeIn, ReverseParallax, ParallaxBasePosition } from '@/effects';
 
 type PersonItemProps = {
@@ -23,6 +22,7 @@ type PersonItemProps = {
   name: string;
   mainVisualUrl: string;
   showArrowIcon?: boolean;
+  isComingSoon?: boolean;
 };
 
 export const PersonItem: React.FC<PersonItemProps> = ({
@@ -30,6 +30,7 @@ export const PersonItem: React.FC<PersonItemProps> = ({
   name,
   mainVisualUrl,
   showArrowIcon = true,
+  isComingSoon,
 }) => {
   // const formattedPublishedAt = useMemo(
   //   () => dayjs(publishedAt).format(DateFormat.YEAR_MONTH_DATE_JP),
@@ -41,10 +42,15 @@ export const PersonItem: React.FC<PersonItemProps> = ({
       <Container>
         <ThumbnailContainer>
           <ReverseParallax zoom={1.1} coefficient={0.03} min={-800} max={800}>
-            <Thumbnail src={mainVisualUrl} />
+            <Thumbnail src={mainVisualUrl} isComingSoon={isComingSoon} />
           </ReverseParallax>
+          {isComingSoon && (
+            <ComingSoonLabel>
+              <UnderLineText size="small">近日公開</UnderLineText>
+            </ComingSoonLabel>
+          )}
         </ThumbnailContainer>
-        <Info>
+        <Info isComingSoon={isComingSoon}>
           <Position>{position}</Position>
           <NameContainer>
             <Name>{name}</Name>
@@ -59,8 +65,12 @@ export const PersonItem: React.FC<PersonItemProps> = ({
     </IntersectionFadeIn>
   );
 };
-const Info = styled.div`
+
+type IsComingSoonAcceptable = Pick<PersonItemProps, 'isComingSoon'>;
+
+const Info = styled.div<IsComingSoonAcceptable>`
   margin-top: ${Spacing.NORMAL}px;
+  opacity: ${({ isComingSoon }) => (isComingSoon ? 0.2 : 1)};
 `;
 
 const Position = styled.p`
@@ -96,12 +106,22 @@ const IconContainer = styled.div`
 
 const Container = styled.div``;
 
+const ComingSoonLabel = styled.div`
+  ${StyleMixin.ABSOLUTE_CENTERING};
+`;
+
 const ThumbnailContainer = styled.div`
+  position: relative;
   overflow: hidden;
 `;
 
-const Thumbnail = styled.div`
+const Thumbnail = styled.div<
+  {
+    src: string;
+  } & IsComingSoonAcceptable
+>`
   width: 100%;
+  opacity: ${({ isComingSoon }) => (isComingSoon ? 0.2 : 1)};
   ${StyleMixin.BACKGROUND_IMAGE_WITH_SRC}
 
   &::after {
@@ -145,13 +165,22 @@ export const TopPersonItem: React.FC<TopItemProps> = ({
           </ReverseParallax>
         </TopThumbnailContainer>
         <TopInfo>
-          <TopPosition>{position}</TopPosition>
-          <TopName>{name}</TopName>
+          <TopProfileContainer>
+            <TopProfile>
+              <TopPosition>{position}</TopPosition>
+              <TopName>{name}</TopName>
+            </TopProfile>
+            {showArrowIcon && (
+              <TopIconContainerSmallScreen>
+                <ArrowIcon />
+              </TopIconContainerSmallScreen>
+            )}
+          </TopProfileContainer>
           <TopTitle>{title}</TopTitle>
           {showArrowIcon && (
-            <TopIconContainer>
+            <TopIconContainerNormalScreen>
               <ArrowIcon />
-            </TopIconContainer>
+            </TopIconContainerNormalScreen>
           )}
         </TopInfo>
       </TopContainer>
@@ -161,8 +190,8 @@ export const TopPersonItem: React.FC<TopItemProps> = ({
 
 const TopContainer = styled.div`
   display: flex;
-  justify-content: space-around;
   align-items: center;
+  justify-content: space-around;
   max-width: ${ModuleWidth.SEMI_WIDE}px;
   margin: 0 auto;
 
@@ -173,9 +202,9 @@ const TopContainer = styled.div`
 `;
 
 const TopThumbnailContainer = styled.div`
-  overflow: hidden;
   width: 40%;
   height: 100%;
+  overflow: hidden;
 
   ${media.lessThan(ScreenType.MEDIUM)`
     margin: 0 auto;
@@ -202,6 +231,17 @@ const TopInfo = styled.div`
   `}
 `;
 
+const TopProfileContainer = styled.div`
+  ${media.lessThan(ScreenType.MEDIUM)`
+    display: flex;
+    justify-content: center;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  `}
+`;
+const TopProfile = styled.div``;
+
 const TopPosition = styled.p`
   font-size: ${TextSize.SMALL}rem;
   ${TypographyMixin.DISPLAY};
@@ -226,10 +266,27 @@ const TopTitle = styled.p`
   margin-top: ${Spacing.NORMAL}px;
   font-size: ${TextSize.X_SMALL}rem;
   ${TypographyMixin.DISPLAY};
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 80%;
+  `}
 `;
 
-const TopIconContainer = styled.div`
+const TopIconContainerNormalScreen = styled.div`
   width: ${Spacing.XX_LARGE}px;
   margin-top: ${Spacing.NORMAL}px;
   margin-left: auto;
+  ${media.lessThan(ScreenType.MEDIUM)`
+    display: none;
+  `}
+`;
+
+const TopIconContainerSmallScreen = styled.div`
+  width: ${Spacing.X_LARGE}px;
+  margin-left: ${Spacing.X_LARGE}px;
+  ${media.greaterThan(ScreenType.MEDIUM)`
+    display: none;
+  `}
 `;

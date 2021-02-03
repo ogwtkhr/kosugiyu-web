@@ -9,19 +9,17 @@
     ogImage: /meta/ogimage.jpg
   pages:
     - id: top
-      title: 小杉湯について
-      # TODO
+      title: 小杉湯
       description: 昭和八年創業。高円寺の銭湯「小杉湯」の公式ウェブサイトです。
     - id: facility
       title: 営業・施設案内
-      description: 'TODO: 施設・営業案内のdescription'
+      description: 昭和八年創業。高円寺の銭湯「小杉湯」の営業時間や施設のご案内です。
     - id: archive
       title: できごと
-      description: 'TODO: できごとのdescription'
+      description: 昭和八年創業。高円寺の銭湯「小杉湯」の「できごと」を伝えます。
     - id: persons
       title: ケノ日のハレ
-      # TODO
-      description: 昭和八年創業。高円寺の銭湯「小杉湯」にまつわる人々をご紹介します。
+      description: 昭和八年創業。高円寺の銭湯「小杉湯」のWEBメディア「ケノ日のハレ」です。
   facilities:
     - id: facade
       title: 外観
