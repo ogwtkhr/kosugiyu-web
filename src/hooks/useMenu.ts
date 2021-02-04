@@ -1,5 +1,6 @@
 import { graphql, useStaticQuery } from 'gatsby';
 import { MenuQuery } from '@/types';
+import { PageId } from '@/constants';
 
 type Parameter = {
   ignoreTopData?: boolean;
@@ -20,5 +21,7 @@ export const useMenu = ({ ignoreTopData }: Parameter = {}) => {
     id,
     label: title,
   }));
-  return ignoreTopData ? menu.filter(({ id }) => id !== 'top') : menu;
+  return ignoreTopData
+    ? menu.filter(({ id }) => id !== PageId.TOP || id !== PageId.NOT_FOUND)
+    : menu;
 };

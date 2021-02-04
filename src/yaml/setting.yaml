@@ -24,6 +24,9 @@
       title: ケノ日のハレ
       description: 昭和八年創業。高円寺の銭湯「小杉湯」のWEBメディア「ケノ日のハレ」です。
       ogImage: /meta/og_images/persons.jpg
+    - id: not_found
+      title: ページが存在しません
+      description: ページが存在しません
   facilities:
     - id: facade
       title: 外観
