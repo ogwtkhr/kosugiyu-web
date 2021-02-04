@@ -182,6 +182,9 @@ export const TopPersonItem: React.FC<TopItemProps> = ({
           <TopTitle>{title}</TopTitle>
           {subInformation && (
             <TopSubInfo>
+              {subInformation.publishDate && (
+                <TopPublishDate>{subInformation.publishDate}</TopPublishDate>
+              )}
               {(subInformation.twitter || subInformation.facebook) && (
                 <TopSubInfoSocialButtons>
                   {subInformation.twitter && (
@@ -195,9 +198,6 @@ export const TopPersonItem: React.FC<TopItemProps> = ({
                     </TopSubInfoSocialButton>
                   )}
                 </TopSubInfoSocialButtons>
-              )}
-              {subInformation.publishDate && (
-                <TopPublishDate>{subInformation.publishDate}</TopPublishDate>
               )}
             </TopSubInfo>
           )}
@@ -317,8 +317,8 @@ const TopIconContainerSmallScreen = styled.div`
 
 const TopSubInfo = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  align-items: flex-end;
+  justify-content: space-between;
   margin-top: ${Spacing.LARGE}px;
   ${media.lessThan(ScreenType.MEDIUM)`
     justify-content: space-between;
@@ -346,8 +346,7 @@ const TopSubInfoSocialButton = styled.div`
 `;
 
 const TopPublishDate = styled.div`
-  ${TypographyMixin.SUB};
-  ${TopSubInfoSocialButtons} + & {
-    margin-left: ${Spacing.LARGE}px;
-  }
+  ${TypographyMixin.DISPLAY};
+  color: ${Colors.UI_TEXT_SUB};
+  font-size: ${TextSize.SMALL}rem;
 `;

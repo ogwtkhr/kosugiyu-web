@@ -132,7 +132,9 @@ const TitleContainer = styled.div`
   })};
 `;
 
-const TitleInner = styled.div``;
+const TitleInner = styled.div`
+  width: 100%;
+`;
 
 const Title = styled.h2`
   ${TypographyMixin.DISPLAY};
@@ -173,8 +175,8 @@ const MetaInfo = styled.div``;
 
 const PublishedDate = styled.p`
   ${TypographyMixin.DISPLAY};
-  font-size: ${TextSize.SMALL}rem;
   color: ${Colors.UI_TEXT_SUB};
+  font-size: ${TextSize.SMALL}rem;
 `;
 
 const MainVisualContainer = styled.div`
