@@ -22,6 +22,6 @@ export const useMenu = ({ ignoreTopData }: Parameter = {}) => {
     label: title,
   }));
   return ignoreTopData
-    ? menu.filter(({ id }) => id !== PageId.TOP || id !== PageId.NOT_FOUND)
+    ? menu.filter(({ id }) => id !== PageId.TOP && id !== PageId.NOT_FOUND)
     : menu;
 };
