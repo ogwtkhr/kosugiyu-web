@@ -26,14 +26,12 @@ type ButtonProps = {
 export const Button: React.FC<ButtonProps> = (props) => {
   return (
     <StyledButton {...props}>
-      {/* <Link to="/persons"> */}
       <ButtonInner>
         <ButtonLabel>{props.children}</ButtonLabel>
         <ButtonIcon>
           <ArrowIcon />
         </ButtonIcon>
       </ButtonInner>
-      {/* </Link> */}
     </StyledButton>
   );
 };

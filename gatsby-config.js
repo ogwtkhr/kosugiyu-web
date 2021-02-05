@@ -68,7 +68,7 @@ module.exports = {
         serviceId: 'kosugiyu',
         apis: [
           {
-            endpoint: 'persons',
+            endpoint: 'media',
           },
           {
             endpoint: 'archive',

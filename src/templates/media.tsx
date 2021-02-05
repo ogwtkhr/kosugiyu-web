@@ -19,19 +19,19 @@ import { stripTag } from '@/util/string';
 import { TopPersonItem, Article, ArticleInfo, MicroCMSImage } from '@/components';
 import { ReverseParallax, ParallaxBasePosition } from '@/effects';
 
-type PersonsPageProps = {
-  data: Pick<Query, 'microcmsPersons'>;
+type MediaPageProps = {
+  data: Pick<Query, 'microcmsMedia'>;
 };
 
-const PersonsPage: React.FC<PersonsPageProps> = ({ data }) => {
-  const title = data.microcmsPersons?.title || '';
-  const name = data.microcmsPersons?.name || '';
-  const personPosition = data.microcmsPersons?.position || '';
-  const publishedAt = data.microcmsPersons?.publishedAt || '';
-  const mainVisual = data.microcmsPersons?.mainVisual?.url || '';
-  const lastVisual = data.microcmsPersons?.lastVisual?.url || '';
-  const body = data.microcmsPersons?.body || '';
-  const credit = data.microcmsPersons?.credit || '';
+const MediaPage: React.FC<MediaPageProps> = ({ data }) => {
+  const title = data.microcmsMedia?.title || '';
+  const name = data.microcmsMedia?.name || '';
+  const personPosition = data.microcmsMedia?.position || '';
+  const publishedAt = data.microcmsMedia?.publishedAt || '';
+  const mainVisual = data.microcmsMedia?.mainVisual?.url || '';
+  const lastVisual = data.microcmsMedia?.lastVisual?.url || '';
+  const body = data.microcmsMedia?.body || '';
+  const credit = data.microcmsMedia?.credit || '';
 
   const strippedBody = useMemo(() => stripTag(body || '').slice(0, 200), [body]);
 
@@ -58,7 +58,7 @@ const PersonsPage: React.FC<PersonsPageProps> = ({ data }) => {
           parallaxBasePosition={ParallaxBasePosition.TOP}
         />
         <ArticleContainer>
-          <Article body={data.microcmsPersons?.body || ''} />
+          <Article body={data.microcmsMedia?.body || ''} />
         </ArticleContainer>
       </Container>
       {credit && <ArticleInfo title="クレジット" body={credit} />}
@@ -84,7 +84,7 @@ const PersonsPage: React.FC<PersonsPageProps> = ({ data }) => {
 
 export const query = graphql`
   query($slug: String!) {
-    microcmsPersons(slug: { eq: $slug }) {
+    microcmsMedia(slug: { eq: $slug }) {
       title
       position
       name
@@ -120,4 +120,4 @@ const LastVisualContainer = styled.div`
   overflow: hidden;
 `;
 
-export default PersonsPage;
+export default MediaPage;

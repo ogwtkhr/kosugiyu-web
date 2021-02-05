@@ -4,7 +4,7 @@ export const PageId = {
   TOP: 'top',
   FACILITY: 'facility',
   ARCHIVE: 'archive',
-  PERSONS: 'persons',
+  MEDIA: 'media',
   NOT_FOUND: 'not_found',
 } as const;
 

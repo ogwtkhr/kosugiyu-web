@@ -1842,7 +1842,7 @@ export type MicrocmsArchiveSortInput = {
   order?: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
-export type MicrocmsPersons = Node & {
+export type MicrocmsMedia = Node & {
   id: Scalars['ID'];
   parent?: Maybe<Node>;
   children: Array<Node>;
@@ -1855,16 +1855,16 @@ export type MicrocmsPersons = Node & {
   position?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
-  mainVisual?: Maybe<MicrocmsPersonsMainVisual>;
+  mainVisual?: Maybe<MicrocmsMediaMainVisual>;
   body?: Maybe<Scalars['String']>;
-  lastVisual?: Maybe<MicrocmsPersonsLastVisual>;
+  lastVisual?: Maybe<MicrocmsMediaLastVisual>;
   isComingSoon?: Maybe<Scalars['Boolean']>;
-  personsId?: Maybe<Scalars['String']>;
+  mediaId?: Maybe<Scalars['String']>;
   credit?: Maybe<Scalars['String']>;
 };
 
 
-export type MicrocmsPersonsCreatedAtArgs = {
+export type MicrocmsMediaCreatedAtArgs = {
   formatString?: Maybe<Scalars['String']>;
   fromNow?: Maybe<Scalars['Boolean']>;
   difference?: Maybe<Scalars['String']>;
@@ -1872,7 +1872,7 @@ export type MicrocmsPersonsCreatedAtArgs = {
 };
 
 
-export type MicrocmsPersonsUpdatedAtArgs = {
+export type MicrocmsMediaUpdatedAtArgs = {
   formatString?: Maybe<Scalars['String']>;
   fromNow?: Maybe<Scalars['Boolean']>;
   difference?: Maybe<Scalars['String']>;
@@ -1880,7 +1880,7 @@ export type MicrocmsPersonsUpdatedAtArgs = {
 };
 
 
-export type MicrocmsPersonsPublishedAtArgs = {
+export type MicrocmsMediaPublishedAtArgs = {
   formatString?: Maybe<Scalars['String']>;
   fromNow?: Maybe<Scalars['Boolean']>;
   difference?: Maybe<Scalars['String']>;
@@ -1888,41 +1888,41 @@ export type MicrocmsPersonsPublishedAtArgs = {
 };
 
 
-export type MicrocmsPersonsRevisedAtArgs = {
+export type MicrocmsMediaRevisedAtArgs = {
   formatString?: Maybe<Scalars['String']>;
   fromNow?: Maybe<Scalars['Boolean']>;
   difference?: Maybe<Scalars['String']>;
   locale?: Maybe<Scalars['String']>;
 };
 
-export type MicrocmsPersonsConnection = {
+export type MicrocmsMediaConnection = {
   totalCount: Scalars['Int'];
-  edges: Array<MicrocmsPersonsEdge>;
-  nodes: Array<MicrocmsPersons>;
+  edges: Array<MicrocmsMediaEdge>;
+  nodes: Array<MicrocmsMedia>;
   pageInfo: PageInfo;
   distinct: Array<Scalars['String']>;
-  group: Array<MicrocmsPersonsGroupConnection>;
+  group: Array<MicrocmsMediaGroupConnection>;
 };
 
 
-export type MicrocmsPersonsConnectionDistinctArgs = {
-  field: MicrocmsPersonsFieldsEnum;
+export type MicrocmsMediaConnectionDistinctArgs = {
+  field: MicrocmsMediaFieldsEnum;
 };
 
 
-export type MicrocmsPersonsConnectionGroupArgs = {
+export type MicrocmsMediaConnectionGroupArgs = {
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
-  field: MicrocmsPersonsFieldsEnum;
+  field: MicrocmsMediaFieldsEnum;
 };
 
-export type MicrocmsPersonsEdge = {
-  next?: Maybe<MicrocmsPersons>;
-  node: MicrocmsPersons;
-  previous?: Maybe<MicrocmsPersons>;
+export type MicrocmsMediaEdge = {
+  next?: Maybe<MicrocmsMedia>;
+  node: MicrocmsMedia;
+  previous?: Maybe<MicrocmsMedia>;
 };
 
-export type MicrocmsPersonsFieldsEnum = 
+export type MicrocmsMediaFieldsEnum = 
   | 'id'
   | 'parent___id'
   | 'parent___parent___id'
@@ -2025,10 +2025,10 @@ export type MicrocmsPersonsFieldsEnum =
   | 'lastVisual___height'
   | 'lastVisual___width'
   | 'isComingSoon'
-  | 'personsId'
+  | 'mediaId'
   | 'credit';
 
-export type MicrocmsPersonsFilterInput = {
+export type MicrocmsMediaFilterInput = {
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
   children?: Maybe<NodeFilterListInput>;
@@ -2041,49 +2041,49 @@ export type MicrocmsPersonsFilterInput = {
   position?: Maybe<StringQueryOperatorInput>;
   name?: Maybe<StringQueryOperatorInput>;
   title?: Maybe<StringQueryOperatorInput>;
-  mainVisual?: Maybe<MicrocmsPersonsMainVisualFilterInput>;
+  mainVisual?: Maybe<MicrocmsMediaMainVisualFilterInput>;
   body?: Maybe<StringQueryOperatorInput>;
-  lastVisual?: Maybe<MicrocmsPersonsLastVisualFilterInput>;
+  lastVisual?: Maybe<MicrocmsMediaLastVisualFilterInput>;
   isComingSoon?: Maybe<BooleanQueryOperatorInput>;
-  personsId?: Maybe<StringQueryOperatorInput>;
+  mediaId?: Maybe<StringQueryOperatorInput>;
   credit?: Maybe<StringQueryOperatorInput>;
 };
 
-export type MicrocmsPersonsGroupConnection = {
+export type MicrocmsMediaGroupConnection = {
   totalCount: Scalars['Int'];
-  edges: Array<MicrocmsPersonsEdge>;
-  nodes: Array<MicrocmsPersons>;
+  edges: Array<MicrocmsMediaEdge>;
+  nodes: Array<MicrocmsMedia>;
   pageInfo: PageInfo;
   field: Scalars['String'];
   fieldValue?: Maybe<Scalars['String']>;
 };
 
-export type MicrocmsPersonsLastVisual = {
+export type MicrocmsMediaLastVisual = {
   url?: Maybe<Scalars['String']>;
   height?: Maybe<Scalars['Int']>;
   width?: Maybe<Scalars['Int']>;
 };
 
-export type MicrocmsPersonsLastVisualFilterInput = {
+export type MicrocmsMediaLastVisualFilterInput = {
   url?: Maybe<StringQueryOperatorInput>;
   height?: Maybe<IntQueryOperatorInput>;
   width?: Maybe<IntQueryOperatorInput>;
 };
 
-export type MicrocmsPersonsMainVisual = {
+export type MicrocmsMediaMainVisual = {
   url?: Maybe<Scalars['String']>;
   height?: Maybe<Scalars['Int']>;
   width?: Maybe<Scalars['Int']>;
 };
 
-export type MicrocmsPersonsMainVisualFilterInput = {
+export type MicrocmsMediaMainVisualFilterInput = {
   url?: Maybe<StringQueryOperatorInput>;
   height?: Maybe<IntQueryOperatorInput>;
   width?: Maybe<IntQueryOperatorInput>;
 };
 
-export type MicrocmsPersonsSortInput = {
-  fields?: Maybe<Array<Maybe<MicrocmsPersonsFieldsEnum>>>;
+export type MicrocmsMediaSortInput = {
+  fields?: Maybe<Array<Maybe<MicrocmsMediaFieldsEnum>>>;
   order?: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
@@ -2154,8 +2154,8 @@ export type Query = {
   allImageSharp: ImageSharpConnection;
   microcmsArchive?: Maybe<MicrocmsArchive>;
   allMicrocmsArchive: MicrocmsArchiveConnection;
-  microcmsPersons?: Maybe<MicrocmsPersons>;
-  allMicrocmsPersons: MicrocmsPersonsConnection;
+  microcmsMedia?: Maybe<MicrocmsMedia>;
+  allMicrocmsMedia: MicrocmsMediaConnection;
   settingYaml?: Maybe<SettingYaml>;
   allSettingYaml: SettingYamlConnection;
   siteBuildMetadata?: Maybe<SiteBuildMetadata>;
@@ -2366,7 +2366,7 @@ export type QueryAllMicrocmsArchiveArgs = {
 };
 
 
-export type QueryMicrocmsPersonsArgs = {
+export type QueryMicrocmsMediaArgs = {
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
   children?: Maybe<NodeFilterListInput>;
@@ -2379,18 +2379,18 @@ export type QueryMicrocmsPersonsArgs = {
   position?: Maybe<StringQueryOperatorInput>;
   name?: Maybe<StringQueryOperatorInput>;
   title?: Maybe<StringQueryOperatorInput>;
-  mainVisual?: Maybe<MicrocmsPersonsMainVisualFilterInput>;
+  mainVisual?: Maybe<MicrocmsMediaMainVisualFilterInput>;
   body?: Maybe<StringQueryOperatorInput>;
-  lastVisual?: Maybe<MicrocmsPersonsLastVisualFilterInput>;
+  lastVisual?: Maybe<MicrocmsMediaLastVisualFilterInput>;
   isComingSoon?: Maybe<BooleanQueryOperatorInput>;
-  personsId?: Maybe<StringQueryOperatorInput>;
+  mediaId?: Maybe<StringQueryOperatorInput>;
   credit?: Maybe<StringQueryOperatorInput>;
 };
 
 
-export type QueryAllMicrocmsPersonsArgs = {
-  filter?: Maybe<MicrocmsPersonsFilterInput>;
-  sort?: Maybe<MicrocmsPersonsSortInput>;
+export type QueryAllMicrocmsMediaArgs = {
+  filter?: Maybe<MicrocmsMediaFilterInput>;
+  sort?: Maybe<MicrocmsMediaSortInput>;
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
 };
@@ -3778,12 +3778,12 @@ export type AllMicrocmsArchiveQuery = { allMicrocmsArchive: { nodes: Array<(
       & { mainVisual?: Maybe<Pick<MicrocmsArchiveMainVisual, 'url'>> }
     )> } };
 
-export type AllMicrocmsPersonsQueryVariables = Exact<{ [key: string]: never; }>;
+export type AllMicrocmsMediaQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AllMicrocmsPersonsQuery = { allMicrocmsPersons: { nodes: Array<(
-      Pick<MicrocmsPersons, 'id' | 'position' | 'title' | 'name' | 'slug' | 'isComingSoon'>
-      & { mainVisual?: Maybe<Pick<MicrocmsPersonsMainVisual, 'url'>> }
+export type AllMicrocmsMediaQuery = { allMicrocmsMedia: { nodes: Array<(
+      Pick<MicrocmsMedia, 'id' | 'position' | 'title' | 'name' | 'slug' | 'isComingSoon'>
+      & { mainVisual?: Maybe<Pick<MicrocmsMediaMainVisual, 'url'>> }
     )> } };
 
 export type Unnamed_1_QueryVariables = Exact<{
@@ -3801,9 +3801,9 @@ export type Unnamed_2_QueryVariables = Exact<{
 }>;
 
 
-export type Unnamed_2_Query = { microcmsPersons?: Maybe<(
-    Pick<MicrocmsPersons, 'title' | 'position' | 'name' | 'body' | 'credit' | 'publishedAt'>
-    & { mainVisual?: Maybe<Pick<MicrocmsPersonsMainVisual, 'url'>>, lastVisual?: Maybe<Pick<MicrocmsPersonsLastVisual, 'url'>> }
+export type Unnamed_2_Query = { microcmsMedia?: Maybe<(
+    Pick<MicrocmsMedia, 'title' | 'position' | 'name' | 'body' | 'credit' | 'publishedAt'>
+    & { mainVisual?: Maybe<Pick<MicrocmsMediaMainVisual, 'url'>>, lastVisual?: Maybe<Pick<MicrocmsMediaLastVisual, 'url'>> }
   )> };
 
 export type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;

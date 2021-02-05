@@ -1,19 +1,19 @@
 import React from 'react';
 import { BaseLayout, Meta } from '@/layouts';
-import { PersonsModule } from '@/modules';
+import { MediaModule } from '@/modules';
 import { PageId } from '@/constants';
 import { usePageInfo } from '@/hooks';
 
-const PersonsPage: React.FC = () => {
-  const { title, description, ogImage } = usePageInfo({ id: PageId.PERSONS });
+const MediaPage: React.FC = () => {
+  const { title, description, ogImage } = usePageInfo({ id: PageId.MEDIA });
   return (
     <>
       <BaseLayout>
         <Meta title={title} description={description} ogImage={ogImage} />
-        <PersonsModule useTitle />
+        <MediaModule useTitle />
       </BaseLayout>
     </>
   );
 };
 
-export default PersonsPage;
+export default MediaPage;

@@ -67,7 +67,6 @@
     "stylelint-processor-styled-components": "^1.10.0",
     "typescript": "^4.1.3"
   },
-  "browserslist": [">0.25%", "not dead", "IE 11"],
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",
