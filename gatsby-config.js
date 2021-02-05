@@ -83,7 +83,7 @@ module.exports = {
         short_name: '小杉湯',
         start_url: '/',
         background_color: '#ffffff',
-        icon: 'src/images//icons/favicon.svg',
+        icon: 'src/images/icons/favicon.svg',
       },
     },
     // {
