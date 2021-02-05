@@ -2,16 +2,20 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { Spacing, ScreenType, SizeType } from '@/constants';
 import media from 'styled-media-query';
-import { ArticleItem, ArticleItemProps, ArticleItemDirection } from './ArticleItem';
+import {
+  ArchiveArticleItem,
+  ArchiveArticleItemProps,
+  ArchiveArticleItemDirection,
+} from './ArchiveArticleItem';
 
 const GUTTER_NORMAL = Spacing.XX_LARGE;
 const GUTTER_SMALL = Spacing.XX_LARGE;
 
-type ArticleGroupProps = {
-  children: (ArticleItemProps | undefined)[];
+type ArchiveArticleGroupProps = {
+  children: (ArchiveArticleItemProps | undefined)[];
 };
 
-export const ArticleGroup: React.FC<ArticleGroupProps> = ({ children }) => {
+export const ArchiveArticleGroup: React.FC<ArchiveArticleGroupProps> = ({ children }) => {
   const [
     article1,
     article2,
@@ -27,7 +31,7 @@ export const ArticleGroup: React.FC<ArticleGroupProps> = ({ children }) => {
   ] = children;
   if (!article1) return <div />;
   return (
-    <ArticleGroupContainer>
+    <ArchiveArticleGroupContainer>
       <ArticleSubGroupType1 list={[article1, article2, article3]} />
       {article4 && (
         <>
@@ -47,138 +51,138 @@ export const ArticleGroup: React.FC<ArticleGroupProps> = ({ children }) => {
           )}
         </>
       )}
-    </ArticleGroupContainer>
+    </ArchiveArticleGroupContainer>
   );
 };
 
-type MaybeArticleItemProps = ArticleItemProps | undefined;
+type MaybeArchiveArticleItemProps = ArchiveArticleItemProps | undefined;
 
 // 1〜3用
 type ArticleSubGroupType1Props = {
-  list: [ArticleItemProps, MaybeArticleItemProps, MaybeArticleItemProps];
+  list: [ArchiveArticleItemProps, MaybeArchiveArticleItemProps, MaybeArchiveArticleItemProps];
 };
 const ArticleSubGroupType1: React.FC<ArticleSubGroupType1Props> = ({ list }) => {
   const [first, second, third] = list;
   return (
-    <ArticleGroupGrid columns={2} collapseOnSmallScreen>
+    <ArchiveArticleGroupGrid columns={2} collapseOnSmallScreen>
       {first && (
-        <ArticleGroupGridItem columnStart={1} columnEnd={2} rowStart={1} rowEnd={2}>
-          <ArticleGroupItem>{first}</ArticleGroupItem>
-        </ArticleGroupGridItem>
+        <ArchiveArticleGroupGridItem columnStart={1} columnEnd={2} rowStart={1} rowEnd={2}>
+          <ArchiveArticleGroupItem>{first}</ArchiveArticleGroupItem>
+        </ArchiveArticleGroupGridItem>
       )}
-      <ArticleGroupGridItem columnStart={2} columnEnd={3} rowStart={1} rowEnd={2}>
+      <ArchiveArticleGroupGridItem columnStart={2} columnEnd={3} rowStart={1} rowEnd={2}>
         {second && (
-          <ArticleGroupItem
+          <ArchiveArticleGroupItem
             textSize={SizeType.SMALL}
-            direction={ArticleItemDirection.HORIZONTAL}
+            direction={ArchiveArticleItemDirection.HORIZONTAL}
             enableTextSizingOnSmallScreen
           >
             {second}
-          </ArticleGroupItem>
+          </ArchiveArticleGroupItem>
         )}
         {third && (
-          <ArticleGroupItem
+          <ArchiveArticleGroupItem
             textSize={SizeType.SMALL}
-            direction={ArticleItemDirection.HORIZONTAL}
+            direction={ArchiveArticleItemDirection.HORIZONTAL}
             enableTextSizingOnSmallScreen
           >
             {third}
-          </ArticleGroupItem>
+          </ArchiveArticleGroupItem>
         )}
-      </ArticleGroupGridItem>
-    </ArticleGroupGrid>
+      </ArchiveArticleGroupGridItem>
+    </ArchiveArticleGroupGrid>
   );
 };
 
 // 3つ並列
 type ArticleSubGroupType2Props = {
-  list: [ArticleItemProps, ArticleItemProps, ArticleItemProps];
+  list: [ArchiveArticleItemProps, ArchiveArticleItemProps, ArchiveArticleItemProps];
 };
 const ArticleSubGroupType2: React.FC<ArticleSubGroupType2Props> = ({ list }) => {
   const [first, second, third] = list;
   return (
-    <ArticleGroupGrid columns={3} collapseOnSmallScreen>
-      <ArticleGroupGridItem columnStart={1} columnEnd={2} rowStart={1} rowEnd={2}>
-        <ArticleGroupItem>{first}</ArticleGroupItem>
-      </ArticleGroupGridItem>
-      <ArticleGroupGridItem columnStart={2} columnEnd={3} rowStart={1} rowEnd={2}>
-        <ArticleGroupItem>{second}</ArticleGroupItem>
-      </ArticleGroupGridItem>
-      <ArticleGroupGridItem columnStart={3} columnEnd={4} rowStart={1} rowEnd={2}>
-        <ArticleGroupItem>{third}</ArticleGroupItem>
-      </ArticleGroupGridItem>
-    </ArticleGroupGrid>
+    <ArchiveArticleGroupGrid columns={3} collapseOnSmallScreen>
+      <ArchiveArticleGroupGridItem columnStart={1} columnEnd={2} rowStart={1} rowEnd={2}>
+        <ArchiveArticleGroupItem>{first}</ArchiveArticleGroupItem>
+      </ArchiveArticleGroupGridItem>
+      <ArchiveArticleGroupGridItem columnStart={2} columnEnd={3} rowStart={1} rowEnd={2}>
+        <ArchiveArticleGroupItem>{second}</ArchiveArticleGroupItem>
+      </ArchiveArticleGroupGridItem>
+      <ArchiveArticleGroupGridItem columnStart={3} columnEnd={4} rowStart={1} rowEnd={2}>
+        <ArchiveArticleGroupItem>{third}</ArchiveArticleGroupItem>
+      </ArchiveArticleGroupGridItem>
+    </ArchiveArticleGroupGrid>
   );
 };
 
 // 4〜5用
 type ArticleSubGroupType3Props = {
   list: [
-    ArticleItemProps,
-    ArticleItemProps,
-    ArticleItemProps,
-    ArticleItemProps,
-    MaybeArticleItemProps,
+    ArchiveArticleItemProps,
+    ArchiveArticleItemProps,
+    ArchiveArticleItemProps,
+    ArchiveArticleItemProps,
+    MaybeArchiveArticleItemProps,
   ];
 };
 const ArticleSubGroupType3: React.FC<ArticleSubGroupType3Props> = ({ list }) => {
   const [first, second, third, fourth, fifth] = list;
   return (
-    <ArticleGroupGrid columns={fifth ? 2 : 1} collapseOnSmallScreen>
-      <ArticleGroupGridItem columnStart={1} columnEnd={2} rowStart={1} rowEnd={2}>
-        <ArticleGroupGrid columns={2}>
-          <ArticleGroupGridItem
+    <ArchiveArticleGroupGrid columns={fifth ? 2 : 1} collapseOnSmallScreen>
+      <ArchiveArticleGroupGridItem columnStart={1} columnEnd={2} rowStart={1} rowEnd={2}>
+        <ArchiveArticleGroupGrid columns={2}>
+          <ArchiveArticleGroupGridItem
             columnStart={1}
             columnEnd={2}
             rowStart={1}
             rowEnd={2}
             disableVerticalGutterSmallScreen
           >
-            <ArticleGroupItem textSize={SizeType.SMALL} enableTextSizingOnSmallScreen>
+            <ArchiveArticleGroupItem textSize={SizeType.SMALL} enableTextSizingOnSmallScreen>
               {first}
-            </ArticleGroupItem>
-          </ArticleGroupGridItem>
-          <ArticleGroupGridItem
+            </ArchiveArticleGroupItem>
+          </ArchiveArticleGroupGridItem>
+          <ArchiveArticleGroupGridItem
             columnStart={2}
             columnEnd={3}
             rowStart={1}
             rowEnd={2}
             disableVerticalGutterSmallScreen
           >
-            <ArticleGroupItem textSize={SizeType.SMALL} enableTextSizingOnSmallScreen>
+            <ArchiveArticleGroupItem textSize={SizeType.SMALL} enableTextSizingOnSmallScreen>
               {second}
-            </ArticleGroupItem>
-          </ArticleGroupGridItem>
-          <ArticleGroupGridItem
+            </ArchiveArticleGroupItem>
+          </ArchiveArticleGroupGridItem>
+          <ArchiveArticleGroupGridItem
             columnStart={1}
             columnEnd={2}
             rowStart={2}
             rowEnd={3}
             disableVerticalGutterSmallScreen
           >
-            <ArticleGroupItem textSize={SizeType.SMALL} enableTextSizingOnSmallScreen>
+            <ArchiveArticleGroupItem textSize={SizeType.SMALL} enableTextSizingOnSmallScreen>
               {third}
-            </ArticleGroupItem>
-          </ArticleGroupGridItem>
-          <ArticleGroupGridItem
+            </ArchiveArticleGroupItem>
+          </ArchiveArticleGroupGridItem>
+          <ArchiveArticleGroupGridItem
             columnStart={2}
             columnEnd={3}
             rowStart={2}
             rowEnd={3}
             disableVerticalGutterSmallScreen
           >
-            <ArticleGroupItem textSize={SizeType.SMALL} enableTextSizingOnSmallScreen>
+            <ArchiveArticleGroupItem textSize={SizeType.SMALL} enableTextSizingOnSmallScreen>
               {fourth}
-            </ArticleGroupItem>
-          </ArticleGroupGridItem>
-        </ArticleGroupGrid>
-      </ArticleGroupGridItem>
+            </ArchiveArticleGroupItem>
+          </ArchiveArticleGroupGridItem>
+        </ArchiveArticleGroupGrid>
+      </ArchiveArticleGroupGridItem>
       {fifth && (
-        <ArticleGroupGridItem columnStart={2} columnEnd={3} rowStart={1} rowEnd={2}>
-          <ArticleGroupItem>{fifth}</ArticleGroupItem>
-        </ArticleGroupGridItem>
+        <ArchiveArticleGroupGridItem columnStart={2} columnEnd={3} rowStart={1} rowEnd={2}>
+          <ArchiveArticleGroupItem>{fifth}</ArchiveArticleGroupItem>
+        </ArchiveArticleGroupGridItem>
       )}
-    </ArticleGroupGrid>
+    </ArchiveArticleGroupGrid>
   );
 };
 
@@ -191,16 +195,16 @@ const verticalGutterFragment = css`
   }
 `;
 
-const ArticleGroupContainer = styled.div`
+const ArchiveArticleGroupContainer = styled.div`
   ${verticalGutterFragment};
 `;
 
-type ArticleGroupGridProps = {
+type ArchiveArticleGroupGridProps = {
   columns: number;
   collapseOnSmallScreen?: boolean;
 };
 
-const ArticleGroupGrid = styled.div<ArticleGroupGridProps>`
+const ArchiveArticleGroupGrid = styled.div<ArchiveArticleGroupGridProps>`
   display: grid;
   grid-column-gap: ${GUTTER_NORMAL}px;
   grid-row-gap: ${GUTTER_NORMAL}px;
@@ -221,7 +225,7 @@ const ArticleGroupGrid = styled.div<ArticleGroupGridProps>`
       : ''}
 `;
 
-type ArticleGroupGridItemProps = {
+type ArchiveArticleGroupGridItemProps = {
   rowStart: number;
   rowEnd: number;
   columnStart: number;
@@ -229,7 +233,7 @@ type ArticleGroupGridItemProps = {
   disableVerticalGutterSmallScreen?: boolean;
 };
 
-const ArticleGroupGridItem = styled.div<ArticleGroupGridItemProps>`
+const ArchiveArticleGroupGridItem = styled.div<ArchiveArticleGroupGridItemProps>`
   ${({ rowStart, rowEnd, columnStart, columnEnd }) => css`
     grid-row: ${rowStart} / ${rowEnd};
     grid-column: ${columnStart} / ${columnEnd};
@@ -245,26 +249,26 @@ const ArticleGroupGridItem = styled.div<ArticleGroupGridItemProps>`
       : ''}
 `;
 
-type ArticleGroupItemProps = {
-  children: ArticleItemProps;
-} & Pick<ArticleItemProps, 'textSize' | 'direction' | 'enableTextSizingOnSmallScreen'>;
+type ArchiveArticleGroupItemProps = {
+  children: ArchiveArticleItemProps;
+} & Pick<ArchiveArticleItemProps, 'textSize' | 'direction' | 'enableTextSizingOnSmallScreen'>;
 
-const ArticleGroupItem: React.FC<ArticleGroupItemProps> = ({
+const ArchiveArticleGroupItem: React.FC<ArchiveArticleGroupItemProps> = ({
   textSize,
   direction,
   enableTextSizingOnSmallScreen,
   children,
 }) => (
-  <ArticleGroupItemContainer>
-    <ArticleItem
+  <ArchiveArticleGroupItemContainer>
+    <ArchiveArticleItem
       textSize={textSize}
       direction={direction}
       enableTextSizingOnSmallScreen={enableTextSizingOnSmallScreen}
       {...children}
     />
-  </ArticleGroupItemContainer>
+  </ArchiveArticleGroupItemContainer>
 );
 
-const ArticleGroupItemContainer = styled.div`
+const ArchiveArticleGroupItemContainer = styled.div`
   ${verticalGutterFragment};
 `;

@@ -17,9 +17,9 @@ import Transition from 'react-transition-group/Transition';
 import { useMenu, useBaseMetaInfo } from '@/hooks';
 import { Link } from 'gatsby';
 import media from 'styled-media-query';
-import { Overlay } from '@/components/Overlay';
+import { Overlay } from '@/atoms/Overlay';
 
-import { TwitterAccountButton, InstagramAccountButton } from '@/components';
+import { TwitterAccountButton, InstagramAccountButton } from '@/atoms';
 
 const TRANSITION_TIME = 300;
 
@@ -37,7 +37,7 @@ type MenuProps = {
 
 export const Menu: React.FC<MenuProps> = ({ isTriggerShow }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { twitter, facebook, instagram, note } = useBaseMetaInfo();
+  const { twitter, instagram } = useBaseMetaInfo();
   const menuList = useMenu();
 
   return (

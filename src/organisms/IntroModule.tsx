@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 
-import { GridContainer, GridItem, GridImage, Picture } from '@/components';
+import { GridContainer, GridItem, GridImage, Picture } from '@/atoms';
 
 import {
   TypographyMixin,
@@ -360,7 +360,7 @@ const IntroStoryIllustration3 = styled(IntroStoryIllustration)`
 
   ${media.lessThan(ScreenType.MEDIUM)`
     top: auto;
-    bottom: -10px;
+    bottom: -100px;
     right: -32px;
   `}
 `;

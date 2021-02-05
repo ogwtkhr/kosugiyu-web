@@ -1,7 +1,7 @@
 import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
-import { MainLogo } from '@/components';
+import { MainLogo } from '@/atoms';
 import { Colors, Spacing, BigSpacing, ScreenType } from '@/constants';
 import media from 'styled-media-query';
 

@@ -9,6 +9,7 @@
     "dotenv": "^8.2.0",
     "gatsby": "^2.31.1",
     "gatsby-image": "^2.10.0",
+    "gatsby-plugin-manifest": "^2.12.0",
     "gatsby-source-filesystem": "^2.10.0",
     "gatsby-source-microcms": "^1.0.1",
     "gatsby-transformer-sharp": "^2.11.0",
@@ -73,7 +74,7 @@
     "develop": "gatsby develop -H 0.0.0.0",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
-    "serve": "gatsby serve",
+    "serve": "gatsby serve -H 0.0.0.0",
     "clean": "gatsby clean",
     "lint": "eslint -c .eslintrc --ext js,jsx,ts,tsx --fix src/",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"

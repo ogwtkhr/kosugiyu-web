@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BaseLayout, Meta } from '@/layouts';
-import { TopModule, IntroModule, PersonsModule } from '@/modules';
+import { TopModule, IntroModule, MediaModule } from '@/organisms';
 import { useScreenThreshold } from '@/hooks';
 import { ScreenValue } from '@/constants';
 
@@ -19,7 +19,7 @@ const IndexPage: React.FC = () => {
           }}
         />
         <IntroModule />
-        <PersonsModule summaryMode withVerticalMargin enableTopEmphasis={false} />
+        <MediaModule summaryMode withVerticalMargin enableTopEmphasis={false} />
       </BaseLayout>
     </>
   );

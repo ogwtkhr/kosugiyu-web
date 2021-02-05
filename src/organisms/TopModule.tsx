@@ -12,7 +12,8 @@ import {
   LineHeight,
   LetterSpacing,
 } from '@/constants';
-import { HeroImage, MainLogo, TwitterAccountButton, InstagramAccountButton } from '@/components';
+import { MainLogo, TwitterAccountButton, InstagramAccountButton } from '@/atoms';
+import { HeroImage } from '@/molecules';
 import { useMenu, useBaseMetaInfo, useIntersectionObserver } from '@/hooks';
 
 type TopModuleProps = {

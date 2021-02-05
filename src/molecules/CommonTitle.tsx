@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Picture, UnderLineText } from '@/components';
+import { Picture, UnderLineText } from '@/atoms';
 import { Spacing, ModuleWidth, ScreenType, SizeType, ModuleHeight } from '@/constants';
 import media from 'styled-media-query';
 import { getTextBreakFragment } from '@/util/jsx';

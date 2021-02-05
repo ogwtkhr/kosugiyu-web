@@ -11,7 +11,7 @@ import {
   InformationItem,
   InformationContentDashLine,
   InformationNormalText,
-} from '@/components';
+} from '@/molecules';
 import styled from 'styled-components';
 
 export const FacilityModule: React.FC = () => {

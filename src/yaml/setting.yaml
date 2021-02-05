@@ -20,10 +20,10 @@
       title: できごと
       description: 昭和八年創業。高円寺の銭湯「小杉湯」の「できごと」を伝えます。
       ogImage: /meta/og_images/archive.jpg
-    - id: persons
+    - id: media
       title: ケノ日のハレ
       description: 昭和八年創業。高円寺の銭湯「小杉湯」のWEBメディア「ケノ日のハレ」です。
-      ogImage: /meta/og_images/persons.jpg
+      ogImage: /meta/og_images/media.jpg
     - id: not_found
       title: ページが存在しません
       description: ページが存在しません

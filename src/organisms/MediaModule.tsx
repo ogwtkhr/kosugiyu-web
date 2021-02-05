@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql, useStaticQuery, Link } from 'gatsby';
-import { AllMicrocmsPersonsQuery } from '@/types';
+import { AllMicrocmsMediaQuery } from '@/types';
 import styled, { css } from 'styled-components';
 import {
   StyleMixin,
@@ -11,19 +11,12 @@ import {
   ModuleHeight,
   Colors,
 } from '@/constants';
-import {
-  PersonItem,
-  TopPersonItem,
-  Picture,
-  Button,
-  ButtonContainer,
-  MediaLogo,
-  MediaTagLine,
-} from '@/components';
+import { Picture, Button, ButtonContainer, MediaLogo, MediaTagLine } from '@/atoms';
+import { MediaArticleItem, MediaPickupArticleItem } from '@/molecules';
 import media from 'styled-media-query';
 import { ReverseParallax, ParallaxBasePosition, IntersectionFadeIn } from '@/effects';
 
-type PersonsModuleProps = {
+type MediaModuleProps = {
   useTitle?: boolean;
   summaryMode?: boolean;
   summaryMax?: number;
@@ -31,16 +24,16 @@ type PersonsModuleProps = {
   withVerticalMargin?: boolean;
 };
 
-export const PersonsModule: React.FC<PersonsModuleProps> = ({
+export const MediaModule: React.FC<MediaModuleProps> = ({
   useTitle,
   summaryMode,
   summaryMax = 3,
   enableTopEmphasis = true,
   withVerticalMargin,
 }) => {
-  const data = useStaticQuery<AllMicrocmsPersonsQuery>(graphql`
-    query allMicrocmsPersons {
-      allMicrocmsPersons {
+  const data = useStaticQuery<AllMicrocmsMediaQuery>(graphql`
+    query allMicrocmsMedia {
+      allMicrocmsMedia {
         nodes {
           id
           position
@@ -56,53 +49,53 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({
     }
   `);
 
-  const basePersons = data.allMicrocmsPersons.nodes;
-  const [topPerson, ...restPersons] = basePersons;
-  const persons = enableTopEmphasis ? restPersons : basePersons;
-  const summarizedPersons = summaryMode ? persons.slice(0, summaryMax) : persons;
+  const baseArticles = data.allMicrocmsMedia.nodes;
+  const [topArticle, ...restMedia] = baseArticles;
+  const articles = enableTopEmphasis ? restMedia : baseArticles;
+  const summarizedArticles = summaryMode ? articles.slice(0, summaryMax) : articles;
 
-  const topPersonSlug = topPerson?.slug || '';
-  const topPersonPosition = topPerson?.position || '';
-  const topPersonName = topPerson?.name || '';
-  const topPersonTitle = topPerson?.title || '';
-  const topPersonMainVisualUrl = topPerson?.mainVisual?.url || '';
-  const isSummaryView = summaryMode && persons.length > summaryMax;
+  const topArticleSlug = topArticle?.slug || '';
+  const topArticlePosition = topArticle?.position || '';
+  const topArticleName = topArticle?.name || '';
+  const topArticleTitle = topArticle?.title || '';
+  const topArticleMainVisualUrl = topArticle?.mainVisual?.url || '';
+  const isSummaryView = summaryMode && articles.length > summaryMax;
 
   return (
     <>
       {useTitle && (
-        <PersonsTitleContainer>
-          <PersonsTitleInner>
-            <PersonsTitleLogoArea>
-              <PersonsTitleLogo>
+        <MediaTitleContainer>
+          <MediaTitleInner>
+            <MediaTitleLogoArea>
+              <MediaTitleLogo>
                 <MediaLogo />
-              </PersonsTitleLogo>
-              <PersonsTitleTagLine>
+              </MediaTitleLogo>
+              <MediaTitleTagLine>
                 <MediaTagLine />
-              </PersonsTitleTagLine>
-            </PersonsTitleLogoArea>
-            <PersonsTitleImage>
+              </MediaTitleTagLine>
+            </MediaTitleLogoArea>
+            <MediaTitleImage>
               <ReverseParallax
                 zoom={1.1}
                 zoomSmall={1.7}
                 basePosition={ParallaxBasePosition.TOP}
                 fillLayout
               >
-                <Picture relativePath="photos/persons/hero.jpg" />
+                <Picture relativePath="photos/media/hero.jpg" />
               </ReverseParallax>
-            </PersonsTitleImage>
-          </PersonsTitleInner>
-        </PersonsTitleContainer>
+            </MediaTitleImage>
+          </MediaTitleInner>
+        </MediaTitleContainer>
       )}
       <Container withVerticalMargin={withVerticalMargin}>
         {enableTopEmphasis && (
           <TopPersonContainer>
-            <PersonLink to={`/persons/${topPersonSlug}`}>
-              <TopPersonItem
-                position={topPersonPosition}
-                name={topPersonName}
-                title={topPersonTitle}
-                mainVisualUrl={topPersonMainVisualUrl}
+            <PersonLink to={`/media/${topArticleSlug}`}>
+              <MediaPickupArticleItem
+                position={topArticlePosition}
+                name={topArticleName}
+                title={topArticleTitle}
+                mainVisualUrl={topArticleMainVisualUrl}
               />
             </PersonLink>
           </TopPersonContainer>
@@ -111,33 +104,37 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({
         <PersonListContainer>
           {summaryMode && (
             <>
-              <PersonsSummaryTitleLogo>
+              <MediaSummaryTitleLogo>
                 <IntersectionFadeIn fillLayout slideIn>
                   <MediaLogo />
                 </IntersectionFadeIn>
-              </PersonsSummaryTitleLogo>
-              <PersonsSummaryTitleTagLine>
+              </MediaSummaryTitleLogo>
+              <MediaSummaryTitleTagLine>
                 <IntersectionFadeIn fillLayout slideIn>
                   <MediaTagLine />
                 </IntersectionFadeIn>
-              </PersonsSummaryTitleTagLine>
+              </MediaSummaryTitleTagLine>
             </>
           )}
-          <PersonList under2={summarizedPersons.length <= 2} withTitle={summaryMode}>
-            {summarizedPersons.map((person) => {
-              const slug = person.slug || '';
-              const position = person.position || '';
-              const name = person.name || '';
-              const mainVisualUrl = person?.mainVisual?.url || '';
-              const isComingSoon = person.isComingSoon;
+          <PersonList under2={summarizedArticles.length <= 2} withTitle={summaryMode}>
+            {summarizedArticles.map((article) => {
+              const slug = article.slug || '';
+              const position = article.position || '';
+              const name = article.name || '';
+              const mainVisualUrl = article?.mainVisual?.url || '';
+              const isComingSoon = article.isComingSoon;
               return (
-                <PersonListItem key={person.slug}>
+                <PersonListItem key={article.slug}>
                   {!isComingSoon ? (
-                    <PersonLink to={`/persons/${slug}`}>
-                      <PersonItem position={position} name={name} mainVisualUrl={mainVisualUrl} />
+                    <PersonLink to={`/media/${slug}`}>
+                      <MediaArticleItem
+                        position={position}
+                        name={name}
+                        mainVisualUrl={mainVisualUrl}
+                      />
                     </PersonLink>
                   ) : (
-                    <PersonItem
+                    <MediaArticleItem
                       position={position}
                       name={name}
                       mainVisualUrl={mainVisualUrl}
@@ -151,7 +148,7 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({
         </PersonListContainer>
         {isSummaryView && (
           <ButtonContainer>
-            <Button to="/persons">さらに読む</Button>
+            <Button to="/media">さらに読む</Button>
           </ButtonContainer>
         )}
       </Container>
@@ -159,7 +156,7 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({
   );
 };
 
-type ContainerProps = Pick<PersonsModuleProps, 'withVerticalMargin'>;
+type ContainerProps = Pick<MediaModuleProps, 'withVerticalMargin'>;
 const Container = styled.div<ContainerProps>`
   position: relative;
   max-width: ${ModuleWidth.MIDDLE}px;
@@ -174,9 +171,9 @@ const Container = styled.div<ContainerProps>`
   `}
 `;
 
-const PersonsTitleContainer = styled.div``;
+const MediaTitleContainer = styled.div``;
 
-const PersonsTitleInner = styled.div`
+const MediaTitleInner = styled.div`
   display: flex;
   position: relative;
   max-width: ${ModuleWidth.WIDE}px;
@@ -187,7 +184,7 @@ const PersonsTitleInner = styled.div`
   `}
 `;
 
-const PersonsTitleLogoArea = styled.div`
+const MediaTitleLogoArea = styled.div`
   position: relative;
   z-index: 1;
   width: 40%;
@@ -196,7 +193,7 @@ const PersonsTitleLogoArea = styled.div`
   `}
 `;
 
-const PersonsTitleLogo = styled.div`
+const MediaTitleLogo = styled.div`
   position: absolute;
   top: 138px;
   right: -135px;
@@ -211,7 +208,7 @@ const PersonsTitleLogo = styled.div`
   `}
 `;
 
-const PersonsTitleTagLine = styled.div`
+const MediaTitleTagLine = styled.div`
   position: absolute;
   top: 337px;
   right: 251px;
@@ -226,7 +223,7 @@ const PersonsTitleTagLine = styled.div`
   `}
 `;
 
-const PersonsTitleImage = styled.div`
+const MediaTitleImage = styled.div`
   width: 60%;
   overflow: hidden;
   ${media.lessThan(ScreenType.MEDIUM)`
@@ -235,7 +232,7 @@ const PersonsTitleImage = styled.div`
   `}
 `;
 
-const PersonsSummaryTitleLogo = styled.div`
+const MediaSummaryTitleLogo = styled.div`
   position: absolute;
   z-index: 1;
   top: 0;
@@ -251,7 +248,7 @@ const PersonsSummaryTitleLogo = styled.div`
   `}
 `;
 
-const PersonsSummaryTitleTagLine = styled.div`
+const MediaSummaryTitleTagLine = styled.div`
   position: absolute;
   top: 199px;
   left: 0;
@@ -321,4 +318,4 @@ const PersonList = styled.ul<PersonListProps>`
 
 const PersonListItem = styled.li``;
 
-export default PersonsModule;
+export default MediaModule;

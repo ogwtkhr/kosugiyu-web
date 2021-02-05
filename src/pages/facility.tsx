@@ -1,9 +1,9 @@
 import React from 'react';
 import { BaseLayout, Meta } from '@/layouts';
 import { usePageInfo } from '@/hooks';
-import { CommonTitle } from '@/components';
+import { CommonTitle } from '@/molecules';
 import { PageId } from '@/constants';
-import { FacilityModule } from '@/modules';
+import { FacilityModule } from '@/organisms';
 
 const FacilityPage: React.FC = () => {
   const { title, description, ogImage } = usePageInfo({ id: PageId.FACILITY });

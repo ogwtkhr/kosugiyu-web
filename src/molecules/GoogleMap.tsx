@@ -37,7 +37,7 @@ export const GoogleMap: React.FC = () => {
           },
         ],
       });
-      const marker = new google.maps.Marker({
+      new google.maps.Marker({
         position,
         map,
       });
@@ -56,8 +56,8 @@ const MapContainer = styled.div`
   &::before {
     content: '';
     display: block;
-    padding-bottom: 50%;
     max-height: 100px;
+    padding-bottom: 50%;
     ${media.greaterThan(ScreenType.LARGE)`
       display: none;
     `}

@@ -68,12 +68,22 @@ module.exports = {
         serviceId: 'kosugiyu',
         apis: [
           {
-            endpoint: 'persons',
+            endpoint: 'media',
           },
           {
             endpoint: 'archive',
           },
         ],
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-manifest',
+      options: {
+        name: '小杉湯',
+        short_name: '小杉湯',
+        start_url: '/',
+        background_color: '#ffffff',
+        icon: 'src/images/icons/favicon.svg',
       },
     },
     // {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { usePageInfo } from '@/hooks';
 import { PageId } from '@/constants';
-import { Picture } from '@/components';
+import { Picture } from '@/atoms';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 

@@ -11,7 +11,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
   const result = await graphql(`
     {
-      allMicrocmsPersons(sort: { fields: [createdAt], order: DESC }) {
+      allMicrocmsMedia(sort: { fields: [createdAt], order: DESC }) {
         nodes {
           id
           title
@@ -31,20 +31,20 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `);
 
-  result.data.allMicrocmsPersons.nodes.forEach((edge) => {
-    const personPageInfo = edge;
-    const { slug, isComingSoon } = personPageInfo;
+  result.data.allMicrocmsMedia.nodes.forEach((edge) => {
+    const mediaPageInfo = edge;
+    const { slug, isComingSoon } = mediaPageInfo;
     if (!isComingSoon) {
-      console.log('Create page.', `/persons/${slug}`);
+      console.log('Create page.', `/media/${slug}`);
       createPage({
-        path: `/persons/${slug}`,
-        component: path.resolve('./src/templates/persons.tsx'),
+        path: `/media/${slug}`,
+        component: path.resolve('./src/templates/media.tsx'),
         context: {
           slug,
         },
       });
     } else {
-      console.log('Skip page by isComingSoon flag.', `/archive/${slug}`);
+      console.log('Skip page by isComingSoon flag.', `/media/${slug}`);
     }
   });
 

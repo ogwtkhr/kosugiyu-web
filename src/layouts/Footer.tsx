@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Spacing, BigSpacing, TextSize, ScreenType } from '@/constants';
-import { CombinationLogo, ExternalLink } from '@/components';
+import { CombinationLogo, ExternalLink } from '@/atoms';
 import media from 'styled-media-query';
 import { useBaseMetaInfo } from '@/hooks';
 

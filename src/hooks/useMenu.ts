@@ -6,7 +6,12 @@ type Parameter = {
   ignoreTopData?: boolean;
 };
 
-export const useMenu = ({ ignoreTopData }: Parameter = {}) => {
+type MenuData = {
+  id: string;
+  label: string;
+}[];
+
+export const useMenu = ({ ignoreTopData }: Parameter = {}): MenuData => {
   const data = useStaticQuery<MenuQuery>(graphql`
     query Menu {
       settingYaml {
@@ -20,7 +25,7 @@ export const useMenu = ({ ignoreTopData }: Parameter = {}) => {
   const menu = (data.settingYaml?.pages || [])
     .map((item) => ({
       id: item?.id || '',
-      label: item?.title || '',
+      label: item?.id === PageId.TOP ? 'トップ' : item?.title || '',
     }))
     .filter(({ id }) => id !== PageId.NOT_FOUND);
   return ignoreTopData ? menu.filter(({ id }) => id !== PageId.TOP) : menu;

@@ -1,10 +1,9 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import media from 'styled-media-query';
-import { BoxProps, boxMixin, getBoxExpression } from './Box';
-import Picture from './Picture';
+import { BoxProps, getBoxExpression } from './Box';
 import { ScreenType, ScreenValue } from '@/constants';
-
+import { Picture } from '@/atoms/Picture';
 import { isNumber } from 'lodash';
 import { IntersectionFadeIn, ReverseParallax } from '@/effects';
 
@@ -22,10 +21,10 @@ const withUnit = (value: NumberOrString): string => (isNumber(value) ? `${value}
 
 export const GridContainer = styled.div<GridContainerProps>`
   display: grid;
+  grid-auto-rows: 3.5vw;
   grid-column-gap: ${({ columnGap = '' }) => withUnit(columnGap)};
   grid-row-gap: ${({ rowGap = '' }) => withUnit(rowGap)};
   grid-template-columns: repeat(12, 1fr);
-  grid-auto-rows: 3.5vw;
   grid-template-rows: 3.5vw;
   ${media.greaterThan<GridContainerProps>(ScreenType.LARGE)`
     width: ${ScreenValue.LARGE}px;
@@ -116,7 +115,7 @@ export const GridImage: React.FC<GridImageProps> = ({ src, speed }) => {
 
 const GridImageContainer = styled.div`
   position: relative;
-  overflow: hidden;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 `;

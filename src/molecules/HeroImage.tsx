@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Picture, ScrollLine } from '@/components';
+import { Picture, ScrollLine } from '@/atoms';
 import { Colors, LineHeight, ScreenType, Spacing, TextSize, TypeFace } from '@/constants';
 import media from 'styled-media-query';
 import { ReverseParallax, ParallaxBasePosition } from '@/effects';
