@@ -1859,6 +1859,7 @@ export type MicrocmsMedia = Node & {
   body?: Maybe<Scalars['String']>;
   lastVisual?: Maybe<MicrocmsMediaLastVisual>;
   isComingSoon?: Maybe<Scalars['Boolean']>;
+  publishDate?: Maybe<Scalars['Date']>;
   mediaId?: Maybe<Scalars['String']>;
   credit?: Maybe<Scalars['String']>;
 };
@@ -1889,6 +1890,14 @@ export type MicrocmsMediaPublishedAtArgs = {
 
 
 export type MicrocmsMediaRevisedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+export type MicrocmsMediaPublishDateArgs = {
   formatString?: Maybe<Scalars['String']>;
   fromNow?: Maybe<Scalars['Boolean']>;
   difference?: Maybe<Scalars['String']>;
@@ -2025,6 +2034,7 @@ export type MicrocmsMediaFieldsEnum =
   | 'lastVisual___height'
   | 'lastVisual___width'
   | 'isComingSoon'
+  | 'publishDate'
   | 'mediaId'
   | 'credit';
 
@@ -2045,6 +2055,7 @@ export type MicrocmsMediaFilterInput = {
   body?: Maybe<StringQueryOperatorInput>;
   lastVisual?: Maybe<MicrocmsMediaLastVisualFilterInput>;
   isComingSoon?: Maybe<BooleanQueryOperatorInput>;
+  publishDate?: Maybe<DateQueryOperatorInput>;
   mediaId?: Maybe<StringQueryOperatorInput>;
   credit?: Maybe<StringQueryOperatorInput>;
 };
@@ -2383,6 +2394,7 @@ export type QueryMicrocmsMediaArgs = {
   body?: Maybe<StringQueryOperatorInput>;
   lastVisual?: Maybe<MicrocmsMediaLastVisualFilterInput>;
   isComingSoon?: Maybe<BooleanQueryOperatorInput>;
+  publishDate?: Maybe<DateQueryOperatorInput>;
   mediaId?: Maybe<StringQueryOperatorInput>;
   credit?: Maybe<StringQueryOperatorInput>;
 };
@@ -3822,7 +3834,7 @@ export type AllMicrocmsMediaQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type AllMicrocmsMediaQuery = { allMicrocmsMedia: { nodes: Array<(
-      Pick<MicrocmsMedia, 'id' | 'position' | 'title' | 'name' | 'slug' | 'isComingSoon'>
+      Pick<MicrocmsMedia, 'id' | 'position' | 'title' | 'name' | 'slug' | 'isComingSoon' | 'publishDate' | 'publishedAt'>
       & { mainVisual?: Maybe<Pick<MicrocmsMediaMainVisual, 'url'>> }
     )> } };
 

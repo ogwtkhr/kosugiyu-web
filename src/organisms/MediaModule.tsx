@@ -15,6 +15,7 @@ import { Picture, Button, ButtonContainer, MediaLogo, MediaTagLine } from '@/ato
 import { MediaArticleItem, MediaPickupArticleItem } from '@/molecules';
 import media from 'styled-media-query';
 import { ReverseParallax, ParallaxBasePosition, IntersectionFadeIn } from '@/effects';
+import { orderBy } from 'lodash';
 
 type MediaModuleProps = {
   useTitle?: boolean;
@@ -41,6 +42,8 @@ export const MediaModule: React.FC<MediaModuleProps> = ({
           name
           slug
           isComingSoon
+          publishDate
+          publishedAt
           mainVisual {
             url
           }
@@ -52,7 +55,27 @@ export const MediaModule: React.FC<MediaModuleProps> = ({
   const baseArticles = data.allMicrocmsMedia.nodes;
   const [topArticle, ...restMedia] = baseArticles;
   const articles = enableTopEmphasis ? restMedia : baseArticles;
-  const summarizedArticles = summaryMode ? articles.slice(0, summaryMax) : articles;
+  const summarizedArticles = orderBy(
+    (summaryMode ? articles.slice(0, summaryMax) : articles).map((article) => {
+      const slug = article.slug || '';
+      const position = article.position || '';
+      const name = article.name || '';
+      const mainVisualUrl = article?.mainVisual?.url || '';
+      const isComingSoon = article.isComingSoon;
+      const publishDate = article.publishDate || article.publishedAt || '';
+      return {
+        slug,
+        position,
+        name,
+        mainVisualUrl,
+        publishDate,
+        isComingSoon: !!isComingSoon,
+      };
+    }),
+    'publishDate',
+    // TODO: タイミングを見計らってdescに
+    'asc',
+  );
 
   const topArticleSlug = topArticle?.slug || '';
   const topArticlePosition = topArticle?.position || '';
@@ -117,14 +140,9 @@ export const MediaModule: React.FC<MediaModuleProps> = ({
             </>
           )}
           <MediaArticleList under2={summarizedArticles.length <= 2} withTitle={summaryMode}>
-            {summarizedArticles.map((article) => {
-              const slug = article.slug || '';
-              const position = article.position || '';
-              const name = article.name || '';
-              const mainVisualUrl = article?.mainVisual?.url || '';
-              const isComingSoon = article.isComingSoon;
+            {summarizedArticles.map(({ slug, position, name, mainVisualUrl, isComingSoon }) => {
               return (
-                <MediaArticleListItem key={article.slug}>
+                <MediaArticleListItem key={slug}>
                   {!isComingSoon ? (
                     <PersonLink to={`/media/${slug}`}>
                       <MediaArticleItem
