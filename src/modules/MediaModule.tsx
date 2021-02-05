@@ -12,8 +12,8 @@ import {
   Colors,
 } from '@/constants';
 import {
-  PersonItem,
-  TopPersonItem,
+  MediaArticleItem,
+  MediaPickupArticleItem,
   Picture,
   Button,
   ButtonContainer,
@@ -98,7 +98,7 @@ export const MediaModule: React.FC<MediaModuleProps> = ({
         {enableTopEmphasis && (
           <TopPersonContainer>
             <PersonLink to={`/media/${topArticleSlug}`}>
-              <TopPersonItem
+              <MediaPickupArticleItem
                 position={topArticlePosition}
                 name={topArticleName}
                 title={topArticleTitle}
@@ -134,10 +134,14 @@ export const MediaModule: React.FC<MediaModuleProps> = ({
                 <PersonListItem key={article.slug}>
                   {!isComingSoon ? (
                     <PersonLink to={`/media/${slug}`}>
-                      <PersonItem position={position} name={name} mainVisualUrl={mainVisualUrl} />
+                      <MediaArticleItem
+                        position={position}
+                        name={name}
+                        mainVisualUrl={mainVisualUrl}
+                      />
                     </PersonLink>
                   ) : (
-                    <PersonItem
+                    <MediaArticleItem
                       position={position}
                       name={name}
                       mainVisualUrl={mainVisualUrl}

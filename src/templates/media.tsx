@@ -16,7 +16,7 @@ import {
 } from '@/constants';
 import media from 'styled-media-query';
 import { stripTag } from '@/util/string';
-import { TopPersonItem, Article, ArticleInfo, MicroCMSImage } from '@/components';
+import { MediaPickupArticleItem, Article, ArticleInfo, MicroCMSImage } from '@/components';
 import { ReverseParallax, ParallaxBasePosition } from '@/effects';
 
 type MediaPageProps = {
@@ -26,7 +26,7 @@ type MediaPageProps = {
 const MediaPage: React.FC<MediaPageProps> = ({ data }) => {
   const title = data.microcmsMedia?.title || '';
   const name = data.microcmsMedia?.name || '';
-  const personPosition = data.microcmsMedia?.position || '';
+  const position = data.microcmsMedia?.position || '';
   const publishedAt = data.microcmsMedia?.publishedAt || '';
   const mainVisual = data.microcmsMedia?.mainVisual?.url || '';
   const lastVisual = data.microcmsMedia?.lastVisual?.url || '';
@@ -44,9 +44,9 @@ const MediaPage: React.FC<MediaPageProps> = ({ data }) => {
     <BaseLayout useHeader>
       <Meta title={title} description={strippedBody} ogImage={mainVisual} />
       <Container>
-        <TopPersonItem
+        <MediaPickupArticleItem
           title={title}
-          position={personPosition}
+          position={position}
           name={name}
           mainVisualUrl={mainVisual}
           showArrowIcon={false}
