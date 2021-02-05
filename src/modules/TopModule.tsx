@@ -125,7 +125,7 @@ const Container = styled.div`
   background-color: ${Colors.UI_PAPER};
 
   ${media.lessThan(ScreenType.MEDIUM)`
-    /* flex-direction: row-reverse; */
+    flex-direction: row-reverse;
   `}
 `;
 
@@ -140,7 +140,7 @@ const SideColumn = styled.div`
 
   ${media.lessThan(ScreenType.MEDIUM)`
     width: 80px;
-    padding:  ${Spacing.XX_LARGE}px 0;
+    padding:  70px 0 0;
   `}
 `;
 
@@ -215,12 +215,13 @@ const HeroArea = styled.div`
   position: relative;
   flex-direction: column;
   justify-content: center;
-  height: calc(100% - 70px);
+  height: calc(100% - 24px);
   margin-top: ${Spacing.XXX_LARGE}px;
   margin-right: ${Spacing.XXX_LARGE}px;
 
   ${media.lessThan(ScreenType.MEDIUM)`
-    margin-top: 70px;
+    /* margin-top: 30px; */
+    margin-top: 24px;
     margin-right: 0;
     /* height: 100%; */
   `}
