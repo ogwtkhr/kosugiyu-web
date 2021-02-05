@@ -6,6 +6,7 @@ import {
   StyleMixin,
   ScreenType,
   TextSize,
+  LetterSpacing,
   TextWeight,
   PropsWithTransition,
   TransitionStatus,
@@ -105,7 +106,7 @@ const Type = styled.span`
   display: inline-block;
   font-size: ${TextSize.X_LARGE}rem;
   font-weight: ${TextWeight.BOLD};
-  letter-spacing: 0.2em;
+  letter-spacing: ${LetterSpacing.MIDDLE_WIDE}em;
 
   ${media.lessThan(ScreenType.MEDIUM)`
     font-size: ${TextSize.LARGE}rem;

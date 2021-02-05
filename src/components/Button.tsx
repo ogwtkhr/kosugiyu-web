@@ -1,13 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { rgba } from 'polished';
 import {
   Spacing,
   BigSpacing,
   LINE,
   Colors,
   Transitions,
-  Opacity,
   TextSize,
   TypographyMixin,
 } from '@/constants';

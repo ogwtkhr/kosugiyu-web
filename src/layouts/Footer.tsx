@@ -1,20 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Spacing, BigSpacing, TextSize, ScreenType } from '@/constants';
-import { CombinationLogo } from '@/components';
+import { CombinationLogo, ExternalLink } from '@/components';
 import media from 'styled-media-query';
-import { Link } from 'gatsby';
+import { useBaseMetaInfo } from '@/hooks';
 
-export const Footer: React.FC = () => (
-  <Container>
-    <Link to="/">
-      <FooterLogo>
-        <CombinationLogo />
-      </FooterLogo>
-    </Link>
-    <FooterText>{new Date().getFullYear()} Kosugiyu, inc.</FooterText>
-  </Container>
-);
+export const Footer: React.FC = () => {
+  const { companyUrl } = useBaseMetaInfo();
+  return (
+    <Container>
+      <ExternalLink href={companyUrl}>
+        <FooterLogo>
+          <CombinationLogo />
+        </FooterLogo>
+      </ExternalLink>
+      <FooterText>{new Date().getFullYear()} Kosugiyu, inc.</FooterText>
+    </Container>
+  );
+};
 
 const Container = styled.footer`
   display: flex;

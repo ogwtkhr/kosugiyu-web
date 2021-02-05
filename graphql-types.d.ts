@@ -766,6 +766,7 @@ export type FileFieldsEnum =
   | 'childrenSettingYaml___meta___title'
   | 'childrenSettingYaml___meta___description'
   | 'childrenSettingYaml___meta___url'
+  | 'childrenSettingYaml___meta___companyUrl'
   | 'childrenSettingYaml___meta___twitter'
   | 'childrenSettingYaml___meta___facebook'
   | 'childrenSettingYaml___meta___instagram'
@@ -827,6 +828,7 @@ export type FileFieldsEnum =
   | 'childSettingYaml___meta___title'
   | 'childSettingYaml___meta___description'
   | 'childSettingYaml___meta___url'
+  | 'childSettingYaml___meta___companyUrl'
   | 'childSettingYaml___meta___twitter'
   | 'childSettingYaml___meta___facebook'
   | 'childSettingYaml___meta___instagram'
@@ -2627,6 +2629,7 @@ export type SettingYamlFieldsEnum =
   | 'meta___title'
   | 'meta___description'
   | 'meta___url'
+  | 'meta___companyUrl'
   | 'meta___twitter'
   | 'meta___facebook'
   | 'meta___instagram'
@@ -2675,6 +2678,7 @@ export type SettingYamlMeta = {
   title?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   url?: Maybe<Scalars['String']>;
+  companyUrl?: Maybe<Scalars['String']>;
   twitter?: Maybe<Scalars['String']>;
   facebook?: Maybe<Scalars['String']>;
   instagram?: Maybe<Scalars['String']>;
@@ -2686,6 +2690,7 @@ export type SettingYamlMetaFilterInput = {
   title?: Maybe<StringQueryOperatorInput>;
   description?: Maybe<StringQueryOperatorInput>;
   url?: Maybe<StringQueryOperatorInput>;
+  companyUrl?: Maybe<StringQueryOperatorInput>;
   twitter?: Maybe<StringQueryOperatorInput>;
   facebook?: Maybe<StringQueryOperatorInput>;
   instagram?: Maybe<StringQueryOperatorInput>;
@@ -3740,7 +3745,7 @@ export type AllImageFileQuery = { desktopImages: { edges: Array<{ node: (
 export type SiteMetaDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type SiteMetaDataQuery = { settingYaml?: Maybe<{ meta?: Maybe<Pick<SettingYamlMeta, 'title' | 'description' | 'url' | 'twitter' | 'facebook' | 'instagram' | 'note' | 'ogImage'>> }> };
+export type SiteMetaDataQuery = { settingYaml?: Maybe<{ meta?: Maybe<Pick<SettingYamlMeta, 'title' | 'description' | 'url' | 'companyUrl' | 'twitter' | 'facebook' | 'instagram' | 'note' | 'ogImage'>> }> };
 
 export type FacilityInfoQueryVariables = Exact<{ [key: string]: never; }>;
 

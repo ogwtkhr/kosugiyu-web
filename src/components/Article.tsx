@@ -8,6 +8,7 @@ import {
   Colors,
   TypographyMixin,
   TextSize,
+  LetterSpacing,
   ScreenType,
 } from '@/constants';
 
@@ -46,8 +47,10 @@ const Container = styled.article`
 
     & > strong,
     & > em {
-      color: ${Colors.UI_TEXT_SUB};
+      color: ${Colors.ABSTRACT_MIDDLE_GRAY};
       font-weight: ${TextWeight.BOLD};
+      /* 詰まって見えるので微調整 */
+      letter-spacing: ${LetterSpacing.SEMI_WIDE + 0.02}em;
     }
 
     & > img {

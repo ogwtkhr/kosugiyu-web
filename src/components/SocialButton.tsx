@@ -11,6 +11,7 @@ import {
   InstagramCircleIcon,
   NoteCircleIcon,
 } from './Icon';
+import { ExternalLink } from '@/components';
 import { Colors } from '@/constants';
 import { ValueOf } from '@/types';
 
@@ -37,11 +38,6 @@ type SocialAccountProps = {
   shape?: Shape;
 };
 
-const defaultProps = {
-  target: '_blank',
-  rel: 'noopener noreferrer',
-} as const;
-
 export const TwitterTweetButton: React.FC<TwitterTweetButtonProps> = ({
   url: propsUrl,
   title: propsTitle,
@@ -54,7 +50,7 @@ export const TwitterTweetButton: React.FC<TwitterTweetButtonProps> = ({
     title,
   )}&url=${encodeURIComponent(url)}`;
   return (
-    <Container {...defaultProps} href={shareUrl}>
+    <Container href={shareUrl}>
       {shape === Shape.CIRCLE ? <TwitterCircleIcon color={color} /> : <TwitterIcon color={color} />}
     </Container>
   );
@@ -64,7 +60,7 @@ export const FacebookShareButton: React.FC<SocialBaseProps> = ({ url: propsUrl, 
   const url = propsUrl || window.location.href;
   const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
   return (
-    <Container {...defaultProps} href={shareUrl}>
+    <Container href={shareUrl}>
       {shape === Shape.CIRCLE ? (
         <FacebookCircleIcon color={color} />
       ) : (
@@ -77,7 +73,7 @@ export const FacebookShareButton: React.FC<SocialBaseProps> = ({ url: propsUrl, 
 export const TwitterAccountButton: React.FC<SocialAccountProps> = ({ id, color, shape }) => {
   const url = `https://twitter.com/${id}`;
   return (
-    <Container {...defaultProps} href={url}>
+    <Container href={url}>
       {shape === Shape.CIRCLE ? <TwitterCircleIcon color={color} /> : <TwitterIcon color={color} />}
     </Container>
   );
@@ -86,7 +82,7 @@ export const TwitterAccountButton: React.FC<SocialAccountProps> = ({ id, color, 
 export const FacebookAccountButton: React.FC<SocialAccountProps> = ({ id, color, shape }) => {
   const url = `https://www.facebook.com/${id}/`;
   return (
-    <Container {...defaultProps} href={url}>
+    <Container href={url}>
       {shape === Shape.CIRCLE ? (
         <FacebookCircleIcon color={color} />
       ) : (
@@ -99,7 +95,7 @@ export const FacebookAccountButton: React.FC<SocialAccountProps> = ({ id, color,
 export const InstagramAccountButton: React.FC<SocialAccountProps> = ({ id, color, shape }) => {
   const url = `https://www.instagram.com/${id}/`;
   return (
-    <Container {...defaultProps} href={url}>
+    <Container href={url}>
       {shape === Shape.CIRCLE ? (
         <InstagramCircleIcon color={color} />
       ) : (
@@ -112,16 +108,15 @@ export const InstagramAccountButton: React.FC<SocialAccountProps> = ({ id, color
 export const NoteAccountButton: React.FC<SocialAccountProps> = ({ id, color, shape }) => {
   const url = `https://note.com/${id}`;
   return (
-    <Container {...defaultProps} href={url}>
+    <Container href={url}>
       {shape === Shape.CIRCLE ? <NoteCircleIcon color={color} /> : <NoteIcon color={color} />}
     </Container>
   );
 };
 
-const Container = styled.a`
+const Container = styled(ExternalLink)`
   display: block;
   width: 100%;
   height: 100%;
-  /* color: ${Colors.UI_TEXT_SUB}; */
   color: ${Colors.UI_TEXT_MAIN};
 `;
