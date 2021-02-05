@@ -16,8 +16,9 @@ import {
 } from '@/constants';
 import media from 'styled-media-query';
 import { stripTag } from '@/util/string';
-import { MediaPickupArticleItem, Article, ArticleInfo, MicroCMSImage } from '@/components';
+import { Article, MicroCMSImage } from '@/atoms';
 import { ReverseParallax, ParallaxBasePosition } from '@/effects';
+import { MediaPickupArticleItem, ArticleInfo } from '@/molecules';
 
 type MediaPageProps = {
   data: Pick<Query, 'microcmsMedia'>;

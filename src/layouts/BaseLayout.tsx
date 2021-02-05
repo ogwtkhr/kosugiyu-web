@@ -6,10 +6,10 @@ import { GlobalStyle } from './GlobalStyle';
 import 'intersection-observer';
 import 'reset.css';
 
-import { Menu } from '@/components';
+import { Menu } from '@/molecules';
 import { Colors } from '@/constants';
-import Header from './Header';
-import Loading from './Loading';
+import { Header } from '@/layouts/Header';
+import { Loading } from '@/layouts/Loading';
 import { useBaseMetaInfo } from '@/hooks';
 
 type BaseLayoutProps = {
@@ -39,8 +39,8 @@ export const BaseLayout: React.FC<BaseLayoutProps> = ({
 };
 
 const Main = styled.main`
-  background-color: ${Colors.UI_PAPER};
   overflow: hidden;
+  background-color: ${Colors.UI_PAPER};
 `;
 
 export default BaseLayout;

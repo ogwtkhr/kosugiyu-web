@@ -11,7 +11,7 @@ import {
   InstagramCircleIcon,
   NoteCircleIcon,
 } from './Icon';
-import { ExternalLink } from '@/components';
+import { ExternalLink } from '@/atoms';
 import { Colors } from '@/constants';
 import { ValueOf } from '@/types';
 

@@ -15,7 +15,7 @@ import {
   SizeType,
   LetterSpacing,
 } from '@/constants';
-import { MicroCMSImage } from '@/components';
+import { MicroCMSImage } from '@/atoms';
 import dayjs from 'dayjs';
 import media from 'styled-media-query';
 

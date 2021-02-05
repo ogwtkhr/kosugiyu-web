@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BaseLayout, Meta } from '@/layouts';
-import { TopModule, IntroModule, MediaModule } from '@/modules';
+import { TopModule, IntroModule, MediaModule } from '@/organisms';
 import { useScreenThreshold } from '@/hooks';
 import { ScreenValue } from '@/constants';
 

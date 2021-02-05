@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { useFacilityInfo } from '@/hooks';
-import { Picture, PrevIcon, NextIcon, OtherWindowIcon, Overlay } from '@/components';
+import { Picture, PrevIcon, NextIcon, OtherWindowIcon, Overlay, UnderLineText } from '@/atoms';
 import styled, { css } from 'styled-components';
 import Transition from 'react-transition-group/Transition';
 
@@ -21,18 +21,14 @@ import {
 } from '@/constants';
 import media from 'styled-media-query';
 import { ReverseParallax, SlideView } from '@/effects';
-import { UnderLineText } from './UnderLineText';
 import { ValueOf } from '@/types';
 
-// TODO: 統合
 export const FacilityLayers = {
-  BACKGROUND: 1,
-  BIG_IMAGE: 2,
-  OVER_BIG_IMAGE: 3,
-  WINDOW_BASE: 4,
-  // WINDOW_POPUP: 5,
+  BACKGROUND: Layer.UNDER,
+  BIG_IMAGE: Layer.BASE,
+  OVER_BIG_IMAGE: Layer.FIXED,
+  WINDOW_BASE: Layer.OVERLAY,
   OVERLAY: Layer.PRIVILEGE,
-  // MODAL: Layer.PRIVILEGE,
 } as const;
 
 const FacilityID = {

@@ -13,7 +13,7 @@ import {
   LineHeight,
 } from '@/constants';
 
-import { UnderLineText, MicroCMSImage, ArrowIcon } from '@/components';
+import { UnderLineText, MicroCMSImage, ArrowIcon } from '@/atoms';
 import { IntersectionFadeIn, ReverseParallax } from '@/effects';
 
 export type MediaArticleItemProps = {

@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 
-import { GridContainer, GridItem, GridImage, Picture } from '@/components';
+import { GridContainer, GridItem, GridImage, Picture } from '@/atoms';
 
 import {
   TypographyMixin,

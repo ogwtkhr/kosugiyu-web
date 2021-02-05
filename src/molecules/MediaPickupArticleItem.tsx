@@ -12,8 +12,8 @@ import {
   ScreenType,
 } from '@/constants';
 
-import { TwitterTweetButton, FacebookShareButton, MicroCMSImage, ArrowIcon } from '@/components';
-import { MediaArticleItemProps } from '@/components/MediaArticleItem';
+import { TwitterTweetButton, FacebookShareButton, MicroCMSImage, ArrowIcon } from '@/atoms';
+import { MediaArticleItemProps } from '@/molecules/MediaArticleItem';
 import { IntersectionFadeIn, ReverseParallax, ParallaxBasePosition } from '@/effects';
 
 type SubInformation = {

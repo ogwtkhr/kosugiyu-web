@@ -11,15 +11,8 @@ import {
   ModuleHeight,
   Colors,
 } from '@/constants';
-import {
-  MediaArticleItem,
-  MediaPickupArticleItem,
-  Picture,
-  Button,
-  ButtonContainer,
-  MediaLogo,
-  MediaTagLine,
-} from '@/components';
+import { Picture, Button, ButtonContainer, MediaLogo, MediaTagLine } from '@/atoms';
+import { MediaArticleItem, MediaPickupArticleItem } from '@/molecules';
 import media from 'styled-media-query';
 import { ReverseParallax, ParallaxBasePosition, IntersectionFadeIn } from '@/effects';
 

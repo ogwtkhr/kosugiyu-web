@@ -3,7 +3,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 import { AllMicrocmsArchiveQuery } from '@/types';
 import styled from 'styled-components';
 import { StyleMixin, TextSize, TypographyMixin, Colors, Spacing, ScreenType } from '@/constants';
-import { CommonTitle, ArchiveArticleGroup, ArchiveArticleItemProps } from '@/components';
+import { CommonTitle, ArchiveArticleGroup, ArchiveArticleItemProps } from '@/molecules';
 import { groupByIndex } from '@/util/array';
 import media from 'styled-media-query';
 import { orderBy, groupBy } from 'lodash';

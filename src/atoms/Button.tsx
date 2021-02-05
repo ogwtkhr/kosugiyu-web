@@ -9,7 +9,7 @@ import {
   TextSize,
   TypographyMixin,
 } from '@/constants';
-import { ArrowIcon } from '@/components';
+import { ArrowIcon } from '@/atoms';
 import { Link } from 'gatsby';
 
 type ButtonElementName = 'button' | 'a' | 'span' | 'div';

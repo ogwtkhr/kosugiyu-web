@@ -1,5 +1,5 @@
 import React from 'react';
-import { UnderLineText, FacilityLayers } from '@/components';
+import { UnderLineText } from '@/atoms';
 import styled from 'styled-components';
 
 import {
@@ -12,6 +12,7 @@ import {
   TextSize,
   TypographyMixin,
   BigSpacing,
+  Layer,
   getResponsiveOffsetMixin,
 } from '@/constants';
 import media from 'styled-media-query';
@@ -58,7 +59,7 @@ const InformationUnitContainer = styled.section`
 
 const InformationHeading = styled.h3`
   position: relative;
-  z-index: ${FacilityLayers.OVER_BIG_IMAGE};
+  z-index: ${Layer.FIXED};
 `;
 
 export const InformationGroupRow = styled.div`
@@ -77,7 +78,7 @@ export const InformationGroup: React.FC<TitleInjectable> = ({ title, children })
 
 const InformationGroupContainer = styled.div`
   position: relative;
-  z-index: ${FacilityLayers.OVER_BIG_IMAGE};
+  z-index: ${Layer.FIXED};
   flex: 1;
   margin: ${Spacing.XX_LARGE}px 0;
 

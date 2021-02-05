@@ -9,7 +9,6 @@ import {
   ModuleWidth,
   TextWeight,
   Spacing,
-  StyleMixin,
   AspectRatio,
   Colors,
   TypographyMixin,
@@ -22,8 +21,9 @@ import {
 } from '@/constants';
 import media from 'styled-media-query';
 import { stripTag } from '@/util/string';
-import { Article, ArticleInfo, MicroCMSImage } from '@/components';
-import { TwitterTweetButton, FacebookShareButton } from '@/components/SocialButton';
+import { Article, MicroCMSImage } from '@/atoms';
+import { TwitterTweetButton, FacebookShareButton } from '@/atoms/SocialButton';
+import { ArticleInfo } from '@/molecules';
 
 type ArchivePageProps = {
   data: Pick<Query, 'microcmsArchive'>;
@@ -217,12 +217,12 @@ const ArticleContainer = styled.div`
   `}
 `;
 
-const InfoList = styled.ul``;
+// const InfoList = styled.ul``;
 
-const InfoListItem = styled.li`
-  &:not(:first-child) {
-    margin-top: ${Spacing.NORMAL}px;
-  }
-`;
+// const InfoListItem = styled.li`
+//   &:not(:first-child) {
+//     margin-top: ${Spacing.NORMAL}px;
+//   }
+// `;
 
 export default ArchivePage;

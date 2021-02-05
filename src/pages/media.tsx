@@ -1,6 +1,6 @@
 import React from 'react';
 import { BaseLayout, Meta } from '@/layouts';
-import { MediaModule } from '@/modules';
+import { MediaModule } from '@/organisms';
 import { PageId } from '@/constants';
 import { usePageInfo } from '@/hooks';
 
