@@ -490,6 +490,11 @@ const DetailList = styled.ul`
   max-height: 70vh;
   margin-top: ${Spacing.X_LARGE}px;
   overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const DetailListItem = styled.li`

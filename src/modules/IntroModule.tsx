@@ -360,7 +360,7 @@ const IntroStoryIllustration3 = styled(IntroStoryIllustration)`
 
   ${media.lessThan(ScreenType.MEDIUM)`
     top: auto;
-    bottom: -10px;
+    bottom: -100px;
     right: -32px;
   `}
 `;
