@@ -4,8 +4,6 @@ import { AllMicrocmsPersonsQuery } from '@/types';
 import styled, { css } from 'styled-components';
 import {
   StyleMixin,
-  TypographyMixin,
-  TextSize,
   Spacing,
   BigSpacing,
   ModuleWidth,
@@ -73,17 +71,17 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({
   return (
     <>
       {useTitle && (
-        <PersonsHeadingContainer>
-          <PersonsHeadingInner>
-            <PersonsHeadingLogoArea>
-              <PersonsHeadingLogo>
+        <PersonsTitleContainer>
+          <PersonsTitleInner>
+            <PersonsTitleLogoArea>
+              <PersonsTitleLogo>
                 <MediaLogo />
-              </PersonsHeadingLogo>
-              <PersonsHeadingTagLine>
+              </PersonsTitleLogo>
+              <PersonsTitleTagLine>
                 <MediaTagLine />
-              </PersonsHeadingTagLine>
-            </PersonsHeadingLogoArea>
-            <PersonsHeadingImage>
+              </PersonsTitleTagLine>
+            </PersonsTitleLogoArea>
+            <PersonsTitleImage>
               <ReverseParallax
                 zoom={1.1}
                 zoomSmall={1.7}
@@ -92,9 +90,9 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({
               >
                 <Picture relativePath="photos/persons/hero.jpg" />
               </ReverseParallax>
-            </PersonsHeadingImage>
-          </PersonsHeadingInner>
-        </PersonsHeadingContainer>
+            </PersonsTitleImage>
+          </PersonsTitleInner>
+        </PersonsTitleContainer>
       )}
       <Container withVerticalMargin={withVerticalMargin}>
         {enableTopEmphasis && (
@@ -112,11 +110,20 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({
 
         <PersonListContainer>
           {summaryMode && (
-            <PersonsHeadingSubTitle>
-              <HeadingTitle />
-            </PersonsHeadingSubTitle>
+            <>
+              <PersonsSummaryTitleLogo>
+                <IntersectionFadeIn fillLayout slideIn>
+                  <MediaLogo />
+                </IntersectionFadeIn>
+              </PersonsSummaryTitleLogo>
+              <PersonsSummaryTitleTagLine>
+                <IntersectionFadeIn fillLayout slideIn>
+                  <MediaTagLine />
+                </IntersectionFadeIn>
+              </PersonsSummaryTitleTagLine>
+            </>
           )}
-          <PersonList under2={summarizedPersons.length <= 2}>
+          <PersonList under2={summarizedPersons.length <= 2} withTitle={summaryMode}>
             {summarizedPersons.map((person) => {
               const slug = person.slug || '';
               const position = person.position || '';
@@ -152,28 +159,24 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({
   );
 };
 
-const HeadingTitle: React.FC = () => (
-  <IntersectionFadeIn>
-    <PersonsHeadingTitle>
-      <PersonsHeadingTitleSub>日常の中の非日常を届ける</PersonsHeadingTitleSub>
-      <PersonsHeadingTitleMain>ケノ日のハレ</PersonsHeadingTitleMain>
-    </PersonsHeadingTitle>
-  </IntersectionFadeIn>
-);
-
-const Container = styled.div<Pick<PersonsModuleProps, 'withVerticalMargin'>>`
+type ContainerProps = Pick<PersonsModuleProps, 'withVerticalMargin'>;
+const Container = styled.div<ContainerProps>`
+  position: relative;
   max-width: ${ModuleWidth.MIDDLE}px;
   margin: ${({ withVerticalMargin }) =>
-    `${withVerticalMargin ? BigSpacing.LARGE : 0}px auto ${BigSpacing.NORMAL}px`};
+    `${withVerticalMargin ? BigSpacing.NORMAL : 0}px auto ${BigSpacing.NORMAL}px`};
 
-  ${media.lessThan(ScreenType.MEDIUM)`
-    margin: ${Spacing.LARGE}px auto;
+  ${media.lessThan<ContainerProps>(ScreenType.MEDIUM)`
+    margin: ${({ withVerticalMargin }) =>
+      `${withVerticalMargin ? Spacing.XXX_LARGE : 0}px auto ${
+        withVerticalMargin ? Spacing.X_LARGE : 0
+      }px`};
   `}
 `;
 
-const PersonsHeadingContainer = styled.div``;
+const PersonsTitleContainer = styled.div``;
 
-const PersonsHeadingInner = styled.div`
+const PersonsTitleInner = styled.div`
   display: flex;
   position: relative;
   max-width: ${ModuleWidth.WIDE}px;
@@ -184,7 +187,7 @@ const PersonsHeadingInner = styled.div`
   `}
 `;
 
-const PersonsHeadingLogoArea = styled.div`
+const PersonsTitleLogoArea = styled.div`
   position: relative;
   z-index: 1;
   width: 40%;
@@ -193,7 +196,7 @@ const PersonsHeadingLogoArea = styled.div`
   `}
 `;
 
-const PersonsHeadingLogo = styled.div`
+const PersonsTitleLogo = styled.div`
   position: absolute;
   top: 138px;
   right: -135px;
@@ -208,7 +211,7 @@ const PersonsHeadingLogo = styled.div`
   `}
 `;
 
-const PersonsHeadingTagLine = styled.div`
+const PersonsTitleTagLine = styled.div`
   position: absolute;
   top: 337px;
   right: 251px;
@@ -223,7 +226,7 @@ const PersonsHeadingTagLine = styled.div`
   `}
 `;
 
-const PersonsHeadingImage = styled.div`
+const PersonsTitleImage = styled.div`
   width: 60%;
   overflow: hidden;
   ${media.lessThan(ScreenType.MEDIUM)`
@@ -232,32 +235,36 @@ const PersonsHeadingImage = styled.div`
   `}
 `;
 
-const PersonsHeadingSubTitle = styled.div`
-  margin-right: ${BigSpacing.SMALL}px;
+const PersonsSummaryTitleLogo = styled.div`
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 152px;
+
   ${media.lessThan(ScreenType.MEDIUM)`
-    margin-right: 0;
+    top: 12px;
+    left: 10px;
+    width: 212px;
+    height: 107px;
   `}
 `;
 
-const PersonsHeadingTitle = styled.div`
-  display: flex;
+const PersonsSummaryTitleTagLine = styled.div`
+  position: absolute;
+  top: 199px;
+  left: 0;
+  width: 97px;
+  height: 72px;
+
   ${media.lessThan(ScreenType.MEDIUM)`
-    justify-content: center;
-    margin-bottom: ${Spacing.LARGE}px;
+    top: 28px;
+    left: auto;
+    right: 16px;
+    width: 88px;
+    height: 63px;
   `}
-`;
-
-const PersonsHeadingTitleMain = styled.h1`
-  ${TypographyMixin.DISPLAY};
-  ${TypographyMixin.VERTICAL_WRITING};
-  font-size: ${TextSize.XXX_LARGE}rem;
-`;
-
-const PersonsHeadingTitleSub = styled.p`
-  ${TypographyMixin.DISPLAY};
-  ${TypographyMixin.VERTICAL_WRITING};
-  margin-top: ${Spacing.XX_LARGE}px;
-  font-size: ${TextSize.X_SMALL}rem;
 `;
 
 const PersonLink = styled(Link)`
@@ -276,16 +283,11 @@ const TopPersonContainer = styled.div`
 
 const PersonListContainer = styled.div`
   display: flex;
-
-  ${media.lessThan(ScreenType.MEDIUM)`
-    display: block;
-    margin: ${Spacing.XX_LARGE}px auto;
-  `}
 `;
 
-// TODO: ad hocなので後で消す？
 type PersonListProps = {
   under2?: boolean;
+  withTitle?: boolean;
 };
 
 const PersonList = styled.ul<PersonListProps>`
@@ -293,7 +295,10 @@ const PersonList = styled.ul<PersonListProps>`
   grid-gap: ${BigSpacing.XX_SMALL}px;
   grid-template-columns: repeat(3, 1fr);
   flex: 1;
-  margin: 0 auto;
+  margin-top: ${({ withTitle }) => (withTitle ? 122 : 0)}px;
+  margin-right: auto;
+  margin-bottom: 0;
+  margin-left: ${({ withTitle }) => (withTitle ? 146 : 0)}px;
   overflow: hidden;
 
   ${({ under2 }) =>
@@ -305,9 +310,10 @@ const PersonList = styled.ul<PersonListProps>`
         `
       : ''}
 
-  ${media.lessThan(ScreenType.MEDIUM)`
+  ${media.lessThan<PersonListProps>(ScreenType.MEDIUM)`
     grid-template-columns: repeat(2, 1fr);
     grid-gap: ${Spacing.XX_LARGE}px ${Spacing.LARGE}px;
+    margin-top: ${({ withTitle }) => (withTitle ? 110 : 0)}px;
     margin-left: ${Spacing.X_LARGE}px;
     margin-right: ${Spacing.X_LARGE}px;
   `}
