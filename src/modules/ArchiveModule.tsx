@@ -130,7 +130,7 @@ const YearNavigationLine = styled.div`
   background-color: ${Colors.UI_LINE_WEAKEN};
 `;
 
-const ArticlesByYear = styled.div`
+const ArticlesByYear = styled.section`
   margin-top: ${Spacing.XXX_LARGE}px;
   margin-bottom: ${Spacing.XXX_LARGE}px;
   ${StyleMixin.RESPONSIVE_OFFSET};

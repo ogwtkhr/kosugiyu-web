@@ -85,7 +85,7 @@ export const StyleMixin = {
     ${getResponsiveOffsetMixin({
       maxWidth: ModuleWidth.SEMI_WIDE,
       margin: Spacing.XXX_LARGE,
-      marginSmall: Spacing.LARGE,
+      marginSmall: Spacing.X_LARGE,
     })}
   `,
 } as const;

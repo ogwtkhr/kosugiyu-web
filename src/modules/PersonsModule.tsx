@@ -285,8 +285,8 @@ const PersonList = styled.ul<PersonListProps>`
   ${media.lessThan(ScreenType.MEDIUM)`
     grid-template-columns: repeat(2, 1fr);
     grid-gap: ${Spacing.XX_LARGE}px ${Spacing.LARGE}px;
-    margin-left: ${Spacing.LARGE}px;
-    margin-right: ${Spacing.LARGE}px;
+    margin-left: ${Spacing.X_LARGE}px;
+    margin-right: ${Spacing.X_LARGE}px;
   `}
 `;
 
