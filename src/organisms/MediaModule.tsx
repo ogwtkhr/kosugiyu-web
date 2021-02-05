@@ -52,14 +52,12 @@ export const MediaModule: React.FC<MediaModuleProps> = ({
     }
   `);
 
-  const baseArticles = data.allMicrocmsMedia.nodes;
-  const [topArticle, ...restMedia] = baseArticles;
-  const articles = enableTopEmphasis ? restMedia : baseArticles;
-  const summarizedArticles = orderBy(
-    (summaryMode ? articles.slice(0, summaryMax) : articles).map((article) => {
+  const baseArticles = orderBy(
+    data.allMicrocmsMedia.nodes.map((article) => {
       const slug = article.slug || '';
       const position = article.position || '';
       const name = article.name || '';
+      const title = article.title || '';
       const mainVisualUrl = article?.mainVisual?.url || '';
       const isComingSoon = article.isComingSoon;
       const publishDate = article.publishDate || article.publishedAt || '';
@@ -67,6 +65,7 @@ export const MediaModule: React.FC<MediaModuleProps> = ({
         slug,
         position,
         name,
+        title,
         mainVisualUrl,
         publishDate,
         isComingSoon: !!isComingSoon,
@@ -77,11 +76,14 @@ export const MediaModule: React.FC<MediaModuleProps> = ({
     'asc',
   );
 
-  const topArticleSlug = topArticle?.slug || '';
-  const topArticlePosition = topArticle?.position || '';
-  const topArticleName = topArticle?.name || '';
-  const topArticleTitle = topArticle?.title || '';
-  const topArticleMainVisualUrl = topArticle?.mainVisual?.url || '';
+  const [topArticle, ...restMedia] = baseArticles;
+  const articles = enableTopEmphasis ? restMedia : baseArticles;
+  const summarizedArticles = summaryMode ? articles.slice(0, summaryMax) : articles;
+  const topArticleSlug = topArticle.slug;
+  const topArticlePosition = topArticle.position;
+  const topArticleName = topArticle.name;
+  const topArticleTitle = topArticle.title;
+  const topArticleMainVisualUrl = topArticle.mainVisualUrl;
   const isSummaryView = summaryMode && articles.length > summaryMax;
 
   return (
@@ -129,7 +131,9 @@ export const MediaModule: React.FC<MediaModuleProps> = ({
             <>
               <MediaSummaryTitleLogo>
                 <IntersectionFadeIn fillLayout slideIn>
-                  <MediaLogo />
+                  <Link to="/media">
+                    <MediaLogo />
+                  </Link>
                 </IntersectionFadeIn>
               </MediaSummaryTitleLogo>
               <MediaSummaryTitleTagLine>
@@ -251,6 +255,7 @@ const MediaTitleImage = styled.div`
 `;
 
 const MediaSummaryTitleLogo = styled.div`
+  ${StyleMixin.HOVER_EFFECT.NORMAL};
   position: absolute;
   z-index: 1;
   top: 0;
