@@ -5,6 +5,7 @@ type MetaInfo = {
   title: string;
   description: string;
   url: string;
+  companyUrl: string;
   twitter: string;
   facebook: string;
   instagram: string;
@@ -20,6 +21,7 @@ export const useBaseMetaInfo = (): MetaInfo => {
           title
           description
           url
+          companyUrl
           twitter
           facebook
           instagram
@@ -35,6 +37,7 @@ export const useBaseMetaInfo = (): MetaInfo => {
   const title = baseMeta?.title || '';
   const description = baseMeta?.description || '';
   const url = baseMeta?.url || '';
+  const companyUrl = baseMeta?.companyUrl || '';
   const twitter = baseMeta?.twitter || '';
   const facebook = baseMeta?.facebook || '';
   const instagram = baseMeta?.instagram || '';
@@ -45,6 +48,7 @@ export const useBaseMetaInfo = (): MetaInfo => {
     title,
     description,
     url,
+    companyUrl,
     twitter,
     facebook,
     instagram,
