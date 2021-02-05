@@ -174,13 +174,13 @@ const Container = styled.div<Pick<PersonsModuleProps, 'withVerticalMargin'>>`
 const PersonsHeadingContainer = styled.div``;
 
 const PersonsHeadingInner = styled.div`
-  position: relative;
   display: flex;
+  position: relative;
   max-width: ${ModuleWidth.WIDE}px;
   height: ${ModuleHeight.HERO_NORMAL_SCREEN}px;
   margin: 0 auto;
   ${media.lessThan(ScreenType.MEDIUM)`
-    height: 300px;
+    height: 388px;
   `}
 `;
 
@@ -188,6 +188,9 @@ const PersonsHeadingLogoArea = styled.div`
   position: relative;
   z-index: 1;
   width: 40%;
+  ${media.lessThan(ScreenType.MEDIUM)`
+    width: 25%;
+  `}
 `;
 
 const PersonsHeadingLogo = styled.div`
@@ -196,6 +199,13 @@ const PersonsHeadingLogo = styled.div`
   right: -135px;
   width: 447px;
   height: 227px;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    top: 22px;
+    right: -178px;
+    width: 250px;
+    height: 127px;
+  `}
 `;
 
 const PersonsHeadingTagLine = styled.div`
@@ -204,11 +214,22 @@ const PersonsHeadingTagLine = styled.div`
   right: 251px;
   width: 168px;
   height: 126px;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    top: 173px;
+    right: -25px;
+    width: 98px;
+    height: 70px;
+  `}
 `;
 
 const PersonsHeadingImage = styled.div`
   width: 60%;
   overflow: hidden;
+  ${media.lessThan(ScreenType.MEDIUM)`
+    padding-top: 68px;
+    width: 75%;
+  `}
 `;
 
 const PersonsHeadingSubTitle = styled.div`
@@ -249,7 +270,7 @@ const PersonLink = styled(Link)`
 const TopPersonContainer = styled.div`
   margin: ${BigSpacing.LARGE}px auto;
   ${media.lessThan(ScreenType.MEDIUM)`
-    margin: ${Spacing.XX_LARGE}px 0;
+    margin: ${BigSpacing.X_SMALL}px 0 ${BigSpacing.XX_SMALL}px;
   `}
 `;
 
