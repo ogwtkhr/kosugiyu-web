@@ -50,7 +50,7 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background-color: ${Colors.UI_OBJECT_PLACEHOLDER};
+  background-color: #000c12;
 `;
 
 const BusinessInfo = styled.div`

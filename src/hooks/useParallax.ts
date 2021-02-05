@@ -108,8 +108,12 @@ export const useParallax = <T extends HTMLElement = HTMLElement>(
   }, [getValue, verbose]);
 
   useEffect(() => {
-    window.addEventListener(DomEventType.SCROLL, handler);
-    window.addEventListener(DomEventType.RESIZE, handler);
+    window.addEventListener(DomEventType.SCROLL, handler, {
+      passive: true,
+    });
+    window.addEventListener(DomEventType.RESIZE, handler, {
+      passive: true,
+    });
 
     return () => {
       window.removeEventListener(DomEventType.SCROLL, handler);

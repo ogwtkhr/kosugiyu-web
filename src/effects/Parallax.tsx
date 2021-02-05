@@ -57,7 +57,7 @@ export const Parallax: React.FC<ParallaxProps> = ({
   };
 
   const parallaxSeed = seeds[basePosition];
-  const transformProperty = useMemo(() => `translateY(${parallaxSeed}px)`, [parallaxSeed]);
+  const transformProperty = useMemo(() => `translate3d(0, ${parallaxSeed}px, 0)`, [parallaxSeed]);
 
   useEffect(() => {
     if (onScroll) onScroll(parallaxSeed);

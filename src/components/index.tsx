@@ -25,3 +25,4 @@ export * from './ArticleItem';
 export * from './ArticleGroup';
 export * from './FacilityNavigator';
 export * from './InformationItems';
+export * from './MicroCMSImage';

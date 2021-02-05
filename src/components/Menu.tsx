@@ -103,12 +103,12 @@ const Item = styled.li`
 
 const Type = styled.span`
   display: inline-block;
-  font-size: ${TextSize.XX_LARGE}rem;
+  font-size: ${TextSize.X_LARGE}rem;
   font-weight: ${TextWeight.BOLD};
   letter-spacing: 0.2em;
 
   ${media.lessThan(ScreenType.MEDIUM)`
-    font-size: ${TextSize.X_LARGE}rem;
+    font-size: ${TextSize.LARGE}rem;
   `}
 `;
 
@@ -160,6 +160,9 @@ const TriggerContainer = styled.button<PropsWithTransition>`
 
   &:hover {
     opacity: 0.2;
+    ${media.greaterThan(ScreenType.HUGE)`
+      opacity: 1;
+    `}
   }
 
   ${media.greaterThan(ScreenType.HUGE)`
