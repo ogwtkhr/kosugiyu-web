@@ -3,7 +3,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 import { AllMicrocmsArchiveQuery } from '@/types';
 import styled from 'styled-components';
 import { StyleMixin, TextSize, TypographyMixin, Colors, Spacing, ScreenType } from '@/constants';
-import { CommonTitle, ArticleGroup, ArticleItemProps } from '@/components';
+import { CommonTitle, ArchiveArticleGroup, ArchiveArticleItemProps } from '@/components';
 import { groupByIndex } from '@/util/array';
 import media from 'styled-media-query';
 import { orderBy, groupBy } from 'lodash';
@@ -27,7 +27,7 @@ export const ArchiveModule: React.FC = () => {
     }
   `);
 
-  const baseArticles: ArticleItemProps[] = orderBy(
+  const baseArticles: ArchiveArticleItemProps[] = orderBy(
     data.allMicrocmsArchive.nodes.map((entry) => {
       const slug = entry.slug || '';
       const title = entry.title || '';
@@ -78,7 +78,7 @@ export const ArchiveModule: React.FC = () => {
             </ArticleYear>
             <ArticleList>
               {groupedArticle.map((group, index) => {
-                return <ArticleGroup key={index}>{group}</ArticleGroup>;
+                return <ArchiveArticleGroup key={index}>{group}</ArchiveArticleGroup>;
               })}
             </ArticleList>
           </ArticlesByYear>

@@ -19,29 +19,29 @@ import { MicroCMSImage } from '@/components';
 import dayjs from 'dayjs';
 import media from 'styled-media-query';
 
-export const ArticleItemDirection = {
+export const ArchiveArticleItemDirection = {
   VERTICAL: 'vertical',
   HORIZONTAL: 'horizontal',
 } as const;
 
-export type ArticleItemDirection = ValueOf<typeof ArticleItemDirection>;
+export type ArchiveArticleItemDirection = ValueOf<typeof ArchiveArticleItemDirection>;
 
-export type ArticleItemProps = {
+export type ArchiveArticleItemProps = {
   slug: string;
   title: string;
   mainVisualUrl: string;
   publishDate: string;
-  direction?: ArticleItemDirection;
+  direction?: ArchiveArticleItemDirection;
   textSize?: Extract<SizeType, 'small' | 'normal'>;
   enableTextSizingOnSmallScreen?: boolean;
 };
 
-export const ArticleItem: React.FC<ArticleItemProps> = ({
+export const ArchiveArticleItem: React.FC<ArchiveArticleItemProps> = ({
   slug,
   title,
   mainVisualUrl,
   publishDate,
-  direction = ArticleItemDirection.VERTICAL,
+  direction = ArchiveArticleItemDirection.VERTICAL,
   textSize,
   enableTextSizingOnSmallScreen,
 }) => {
@@ -53,7 +53,7 @@ export const ArticleItem: React.FC<ArticleItemProps> = ({
   // TODO: テーマ機能
 
   return (
-    <ArticleItemContainer>
+    <ArchiveArticleItemContainer>
       <ArticleLink direction={direction} to={`/archive/${slug}`}>
         <ArticleThumbnailContainer direction={direction}>
           {/* TODO、細かいサイズ出し分け、ジャギ解消 */}
@@ -80,30 +80,30 @@ export const ArticleItem: React.FC<ArticleItemProps> = ({
           </PublishDate>
         </ArticleTitleContainer>
       </ArticleLink>
-    </ArticleItemContainer>
+    </ArchiveArticleItemContainer>
   );
 };
 
-type ArticleItemChildPropsWithDirection = Pick<ArticleItemProps, 'direction'>;
-type ArticleItemChildPropsWithTextSize = Pick<
-  ArticleItemProps,
+type ArchiveArticleItemChildPropsWithDirection = Pick<ArchiveArticleItemProps, 'direction'>;
+type ArchiveArticleItemChildPropsWithTextSize = Pick<
+  ArchiveArticleItemProps,
   'textSize' | 'enableTextSizingOnSmallScreen'
 >;
 
-const ArticleLink = styled(Link)<ArticleItemChildPropsWithDirection>`
-  display: ${({ direction }) => (direction === ArticleItemDirection.VERTICAL ? 'block' : 'flex')};
+const ArticleLink = styled(Link)<ArchiveArticleItemChildPropsWithDirection>`
+  display: ${({ direction }) =>
+    direction === ArchiveArticleItemDirection.VERTICAL ? 'block' : 'flex'};
   text-decoration: none;
   ${StyleMixin.HOVER_EFFECT.NORMAL};
 `;
 
-const ArticleItemContainer = styled.article``;
+const ArchiveArticleItemContainer = styled.article``;
 
-const ArticleTitleContainer = styled.div<ArticleItemChildPropsWithDirection>`
+const ArticleTitleContainer = styled.div<ArchiveArticleItemChildPropsWithDirection>`
   flex: 1;
-  /* max-width: 400px; */
   padding: ${Spacing.LARGE}px 0;
   ${({ direction }) =>
-    direction === ArticleItemDirection.HORIZONTAL
+    direction === ArchiveArticleItemDirection.HORIZONTAL
       ? css`
           margin-left: ${Spacing.X_LARGE}px;
           display: flex;
@@ -117,15 +117,15 @@ const ArticleTitleContainer = styled.div<ArticleItemChildPropsWithDirection>`
       : ''};
 `;
 
-const ArticleTitle = styled.h3<ArticleItemChildPropsWithTextSize>`
+const ArticleTitle = styled.h3<ArchiveArticleItemChildPropsWithTextSize>`
   ${TypographyMixin.DISPLAY};
   font-size: ${({ textSize }) =>
     textSize === SizeType.SMALL ? TextSize.NORMAL : TextSize.LARGE}rem;
+  letter-spacing: ${LetterSpacing.SEMI_WIDE}em;
   line-height: ${LineHeight.NORMAL};
   text-decoration: none;
-  letter-spacing: ${LetterSpacing.SEMI_WIDE}em;
 
-  ${media.lessThan<ArticleItemChildPropsWithTextSize>(ScreenType.MEDIUM)`
+  ${media.lessThan<ArchiveArticleItemChildPropsWithTextSize>(ScreenType.MEDIUM)`
     font-size: ${({ textSize, enableTextSizingOnSmallScreen }) =>
       enableTextSizingOnSmallScreen && textSize === SizeType.SMALL
         ? TextSize.SMALL
@@ -133,11 +133,11 @@ const ArticleTitle = styled.h3<ArticleItemChildPropsWithTextSize>`
   `}
 `;
 
-const ArticleThumbnailContainer = styled.div<ArticleItemChildPropsWithDirection>`
-  width: ${({ direction }) => (direction === ArticleItemDirection.VERTICAL ? 100 : 40)}%;
+const ArticleThumbnailContainer = styled.div<ArchiveArticleItemChildPropsWithDirection>`
+  width: ${({ direction }) => (direction === ArchiveArticleItemDirection.VERTICAL ? 100 : 40)}%;
 `;
 
-const PublishDate = styled.time<ArticleItemChildPropsWithTextSize>`
+const PublishDate = styled.time<ArchiveArticleItemChildPropsWithTextSize>`
   display: block;
   ${TypographyMixin.DISPLAY};
   color: ${Colors.UI_TEXT_SUB};
@@ -145,7 +145,7 @@ const PublishDate = styled.time<ArticleItemChildPropsWithTextSize>`
     textSize === SizeType.SMALL ? TextSize.X_SMALL : TextSize.SMALL}rem;
   line-height: ${LineHeight.NORMAL};
 
-  ${media.lessThan<ArticleItemChildPropsWithTextSize>(ScreenType.MEDIUM)`
+  ${media.lessThan<ArchiveArticleItemChildPropsWithTextSize>(ScreenType.MEDIUM)`
     font-size: ${({ textSize, enableTextSizingOnSmallScreen }) =>
       enableTextSizingOnSmallScreen && textSize === SizeType.SMALL
         ? TextSize.XX_SMALL
