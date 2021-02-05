@@ -84,7 +84,7 @@ type IsComingSoonAcceptable = Pick<PersonItemProps, 'isComingSoon'>;
 
 const Info = styled.div<IsComingSoonAcceptable>`
   margin-top: ${Spacing.NORMAL}px;
-  opacity: ${({ isComingSoon }) => (isComingSoon ? 0.2 : '1')};
+  opacity: ${({ isComingSoon }) => (isComingSoon ? 0.2 : 1)};
 `;
 
 const Position = styled.p`

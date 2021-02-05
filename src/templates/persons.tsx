@@ -123,14 +123,4 @@ const LastVisualContainer = styled.div`
   overflow: hidden;
 `;
 
-// const LastVisual = styled.div`
-//   ${StyleMixin.BACKGROUND_IMAGE_WITH_SRC};
-
-//   &::after {
-//     content: '';
-//     display: block;
-//     padding-bottom: ${AspectRatio.PLATINUM_HORIZONTAL}%;
-//   }
-// `;
-
 export default PersonsPage;
