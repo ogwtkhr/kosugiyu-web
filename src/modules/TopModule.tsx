@@ -19,7 +19,7 @@ import {
   InstagramAccountButton,
   NoteAccountButton,
 } from '@/components';
-import { useMenu, useBaseMetaInfo, useIntersectionObserver } from '@/hooks';
+import { useMenu, useBaseMetaInfo, useIntersectionObserver, useScreenSize } from '@/hooks';
 
 type TopModuleProps = {
   onViewInStatusChange: (viewInStatus: boolean) => void;
@@ -41,6 +41,8 @@ export const TopModule: React.FC<TopModuleProps> = ({ onViewInStatusChange }) =>
   useEffect(() => {
     onViewInStatusChange(isContainerIntersecting);
   }, [isContainerIntersecting, onViewInStatusChange]);
+
+  const { height: screenHeight } = useScreenSize();
 
   return (
     <>
@@ -121,7 +123,7 @@ const Container = styled.div`
   display: flex;
   position: relative;
   width: 100vw;
-  height: 100vh;
+  height: 90vh;
   background-color: ${Colors.UI_PAPER};
 
   ${media.lessThan(ScreenType.MEDIUM)`

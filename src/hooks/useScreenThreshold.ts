@@ -1,26 +1,14 @@
-import { useState, useEffect } from 'react';
-import { window } from '@/util/window';
-import { DomEventType, ScreenValue } from '@/constants';
+import { ScreenValue } from '@/constants';
+import { useScreenSize } from '@/hooks/useScreenSize';
 
 export const useScreenThreshold = (
   threshold = ScreenValue.MEDIUM,
 ): {
   overThreshold: boolean;
 } => {
-  const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
-
-  useEffect(() => {
-    const handler = () => {
-      setWindowWidth(window.innerWidth);
-    };
-    window.addEventListener(DomEventType.RESIZE, handler);
-    handler();
-    return () => {
-      window.removeEventListener(DomEventType.RESIZE, handler);
-    };
-  }, []);
+  const { width } = useScreenSize();
 
   return {
-    overThreshold: windowWidth > threshold,
+    overThreshold: width > threshold,
   };
 };
