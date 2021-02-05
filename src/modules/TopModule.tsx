@@ -10,16 +10,10 @@ import {
   TextSize,
   TextWeight,
   LineHeight,
+  LetterSpacing,
 } from '@/constants';
-import {
-  HeroImage,
-  MainLogo,
-  FacebookAccountButton,
-  TwitterAccountButton,
-  InstagramAccountButton,
-  NoteAccountButton,
-} from '@/components';
-import { useMenu, useBaseMetaInfo, useIntersectionObserver, useScreenSize } from '@/hooks';
+import { HeroImage, MainLogo } from '@/components';
+import { useMenu, useIntersectionObserver } from '@/hooks';
 
 type TopModuleProps = {
   onViewInStatusChange: (viewInStatus: boolean) => void;
@@ -27,7 +21,6 @@ type TopModuleProps = {
 
 export const TopModule: React.FC<TopModuleProps> = ({ onViewInStatusChange }) => {
   const menuList = useMenu({ ignoreTopData: true });
-  const { twitter, facebook, instagram, note } = useBaseMetaInfo();
   const sentinelRef = useRef<HTMLDivElement>(null);
   const [containerRef, isContainerIntersecting] = useIntersectionObserver<HTMLDivElement>();
   const scroll = useCallback(() => {
@@ -36,13 +29,10 @@ export const TopModule: React.FC<TopModuleProps> = ({ onViewInStatusChange }) =>
       block: 'start',
     });
   }, []);
-  const socialAccounts = { twitter, facebook, instagram, note };
 
   useEffect(() => {
     onViewInStatusChange(isContainerIntersecting);
   }, [isContainerIntersecting, onViewInStatusChange]);
-
-  const { height: screenHeight } = useScreenSize();
 
   return (
     <>
@@ -54,18 +44,15 @@ export const TopModule: React.FC<TopModuleProps> = ({ onViewInStatusChange }) =>
             </Logo>
             <LogoCopy>高円寺 昭和八年創業</LogoCopy>
           </LogoContainer>
-          <SocialAccountContainer>
-            <SocialAccountButtons accounts={socialAccounts} />
-          </SocialAccountContainer>
         </SideColumn>
         <MainColumn>
           <HeroArea>
             <HeroImage />
           </HeroArea>
         </MainColumn>
-        <MenuListNormalScreen>
+        <MenuListContainer>
           <MenuList list={menuList} onIntroClick={scroll} />
-        </MenuListNormalScreen>
+        </MenuListContainer>
       </Container>
 
       <div ref={sentinelRef} />
@@ -92,42 +79,16 @@ const MenuList: React.FC<MenuListProps> = ({ list, onIntroClick }) => (
   </>
 );
 
-type SocialAccounts = { twitter: string; facebook: string; instagram: string; note: string };
-
-type SocialAccountButtonsProps = {
-  accounts: SocialAccounts;
-  color?: string;
-};
-
-const SocialAccountButtons: React.FC<SocialAccountButtonsProps> = ({ accounts, color }) => {
-  const { twitter, facebook, instagram, note } = accounts;
-  return (
-    <>
-      <SocialAccountButton>
-        <InstagramAccountButton color={color} id={instagram} />
-      </SocialAccountButton>
-      <SocialAccountButton>
-        <NoteAccountButton color={color} id={note} />
-      </SocialAccountButton>
-      <SocialAccountButton>
-        <TwitterAccountButton color={color} id={twitter} />
-      </SocialAccountButton>
-      <SocialAccountButton>
-        <FacebookAccountButton color={color} id={facebook} />
-      </SocialAccountButton>
-    </>
-  );
-};
-
 const Container = styled.div`
   display: flex;
   position: relative;
   width: 100vw;
-  height: 90vh;
+  height: 100vh;
   background-color: ${Colors.UI_PAPER};
 
   ${media.lessThan(ScreenType.MEDIUM)`
     flex-direction: row-reverse;
+    height: auto;
   `}
 `;
 
@@ -142,7 +103,7 @@ const SideColumn = styled.div`
 
   ${media.lessThan(ScreenType.MEDIUM)`
     width: 80px;
-    padding:  70px 0 0;
+    padding:  84px 0 0;
   `}
 `;
 
@@ -180,35 +141,13 @@ const LogoCopy = styled.p`
   font-size: ${TextSize.SMALL}rem;
   font-weight: ${TextWeight.BOLD};
   letter-spacing: 0.3rem;
+  color: ${Colors.BRAND_LOGO};
   ${TypographyMixin.VERTICAL_WRITING};
+  letter-spacing: ${LetterSpacing.VERY_WIDE}em;
 
   ${media.lessThan(ScreenType.MEDIUM)`
     font-size: ${TextSize.X_SMALL}rem;
     margin-top: ${Spacing.LARGE}px;
-  `}
-`;
-
-const SocialAccountContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 20px;
-
-  ${media.lessThan(ScreenType.MEDIUM)`
-    display: none;
-  `}
-`;
-
-const SocialAccountButton = styled.div`
-  & + & {
-    margin-top: ${Spacing.X_LARGE}px;
-  }
-
-  ${media.lessThan(ScreenType.MEDIUM)`
-    & + & {
-      margin-top: 0;
-      margin-left: 20px;
-    }
   `}
 `;
 
@@ -217,19 +156,22 @@ const HeroArea = styled.div`
   position: relative;
   flex-direction: column;
   justify-content: center;
-  height: calc(100% - 24px);
+  height: calc(100% - 40px);
   margin-top: ${Spacing.XXX_LARGE}px;
   margin-right: ${Spacing.XXX_LARGE}px;
 
   ${media.lessThan(ScreenType.MEDIUM)`
-    /* margin-top: 30px; */
-    margin-top: 24px;
+    margin-top: 70px;
+    height: 520px;
     margin-right: 0;
-    /* height: 100%; */
+  `}
+  /* TODO: アス比 + 最大高さもっといい感じにできると */
+  ${media.lessThan('350px')`
+    height: 460px;
   `}
 `;
 
-const MenuListNormalScreen = styled.ul`
+const MenuListContainer = styled.ul`
   position: absolute;
   top: 10px;
   right: ${Spacing.XXX_LARGE}px;

@@ -76,8 +76,8 @@ const ScrollLineContainer = styled.div`
   align-items: center;
 
   ${media.lessThan(ScreenType.MEDIUM)`
-    right: ${Spacing.LARGE}px;
-    flex-direction: row-reverse;
+    right: 0;
+    left: ${Spacing.LARGE}px;
   `}
 `;
 
@@ -88,8 +88,6 @@ const ScrollLineMessage = styled.p`
   font-size: ${TextSize.X_SMALL}rem;
 
   ${media.lessThan(ScreenType.MEDIUM)`
-    margin-right: 0;
-    margin-left: ${Spacing.X_LARGE}px;
     font-size: ${TextSize.XX_SMALL}rem;
   `}
 `;

@@ -33,7 +33,7 @@ export const IntroModule: React.FC = () => {
         </IntroStoryUnitColumnMain>
         <IntroStoryUnitColumnSub>
           <IntroStoryIllustration1>
-            <IntersectionFadeIn slideIn fillLayout wait={500}>
+            <IntersectionFadeIn slideIn fillLayout wait={200}>
               <Picture relativePath="illustrations/intro/story_1.png" />
             </IntersectionFadeIn>
           </IntroStoryIllustration1>
@@ -148,7 +148,7 @@ export const IntroModule: React.FC = () => {
             </MessageTypography>
           </IntersectionFadeIn>
           <IntroStoryIllustration2>
-            <IntersectionFadeIn slideIn fillLayout wait={500}>
+            <IntersectionFadeIn slideIn fillLayout wait={200}>
               <Picture relativePath="illustrations/intro/story_2.png" />
             </IntersectionFadeIn>
           </IntroStoryIllustration2>
@@ -157,7 +157,7 @@ export const IntroModule: React.FC = () => {
       <IntroStoryUnitNormal>
         <IntroStoryUnitColumnSub>
           <IntroStoryIllustration3>
-            <IntersectionFadeIn slideIn fillLayout wait={500}>
+            <IntersectionFadeIn slideIn fillLayout wait={200}>
               <Picture relativePath="illustrations/intro/story_3.png" />
             </IntersectionFadeIn>
           </IntroStoryIllustration3>
@@ -191,7 +191,7 @@ export const IntroModule: React.FC = () => {
         </IntroStoryUnitColumnMain>
         <IntroStoryUnitColumnSub>
           <IntroStoryIllustration4>
-            <IntersectionFadeIn slideIn fillLayout wait={500}>
+            <IntersectionFadeIn slideIn fillLayout wait={200}>
               <Picture relativePath="illustrations/intro/story_4.png" />
             </IntersectionFadeIn>
           </IntroStoryIllustration4>
