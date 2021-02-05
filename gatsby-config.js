@@ -76,6 +76,16 @@ module.exports = {
         ],
       },
     },
+    {
+      resolve: 'gatsby-plugin-manifest',
+      options: {
+        name: '小杉湯',
+        short_name: '小杉湯',
+        start_url: '/',
+        background_color: '#ffffff',
+        icon: 'src/images//icons/favicon.svg',
+      },
+    },
     // {
     //   resolve: 'gatsby-plugin-eslint',
     //   options: {

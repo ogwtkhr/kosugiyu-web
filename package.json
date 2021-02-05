@@ -9,6 +9,7 @@
     "dotenv": "^8.2.0",
     "gatsby": "^2.31.1",
     "gatsby-image": "^2.10.0",
+    "gatsby-plugin-manifest": "^2.12.0",
     "gatsby-source-filesystem": "^2.10.0",
     "gatsby-source-microcms": "^1.0.1",
     "gatsby-transformer-sharp": "^2.11.0",
