@@ -12,7 +12,7 @@ import {
   ScreenType,
 } from '@/constants';
 
-import { TwitterTweetButton, FacebookShareButton, MicroCMSImage, ArrowIcon } from '@/atoms';
+import { ShareButtonList, MicroCMSImage, ArrowIcon } from '@/atoms';
 import { MediaArticleItemProps } from '@/molecules/MediaArticleItem';
 import { IntersectionFadeIn, ReverseParallax, ParallaxBasePosition } from '@/effects';
 
@@ -80,18 +80,10 @@ export const MediaPickupArticleItem: React.FC<MediaPickupArticleItemProps> = ({
                 <PublishDate>{subInformation.publishDate}</PublishDate>
               )}
               {(subInformation.twitter || subInformation.facebook) && (
-                <SubInfoSocialButtons>
-                  {subInformation.twitter && (
-                    <SubInfoSocialButton>
-                      <TwitterTweetButton shape="circle" />
-                    </SubInfoSocialButton>
-                  )}
-                  {subInformation.facebook && (
-                    <SubInfoSocialButton>
-                      <FacebookShareButton shape="circle" />
-                    </SubInfoSocialButton>
-                  )}
-                </SubInfoSocialButtons>
+                <ShareButtonList
+                  twitter={subInformation.twitter}
+                  facebook={subInformation.facebook}
+                />
               )}
             </SubInfo>
           )}
@@ -212,31 +204,6 @@ const SubInfo = styled.div`
     margin-left: auto;
     margin-right: auto;
     max-width: 80%;
-  `}
-`;
-
-const SubInfoSocialButtons = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-
-  ${media.lessThan(ScreenType.MEDIUM)`
-    justify-content: flex-end;
-  `}
-`;
-
-const SubInfoSocialButton = styled.div`
-  width: 28px;
-  & + & {
-    margin-left: ${Spacing.NORMAL}px;
-  }
-
-  ${media.lessThan(ScreenType.MEDIUM)`
-    width: 32px;
-
-    & + & {
-      margin-left: ${Spacing.LARGE}px;
-    }
   `}
 `;
 

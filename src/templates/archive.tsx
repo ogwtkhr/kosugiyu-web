@@ -22,7 +22,7 @@ import {
 import media from 'styled-media-query';
 import { stripTag } from '@/util/string';
 import { Article, MicroCMSImage } from '@/atoms';
-import { TwitterTweetButton, FacebookShareButton } from '@/atoms/SocialButton';
+import { ShareButtonList } from '@/atoms/SocialButton';
 import { ArticleInfo } from '@/molecules';
 
 type ArchivePageProps = {
@@ -53,14 +53,7 @@ const ArchivePage: React.FC<ArchivePageProps> = ({ data }) => {
               <MetaInfo>
                 <PublishedDate>{publishedDate}</PublishedDate>
               </MetaInfo>
-              <SocialButtons>
-                <SocialButton>
-                  <TwitterTweetButton shape="circle" />
-                </SocialButton>
-                <SocialButton>
-                  <FacebookShareButton shape="circle" />
-                </SocialButton>
-              </SocialButtons>
+              <ShareButtonList twitter facebook />
             </MetaInfoContainer>
           </TitleInner>
         </TitleContainer>
