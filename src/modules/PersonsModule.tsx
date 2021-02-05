@@ -13,7 +13,15 @@ import {
   ModuleHeight,
   Colors,
 } from '@/constants';
-import { PersonItem, TopPersonItem, Picture, Button, ButtonContainer } from '@/components';
+import {
+  PersonItem,
+  TopPersonItem,
+  Picture,
+  Button,
+  ButtonContainer,
+  MediaLogo,
+  MediaTagLine,
+} from '@/components';
 import media from 'styled-media-query';
 import { ReverseParallax, ParallaxBasePosition, IntersectionFadeIn } from '@/effects';
 
@@ -67,12 +75,14 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({
       {useTitle && (
         <PersonsHeadingContainer>
           <PersonsHeadingInner>
-            <PersonsHeadingMain>
-              <HeadingTitle />
-              <PersonsHeadingBodyCopyLargeScreen>
-                親譲りの無鉄砲で小供の時から損ばかりして居る。小学校に居る時分学校の二階から飛び降りて一週間程腰を抜かした事がある。なぜそんな無闇(むやみ)をしたと聞く人があるかも知れぬ。別段深い理由でもない。
-              </PersonsHeadingBodyCopyLargeScreen>
-            </PersonsHeadingMain>
+            <PersonsHeadingLogoArea>
+              <PersonsHeadingLogo>
+                <MediaLogo />
+              </PersonsHeadingLogo>
+              <PersonsHeadingTagLine>
+                <MediaTagLine />
+              </PersonsHeadingTagLine>
+            </PersonsHeadingLogoArea>
             <PersonsHeadingImage>
               <ReverseParallax
                 zoom={1.1}
@@ -84,9 +94,6 @@ export const PersonsModule: React.FC<PersonsModuleProps> = ({
               </ReverseParallax>
             </PersonsHeadingImage>
           </PersonsHeadingInner>
-          <PersonsHeadingBodyCopySmallScreen>
-            親譲りの無鉄砲で小供の時から損ばかりして居る。小学校に居る時分学校の二階から飛び降りて一週間程腰を抜かした事がある。なぜそんな無闇(むやみ)をしたと聞く人があるかも知れぬ。別段深い理由でもない。
-          </PersonsHeadingBodyCopySmallScreen>
         </PersonsHeadingContainer>
       )}
       <Container withVerticalMargin={withVerticalMargin}>
@@ -167,6 +174,7 @@ const Container = styled.div<Pick<PersonsModuleProps, 'withVerticalMargin'>>`
 const PersonsHeadingContainer = styled.div``;
 
 const PersonsHeadingInner = styled.div`
+  position: relative;
   display: flex;
   max-width: ${ModuleWidth.WIDE}px;
   height: ${ModuleHeight.HERO_NORMAL_SCREEN}px;
@@ -176,20 +184,31 @@ const PersonsHeadingInner = styled.div`
   `}
 `;
 
-const PersonsHeadingImage = styled.div`
-  flex: 1;
-  overflow: hidden;
+const PersonsHeadingLogoArea = styled.div`
+  position: relative;
+  z-index: 1;
+  width: 40%;
 `;
 
-const PersonsHeadingMain = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 30%;
-  padding: 0 ${Spacing.XX_LARGE}px;
-  ${media.lessThan(ScreenType.MEDIUM)`
-    padding: 0;
-  `}
+const PersonsHeadingLogo = styled.div`
+  position: absolute;
+  top: 138px;
+  right: -135px;
+  width: 447px;
+  height: 227px;
+`;
+
+const PersonsHeadingTagLine = styled.div`
+  position: absolute;
+  top: 337px;
+  right: 251px;
+  width: 168px;
+  height: 126px;
+`;
+
+const PersonsHeadingImage = styled.div`
+  width: 60%;
+  overflow: hidden;
 `;
 
 const PersonsHeadingSubTitle = styled.div`
@@ -218,23 +237,6 @@ const PersonsHeadingTitleSub = styled.p`
   ${TypographyMixin.VERTICAL_WRITING};
   margin-top: ${Spacing.XX_LARGE}px;
   font-size: ${TextSize.X_SMALL}rem;
-`;
-
-const PersonsHeadingBodyCopyLargeScreen = styled.p`
-  ${TypographyMixin.DISPLAY};
-  font-size: ${TextSize.SMALL}rem;
-  ${media.lessThan(ScreenType.MEDIUM)`
-    display: none;
-  `}
-`;
-
-const PersonsHeadingBodyCopySmallScreen = styled.p`
-  margin: ${Spacing.LARGE}px;
-  ${TypographyMixin.DISPLAY};
-  font-size: ${TextSize.X_SMALL}rem;
-  ${media.greaterThan(ScreenType.MEDIUM)`
-    display: none;
-  `}
 `;
 
 const PersonLink = styled(Link)`
@@ -278,7 +280,7 @@ const PersonList = styled.ul<PersonListProps>`
       ? css`
           grid-template-columns: repeat(2, 1fr);
           grid-gap: ${BigSpacing.SMALL}px;
-          max-width: 720px;
+          max-width: 600px;
         `
       : ''}
 
