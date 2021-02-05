@@ -181,7 +181,7 @@ const SocialButton = styled.div`
   }
 
   ${media.lessThan(ScreenType.MEDIUM)`
-    width: 36px;
+    width: 32px;
 
     & + & {
       margin-left: ${Spacing.LARGE}px;

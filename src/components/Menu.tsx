@@ -87,7 +87,7 @@ export const Menu: React.FC<MenuProps> = ({ isTriggerShow }) => {
 };
 
 const Item = styled.li`
-  margin-top: ${Spacing.X_LARGE}px;
+  margin-top: ${Spacing.XXX_LARGE}px;
   list-style-type: none;
   text-align: center;
   cursor: pointer;
