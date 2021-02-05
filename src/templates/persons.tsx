@@ -33,11 +33,7 @@ const PersonsPage: React.FC<PersonsPageProps> = ({ data }) => {
   const body = data.microcmsPersons?.body || '';
   const credit = data.microcmsPersons?.credit || '';
 
-  console.log(data.microcmsPersons);
-
   const strippedBody = useMemo(() => stripTag(body || '').slice(0, 200), [body]);
-
-  console.log(publishedAt);
 
   const publishDate = useMemo(() => dayjs(publishedAt).format(DateFormat.YEAR_MONTH_DATE_JP), [
     publishedAt,
@@ -77,6 +73,7 @@ const PersonsPage: React.FC<PersonsPageProps> = ({ data }) => {
             }}
             optionsSmallScreen={{
               height: 240,
+              aspectRatio: AspectRatio.R_4_BY_3,
             }}
           />
         </ReverseParallax>

@@ -12,8 +12,8 @@ import {
   LineHeight,
   LetterSpacing,
 } from '@/constants';
-import { HeroImage, MainLogo } from '@/components';
-import { useMenu, useIntersectionObserver } from '@/hooks';
+import { HeroImage, MainLogo, TwitterAccountButton, InstagramAccountButton } from '@/components';
+import { useMenu, useBaseMetaInfo, useIntersectionObserver } from '@/hooks';
 
 type TopModuleProps = {
   onViewInStatusChange: (viewInStatus: boolean) => void;
@@ -22,7 +22,11 @@ type TopModuleProps = {
 export const TopModule: React.FC<TopModuleProps> = ({ onViewInStatusChange }) => {
   const menuList = useMenu({ ignoreTopData: true });
   const sentinelRef = useRef<HTMLDivElement>(null);
+  const { twitter, instagram } = useBaseMetaInfo();
   const [containerRef, isContainerIntersecting] = useIntersectionObserver<HTMLDivElement>();
+
+  const socialAccounts = { twitter, instagram };
+
   const scroll = useCallback(() => {
     sentinelRef.current?.scrollIntoView({
       behavior: 'smooth',
@@ -44,6 +48,9 @@ export const TopModule: React.FC<TopModuleProps> = ({ onViewInStatusChange }) =>
             </Logo>
             <LogoCopy>高円寺 昭和八年創業</LogoCopy>
           </LogoContainer>
+          <SocialAccountContainer>
+            <SocialAccountButtons accounts={socialAccounts} />
+          </SocialAccountContainer>
         </SideColumn>
         <MainColumn>
           <HeroArea>
@@ -96,8 +103,8 @@ const SideColumn = styled.div`
   display: flex;
   position: relative;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   width: 130px;
   padding: ${Spacing.XXX_LARGE}px ${Spacing.XXX_LARGE}px ${Spacing.XX_LARGE}px;
 
@@ -109,23 +116,12 @@ const SideColumn = styled.div`
 
 const MainColumn = styled.div`
   flex: 1;
-  /* ${media.lessThan(ScreenType.MEDIUM)`
-    height: 64%;
-  `} */
 `;
 
 const LogoContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  /* ${media.lessThan(ScreenType.MEDIUM)`
-    width: 55px;
-    position: absolute;
-    top: 72px;
-    right: ${Spacing.X_LARGE}px;
-    align-items: flex-start;
-  `} */
 `;
 
 const Logo = styled.h1`
@@ -138,16 +134,58 @@ const Logo = styled.h1`
 
 const LogoCopy = styled.p`
   margin-top: ${Spacing.XX_LARGE}px;
+  color: ${Colors.BRAND_LOGO};
   font-size: ${TextSize.SMALL}rem;
   font-weight: ${TextWeight.BOLD};
-  letter-spacing: 0.3rem;
-  color: ${Colors.BRAND_LOGO};
-  ${TypographyMixin.VERTICAL_WRITING};
   letter-spacing: ${LetterSpacing.VERY_WIDE}em;
+  ${TypographyMixin.VERTICAL_WRITING};
 
   ${media.lessThan(ScreenType.MEDIUM)`
     font-size: ${TextSize.X_SMALL}rem;
     margin-top: ${Spacing.LARGE}px;
+  `}
+`;
+
+const SocialAccountContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 20px;
+  ${media.lessThan(ScreenType.MEDIUM)`
+    display: none;
+  `}
+`;
+
+type SocialAccounts = { twitter: string; instagram: string };
+
+type SocialAccountButtonsProps = {
+  accounts: SocialAccounts;
+  color?: string;
+};
+
+const SocialAccountButtons: React.FC<SocialAccountButtonsProps> = ({ accounts, color }) => {
+  const { twitter, instagram } = accounts;
+  return (
+    <>
+      <SocialAccountButton>
+        <InstagramAccountButton color={color} id={instagram} />
+      </SocialAccountButton>
+      <SocialAccountButton>
+        <TwitterAccountButton color={color} id={twitter} />
+      </SocialAccountButton>
+    </>
+  );
+};
+
+const SocialAccountButton = styled.div`
+  & + & {
+    margin-top: ${Spacing.X_LARGE}px;
+  }
+  ${media.lessThan(ScreenType.MEDIUM)`
+    & + & {
+      margin-top: 0;
+      margin-left: 20px;
+    }
   `}
 `;
 

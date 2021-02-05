@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import media from 'styled-media-query';
-// import Transition, { TransitionStatus } from 'react-transition-group/Transition';
+
 import { GridContainer, GridItem, GridImage, Picture } from '@/components';
 
 import {
@@ -13,12 +13,16 @@ import {
   Spacing,
   AspectRatio,
   ModuleWidth,
+  ScreenValue,
 } from '@/constants';
 import { IntersectionFadeIn, Parallax, ReverseParallax } from '@/effects';
 import { isSafari } from '@/util/ua';
+import { useScreenThreshold } from '@/hooks';
 
 export const IntroModule: React.FC = () => {
   const [finalPhotoOpacity, setFinalPhotoOpacity] = useState(0);
+  const { overThreshold: isNormalScreen } = useScreenThreshold(ScreenValue.MEDIUM);
+
   return (
     <>
       <IntroStoryUnitNormal>
@@ -212,9 +216,10 @@ export const IntroModule: React.FC = () => {
           <Parallax
             coefficient={0.12}
             min={0}
+            basePosition={isNormalScreen ? 'center' : 'bottom'}
             onScroll={(e) => {
               // 120〜0くらいのレンジなのでざっくり
-              setFinalPhotoOpacity((100 - e * 1.3) / 100);
+              setFinalPhotoOpacity((100 - e * (isNormalScreen ? 1.3 : 2)) / 100);
             }}
             fillLayout
           >
@@ -274,6 +279,7 @@ const IntroStoryUnitNormal = styled.section`
   max-width: ${ModuleWidth.WIDE}px;
   margin: ${BigSpacing.NORMAL}px auto;
   ${media.lessThan(ScreenType.MEDIUM)`
+    margin: ${BigSpacing.X_SMALL}px auto;
     height: 440px;
   `}
 `;
@@ -354,7 +360,7 @@ const IntroStoryIllustration3 = styled(IntroStoryIllustration)`
 
   ${media.lessThan(ScreenType.MEDIUM)`
     top: auto;
-    bottom: -120px;
+    bottom: -10px;
     right: -32px;
   `}
 `;
