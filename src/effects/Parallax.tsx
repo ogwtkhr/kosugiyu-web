@@ -79,7 +79,7 @@ export const Parallax: React.FC<ParallaxProps> = ({
         transform: transformProperty,
       }}
     >
-      <Inner zoom={zoom} zoomSmall={enableSmallScreen ? 1 : zoomSmall}>
+      <Inner zoom={zoom} zoomSmall={enableSmallScreen ? zoomSmall : 1}>
         {children}
       </Inner>
     </Outer>
