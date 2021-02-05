@@ -101,7 +101,7 @@ export const MediaModule: React.FC<MediaModuleProps> = ({
           </TopPersonContainer>
         )}
 
-        <PersonListContainer>
+        <MediaArticleListContainer>
           {summaryMode && (
             <>
               <MediaSummaryTitleLogo>
@@ -116,7 +116,7 @@ export const MediaModule: React.FC<MediaModuleProps> = ({
               </MediaSummaryTitleTagLine>
             </>
           )}
-          <PersonList under2={summarizedArticles.length <= 2} withTitle={summaryMode}>
+          <MediaArticleList under2={summarizedArticles.length <= 2} withTitle={summaryMode}>
             {summarizedArticles.map((article) => {
               const slug = article.slug || '';
               const position = article.position || '';
@@ -124,7 +124,7 @@ export const MediaModule: React.FC<MediaModuleProps> = ({
               const mainVisualUrl = article?.mainVisual?.url || '';
               const isComingSoon = article.isComingSoon;
               return (
-                <PersonListItem key={article.slug}>
+                <MediaArticleListItem key={article.slug}>
                   {!isComingSoon ? (
                     <PersonLink to={`/media/${slug}`}>
                       <MediaArticleItem
@@ -141,11 +141,11 @@ export const MediaModule: React.FC<MediaModuleProps> = ({
                       isComingSoon={isComingSoon}
                     />
                   )}
-                </PersonListItem>
+                </MediaArticleListItem>
               );
             })}
-          </PersonList>
-        </PersonListContainer>
+          </MediaArticleList>
+        </MediaArticleListContainer>
         {isSummaryView && (
           <ButtonContainer>
             <Button to="/media">さらに読む</Button>
@@ -278,16 +278,16 @@ const TopPersonContainer = styled.div`
   `}
 `;
 
-const PersonListContainer = styled.div`
+const MediaArticleListContainer = styled.div`
   display: flex;
 `;
 
-type PersonListProps = {
+type MediaArticleListProps = {
   under2?: boolean;
   withTitle?: boolean;
 };
 
-const PersonList = styled.ul<PersonListProps>`
+const MediaArticleList = styled.ul<MediaArticleListProps>`
   display: grid;
   grid-gap: ${BigSpacing.XX_SMALL}px;
   grid-template-columns: repeat(3, 1fr);
@@ -295,7 +295,8 @@ const PersonList = styled.ul<PersonListProps>`
   margin-top: ${({ withTitle }) => (withTitle ? 122 : 0)}px;
   margin-right: auto;
   margin-bottom: 0;
-  margin-left: ${({ withTitle }) => (withTitle ? 146 : 0)}px;
+  /* TODO いまいちなので分離したい */
+  margin-left: ${({ withTitle }) => (withTitle ? '146px' : 'auto')};
   overflow: hidden;
 
   ${({ under2 }) =>
@@ -307,7 +308,7 @@ const PersonList = styled.ul<PersonListProps>`
         `
       : ''}
 
-  ${media.lessThan<PersonListProps>(ScreenType.MEDIUM)`
+  ${media.lessThan<MediaArticleListProps>(ScreenType.MEDIUM)`
     grid-template-columns: repeat(2, 1fr);
     grid-gap: ${Spacing.XX_LARGE}px ${Spacing.LARGE}px;
     margin-top: ${({ withTitle }) => (withTitle ? 110 : 0)}px;
@@ -316,6 +317,6 @@ const PersonList = styled.ul<PersonListProps>`
   `}
 `;
 
-const PersonListItem = styled.li``;
+const MediaArticleListItem = styled.li``;
 
 export default MediaModule;

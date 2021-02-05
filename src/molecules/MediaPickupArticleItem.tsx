@@ -109,7 +109,7 @@ export const MediaPickupArticleItem: React.FC<MediaPickupArticleItemProps> = ({
 const Container = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   max-width: ${ModuleWidth.SEMI_WIDE}px;
   margin: 0 auto;
 
@@ -120,7 +120,7 @@ const Container = styled.div`
 `;
 
 const ThumbnailContainer = styled.div`
-  width: 40%;
+  width: 50%;
   height: 100%;
   overflow: hidden;
 
