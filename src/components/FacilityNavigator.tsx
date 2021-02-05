@@ -64,7 +64,7 @@ export const FacilityNavigator: React.FC = () => {
   return (
     <Container>
       <BigImageContainer>
-        <ReverseParallax fillLayout>
+        <ReverseParallax fillLayout enableSmallScreen>
           <BigImage id={id}>
             <Picture relativePath="illustrations/facility/all_facilities.png" />
           </BigImage>

@@ -179,6 +179,14 @@ const SocialButton = styled.div`
   & + & {
     margin-left: ${Spacing.NORMAL}px;
   }
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    width: 36px;
+
+    & + & {
+      margin-left: ${Spacing.LARGE}px;
+    }
+  `}
 `;
 
 const MetaInfo = styled.div``;
@@ -187,6 +195,10 @@ const PublishedDate = styled.p`
   ${TypographyMixin.DISPLAY};
   color: ${Colors.UI_TEXT_SUB};
   font-size: ${TextSize.SMALL}rem;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    font-size: ${TextSize.SMALL}rem;
+  `}
 `;
 
 const MainVisualContainer = styled.div`
