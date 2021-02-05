@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
 import dayjs from 'dayjs';
 
 import { Query } from '@/types';
@@ -7,16 +7,17 @@ import { BaseLayout, Meta } from '@/layouts';
 import styled from 'styled-components';
 import {
   BigSpacing,
-  Colors,
   DateFormat,
   ScreenType,
   Spacing,
   ModuleWidth,
   AspectRatio,
+  StyleMixin,
+  getResponsiveOffsetMixin,
 } from '@/constants';
 import media from 'styled-media-query';
 import { stripTag } from '@/util/string';
-import { Article, MicroCMSImage } from '@/atoms';
+import { Article, MicroCMSImage, MediaLogo } from '@/atoms';
 import { ReverseParallax, ParallaxBasePosition } from '@/effects';
 import { MediaPickupArticleItem, ArticleInfo } from '@/molecules';
 
@@ -45,19 +46,26 @@ const MediaPage: React.FC<MediaPageProps> = ({ data }) => {
     <BaseLayout useHeader>
       <Meta title={title} description={strippedBody} ogImage={mainVisual} />
       <Container>
-        <MediaPickupArticleItem
-          title={title}
-          position={position}
-          name={name}
-          mainVisualUrl={mainVisual}
-          showArrowIcon={false}
-          subInformation={{
-            twitter: true,
-            facebook: true,
-            publishDate,
-          }}
-          parallaxBasePosition={ParallaxBasePosition.TOP}
-        />
+        <MediaLogoContainer>
+          <Link to="/media">
+            <MediaLogo />
+          </Link>
+        </MediaLogoContainer>
+        <PickupItemContainer>
+          <MediaPickupArticleItem
+            title={title}
+            position={position}
+            name={name}
+            mainVisualUrl={mainVisual}
+            showArrowIcon={false}
+            subInformation={{
+              twitter: true,
+              facebook: true,
+              publishDate,
+            }}
+            parallaxBasePosition={ParallaxBasePosition.TOP}
+          />
+        </PickupItemContainer>
         <ArticleContainer>
           <Article body={data.microcmsMedia?.body || ''} />
         </ArticleContainer>
@@ -103,7 +111,34 @@ export const query = graphql`
 `;
 
 const Container = styled.div`
-  background-color: ${Colors.UI_PAPER};
+  position: relative;
+  padding-top: 50px;
+`;
+
+const PickupItemContainer = styled.div`
+  ${getResponsiveOffsetMixin({
+    maxWidth: ModuleWidth.SEMI_WIDE,
+    margin: Spacing.XXX_LARGE,
+    marginSmall: 0,
+  })}
+`;
+
+const MediaLogoContainer = styled.div`
+  ${StyleMixin.HOVER_EFFECT.NORMAL};
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 50%;
+  width: 250px;
+  height: 127px;
+  transform: translateX(-50%);
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    left: ${Spacing.X_LARGE}px;
+    width: 170px;
+    height: 86px;
+    transform: none;
+  `}
 `;
 
 const ArticleContainer = styled.div`

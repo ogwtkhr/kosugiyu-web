@@ -5,6 +5,7 @@ import { Transitions } from './transitions';
 import { calcResponsivePoint } from '@/util/style';
 import media from 'styled-media-query';
 import { ModuleWidth, Spacing } from './spacing';
+import { isUndefined } from 'lodash';
 
 export const getResponsiveOffsetMixin = ({
   maxWidth,
@@ -26,7 +27,7 @@ export const getResponsiveOffsetMixin = ({
 
     ${media.lessThan(ScreenType.MEDIUM)`
       ${
-        marginSmall
+        !isUndefined(marginSmall)
           ? css`
               margin-left: ${marginSmall}px;
               margin-right: ${marginSmall}px;

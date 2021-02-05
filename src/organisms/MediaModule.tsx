@@ -15,6 +15,7 @@ import { Picture, Button, ButtonContainer, MediaLogo, MediaTagLine } from '@/ato
 import { MediaArticleItem, MediaPickupArticleItem } from '@/molecules';
 import media from 'styled-media-query';
 import { ReverseParallax, ParallaxBasePosition, IntersectionFadeIn } from '@/effects';
+import { orderBy } from 'lodash';
 
 type MediaModuleProps = {
   useTitle?: boolean;
@@ -41,6 +42,8 @@ export const MediaModule: React.FC<MediaModuleProps> = ({
           name
           slug
           isComingSoon
+          publishDate
+          publishedAt
           mainVisual {
             url
           }
@@ -52,7 +55,27 @@ export const MediaModule: React.FC<MediaModuleProps> = ({
   const baseArticles = data.allMicrocmsMedia.nodes;
   const [topArticle, ...restMedia] = baseArticles;
   const articles = enableTopEmphasis ? restMedia : baseArticles;
-  const summarizedArticles = summaryMode ? articles.slice(0, summaryMax) : articles;
+  const summarizedArticles = orderBy(
+    (summaryMode ? articles.slice(0, summaryMax) : articles).map((article) => {
+      const slug = article.slug || '';
+      const position = article.position || '';
+      const name = article.name || '';
+      const mainVisualUrl = article?.mainVisual?.url || '';
+      const isComingSoon = article.isComingSoon;
+      const publishDate = article.publishDate || article.publishedAt || '';
+      return {
+        slug,
+        position,
+        name,
+        mainVisualUrl,
+        publishDate,
+        isComingSoon: !!isComingSoon,
+      };
+    }),
+    'publishDate',
+    // TODO: タイミングを見計らってdescに
+    'asc',
+  );
 
   const topArticleSlug = topArticle?.slug || '';
   const topArticlePosition = topArticle?.position || '';
@@ -101,7 +124,7 @@ export const MediaModule: React.FC<MediaModuleProps> = ({
           </TopPersonContainer>
         )}
 
-        <PersonListContainer>
+        <MediaArticleListContainer>
           {summaryMode && (
             <>
               <MediaSummaryTitleLogo>
@@ -116,15 +139,10 @@ export const MediaModule: React.FC<MediaModuleProps> = ({
               </MediaSummaryTitleTagLine>
             </>
           )}
-          <PersonList under2={summarizedArticles.length <= 2} withTitle={summaryMode}>
-            {summarizedArticles.map((article) => {
-              const slug = article.slug || '';
-              const position = article.position || '';
-              const name = article.name || '';
-              const mainVisualUrl = article?.mainVisual?.url || '';
-              const isComingSoon = article.isComingSoon;
+          <MediaArticleList under2={summarizedArticles.length <= 2} withTitle={summaryMode}>
+            {summarizedArticles.map(({ slug, position, name, mainVisualUrl, isComingSoon }) => {
               return (
-                <PersonListItem key={article.slug}>
+                <MediaArticleListItem key={slug}>
                   {!isComingSoon ? (
                     <PersonLink to={`/media/${slug}`}>
                       <MediaArticleItem
@@ -141,11 +159,11 @@ export const MediaModule: React.FC<MediaModuleProps> = ({
                       isComingSoon={isComingSoon}
                     />
                   )}
-                </PersonListItem>
+                </MediaArticleListItem>
               );
             })}
-          </PersonList>
-        </PersonListContainer>
+          </MediaArticleList>
+        </MediaArticleListContainer>
         {isSummaryView && (
           <ButtonContainer>
             <Button to="/media">さらに読む</Button>
@@ -278,16 +296,16 @@ const TopPersonContainer = styled.div`
   `}
 `;
 
-const PersonListContainer = styled.div`
+const MediaArticleListContainer = styled.div`
   display: flex;
 `;
 
-type PersonListProps = {
+type MediaArticleListProps = {
   under2?: boolean;
   withTitle?: boolean;
 };
 
-const PersonList = styled.ul<PersonListProps>`
+const MediaArticleList = styled.ul<MediaArticleListProps>`
   display: grid;
   grid-gap: ${BigSpacing.XX_SMALL}px;
   grid-template-columns: repeat(3, 1fr);
@@ -295,7 +313,8 @@ const PersonList = styled.ul<PersonListProps>`
   margin-top: ${({ withTitle }) => (withTitle ? 122 : 0)}px;
   margin-right: auto;
   margin-bottom: 0;
-  margin-left: ${({ withTitle }) => (withTitle ? 146 : 0)}px;
+  /* TODO いまいちなので分離したい */
+  margin-left: ${({ withTitle }) => (withTitle ? '146px' : 'auto')};
   overflow: hidden;
 
   ${({ under2 }) =>
@@ -307,7 +326,7 @@ const PersonList = styled.ul<PersonListProps>`
         `
       : ''}
 
-  ${media.lessThan<PersonListProps>(ScreenType.MEDIUM)`
+  ${media.lessThan<MediaArticleListProps>(ScreenType.MEDIUM)`
     grid-template-columns: repeat(2, 1fr);
     grid-gap: ${Spacing.XX_LARGE}px ${Spacing.LARGE}px;
     margin-top: ${({ withTitle }) => (withTitle ? 110 : 0)}px;
@@ -316,6 +335,6 @@ const PersonList = styled.ul<PersonListProps>`
   `}
 `;
 
-const PersonListItem = styled.li``;
+const MediaArticleListItem = styled.li``;
 
 export default MediaModule;

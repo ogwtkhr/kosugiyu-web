@@ -12,8 +12,9 @@ import {
   NoteCircleIcon,
 } from './Icon';
 import { ExternalLink } from '@/atoms';
-import { Colors } from '@/constants';
+import { Colors, Spacing, ScreenType } from '@/constants';
 import { ValueOf } from '@/types';
+import media from 'styled-media-query';
 
 const Shape = {
   NORMAL: 'normal',
@@ -119,4 +120,51 @@ const Container = styled(ExternalLink)`
   width: 100%;
   height: 100%;
   color: ${Colors.UI_TEXT_MAIN};
+`;
+
+type ShareButtonListProps = {
+  twitter?: boolean;
+  facebook?: boolean;
+};
+
+export const ShareButtonList: React.FC<ShareButtonListProps> = ({ twitter, facebook }) => {
+  return (
+    <ShareButtonListContainer>
+      {twitter && (
+        <ButtonItem>
+          <TwitterTweetButton shape="circle" />
+        </ButtonItem>
+      )}
+      {facebook && (
+        <ButtonItem>
+          <FacebookShareButton shape="circle" />
+        </ButtonItem>
+      )}
+    </ShareButtonListContainer>
+  );
+};
+
+const ShareButtonListContainer = styled.ul`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    justify-content: flex-end;
+  `}
+`;
+
+const ButtonItem = styled.div`
+  width: 28px;
+  & + & {
+    margin-left: ${Spacing.NORMAL}px;
+  }
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    width: 32px;
+
+    & + & {
+      margin-left: ${Spacing.LARGE}px;
+    }
+  `}
 `;
