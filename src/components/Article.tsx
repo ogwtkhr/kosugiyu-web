@@ -64,10 +64,8 @@ const Container = styled.article`
       margin-top: ${Spacing.X_LARGE}px;
 
       ${media.lessThan(ScreenType.MEDIUM)`
-        margin-left: -${Spacing.X_LARGE}px;
-        margin-right: -${Spacing.X_LARGE}px;
         margin-top: ${Spacing.MIDDLE}px;
-        width: calc(100% + ${Spacing.X_LARGE * 2}px);
+        width: 100%;
       `}
     }
 

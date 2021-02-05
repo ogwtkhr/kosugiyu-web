@@ -11,6 +11,7 @@ import {
   PropsWithTransition,
   TransitionStatus,
   Transitions,
+  BigSpacing,
 } from '@/constants';
 import Transition from 'react-transition-group/Transition';
 import { useMenu, useBaseMetaInfo } from '@/hooks';
@@ -18,12 +19,7 @@ import { Link } from 'gatsby';
 import media from 'styled-media-query';
 import { Overlay } from '@/components/Overlay';
 
-import {
-  FacebookAccountButton,
-  TwitterAccountButton,
-  InstagramAccountButton,
-  NoteAccountButton,
-} from '@/components';
+import { TwitterAccountButton, InstagramAccountButton } from '@/components';
 
 const TRANSITION_TIME = 300;
 
@@ -72,13 +68,7 @@ export const Menu: React.FC<MenuProps> = ({ isTriggerShow }) => {
             <InstagramAccountButton id={instagram} />
           </SocialAccountButton>
           <SocialAccountButton>
-            <NoteAccountButton id={note} />
-          </SocialAccountButton>
-          <SocialAccountButton>
             <TwitterAccountButton id={twitter} />
-          </SocialAccountButton>
-          <SocialAccountButton>
-            <FacebookAccountButton id={facebook} />
           </SocialAccountButton>
         </SocialAccountContainer>
       </Overlay>
@@ -116,9 +106,9 @@ const Type = styled.span`
 const SocialAccountContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 260px;
+  width: 160px;
   height: 30px;
-  margin-top: ${Spacing.XXX_LARGE}px;
+  margin-top: ${BigSpacing.X_SMALL}px;
 `;
 
 const SocialAccountButton = styled.div`

@@ -10,15 +10,9 @@ import {
   TextSize,
   TextWeight,
   LineHeight,
+  LetterSpacing,
 } from '@/constants';
-import {
-  HeroImage,
-  MainLogo,
-  FacebookAccountButton,
-  TwitterAccountButton,
-  InstagramAccountButton,
-  NoteAccountButton,
-} from '@/components';
+import { HeroImage, MainLogo, TwitterAccountButton, InstagramAccountButton } from '@/components';
 import { useMenu, useBaseMetaInfo, useIntersectionObserver } from '@/hooks';
 
 type TopModuleProps = {
@@ -27,16 +21,18 @@ type TopModuleProps = {
 
 export const TopModule: React.FC<TopModuleProps> = ({ onViewInStatusChange }) => {
   const menuList = useMenu({ ignoreTopData: true });
-  const { twitter, facebook, instagram, note } = useBaseMetaInfo();
   const sentinelRef = useRef<HTMLDivElement>(null);
+  const { twitter, instagram } = useBaseMetaInfo();
   const [containerRef, isContainerIntersecting] = useIntersectionObserver<HTMLDivElement>();
+
+  const socialAccounts = { twitter, instagram };
+
   const scroll = useCallback(() => {
     sentinelRef.current?.scrollIntoView({
       behavior: 'smooth',
       block: 'start',
     });
   }, []);
-  const socialAccounts = { twitter, facebook, instagram, note };
 
   useEffect(() => {
     onViewInStatusChange(isContainerIntersecting);
@@ -61,9 +57,9 @@ export const TopModule: React.FC<TopModuleProps> = ({ onViewInStatusChange }) =>
             <HeroImage />
           </HeroArea>
         </MainColumn>
-        <MenuListNormalScreen>
+        <MenuListContainer>
           <MenuList list={menuList} onIntroClick={scroll} />
-        </MenuListNormalScreen>
+        </MenuListContainer>
       </Container>
 
       <div ref={sentinelRef} />
@@ -90,33 +86,6 @@ const MenuList: React.FC<MenuListProps> = ({ list, onIntroClick }) => (
   </>
 );
 
-type SocialAccounts = { twitter: string; facebook: string; instagram: string; note: string };
-
-type SocialAccountButtonsProps = {
-  accounts: SocialAccounts;
-  color?: string;
-};
-
-const SocialAccountButtons: React.FC<SocialAccountButtonsProps> = ({ accounts, color }) => {
-  const { twitter, facebook, instagram, note } = accounts;
-  return (
-    <>
-      <SocialAccountButton>
-        <InstagramAccountButton color={color} id={instagram} />
-      </SocialAccountButton>
-      <SocialAccountButton>
-        <NoteAccountButton color={color} id={note} />
-      </SocialAccountButton>
-      <SocialAccountButton>
-        <TwitterAccountButton color={color} id={twitter} />
-      </SocialAccountButton>
-      <SocialAccountButton>
-        <FacebookAccountButton color={color} id={facebook} />
-      </SocialAccountButton>
-    </>
-  );
-};
-
 const Container = styled.div`
   display: flex;
   position: relative;
@@ -126,6 +95,7 @@ const Container = styled.div`
 
   ${media.lessThan(ScreenType.MEDIUM)`
     flex-direction: row-reverse;
+    height: auto;
   `}
 `;
 
@@ -133,36 +103,25 @@ const SideColumn = styled.div`
   display: flex;
   position: relative;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   width: 130px;
   padding: ${Spacing.XXX_LARGE}px ${Spacing.XXX_LARGE}px ${Spacing.XX_LARGE}px;
 
   ${media.lessThan(ScreenType.MEDIUM)`
     width: 80px;
-    padding:  70px 0 0;
+    padding:  84px 0 0;
   `}
 `;
 
 const MainColumn = styled.div`
   flex: 1;
-  /* ${media.lessThan(ScreenType.MEDIUM)`
-    height: 64%;
-  `} */
 `;
 
 const LogoContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  /* ${media.lessThan(ScreenType.MEDIUM)`
-    width: 55px;
-    position: absolute;
-    top: 72px;
-    right: ${Spacing.X_LARGE}px;
-    align-items: flex-start;
-  `} */
 `;
 
 const Logo = styled.h1`
@@ -175,9 +134,10 @@ const Logo = styled.h1`
 
 const LogoCopy = styled.p`
   margin-top: ${Spacing.XX_LARGE}px;
+  color: ${Colors.BRAND_LOGO};
   font-size: ${TextSize.SMALL}rem;
   font-weight: ${TextWeight.BOLD};
-  letter-spacing: 0.3rem;
+  letter-spacing: ${LetterSpacing.VERY_WIDE}em;
   ${TypographyMixin.VERTICAL_WRITING};
 
   ${media.lessThan(ScreenType.MEDIUM)`
@@ -191,17 +151,36 @@ const SocialAccountContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 20px;
-
   ${media.lessThan(ScreenType.MEDIUM)`
     display: none;
   `}
 `;
 
+type SocialAccounts = { twitter: string; instagram: string };
+
+type SocialAccountButtonsProps = {
+  accounts: SocialAccounts;
+  color?: string;
+};
+
+const SocialAccountButtons: React.FC<SocialAccountButtonsProps> = ({ accounts, color }) => {
+  const { twitter, instagram } = accounts;
+  return (
+    <>
+      <SocialAccountButton>
+        <InstagramAccountButton color={color} id={instagram} />
+      </SocialAccountButton>
+      <SocialAccountButton>
+        <TwitterAccountButton color={color} id={twitter} />
+      </SocialAccountButton>
+    </>
+  );
+};
+
 const SocialAccountButton = styled.div`
   & + & {
     margin-top: ${Spacing.X_LARGE}px;
   }
-
   ${media.lessThan(ScreenType.MEDIUM)`
     & + & {
       margin-top: 0;
@@ -215,19 +194,22 @@ const HeroArea = styled.div`
   position: relative;
   flex-direction: column;
   justify-content: center;
-  height: calc(100% - 24px);
+  height: calc(100% - 40px);
   margin-top: ${Spacing.XXX_LARGE}px;
   margin-right: ${Spacing.XXX_LARGE}px;
 
   ${media.lessThan(ScreenType.MEDIUM)`
-    /* margin-top: 30px; */
-    margin-top: 24px;
+    margin-top: 70px;
+    height: 520px;
     margin-right: 0;
-    /* height: 100%; */
+  `}
+  /* TODO: アス比 + 最大高さもっといい感じにできると */
+  ${media.lessThan('350px')`
+    height: 460px;
   `}
 `;
 
-const MenuListNormalScreen = styled.ul`
+const MenuListContainer = styled.ul`
   position: absolute;
   top: 10px;
   right: ${Spacing.XXX_LARGE}px;

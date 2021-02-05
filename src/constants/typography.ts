@@ -44,6 +44,7 @@ export const LetterSpacing = {
   SEMI_WIDE: 0.15,
   MIDDLE_WIDE: 0.2,
   WIDE: 0.25,
+  VERY_WIDE: 0.4,
 } as const;
 
 export const TypographyMixin = {

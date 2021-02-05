@@ -137,7 +137,8 @@ const ArticleThumbnailContainer = styled.div<ArticleItemChildPropsWithDirection>
   width: ${({ direction }) => (direction === ArticleItemDirection.VERTICAL ? 100 : 40)}%;
 `;
 
-const PublishDate = styled.p<ArticleItemChildPropsWithTextSize>`
+const PublishDate = styled.time<ArticleItemChildPropsWithTextSize>`
+  display: block;
   ${TypographyMixin.DISPLAY};
   color: ${Colors.UI_TEXT_SUB};
   font-size: ${({ textSize }) =>

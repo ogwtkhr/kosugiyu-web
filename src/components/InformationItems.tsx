@@ -25,7 +25,7 @@ export const InformationRow = styled.div`
   ${getResponsiveOffsetMixin({
     maxWidth: ModuleWidth.MIDDLE,
     margin: Spacing.XXX_LARGE,
-    marginSmall: Spacing.LARGE,
+    marginSmall: Spacing.X_LARGE,
   })};
 
   ${media.lessThan(ScreenType.MEDIUM)`

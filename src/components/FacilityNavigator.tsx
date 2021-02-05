@@ -336,6 +336,7 @@ const DescriptionTitle = styled.h3`
   font-size: ${TextSize.X_LARGE}rem;
 
   ${media.lessThan(ScreenType.MEDIUM)`
+    padding-right: 100px;
     font-size: ${TextSize.LARGE}rem;
   `}
 `;
@@ -415,7 +416,7 @@ const DetailButton = styled.button`
   left: ${CONTROLS_WIDTH + Spacing.LARGE}px;
   align-items: center;
   justify-content: space-around;
-  width: 80px;
+  width: 90px;
   height: ${CONTROLS_HEIGHT}px;
   padding: ${Spacing.SMALL}px;
   border: solid 2px ${Colors.UI_LINE_NORMAL};

@@ -362,7 +362,8 @@ const TopSubInfoSocialButton = styled.div`
   `}
 `;
 
-const TopPublishDate = styled.div`
+const TopPublishDate = styled.time`
+  display: block;
   ${TypographyMixin.DISPLAY};
   color: ${Colors.UI_TEXT_SUB};
   font-size: ${TextSize.SMALL}rem;

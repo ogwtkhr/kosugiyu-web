@@ -138,7 +138,7 @@ const TitleContainer = styled.div`
   ${getResponsiveOffsetMixin({
     maxWidth: ModuleWidth.MIDDLE,
     margin: Spacing.XXX_LARGE,
-    marginSmall: Spacing.LARGE,
+    marginSmall: Spacing.X_LARGE,
   })};
 `;
 
@@ -191,7 +191,8 @@ const SocialButton = styled.div`
 
 const MetaInfo = styled.div``;
 
-const PublishedDate = styled.p`
+const PublishedDate = styled.time`
+  display: block;
   ${TypographyMixin.DISPLAY};
   color: ${Colors.UI_TEXT_SUB};
   font-size: ${TextSize.SMALL}rem;
