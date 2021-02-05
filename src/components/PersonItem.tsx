@@ -256,7 +256,7 @@ const TopInfo = styled.div`
   width: 40%;
 
   ${media.lessThan(ScreenType.MEDIUM)`
-    margin-top: ${Spacing.LARGE}px;
+    margin-top: ${Spacing.XX_LARGE}px;
     width: auto;
   `}
 `;
@@ -287,6 +287,7 @@ const TopName = styled.h3`
   font-size: ${TextSize.XXX_LARGE}rem;
 
   ${media.lessThan(ScreenType.MEDIUM)`
+    margin-top: ${Spacing.SMALL}px;
     font-size: ${TextSize.X_LARGE}rem;
     text-align: center;
   `}
@@ -294,13 +295,15 @@ const TopName = styled.h3`
 
 const TopTitle = styled.p`
   margin-top: ${Spacing.NORMAL}px;
-  font-size: ${TextSize.X_SMALL}rem;
+  font-size: ${TextSize.SMALL}rem;
   ${TypographyMixin.DISPLAY};
 
   ${media.lessThan(ScreenType.MEDIUM)`
+    margin-top: ${Spacing.MIDDLE}px;
     margin-left: auto;
     margin-right: auto;
     max-width: 80%;
+    font-size: ${TextSize.X_SMALL}rem;
   `}
 `;
 
@@ -349,10 +352,22 @@ const TopSubInfoSocialButton = styled.div`
   & + & {
     margin-left: ${Spacing.NORMAL}px;
   }
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    width: 32px;
+
+    & + & {
+      margin-left: ${Spacing.LARGE}px;
+    }
+  `}
 `;
 
 const TopPublishDate = styled.div`
   ${TypographyMixin.DISPLAY};
   color: ${Colors.UI_TEXT_SUB};
   font-size: ${TextSize.SMALL}rem;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    font-size: ${TextSize.X_SMALL}rem;
+  `}
 `;

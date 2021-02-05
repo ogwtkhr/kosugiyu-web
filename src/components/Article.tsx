@@ -33,7 +33,7 @@ const Container = styled.article`
   word-wrap: break-word;
   overflow-wrap: break-word;
   ${media.lessThan(ScreenType.MEDIUM)`
-    margin: 0 ${Spacing.LARGE}px;
+    margin: 0 ${Spacing.X_LARGE}px;
   `}
 
   & p {
@@ -42,8 +42,13 @@ const Container = styled.article`
     font-weight: ${TextWeight.MEDIUM};
 
     ${media.lessThan(ScreenType.MEDIUM)`
+      padding-bottom: ${Spacing.MIDDLE}px;
       font-size: ${TextSize.SMALL}rem;
     `}
+
+    & > br + & > br {
+      margin-top: -${Spacing.NORMAL}px;
+    }
 
     & > strong,
     & > em {
@@ -59,11 +64,11 @@ const Container = styled.article`
       margin-top: ${Spacing.X_LARGE}px;
 
       ${media.lessThan(ScreenType.MEDIUM)`
-      margin-left: -${Spacing.LARGE}px;
-      margin-right: -${Spacing.LARGE}px;
-      margin-top: ${Spacing.LARGE}px;
-      width: calc(100% + ${Spacing.LARGE * 2}px);
-    `}
+        margin-left: -${Spacing.X_LARGE}px;
+        margin-right: -${Spacing.X_LARGE}px;
+        margin-top: ${Spacing.MIDDLE}px;
+        width: calc(100% + ${Spacing.X_LARGE * 2}px);
+      `}
     }
 
     & > a {

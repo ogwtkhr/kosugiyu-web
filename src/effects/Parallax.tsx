@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo } from 'react';
-import { useParallax, ParallaxDirectionType } from '@/hooks';
+import { useParallax, ParallaxDirectionType, useScreenThreshold } from '@/hooks';
 import styled, { css } from 'styled-components';
 import media from 'styled-media-query';
 import { ValueOf } from '@/types';
-import { ScreenType } from '@/constants';
+import { ScreenType, ScreenValue } from '@/constants';
 
 export const ParallaxBasePosition = {
   TOP: 'top',
@@ -28,6 +28,7 @@ type ParallaxProps = {
   basePosition?: ParallaxBasePosition;
   onScroll?: (e: number) => void;
   verbose?: boolean;
+  enableSmallScreen?: boolean;
 };
 
 export const Parallax: React.FC<ParallaxProps> = ({
@@ -42,6 +43,7 @@ export const Parallax: React.FC<ParallaxProps> = ({
   basePosition = ParallaxBasePosition.CENTER,
   onScroll,
   verbose,
+  enableSmallScreen,
 }) => {
   const [ref, { center, top, bottom }] = useParallax<HTMLDivElement>({
     min,
@@ -56,8 +58,14 @@ export const Parallax: React.FC<ParallaxProps> = ({
     [ParallaxBasePosition.BOTTOM]: bottom,
   };
 
+  const { overThreshold } = useScreenThreshold(ScreenValue.MEDIUM);
+  const isSmallScreen = !overThreshold;
+
   const parallaxSeed = seeds[basePosition];
-  const transformProperty = useMemo(() => `translate3d(0, ${parallaxSeed}px, 0)`, [parallaxSeed]);
+  const transformProperty = useMemo(() => {
+    if (!enableSmallScreen && isSmallScreen) return '';
+    return `translate3d(0, ${parallaxSeed}px, 0)`;
+  }, [parallaxSeed, enableSmallScreen, isSmallScreen]);
 
   useEffect(() => {
     if (onScroll) onScroll(parallaxSeed);
@@ -71,7 +79,7 @@ export const Parallax: React.FC<ParallaxProps> = ({
         transform: transformProperty,
       }}
     >
-      <Inner zoom={zoom} zoomSmall={zoomSmall}>
+      <Inner zoom={zoom} zoomSmall={enableSmallScreen ? zoomSmall : 1}>
         {children}
       </Inner>
     </Outer>

@@ -52,19 +52,13 @@ export const TopModule: React.FC<TopModuleProps> = ({ onViewInStatusChange }) =>
             </Logo>
             <LogoCopy>高円寺 昭和八年創業</LogoCopy>
           </LogoContainer>
-          <SocialAccountContainerNormalScreen>
+          <SocialAccountContainer>
             <SocialAccountButtons accounts={socialAccounts} />
-          </SocialAccountContainerNormalScreen>
+          </SocialAccountContainer>
         </SideColumn>
         <MainColumn>
           <HeroArea>
             <HeroImage />
-            <SocialAccountContainerSmallScreen>
-              <SocialAccountButtons
-                accounts={socialAccounts}
-                color={Colors.UI_TEXT_DARK_BACKGROUND}
-              />
-            </SocialAccountContainerSmallScreen>
           </HeroArea>
         </MainColumn>
         <MenuListNormalScreen>
@@ -131,7 +125,7 @@ const Container = styled.div`
   background-color: ${Colors.UI_PAPER};
 
   ${media.lessThan(ScreenType.MEDIUM)`
-    display: block;
+    flex-direction: row-reverse;
   `}
 `;
 
@@ -145,17 +139,16 @@ const SideColumn = styled.div`
   padding: ${Spacing.XXX_LARGE}px ${Spacing.XXX_LARGE}px ${Spacing.XX_LARGE}px;
 
   ${media.lessThan(ScreenType.MEDIUM)`
-    width: 100%;
-    height: 36%;
-    padding: 0;
+    width: 80px;
+    padding:  70px 0 0;
   `}
 `;
 
 const MainColumn = styled.div`
   flex: 1;
-  ${media.lessThan(ScreenType.MEDIUM)`
+  /* ${media.lessThan(ScreenType.MEDIUM)`
     height: 64%;
-  `}
+  `} */
 `;
 
 const LogoContainer = styled.div`
@@ -163,15 +156,13 @@ const LogoContainer = styled.div`
   flex-direction: column;
   align-items: center;
 
-  ${media.lessThan(ScreenType.MEDIUM)`
-    /* Safariで潰れるので一旦指定 */
+  /* ${media.lessThan(ScreenType.MEDIUM)`
     width: 55px;
     position: absolute;
     top: 72px;
     right: ${Spacing.X_LARGE}px;
-    flex-direction: row;
     align-items: flex-start;
-  `}
+  `} */
 `;
 
 const Logo = styled.h1`
@@ -191,39 +182,17 @@ const LogoCopy = styled.p`
 
   ${media.lessThan(ScreenType.MEDIUM)`
     font-size: ${TextSize.X_SMALL}rem;
-    margin-top: 0;
-    margin-left: ${Spacing.X_SMALL}px;
+    margin-top: ${Spacing.LARGE}px;
   `}
 `;
 
-const SocialAccountContainerNormalScreen = styled.div`
+const SocialAccountContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 20px;
+
   ${media.lessThan(ScreenType.MEDIUM)`
-    position: absolute;
-    width: 150px;
-    height: 24px;
-    flex-direction: row;
-    top: ${Spacing.X_LARGE}px;
-    left: ${Spacing.X_LARGE}px;
-  `}
-`;
-
-// TODO
-const SocialAccountContainerSmallScreen = styled.div`
-  display: flex;
-  position: absolute;
-  bottom: ${Spacing.X_LARGE}px;
-  left: ${Spacing.X_LARGE}px;
-  /* flex-direction: column; */
-  justify-content: space-between;
-  width: 190px;
-  height: 24px;
-  display: none;
-
-  ${media.greaterThan(ScreenType.MEDIUM)`
     display: none;
   `}
 `;
@@ -246,13 +215,15 @@ const HeroArea = styled.div`
   position: relative;
   flex-direction: column;
   justify-content: center;
-  height: calc(100% - ${Spacing.XXX_LARGE}px);
+  height: calc(100% - 24px);
   margin-top: ${Spacing.XXX_LARGE}px;
   margin-right: ${Spacing.XXX_LARGE}px;
+
   ${media.lessThan(ScreenType.MEDIUM)`
-    margin-top: 0;
-    margin-right: ${Spacing.X_LARGE}px;
-    height: 100%;
+    /* margin-top: 30px; */
+    margin-top: 24px;
+    margin-right: 0;
+    /* height: 100%; */
   `}
 `;
 
