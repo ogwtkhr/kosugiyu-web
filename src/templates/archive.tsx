@@ -22,7 +22,7 @@ import {
 } from '@/constants';
 import media from 'styled-media-query';
 import { stripTag } from '@/util/string';
-import { Article, ArticleInfo } from '@/components';
+import { Article, ArticleInfo, MicroCMSImage } from '@/components';
 import { TwitterTweetButton, FacebookShareButton } from '@/components/SocialButton';
 
 type ArchivePageProps = {
@@ -65,7 +65,17 @@ const ArchivePage: React.FC<ArchivePageProps> = ({ data }) => {
           </TitleInner>
         </TitleContainer>
         <MainVisualContainer>
-          <MainVisual src={mainVisual} />
+          <MicroCMSImage
+            src={mainVisual}
+            options={{
+              height: 600,
+              aspectRatio: AspectRatio.PLATINUM_HORIZONTAL,
+            }}
+            optionsSmallScreen={{
+              height: 300,
+              aspectRatio: AspectRatio.R_4_BY_3,
+            }}
+          />
         </MainVisualContainer>
         <ArticleContainer>
           <Article body={data.microcmsArchive?.body || ''} />
@@ -132,7 +142,9 @@ const TitleContainer = styled.div`
   })};
 `;
 
-const TitleInner = styled.div``;
+const TitleInner = styled.div`
+  width: 100%;
+`;
 
 const Title = styled.h2`
   ${TypographyMixin.DISPLAY};
@@ -173,8 +185,8 @@ const MetaInfo = styled.div``;
 
 const PublishedDate = styled.p`
   ${TypographyMixin.DISPLAY};
-  font-size: ${TextSize.SMALL}rem;
   color: ${Colors.UI_TEXT_SUB};
+  font-size: ${TextSize.SMALL}rem;
 `;
 
 const MainVisualContainer = styled.div`
@@ -182,26 +194,6 @@ const MainVisualContainer = styled.div`
   max-width: ${ModuleWidth.MIDDLE}px;
   margin: 0 auto;
   overflow: hidden;
-`;
-
-const MainVisual = styled.div`
-  width: 100%;
-  height: 100%;
-  ${StyleMixin.BACKGROUND_IMAGE_WITH_SRC};
-
-  &::after {
-    content: '';
-    display: block;
-    /* padding-bottom: ${AspectRatio.R_16_BY_9}%; */
-    padding-bottom: ${AspectRatio.PLATINUM_HORIZONTAL}%;
-  }
-
-  ${media.lessThan(ScreenType.MEDIUM)`
-    &::after {
-      /* padding-bottom: ${AspectRatio.R_1_BY_1}%; */
-      padding-bottom: 70%;
-    }
-  `}
 `;
 
 const ArticleContainer = styled.div`

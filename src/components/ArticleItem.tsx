@@ -15,6 +15,7 @@ import {
   SizeType,
   LetterSpacing,
 } from '@/constants';
+import { MicroCMSImage } from '@/components';
 import dayjs from 'dayjs';
 import media from 'styled-media-query';
 
@@ -55,7 +56,17 @@ export const ArticleItem: React.FC<ArticleItemProps> = ({
     <ArticleItemContainer>
       <ArticleLink direction={direction} to={`/archive/${slug}`}>
         <ArticleThumbnailContainer direction={direction}>
-          <ArticleThumbnail src={mainVisualUrl} />
+          {/* TODO、細かいサイズ出し分け、ジャギ解消 */}
+          <MicroCMSImage
+            src={mainVisualUrl}
+            options={{
+              height: 500,
+              aspectRatio: AspectRatio.R_4_BY_3,
+            }}
+            optionsSmallScreen={{
+              height: 250,
+            }}
+          />
         </ArticleThumbnailContainer>
         <ArticleTitleContainer direction={direction}>
           <ArticleTitle
@@ -124,18 +135,6 @@ const ArticleTitle = styled.h3<ArticleItemChildPropsWithTextSize>`
 
 const ArticleThumbnailContainer = styled.div<ArticleItemChildPropsWithDirection>`
   width: ${({ direction }) => (direction === ArticleItemDirection.VERTICAL ? 100 : 40)}%;
-  overflow: hidden;
-`;
-
-const ArticleThumbnail = styled.div`
-  width: 100%;
-  ${StyleMixin.BACKGROUND_IMAGE_WITH_SRC};
-
-  &::after {
-    content: '';
-    display: block;
-    padding-bottom: ${AspectRatio.R_4_BY_3}%;
-  }
 `;
 
 const PublishDate = styled.p<ArticleItemChildPropsWithTextSize>`

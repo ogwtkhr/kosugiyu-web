@@ -14,7 +14,13 @@ import {
   LineHeight,
 } from '@/constants';
 
-import { TwitterTweetButton, FacebookShareButton, UnderLineText, ArrowIcon } from '@/components';
+import {
+  TwitterTweetButton,
+  FacebookShareButton,
+  UnderLineText,
+  MicroCMSImage,
+  ArrowIcon,
+} from '@/components';
 import { IntersectionFadeIn, ReverseParallax, ParallaxBasePosition } from '@/effects';
 
 type PersonItemProps = {
@@ -37,7 +43,20 @@ export const PersonItem: React.FC<PersonItemProps> = ({
       <Container>
         <ThumbnailContainer>
           <ReverseParallax zoom={1.1} coefficient={0.03} min={-800} max={800}>
-            <Thumbnail src={mainVisualUrl} isComingSoon={isComingSoon} />
+            <ThumbnailContainer>
+              <ThumbnailInner isComingSoon={isComingSoon}>
+                <MicroCMSImage
+                  src={mainVisualUrl}
+                  options={{
+                    height: 400,
+                    aspectRatio: AspectRatio.SILVER_VERTICAL,
+                  }}
+                  optionsSmallScreen={{
+                    height: 250,
+                  }}
+                />
+              </ThumbnailInner>
+            </ThumbnailContainer>
           </ReverseParallax>
           {isComingSoon && (
             <ComingSoonLabel>
@@ -103,32 +122,20 @@ const Container = styled.div``;
 
 const ComingSoonLabel = styled.div`
   ${StyleMixin.ABSOLUTE_CENTERING};
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    width: 80px;
+  `};
 `;
 
 const ThumbnailContainer = styled.div`
   position: relative;
+  width: 100%;
   overflow: hidden;
 `;
 
-const Thumbnail = styled.div<
-  {
-    src: string;
-  } & IsComingSoonAcceptable
->`
-  width: 100%;
+const ThumbnailInner = styled.div<IsComingSoonAcceptable>`
   opacity: ${({ isComingSoon }) => (isComingSoon ? 0.2 : 1)};
-  ${StyleMixin.BACKGROUND_IMAGE_WITH_SRC}
-
-  &::after {
-    content: '';
-    display: block;
-    padding-bottom: ${AspectRatio.SILVER_VERTICAL}%;
-  }
-
-  ${media.lessThan(ScreenType.MEDIUM)`
-    width: auto;
-    position: static;
-  `}
 `;
 
 type SubInformation = {
@@ -164,7 +171,16 @@ export const TopPersonItem: React.FC<TopItemProps> = ({
             min={-800}
             max={800}
           >
-            <TopThumbnail src={mainVisualUrl} />
+            <MicroCMSImage
+              src={mainVisualUrl}
+              options={{
+                height: 600,
+                aspectRatio: AspectRatio.R_3_BY_4,
+              }}
+              optionsSmallScreen={{
+                height: 400,
+              }}
+            />
           </ReverseParallax>
         </TopThumbnailContainer>
         <TopInfo>
@@ -182,6 +198,9 @@ export const TopPersonItem: React.FC<TopItemProps> = ({
           <TopTitle>{title}</TopTitle>
           {subInformation && (
             <TopSubInfo>
+              {subInformation.publishDate && (
+                <TopPublishDate>{subInformation.publishDate}</TopPublishDate>
+              )}
               {(subInformation.twitter || subInformation.facebook) && (
                 <TopSubInfoSocialButtons>
                   {subInformation.twitter && (
@@ -195,9 +214,6 @@ export const TopPersonItem: React.FC<TopItemProps> = ({
                     </TopSubInfoSocialButton>
                   )}
                 </TopSubInfoSocialButtons>
-              )}
-              {subInformation.publishDate && (
-                <TopPublishDate>{subInformation.publishDate}</TopPublishDate>
               )}
             </TopSubInfo>
           )}
@@ -234,16 +250,6 @@ const TopThumbnailContainer = styled.div`
     margin: 0 auto;
     width: 80%;
   `}
-`;
-
-const TopThumbnail = styled.div`
-  ${StyleMixin.BACKGROUND_IMAGE_WITH_SRC};
-
-  &::after {
-    content: '';
-    display: block;
-    padding-bottom: ${AspectRatio.R_3_BY_4}%;
-  }
 `;
 
 const TopInfo = styled.div`
@@ -317,8 +323,8 @@ const TopIconContainerSmallScreen = styled.div`
 
 const TopSubInfo = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  align-items: flex-end;
+  justify-content: space-between;
   margin-top: ${Spacing.LARGE}px;
   ${media.lessThan(ScreenType.MEDIUM)`
     justify-content: space-between;
@@ -346,8 +352,7 @@ const TopSubInfoSocialButton = styled.div`
 `;
 
 const TopPublishDate = styled.div`
-  ${TypographyMixin.SUB};
-  ${TopSubInfoSocialButtons} + & {
-    margin-left: ${Spacing.LARGE}px;
-  }
+  ${TypographyMixin.DISPLAY};
+  color: ${Colors.UI_TEXT_SUB};
+  font-size: ${TextSize.SMALL}rem;
 `;

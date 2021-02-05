@@ -103,12 +103,12 @@ const Item = styled.li`
 
 const Type = styled.span`
   display: inline-block;
-  font-size: ${TextSize.XX_LARGE}rem;
+  font-size: ${TextSize.X_LARGE}rem;
   font-weight: ${TextWeight.BOLD};
   letter-spacing: 0.2em;
 
   ${media.lessThan(ScreenType.MEDIUM)`
-    font-size: ${TextSize.X_LARGE}rem;
+    font-size: ${TextSize.LARGE}rem;
   `}
 `;
 
@@ -153,13 +153,14 @@ const TriggerContainer = styled.button<PropsWithTransition>`
   height: ${Spacing.X_LARGE}px;
   mix-blend-mode: difference;
   transition: opacity ${TRANSITION_TIME}ms ease;
-  opacity: ${({ state }) => (state === TransitionStatus.ENTERED ? 1 : 0)};
-
   transition: opacity ${Transitions.HOVER_TRANSITION_NORMAL};
-  opacity: 1;
+  opacity: ${({ state }) => (state === TransitionStatus.ENTERED ? 1 : 0)};
 
   &:hover {
     opacity: 0.2;
+    ${media.lessThan(ScreenType.MEDIUM)`
+      opacity: 1;
+    `}
   }
 
   ${media.greaterThan(ScreenType.HUGE)`

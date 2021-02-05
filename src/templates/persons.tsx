@@ -11,13 +11,12 @@ import {
   DateFormat,
   ScreenType,
   Spacing,
-  AspectRatio,
-  StyleMixin,
   ModuleWidth,
+  AspectRatio,
 } from '@/constants';
 import media from 'styled-media-query';
 import { stripTag } from '@/util/string';
-import { TopPersonItem, Article, ArticleInfo } from '@/components';
+import { TopPersonItem, Article, ArticleInfo, MicroCMSImage } from '@/components';
 import { ReverseParallax, ParallaxBasePosition } from '@/effects';
 
 type PersonsPageProps = {
@@ -66,10 +65,20 @@ const PersonsPage: React.FC<PersonsPageProps> = ({ data }) => {
           <Article body={data.microcmsPersons?.body || ''} />
         </ArticleContainer>
       </Container>
-      <ArticleInfo title="クレジット" body={credit} />
+      {credit && <ArticleInfo title="クレジット" body={credit} />}
+
       <LastVisualContainer>
         <ReverseParallax zoom={1.1} fillLayout basePosition="center">
-          <LastVisual src={lastVisual} />
+          <MicroCMSImage
+            src={lastVisual}
+            options={{
+              height: 1000,
+              aspectRatio: AspectRatio.PLATINUM_HORIZONTAL,
+            }}
+            optionsSmallScreen={{
+              height: 240,
+            }}
+          />
         </ReverseParallax>
       </LastVisualContainer>
     </BaseLayout>
@@ -112,16 +121,6 @@ const LastVisualContainer = styled.div`
   max-width: ${ModuleWidth.SEMI_WIDE}px;
   margin: ${Spacing.XXX_LARGE}px auto;
   overflow: hidden;
-`;
-
-const LastVisual = styled.div`
-  ${StyleMixin.BACKGROUND_IMAGE_WITH_SRC};
-
-  &::after {
-    content: '';
-    display: block;
-    padding-bottom: ${AspectRatio.PLATINUM_HORIZONTAL}%;
-  }
 `;
 
 export default PersonsPage;
