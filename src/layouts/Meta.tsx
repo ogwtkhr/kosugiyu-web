@@ -21,6 +21,7 @@ export const Meta: React.FC<Props> = ({
 }) => {
   const {
     title: baseTitle,
+    url,
     description: baseDescription,
     twitter,
     ogImage: baseOgImage,
@@ -30,6 +31,8 @@ export const Meta: React.FC<Props> = ({
   const metaDescription = propsDescription || baseDescription;
   const twitterAccount = `@${twitter}`;
   const image = ogImage || baseOgImage;
+  // twitterは絶対パスが必要
+  const twitterImage = url + image;
 
   return (
     <Helmet
@@ -74,7 +77,7 @@ export const Meta: React.FC<Props> = ({
         },
         {
           name: 'twitter:image',
-          content: image,
+          content: twitterImage,
         },
         {
           name: 'twitter:site',
