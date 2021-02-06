@@ -13,7 +13,7 @@ type Props = {
 };
 
 export const Meta: React.FC<Props> = ({
-  title: propsTitle,
+  title,
   description: propsDescription,
   ogImage,
   lang = 'ja',
@@ -27,7 +27,6 @@ export const Meta: React.FC<Props> = ({
     ogImage: baseOgImage,
   } = useBaseMetaInfo();
 
-  const title = propsTitle || baseTitle;
   const metaDescription = propsDescription || baseDescription;
   const twitterAccount = `@${twitter}`;
   const image = ogImage || baseOgImage;
@@ -41,7 +40,7 @@ export const Meta: React.FC<Props> = ({
       }}
       title={title}
       titleTemplate={`%s | ${baseTitle}`}
-      defaultTitle={title}
+      defaultTitle={baseTitle}
       meta={[
         {
           name: 'description',
