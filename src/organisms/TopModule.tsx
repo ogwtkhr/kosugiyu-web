@@ -58,9 +58,9 @@ export const TopModule: React.FC<TopModuleProps> = ({ onViewInStatusChange }) =>
             <HeroImage />
           </HeroArea>
         </MainColumn>
-        <MenuListContainer>
+        <MenuListNavigation>
           <MenuList list={menuList} onIntroClick={scroll} />
-        </MenuListContainer>
+        </MenuListNavigation>
       </Container>
 
       <div ref={sentinelRef} />
@@ -72,8 +72,9 @@ type MenuListProps = {
   list: ReturnType<typeof useMenu>;
   onIntroClick: () => void;
 };
+
 const MenuList: React.FC<MenuListProps> = ({ list, onIntroClick }) => (
-  <>
+  <MenuListContainer>
     <MenuItem onClick={onIntroClick}>
       <MenuType as="button">小杉湯について</MenuType>
     </MenuItem>
@@ -84,10 +85,10 @@ const MenuList: React.FC<MenuListProps> = ({ list, onIntroClick }) => (
         </Link>
       </MenuItem>
     ))}
-  </>
+  </MenuListContainer>
 );
 
-const Container = styled.div`
+const Container = styled.section`
   display: flex;
   position: relative;
   width: 100vw;
@@ -147,7 +148,7 @@ const LogoCopy = styled.p`
   `}
 `;
 
-const SocialAccountContainer = styled.div`
+const SocialAccountContainer = styled.ul`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -178,7 +179,7 @@ const SocialAccountButtons: React.FC<SocialAccountButtonsProps> = ({ accounts, c
   );
 };
 
-const SocialAccountButton = styled.div`
+const SocialAccountButton = styled.li`
   & + & {
     margin-top: ${Spacing.X_LARGE}px;
   }
@@ -210,7 +211,7 @@ const HeroArea = styled.div`
   `}
 `;
 
-const MenuListContainer = styled.ul`
+const MenuListNavigation = styled.nav`
   position: absolute;
   top: 10px;
   right: ${Spacing.XXX_LARGE}px;
@@ -219,6 +220,8 @@ const MenuListContainer = styled.ul`
     display: none;
   `}
 `;
+
+const MenuListContainer = styled.ul``;
 
 const MenuItem = styled.li`
   ${TypographyMixin.DISPLAY};

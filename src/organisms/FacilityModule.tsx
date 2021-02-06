@@ -13,6 +13,8 @@ import {
   InformationNormalText,
 } from '@/molecules';
 import styled from 'styled-components';
+import media from 'styled-media-query';
+import { ScreenType, BigSpacing, Spacing } from '@/constants';
 
 export const FacilityModule: React.FC = () => {
   return (
@@ -99,11 +101,11 @@ export const FacilityModule: React.FC = () => {
         </InformationUnit>
       </InformationRow>
 
-      <InformationRow>
+      <FacilityNavigatorInformationRow>
         <InformationUnit title="施設紹介">
           <FacilityNavigator />
         </InformationUnit>
-      </InformationRow>
+      </FacilityNavigatorInformationRow>
 
       <InformationRow>
         <InformationUnit title="アクセス">
@@ -126,3 +128,12 @@ export const FacilityModule: React.FC = () => {
 };
 
 const Container = styled.section``;
+
+const FacilityNavigatorInformationRow = styled(InformationRow)`
+  margin-top: 200px;
+  margin-bottom: 200px;
+  ${media.lessThan(ScreenType.MEDIUM)`
+    margin-top: ${BigSpacing.X_SMALL}px;
+    margin-bottom: ${Spacing.XXX_LARGE}px;
+  `}
+`;

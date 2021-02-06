@@ -12,6 +12,7 @@ import {
   TransitionStatus,
   Transitions,
   BigSpacing,
+  LineHeight,
 } from '@/constants';
 import Transition from 'react-transition-group/Transition';
 import { useMenu, useBaseMetaInfo } from '@/hooks';
@@ -56,13 +57,17 @@ export const Menu: React.FC<MenuProps> = ({ isTriggerShow }) => {
       </Transition>
 
       <Overlay isOpen={isOpen}>
-        {menuList.map(({ id, label }) => (
-          <Item key={id}>
-            <Link to={`/${id !== 'top' ? id : ''}`}>
-              <Type>{label}</Type>
-            </Link>
-          </Item>
-        ))}
+        <Navigation>
+          <List>
+            {menuList.map(({ id, label }) => (
+              <Item key={id}>
+                <Link to={`/${id !== 'top' ? id : ''}`}>
+                  <Type>{label}</Type>
+                </Link>
+              </Item>
+            ))}
+          </List>
+        </Navigation>
         <SocialAccountContainer>
           <SocialAccountButton>
             <InstagramAccountButton id={instagram} />
@@ -76,8 +81,12 @@ export const Menu: React.FC<MenuProps> = ({ isTriggerShow }) => {
   );
 };
 
+const Navigation = styled.nav``;
+
+const List = styled.ul``;
+
 const Item = styled.li`
-  margin-top: ${Spacing.XXX_LARGE}px;
+  margin-top: ${BigSpacing.X_SMALL}px;
   list-style-type: none;
   text-align: center;
   cursor: pointer;
@@ -97,6 +106,7 @@ const Type = styled.span`
   font-size: ${TextSize.X_LARGE}rem;
   font-weight: ${TextWeight.BOLD};
   letter-spacing: ${LetterSpacing.MIDDLE_WIDE}em;
+  line-height: ${LineHeight.MONOLITHIC};
 
   ${media.lessThan(ScreenType.MEDIUM)`
     font-size: ${TextSize.LARGE}rem;

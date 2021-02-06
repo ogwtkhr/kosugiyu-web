@@ -154,7 +154,7 @@ const ShareButtonListContainer = styled.ul`
   `}
 `;
 
-const ButtonItem = styled.div`
+const ButtonItem = styled.li`
   width: 28px;
   & + & {
     margin-left: ${Spacing.NORMAL}px;

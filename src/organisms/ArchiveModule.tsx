@@ -136,7 +136,7 @@ const ArticlesByYear = styled.section`
   ${StyleMixin.RESPONSIVE_OFFSET};
 `;
 
-const ArticleYear = styled.div`
+const ArticleYear = styled.h3`
   display: flex;
   align-items: center;
   justify-content: center;

@@ -128,15 +128,17 @@ export const FacilityNavigator: React.FC = () => {
         <DescriptionTitle>{title}</DescriptionTitle>
         <DescriptionBody>{getTextBreakFragment(description)}</DescriptionBody>
         <DescriptionPhoto>
-          <SlideView index={currentIndex}>
-            {(Object.keys(FacilityID) as (keyof typeof FacilityID)[]).map((key) => (
-              <Picture
-                key={FacilityID[key]}
-                loading="eager"
-                relativePath={`photos/facility/photo_${FacilityID[key]}.jpg`}
-              />
-            ))}
-          </SlideView>
+          <DescriptionPhotoInner>
+            <SlideView index={currentIndex}>
+              {(Object.keys(FacilityID) as (keyof typeof FacilityID)[]).map((key) => (
+                <Picture
+                  key={FacilityID[key]}
+                  loading="eager"
+                  relativePath={`photos/facility/photo_${FacilityID[key]}.jpg`}
+                />
+              ))}
+            </SlideView>
+          </DescriptionPhotoInner>
         </DescriptionPhoto>
       </DescriptionWindow>
 
@@ -326,8 +328,7 @@ const DescriptionWindow = styled(BaseWindow)<IdInjectable>`
     padding: ${Spacing.LARGE}px;
   `}
 `;
-
-const DescriptionTitle = styled.h3`
+const DescriptionTitle = styled.h4`
   ${TypographyMixin.DISPLAY};
   font-size: ${TextSize.X_LARGE}rem;
 
@@ -359,6 +360,20 @@ const DescriptionPhoto = styled.div`
     left: calc(100% - 110px);
     width: 120px;
   `}
+
+  &::after {
+    content: '';
+    display: block;
+    padding-bottom: ${AspectRatio.R_4_BY_3}%;
+  }
+`;
+
+const DescriptionPhotoInner = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 `;
 
 const CONTROLS_WIDTH = 200;
@@ -452,7 +467,7 @@ const DetailWindowInner = styled.div`
   `}
 `;
 
-const DetailWindowHeader = styled.div`
+const DetailWindowHeader = styled.h4`
   display: flex;
   justify-content: space-between;
 `;

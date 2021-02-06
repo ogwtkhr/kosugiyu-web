@@ -75,6 +75,8 @@ export const SlideView: React.FC<SlideViewProps> = ({ autoPlay, index = 0, child
 
 const SlideViewContainer = styled.div`
   position: relative;
+  width: 100%;
+  height: 100%;
 `;
 
 export type SlideViewItemProps = {
