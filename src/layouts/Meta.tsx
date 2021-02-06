@@ -12,15 +12,22 @@ type Props = {
   meta?: MetaItem[];
 };
 
-export const Meta: React.FC<Props> = ({ title, description, ogImage, lang = 'ja', meta = [] }) => {
+export const Meta: React.FC<Props> = ({
+  title: propsTitle,
+  description: propsDescription,
+  ogImage,
+  lang = 'ja',
+  meta = [],
+}) => {
   const {
-    title: defaultTitle,
-    description: defaultDescription,
+    title: baseTitle,
+    description: baseDescription,
     twitter,
     ogImage: baseOgImage,
   } = useBaseMetaInfo();
 
-  const metaDescription = description || defaultDescription;
+  const title = propsTitle || baseTitle;
+  const metaDescription = propsDescription || baseDescription;
   const twitterAccount = `@${twitter}`;
   const image = ogImage || baseOgImage;
 
@@ -30,8 +37,8 @@ export const Meta: React.FC<Props> = ({ title, description, ogImage, lang = 'ja'
         lang,
       }}
       title={title}
-      titleTemplate={`%s | ${defaultTitle}`}
-      defaultTitle={defaultTitle}
+      titleTemplate={`%s | ${baseTitle}`}
+      defaultTitle={title}
       meta={[
         {
           name: 'description',
@@ -54,6 +61,10 @@ export const Meta: React.FC<Props> = ({ title, description, ogImage, lang = 'ja'
           content: image,
         },
         {
+          name: 'twitter:title',
+          content: title,
+        },
+        {
           name: 'twitter:card',
           content: 'summary_large_image',
         },
@@ -74,7 +85,6 @@ export const Meta: React.FC<Props> = ({ title, description, ogImage, lang = 'ja'
       link={[
         {
           href: 'https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,500&display=swap',
-          // 'https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,500|Roboto+Condensed&display=swap',
           rel: 'stylesheet',
           type: 'text/css',
         },
