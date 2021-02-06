@@ -111,7 +111,7 @@ const IconContainer = styled.div`
   `};
 `;
 
-const Container = styled.div``;
+const Container = styled.article``;
 
 const ComingSoonLabel = styled.div`
   ${StyleMixin.ABSOLUTE_CENTERING};

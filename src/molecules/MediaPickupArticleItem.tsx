@@ -52,7 +52,7 @@ export const MediaPickupArticleItem: React.FC<MediaPickupArticleItemProps> = ({
             <MicroCMSImage
               src={mainVisualUrl}
               options={{
-                height: 600,
+                height: 910,
                 aspectRatio: AspectRatio.R_3_BY_4,
               }}
               optionsSmallScreen={{
@@ -98,7 +98,7 @@ export const MediaPickupArticleItem: React.FC<MediaPickupArticleItemProps> = ({
   );
 };
 
-const Container = styled.div`
+const Container = styled.article`
   display: flex;
   align-items: center;
   justify-content: space-between;

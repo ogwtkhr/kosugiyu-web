@@ -326,8 +326,7 @@ const DescriptionWindow = styled(BaseWindow)<IdInjectable>`
     padding: ${Spacing.LARGE}px;
   `}
 `;
-
-const DescriptionTitle = styled.h3`
+const DescriptionTitle = styled.h4`
   ${TypographyMixin.DISPLAY};
   font-size: ${TextSize.X_LARGE}rem;
 
@@ -452,7 +451,7 @@ const DetailWindowInner = styled.div`
   `}
 `;
 
-const DetailWindowHeader = styled.div`
+const DetailWindowHeader = styled.h4`
   display: flex;
   justify-content: space-between;
 `;

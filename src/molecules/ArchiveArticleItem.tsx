@@ -117,7 +117,7 @@ const ArticleTitleContainer = styled.div<ArchiveArticleItemChildPropsWithDirecti
       : ''};
 `;
 
-const ArticleTitle = styled.h3<ArchiveArticleItemChildPropsWithTextSize>`
+const ArticleTitle = styled.h4<ArchiveArticleItemChildPropsWithTextSize>`
   ${TypographyMixin.DISPLAY};
   font-size: ${({ textSize }) =>
     textSize === SizeType.SMALL ? TextSize.NORMAL : TextSize.LARGE}rem;

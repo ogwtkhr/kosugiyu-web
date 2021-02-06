@@ -179,7 +179,8 @@ export const MediaModule: React.FC<MediaModuleProps> = ({
 };
 
 type ContainerProps = Pick<MediaModuleProps, 'withVerticalMargin'>;
-const Container = styled.div<ContainerProps>`
+
+const Container = styled.section<ContainerProps>`
   position: relative;
   max-width: ${ModuleWidth.MIDDLE}px;
   margin: ${({ withVerticalMargin }) =>
@@ -215,7 +216,7 @@ const MediaTitleLogoArea = styled.div`
   `}
 `;
 
-const MediaTitleLogo = styled.div`
+const MediaTitleLogo = styled.h2`
   position: absolute;
   top: 138px;
   right: -135px;
@@ -254,7 +255,7 @@ const MediaTitleImage = styled.div`
   `}
 `;
 
-const MediaSummaryTitleLogo = styled.div`
+const MediaSummaryTitleLogo = styled.h2`
   ${StyleMixin.HOVER_EFFECT.NORMAL};
   position: absolute;
   z-index: 1;

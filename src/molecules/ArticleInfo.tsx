@@ -30,7 +30,7 @@ export const ArticleInfo: React.FC<ArticleInfoProps> = ({ title, body, children 
   );
 };
 
-const Container = styled.div`
+const Container = styled.aside`
   max-width: ${ModuleWidth.ARTICLE}px;
   margin: ${Spacing.X_LARGE}px auto;
   ${media.lessThan(ScreenType.MEDIUM)`

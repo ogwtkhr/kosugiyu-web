@@ -421,7 +421,7 @@ const IntroStoryFinalMessage = styled.div`
   `}
 `;
 
-const GridOuter = styled.div`
+const GridOuter = styled.section`
   position: relative;
   margin: ${Spacing.XX_LARGE}px 0;
   background-color: ${Colors.UI_PAPER};
