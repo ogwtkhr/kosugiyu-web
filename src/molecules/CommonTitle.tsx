@@ -33,7 +33,7 @@ const Container = styled.div`
   margin: 0 auto;
 
   ${media.lessThan(ScreenType.MEDIUM)`
-    height: 240px;
+    height: 320px;
   `}
 `;
 
