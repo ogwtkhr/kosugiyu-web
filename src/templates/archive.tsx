@@ -157,31 +157,6 @@ const MetaInfoContainer = styled.div`
   margin-top: ${Spacing.LARGE}px;
 `;
 
-const SocialButtons = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-
-  ${media.lessThan(ScreenType.MEDIUM)`
-    justify-content: flex-end;
-  `}
-`;
-
-const SocialButton = styled.div`
-  width: 28px;
-  & + & {
-    margin-left: ${Spacing.NORMAL}px;
-  }
-
-  ${media.lessThan(ScreenType.MEDIUM)`
-    width: 32px;
-
-    & + & {
-      margin-left: ${Spacing.LARGE}px;
-    }
-  `}
-`;
-
 const MetaInfo = styled.div``;
 
 const PublishedDate = styled.time`

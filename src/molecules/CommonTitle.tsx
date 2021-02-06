@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Picture, UnderLineText } from '@/atoms';
-import { Spacing, ModuleWidth, ScreenType, SizeType, ModuleHeight } from '@/constants';
+import { Spacing, ModuleWidth, ScreenType, SizeType, ModuleHeight, AspectRatio } from '@/constants';
 import media from 'styled-media-query';
 import { getTextBreakFragment } from '@/util/jsx';
 import { ReverseParallax, ParallaxBasePosition } from '@/effects';
@@ -33,7 +33,12 @@ const Container = styled.div`
   margin: 0 auto;
 
   ${media.lessThan(ScreenType.MEDIUM)`
-    height: 320px;
+    height: auto;
+    &::after {
+      content: '';
+      display: block;
+      padding-bottom: ${AspectRatio.R_4_BY_3}%;
+    }
   `}
 `;
 
