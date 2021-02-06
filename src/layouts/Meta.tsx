@@ -30,7 +30,6 @@ export const Meta: React.FC<Props> = ({
   const metaDescription = propsDescription || baseDescription;
   const twitterAccount = `@${twitter}`;
   const image = ogImage || baseOgImage;
-  console.log(title);
 
   return (
     <Helmet
@@ -72,6 +71,10 @@ export const Meta: React.FC<Props> = ({
         {
           name: 'twitter:creator',
           content: twitterAccount,
+        },
+        {
+          name: 'twitter:image',
+          content: image,
         },
         {
           name: 'twitter:site',
