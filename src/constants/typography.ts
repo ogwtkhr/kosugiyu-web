@@ -9,6 +9,7 @@ export const TextSize = {
   X_SMALL: 1.2,
   SMALL: 1.4,
   NORMAL: 1.6,
+  MIDDLE: 1.8,
   LARGE: 2,
   X_LARGE: 2.4,
   XX_LARGE: 2.8,

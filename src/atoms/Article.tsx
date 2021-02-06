@@ -32,6 +32,7 @@ const Container = styled.article`
   margin-left: auto;
   word-wrap: break-word;
   overflow-wrap: break-word;
+
   ${media.lessThan(ScreenType.MEDIUM)`
     margin: 0 ${Spacing.X_LARGE}px;
   `}
@@ -71,6 +72,7 @@ const Container = styled.article`
 
     & > a {
       ${TypographyMixin.LINK};
+      word-break: break-all;
     }
   }
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 
 type ExternalLinkProps = {
   href: string;
@@ -20,8 +21,13 @@ export const ExternalLink: React.FC<ExternalLinkProps> = ({
     : {};
 
   return (
-    <a {...attributes} href={href} className={className}>
+    <Anchor {...attributes} href={href} className={className}>
       {children}
-    </a>
+    </Anchor>
   );
 };
+
+const Anchor = styled.a`
+  /* color: inherit;
+  text-decoration: inherit; */
+`;

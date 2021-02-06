@@ -21,16 +21,20 @@ type ButtonProps = {
   type?: ButtonTypeName;
   href?: string;
   target?: string;
+  showArrow?: boolean;
+  align?: 'center' | 'right';
 };
 
 export const Button: React.FC<ButtonProps> = (props) => {
   return (
     <StyledButton {...props}>
       <ButtonInner>
-        <ButtonLabel>{props.children}</ButtonLabel>
-        <ButtonIcon>
-          <ArrowIcon />
-        </ButtonIcon>
+        <ButtonLabel align={props.align}>{props.children}</ButtonLabel>
+        {props.showArrow && (
+          <ButtonIcon>
+            <ArrowIcon />
+          </ButtonIcon>
+        )}
       </ButtonInner>
     </StyledButton>
   );
@@ -39,7 +43,7 @@ export const Button: React.FC<ButtonProps> = (props) => {
 const StyledButton = styled(Link)`
   ${TypographyMixin.DISPLAY};
   display: inline-block;
-  width: 240px;
+  width: 260px;
   padding: ${Spacing.MIDDLE}px ${Spacing.XXX_LARGE}px;
   transition: ${Transitions.HOVER_TRANSITION_NORMAL};
   border: ${LINE.ShortHand.THIN};
@@ -54,10 +58,12 @@ const ButtonInner = styled.div`
   justify-content: space-between;
 `;
 
-const ButtonLabel = styled.p``;
+const ButtonLabel = styled.p<Pick<ButtonProps, 'align'>>`
+  ${({ align }) => (align ? align : '')}
+`;
 
 const ButtonIcon = styled.div`
-  width: 24px;
+  width: 20px;
 `;
 
 export const ButtonContainer = styled.div`

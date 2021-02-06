@@ -17,7 +17,7 @@ import {
 } from '@/constants';
 import media from 'styled-media-query';
 import { stripTag } from '@/util/string';
-import { Article, MicroCMSImage, MediaLogo } from '@/atoms';
+import { Article, ShareButtonList, MicroCMSImage, MediaLogo } from '@/atoms';
 import { ReverseParallax, ParallaxBasePosition } from '@/effects';
 import { MediaPickupArticleItem, ArticleInfo } from '@/molecules';
 
@@ -87,6 +87,7 @@ const MediaPage: React.FC<MediaPageProps> = ({ data }) => {
           />
         </ReverseParallax>
       </LastVisualContainer>
+      <ShareButtonList twitter facebook />
     </BaseLayout>
   );
 };
