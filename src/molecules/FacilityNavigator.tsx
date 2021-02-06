@@ -346,6 +346,9 @@ const DescriptionBody = styled.p`
     overflow: scroll;
     font-size: ${TextSize.X_SMALL}rem;
   `}
+  ${media.lessThan(`${ScreenValue.VERY_SMALL}px`)`
+    font-size: ${TextSize.XXX_SMALL}rem;
+  `}
 `;
 
 const DescriptionPhoto = styled.div`

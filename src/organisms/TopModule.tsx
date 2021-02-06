@@ -6,6 +6,7 @@ import {
   Spacing,
   TypographyMixin,
   ScreenType,
+  ScreenValue,
   Colors,
   TextSize,
   TextWeight,
@@ -204,9 +205,9 @@ const HeroArea = styled.div`
     margin-top: 70px;
     height: 520px;
     margin-right: 0;
-  `}
+  `}{
   /* TODO: アス比 + 最大高さもっといい感じにできると */
-  ${media.lessThan('350px')`
+  ${media.lessThan(`${ScreenValue.VERY_SMALL}px`)`
     height: 460px;
   `}
 `;
