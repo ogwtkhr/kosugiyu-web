@@ -50,8 +50,11 @@ export const TwitterTweetButton: React.FC<TwitterTweetButtonProps> = ({
   const [title, setTitle] = useState<string>(propsTitle || window.document.title);
 
   useEffect(() => {
-    setUrl(propsUrl || window.location.href);
-    setTitle(propsTitle || window.document.title);
+    setTimeout(() => {
+      // TODO、即時でtitleが書き換わらないのでいったん
+      setUrl(propsUrl || window.location.href);
+      setTitle(propsTitle || window.document.title);
+    }, 10);
   }, [propsUrl, propsTitle]);
 
   const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
@@ -68,7 +71,10 @@ export const FacebookShareButton: React.FC<SocialBaseProps> = ({ url: propsUrl, 
   const [url, setUrl] = useState<string>(propsUrl || window.location.href);
 
   useEffect(() => {
-    setUrl(propsUrl || window.location.href);
+    setTimeout(() => {
+      // 上に同じ
+      setUrl(propsUrl || window.location.href);
+    }, 10);
   }, [propsUrl]);
 
   const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
