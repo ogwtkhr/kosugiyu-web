@@ -8,3 +8,4 @@ export * from './usePageInfo';
 export * from './useFacilityInfo';
 export * from './useScreenSize';
 export * from './useScreenThreshold';
+export * from './useHasMounted';

@@ -12,6 +12,7 @@ import {
   NoteCircleIcon,
 } from './Icon';
 import { ExternalLink } from '@/atoms';
+import { RenderClientOnly } from '@/effects';
 import { Colors, Spacing, ScreenType } from '@/constants';
 import { ValueOf } from '@/types';
 import media from 'styled-media-query';
@@ -129,18 +130,20 @@ type ShareButtonListProps = {
 
 export const ShareButtonList: React.FC<ShareButtonListProps> = ({ twitter, facebook }) => {
   return (
-    <ShareButtonListContainer>
-      {twitter && (
-        <ButtonItem>
-          <TwitterTweetButton shape="circle" />
-        </ButtonItem>
-      )}
-      {facebook && (
-        <ButtonItem>
-          <FacebookShareButton shape="circle" />
-        </ButtonItem>
-      )}
-    </ShareButtonListContainer>
+    <RenderClientOnly>
+      <ShareButtonListContainer>
+        {twitter && (
+          <ButtonItem>
+            <TwitterTweetButton shape="circle" />
+          </ButtonItem>
+        )}
+        {facebook && (
+          <ButtonItem>
+            <FacebookShareButton shape="circle" />
+          </ButtonItem>
+        )}
+      </ShareButtonListContainer>
+    </RenderClientOnly>
   );
 };
 
