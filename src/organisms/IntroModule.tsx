@@ -355,8 +355,12 @@ const IntroStoryIllustration2 = styled(IntroStoryIllustration)`
 `;
 
 const IntroStoryIllustration3 = styled(IntroStoryIllustration)`
-  top: 20%;
+  top: 40px;
   right: -32px;
+
+  ${media.lessThan('900px')`
+    top: -20%;
+  `}
 
   ${media.lessThan(ScreenType.MEDIUM)`
     top: auto;
@@ -368,6 +372,11 @@ const IntroStoryIllustration3 = styled(IntroStoryIllustration)`
 const IntroStoryIllustration4 = styled(IntroStoryIllustration)`
   top: 14%;
   left: -${Spacing.LARGE}px;
+
+  ${media.lessThan('1200px')`
+    top: -10%;
+  `}
+
   ${media.lessThan(ScreenType.MEDIUM)`
     top: auto;
     bottom: -108px;
