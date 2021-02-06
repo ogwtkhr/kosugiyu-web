@@ -30,7 +30,7 @@ export const Meta: React.FC<Props> = ({
   const metaDescription = propsDescription || baseDescription;
   const twitterAccount = `@${twitter}`;
   const image = ogImage || baseOgImage;
-  // twitterは絶対パスが必要
+  // twitterは絶対パスが必要、かつ大きすぎると取得不可
   const twitterImage = `${image.match(/^http/) ? image : url + image}?width=1200`;
 
   return (
