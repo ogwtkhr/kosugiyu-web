@@ -31,7 +31,7 @@ export const Meta: React.FC<Props> = ({
   const twitterAccount = `@${twitter}`;
   const image = ogImage || baseOgImage;
   // twitterは絶対パスが必要
-  const twitterImage = image.match(/^http/) ? image : url + image;
+  const twitterImage = `${image.match(/^http/) ? image : url + image}?width=1200`;
 
   return (
     <Helmet
