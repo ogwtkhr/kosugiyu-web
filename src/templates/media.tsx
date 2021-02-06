@@ -87,7 +87,6 @@ const MediaPage: React.FC<MediaPageProps> = ({ data }) => {
           />
         </ReverseParallax>
       </LastVisualContainer>
-      <ShareButtonList twitter facebook />
     </BaseLayout>
   );
 };
