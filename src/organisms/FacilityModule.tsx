@@ -47,7 +47,7 @@ export const FacilityModule: React.FC = () => {
         <InformationUnit title="入浴料金">
           <InformationGroup>
             <InformationContentRow>
-              <InformationContent flex={1}>
+              <InformationContent flex={1} collapseOnVerySmallScreen>
                 <InformationItem title="大人" price={470} />
                 <InformationItem title="中人（小学生）" price={180} />
                 <InformationItem title="小人（0〜5歳）" price={80} />
@@ -71,7 +71,7 @@ export const FacilityModule: React.FC = () => {
           <InformationGroupRow>
             <InformationGroup title="貸出タオル">
               <InformationContentRow>
-                <InformationContent flex={1}>
+                <InformationContent flex={1} collapseOnVerySmallScreen>
                   <InformationItem title="フェイスタオル" body="無料" supple="（2枚目〜50円）" />
                   <InformationItem title="バスタオル" price={80} supple="（IKEUCHI ORGANIC）" />
                 </InformationContent>
@@ -80,7 +80,7 @@ export const FacilityModule: React.FC = () => {
 
             <InformationGroup title="その他設備">
               <InformationContentRow>
-                <InformationContent flex={1}>
+                <InformationContent flex={1} collapseOnVerySmallScreen>
                   <InformationItem title="ドライヤー" price={20} supple="（3分）" />
                   <InformationItem title="マッサージ機" price={100} supple="（10分）" />
                   <InformationItem title="Wi-Fi" body="無料" />

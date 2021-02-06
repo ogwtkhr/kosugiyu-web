@@ -34,14 +34,14 @@ const Container = styled.aside`
   max-width: ${ModuleWidth.ARTICLE}px;
   margin: ${Spacing.X_LARGE}px auto;
   ${media.lessThan(ScreenType.MEDIUM)`
-    margin: ${Spacing.LARGE}px;
+    margin: ${Spacing.X_LARGE}px;
   `};
 `;
 
 const Title = styled.div`
   color: ${Colors.UI_TEXT_WEAKEN};
   font-size: ${TextSize.NORMAL}rem;
-  font-weight: ${TextWeight.MEDIUM};
+  font-weight: ${TextWeight.BOLD};
 `;
 
 const Body = styled.div`

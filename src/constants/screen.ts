@@ -15,6 +15,7 @@ export const ScreenValue = {
   LARGE: parseInt(defaultBreakpoints.large, 10),
   MEDIUM: parseInt(defaultBreakpoints.medium, 10),
   SMALL: parseInt(defaultBreakpoints.small, 10),
+  VERY_SMALL: 350,
 } as const;
 
 export default ScreenType;

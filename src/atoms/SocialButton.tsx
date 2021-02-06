@@ -147,11 +147,7 @@ export const ShareButtonList: React.FC<ShareButtonListProps> = ({ twitter, faceb
 const ShareButtonListContainer = styled.ul`
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-
-  ${media.lessThan(ScreenType.MEDIUM)`
-    justify-content: flex-end;
-  `}
+  justify-content: flex-end;
 `;
 
 const ButtonItem = styled.li`

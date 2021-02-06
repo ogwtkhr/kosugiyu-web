@@ -124,6 +124,7 @@ const ArticleTitle = styled.h4<ArchiveArticleItemChildPropsWithTextSize>`
   letter-spacing: ${LetterSpacing.SEMI_WIDE}em;
   line-height: ${LineHeight.NORMAL};
   text-decoration: none;
+  word-break: break-all;
 
   ${media.lessThan<ArchiveArticleItemChildPropsWithTextSize>(ScreenType.MEDIUM)`
     font-size: ${({ textSize, enableTextSizingOnSmallScreen }) =>
