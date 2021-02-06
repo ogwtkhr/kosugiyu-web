@@ -8,9 +8,11 @@ import {
   Transitions,
   TextSize,
   TypographyMixin,
+  ScreenType,
 } from '@/constants';
 import { ArrowIcon } from '@/atoms';
 import { Link } from 'gatsby';
+import media from 'styled-media-query';
 
 type ButtonElementName = 'button' | 'a' | 'span' | 'div';
 type ButtonTypeName = 'submit' | 'reset' | 'button';
@@ -70,6 +72,10 @@ export const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   margin: ${BigSpacing.NORMAL}px 0;
+
+  ${media.lessThan(ScreenType.MEDIUM)`
+    margin: ${BigSpacing.XX_SMALL}px 0;
+  `}
 `;
 
 export default Button;
