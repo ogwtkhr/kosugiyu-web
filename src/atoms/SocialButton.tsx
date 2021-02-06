@@ -140,7 +140,7 @@ export const ShareButtonList: React.FC<ShareButtonListProps> = ({ twitter, faceb
           <FacebookShareButton shape="circle" />
         </ButtonItem>
       )}
-    {/* </ShareButtonListContainer> */}
+    </ShareButtonListContainer>
   );
 };
 
