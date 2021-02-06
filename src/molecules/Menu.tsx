@@ -12,6 +12,7 @@ import {
   TransitionStatus,
   Transitions,
   BigSpacing,
+  LineHeight,
 } from '@/constants';
 import Transition from 'react-transition-group/Transition';
 import { useMenu, useBaseMetaInfo } from '@/hooks';
@@ -85,7 +86,7 @@ const Navigation = styled.nav``;
 const List = styled.ul``;
 
 const Item = styled.li`
-  margin-top: ${Spacing.XXX_LARGE}px;
+  margin-top: ${BigSpacing.X_SMALL}px;
   list-style-type: none;
   text-align: center;
   cursor: pointer;
@@ -105,6 +106,7 @@ const Type = styled.span`
   font-size: ${TextSize.X_LARGE}rem;
   font-weight: ${TextWeight.BOLD};
   letter-spacing: ${LetterSpacing.MIDDLE_WIDE}em;
+  line-height: ${LineHeight.MONOLITHIC};
 
   ${media.lessThan(ScreenType.MEDIUM)`
     font-size: ${TextSize.LARGE}rem;

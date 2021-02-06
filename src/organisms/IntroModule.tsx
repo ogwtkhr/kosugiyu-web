@@ -436,6 +436,8 @@ const MessageInGrid = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  /* ぼやけ対策 https://myscreate.com/transform-bugs/ */
+  -webkit-font-smoothing: antialiased;
 `;
 
 export default IntroModule;
