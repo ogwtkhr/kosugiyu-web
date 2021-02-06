@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { window } from '@/util/window';
 import {
@@ -46,8 +46,14 @@ export const TwitterTweetButton: React.FC<TwitterTweetButtonProps> = ({
   color,
   shape,
 }) => {
-  const url = propsUrl || window.location.href;
-  const title = propsTitle || window.document.title;
+  const [url, setUrl] = useState<string>(propsUrl || window.location.href);
+  const [title, setTitle] = useState<string>(propsTitle || window.document.title);
+
+  useEffect(() => {
+    setUrl(propsUrl || window.location.href);
+    setTitle(propsTitle || window.document.title);
+  }, [propsUrl, propsTitle]);
+
   const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
     title,
   )}&url=${encodeURIComponent(url)}`;
@@ -59,7 +65,12 @@ export const TwitterTweetButton: React.FC<TwitterTweetButtonProps> = ({
 };
 
 export const FacebookShareButton: React.FC<SocialBaseProps> = ({ url: propsUrl, color, shape }) => {
-  const url = propsUrl || window.location.href;
+  const [url, setUrl] = useState<string>(propsUrl || window.location.href);
+
+  useEffect(() => {
+    setUrl(propsUrl || window.location.href);
+  }, [propsUrl]);
+
   const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
   return (
     <Container href={shareUrl}>
