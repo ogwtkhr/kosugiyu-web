@@ -8,6 +8,7 @@
     instagram: kosugiyu_sento
     note: kosugiyu
     ogImage: /meta/og_images/main.jpg
+
   pages:
     - id: top
       title: 小杉湯
@@ -21,8 +22,8 @@
       description: 昭和八年創業。高円寺の銭湯「小杉湯」の「できごと」を伝えます。
       ogImage: /meta/og_images/archive.jpg
     - id: media
-      title: ケノ日のハレ
-      description: 昭和八年創業。高円寺の銭湯「小杉湯」のWEBメディア「ケノ日のハレ」です。
+      title: ケの日のハレ
+      description: 昭和八年創業。高円寺の銭湯「小杉湯」のWEBメディア「ケの日のハレ」です。
       ogImage: /meta/og_images/media.jpg
     - id: not_found
       title: ページが存在しません
