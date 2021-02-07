@@ -3,11 +3,11 @@ import { useStaticQuery, graphql } from 'gatsby';
 import { AllImageFileQuery } from '@/types';
 import Img, { FluidObject, GatsbyImageFluidProps } from 'gatsby-image';
 
-type PictureProps = {
+type GatsbyImageProps = {
   relativePath: string;
 } & Omit<GatsbyImageFluidProps, 'fluid'>;
 
-export const Picture: React.FC<PictureProps> = ({
+export const GatsbyImage: React.FC<GatsbyImageProps> = ({
   relativePath,
   fadeIn = false,
   loading = 'eager',
@@ -99,4 +99,4 @@ export const Picture: React.FC<PictureProps> = ({
   );
 };
 
-export default Picture;
+export default GatsbyImage;

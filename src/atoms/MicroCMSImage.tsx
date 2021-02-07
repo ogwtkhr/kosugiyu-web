@@ -1,8 +1,16 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { ScreenValue, AspectRatio, ScreenType } from '@/constants';
-import BaseImgix, { Picture, Source as BaseSource, SharedImigixAndSourceProps } from 'react-imgix';
+import BaseImgix, {
+  Picture,
+  Source as BaseSource,
+  PublicConfigAPI,
+  SharedImigixAndSourceProps,
+} from 'react-imgix';
 import media from 'styled-media-query';
+
+// ImgixをStyledComponentでラップするとフォールバック警告が出るがスルーする
+PublicConfigAPI.disableWarning('fallbackImage');
 
 type Options = {
   aspectRatio?: number;

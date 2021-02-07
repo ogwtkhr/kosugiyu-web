@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Picture, ScrollLine } from '@/atoms';
+import { GatsbyImage, ScrollLine } from '@/atoms';
 import { Colors, LineHeight, ScreenType, Spacing, TextSize, TypeFace } from '@/constants';
 import media from 'styled-media-query';
 import { ReverseParallax, ParallaxBasePosition } from '@/effects';
@@ -9,7 +9,7 @@ export const HeroImage: React.FC = () => {
   return (
     <Container>
       <ReverseParallax zoom={1.1} basePosition={ParallaxBasePosition.TOP} fillLayout>
-        <Picture relativePath="photos/top/hero.jpg" />
+        <GatsbyImage relativePath="photos/top/hero.jpg" />
       </ReverseParallax>
       <BusinessInfo>
         平日 15:30-25:45
