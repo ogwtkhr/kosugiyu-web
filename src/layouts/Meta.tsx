@@ -32,6 +32,7 @@ export const Meta: React.FC<Props> = ({
   const image = ogImage || baseOgImage;
   // twitterは絶対パスが必要、かつ大きすぎると取得不可
   const twitterImage = `${image.match(/^http/) ? image : url + image}?width=1200`;
+  const ogTitle = title || baseTitle;
 
   return (
     <Helmet
@@ -48,7 +49,7 @@ export const Meta: React.FC<Props> = ({
         },
         {
           property: 'og:title',
-          content: title,
+          content: ogTitle,
         },
         {
           property: 'og:description',
@@ -64,7 +65,7 @@ export const Meta: React.FC<Props> = ({
         },
         {
           name: 'twitter:title',
-          content: title,
+          content: ogTitle,
         },
         {
           name: 'twitter:card',
