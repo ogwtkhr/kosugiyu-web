@@ -5,3 +5,8 @@
  */
 
 // You can delete this file if you're not using it
+const { renderAA } = require('./src/util/aa');
+
+exports.onInitialClientRender = () => {
+  renderAA();
+};

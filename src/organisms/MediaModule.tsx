@@ -11,7 +11,7 @@ import {
   ModuleHeight,
   Colors,
 } from '@/constants';
-import { Picture, Button, ButtonContainer, MediaLogo, MediaTagLine } from '@/atoms';
+import { GatsbyImage, Button, ButtonContainer, MediaLogo, MediaTagLine } from '@/atoms';
 import { MediaArticleItem, MediaPickupArticleItem } from '@/molecules';
 import media from 'styled-media-query';
 import { ReverseParallax, ParallaxBasePosition, IntersectionFadeIn } from '@/effects';
@@ -106,7 +106,7 @@ export const MediaModule: React.FC<MediaModuleProps> = ({
                 basePosition={ParallaxBasePosition.TOP}
                 fillLayout
               >
-                <Picture relativePath="photos/media/hero.jpg" />
+                <GatsbyImage relativePath="photos/media/hero.jpg" />
               </ReverseParallax>
             </MediaTitleImage>
           </MediaTitleInner>

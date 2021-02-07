@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 
-import { GridContainer, GridItem, GridImage, Picture } from '@/atoms';
+import { GridContainer, GridItem, GridImage, GatsbyImage } from '@/atoms';
 
 import {
   TypographyMixin,
@@ -30,7 +30,7 @@ export const IntroModule: React.FC = () => {
           <IntroStoryNormalPhoto>
             <ReverseParallax zoom={1.2} fillLayout>
               <IntersectionFadeIn fillLayout>
-                <Picture relativePath="photos/intro/story_1.jpg" />
+                <GatsbyImage relativePath="photos/intro/story_1.jpg" />
               </IntersectionFadeIn>
             </ReverseParallax>
           </IntroStoryNormalPhoto>
@@ -38,7 +38,7 @@ export const IntroModule: React.FC = () => {
         <IntroStoryUnitColumnSub>
           <IntroStoryIllustration1>
             <IntersectionFadeIn slideIn fillLayout wait={200}>
-              <Picture relativePath="illustrations/intro/story_1.png" />
+              <GatsbyImage relativePath="illustrations/intro/story_1.png" />
             </IntersectionFadeIn>
           </IntroStoryIllustration1>
           <MessageTypography isShort>
@@ -153,7 +153,7 @@ export const IntroModule: React.FC = () => {
           </IntersectionFadeIn>
           <IntroStoryIllustration2>
             <IntersectionFadeIn slideIn fillLayout wait={200}>
-              <Picture relativePath="illustrations/intro/story_2.png" />
+              <GatsbyImage relativePath="illustrations/intro/story_2.png" />
             </IntersectionFadeIn>
           </IntroStoryIllustration2>
         </MessageInGrid>
@@ -162,7 +162,7 @@ export const IntroModule: React.FC = () => {
         <IntroStoryUnitColumnSub>
           <IntroStoryIllustration3>
             <IntersectionFadeIn slideIn fillLayout wait={200}>
-              <Picture relativePath="illustrations/intro/story_3.png" />
+              <GatsbyImage relativePath="illustrations/intro/story_3.png" />
             </IntersectionFadeIn>
           </IntroStoryIllustration3>
           <MessageTypography>
@@ -174,7 +174,7 @@ export const IntroModule: React.FC = () => {
             <IntroStoryNormalPhoto>
               <ReverseParallax zoom={1.2} fillLayout>
                 <IntersectionFadeIn fillLayout>
-                  <Picture relativePath="photos/intro/story_9.jpg" />
+                  <GatsbyImage relativePath="photos/intro/story_9.jpg" />
                 </IntersectionFadeIn>
               </ReverseParallax>
             </IntroStoryNormalPhoto>
@@ -187,7 +187,7 @@ export const IntroModule: React.FC = () => {
             <IntroStoryNormalPhoto>
               <ReverseParallax zoom={1.2} fillLayout>
                 <IntersectionFadeIn fillLayout>
-                  <Picture relativePath="photos/intro/story_10.jpg" />
+                  <GatsbyImage relativePath="photos/intro/story_10.jpg" />
                 </IntersectionFadeIn>
               </ReverseParallax>
             </IntroStoryNormalPhoto>
@@ -196,7 +196,7 @@ export const IntroModule: React.FC = () => {
         <IntroStoryUnitColumnSub>
           <IntroStoryIllustration4>
             <IntersectionFadeIn slideIn fillLayout wait={200}>
-              <Picture relativePath="illustrations/intro/story_4.png" />
+              <GatsbyImage relativePath="illustrations/intro/story_4.png" />
             </IntersectionFadeIn>
           </IntroStoryIllustration4>
           <MessageTypography>
@@ -223,7 +223,7 @@ export const IntroModule: React.FC = () => {
             }}
             fillLayout
           >
-            <Picture
+            <GatsbyImage
               relativePath="photos/intro/story_11.jpg"
               imgStyle={{
                 objectPosition: '50% 0',

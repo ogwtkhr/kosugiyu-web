@@ -5,7 +5,7 @@ export * from './ExternalLink';
 export * from './Grid';
 export * from './Box';
 export * from './Overlay';
-export * from './Picture';
+export * from './GatsbyImage';
 export * from './SocialButton';
 export * from './ScrollLine';
 export * from './UnderLineText';

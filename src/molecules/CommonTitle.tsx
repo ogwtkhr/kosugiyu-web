@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Picture, UnderLineText } from '@/atoms';
+import { GatsbyImage, UnderLineText } from '@/atoms';
 import { Spacing, ModuleWidth, ScreenType, SizeType, ModuleHeight, AspectRatio } from '@/constants';
 import media from 'styled-media-query';
 import { getTextBreakFragment } from '@/util/jsx';
@@ -20,7 +20,7 @@ export const CommonTitle: React.FC<CommonTitleProps> = ({ title, imagePath }) =>
     </TitleMain>
     <TitleImage>
       <ReverseParallax zoom={1.2} basePosition={ParallaxBasePosition.TOP} fillLayout>
-        <Picture relativePath={imagePath} />
+        <GatsbyImage relativePath={imagePath} />
       </ReverseParallax>
     </TitleImage>
   </Container>

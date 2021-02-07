@@ -1,7 +1,7 @@
 import React from 'react';
 import { usePageInfo } from '@/hooks';
 import { PageId, BigSpacing, TextSize, Spacing, ScreenType, TypographyMixin } from '@/constants';
-import { Picture, Button, ButtonContainer } from '@/atoms';
+import { GatsbyImage, Button, ButtonContainer } from '@/atoms';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 
@@ -18,7 +18,7 @@ const NotFoundPage: React.FC = () => {
         見つかりませんでした
       </Title>
       <Hero>
-        <Picture relativePath="illustrations/intro/story_4.png" />
+        <GatsbyImage relativePath="illustrations/intro/story_4.png" />
       </Hero>
       <ButtonContainer>
         <Button to="/" showArrow>

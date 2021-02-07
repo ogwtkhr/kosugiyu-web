@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { useFacilityInfo } from '@/hooks';
-import { Picture, PrevIcon, NextIcon, OtherWindowIcon, Overlay, UnderLineText } from '@/atoms';
+import { GatsbyImage, PrevIcon, NextIcon, OtherWindowIcon, Overlay, UnderLineText } from '@/atoms';
 import styled, { css } from 'styled-components';
 import Transition from 'react-transition-group/Transition';
 
@@ -62,7 +62,7 @@ export const FacilityNavigator: React.FC = () => {
       <BigImageContainer>
         <ReverseParallax fillLayout enableSmallScreen>
           <BigImage id={id}>
-            <Picture relativePath="illustrations/facility/all_facilities.png" />
+            <GatsbyImage relativePath="illustrations/facility/all_facilities.png" />
           </BigImage>
         </ReverseParallax>
       </BigImageContainer>
@@ -131,7 +131,7 @@ export const FacilityNavigator: React.FC = () => {
           <DescriptionPhotoInner>
             <SlideView index={currentIndex}>
               {(Object.keys(FacilityID) as (keyof typeof FacilityID)[]).map((key) => (
-                <Picture
+                <GatsbyImage
                   key={FacilityID[key]}
                   loading="eager"
                   relativePath={`photos/facility/photo_${FacilityID[key]}.jpg`}
@@ -159,7 +159,7 @@ export const FacilityNavigator: React.FC = () => {
                   <DetailItem>
                     <div>
                       <DetailItemPhoto>
-                        <Picture relativePath={`photos/facility/photo_${id}.jpg`} />
+                        <GatsbyImage relativePath={`photos/facility/photo_${id}.jpg`} />
                       </DetailItemPhoto>
                     </div>
                     <DetailDescriptionList>
@@ -289,7 +289,7 @@ const BackgroundPhoto: React.FC<BackgroundPhotoProps> = ({ isActive, relativePat
   <Transition in={isActive} timeout={200}>
     {(state) => (
       <BackgroundPhotoContainer state={state}>
-        <Picture relativePath={relativePath} />
+        <GatsbyImage relativePath={relativePath} />
       </BackgroundPhotoContainer>
     )}
   </Transition>

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import media from 'styled-media-query';
 import { BoxProps, getBoxExpression } from './Box';
 import { ScreenType, ScreenValue } from '@/constants';
-import { Picture } from '@/atoms/Picture';
+import { GatsbyImage } from '@/atoms/GatsbyImage';
 import { isNumber } from 'lodash';
 import { IntersectionFadeIn, ReverseParallax } from '@/effects';
 
@@ -106,7 +106,7 @@ export const GridImage: React.FC<GridImageProps> = ({ src, speed }) => {
     <GridImageContainer>
       <ReverseParallax zoom={1.2} fillLayout coefficient={speed}>
         <IntersectionFadeIn slideIn fillLayout>
-          <Picture relativePath={src} />
+          <GatsbyImage relativePath={src} />
         </IntersectionFadeIn>
       </ReverseParallax>
     </GridImageContainer>
