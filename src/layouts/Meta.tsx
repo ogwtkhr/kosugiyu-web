@@ -1,5 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
+import { useLocation } from '@reach/router';
 import { useBaseMetaInfo } from '@/hooks';
 
 type MetaItem = JSX.IntrinsicElements['meta'];
@@ -15,24 +16,25 @@ type Props = {
 export const Meta: React.FC<Props> = ({
   title,
   description: propsDescription,
-  ogImage,
+  ogImage: propsOgImage,
   lang = 'ja',
   meta = [],
 }) => {
   const {
     title: baseTitle,
-    url,
+    url: baseUrl,
     description: baseDescription,
     twitter,
     ogImage: baseOgImage,
   } = useBaseMetaInfo();
+  const { pathname } = useLocation();
 
   const metaDescription = propsDescription || baseDescription;
   const twitterAccount = `@${twitter}`;
-  const image = ogImage || baseOgImage;
-  // twitterは絶対パスが必要、かつ大きすぎると取得不可
-  const twitterImage = `${image.match(/^http/) ? image : url + image}?width=1200`;
+  const image = propsOgImage || baseOgImage;
+  const ogImage = image.match(/^http/) ? `${image}?width=1200` : baseUrl + image;
   const ogTitle = title || baseTitle;
+  const url = baseUrl + pathname;
 
   return (
     <Helmet
@@ -52,6 +54,10 @@ export const Meta: React.FC<Props> = ({
           content: ogTitle,
         },
         {
+          property: 'og:url',
+          content: url,
+        },
+        {
           property: 'og:description',
           content: metaDescription,
         },
@@ -61,7 +67,7 @@ export const Meta: React.FC<Props> = ({
         },
         {
           property: 'og:image',
-          content: image,
+          content: ogImage,
         },
         {
           name: 'twitter:title',
@@ -77,7 +83,7 @@ export const Meta: React.FC<Props> = ({
         },
         {
           name: 'twitter:image',
-          content: twitterImage,
+          content: ogImage,
         },
         {
           name: 'twitter:site',

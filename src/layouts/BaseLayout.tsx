@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 import { Footer } from './Footer';
@@ -11,6 +11,7 @@ import { Colors } from '@/constants';
 import { Header } from '@/layouts/Header';
 import { Loading } from '@/layouts/Loading';
 import { useBaseMetaInfo } from '@/hooks';
+import { renderAA } from '@/util/aa';
 
 type BaseLayoutProps = {
   useHeader?: boolean;
@@ -25,6 +26,9 @@ export const BaseLayout: React.FC<BaseLayoutProps> = ({
   children,
 }) => {
   const { title } = useBaseMetaInfo();
+  useEffect(() => {
+    renderAA();
+  }, []);
 
   return (
     <>
