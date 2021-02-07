@@ -63,12 +63,6 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-google-analytics`,
-      options: {
-        trackingId: 'UA-100837084-2',
-      },
-    },
-    {
       resolve: 'gatsby-source-microcms',
       options: {
         apiKey: process.env.MICRO_CMS_KEY,
