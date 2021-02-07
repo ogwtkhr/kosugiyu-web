@@ -16,7 +16,7 @@ import {
   ScreenValue,
 } from '@/constants';
 import { IntersectionFadeIn, Parallax, ReverseParallax } from '@/effects';
-import { isSafari } from '@/util/ua';
+import { isSafari, isFacebookIosApp } from '@/util/ua';
 import { useScreenThreshold } from '@/hooks';
 
 export const IntroModule: React.FC = () => {
@@ -248,7 +248,7 @@ const MessageTypography: React.FC<MessageTypographyProps> = ({ isShort, children
     <IntersectionFadeIn>
       <MessageTypographyLayout
         isShort={isShort}
-        style={isSafari() && width ? { width: `${width}px` } : {}}
+        style={(isSafari() || isFacebookIosApp()) && width ? { width: `${width}px` } : {}}
       >
         <MessageTypographyStyle ref={ref}>{children}</MessageTypographyStyle>
       </MessageTypographyLayout>
